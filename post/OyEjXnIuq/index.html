@@ -1,0 +1,4850 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="国家数据平台类
+
+
+
+网站名称
+网址
+
+
+
+
+国家科技管理信息系统公共服务平台
+https://service.most.gov.cn
+
+
+国家自然科学基金查询系统
+http://fund.keyanzhiku.com
+
+
+国家数据中心
+h..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/styles/main.css">
+    <!-- 代码渲染风格css -->
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/vs2015.min.css">
+    
+    <!-- 代码高亮插件 -->
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <!-- 代码复制插件 -->
+    <script src="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/js/clipboard.min.js"></script>
+    <!-- live2d插件 -->
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/live2d.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <!-- 数学公式 -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"
+        integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"
+        integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"
+        integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous">
+        </script>
+    <script>
+        renderMathInElement(document.body, {
+            delimiters: [{
+                left: "$$",
+                right: "$$",
+                display: true
+            },
+            {
+                left: "$",
+                right: "$",
+                display: false
+            }
+            ]
+        });
+    </script>
+    
+    <title>地球科学数据库汇总</title>
+
+    <!-- 大纲索引css调整 -->
+    
+    <style>
+        .markdownIt-TOC {
+            padding-left: 2px;
+            width: 100%;
+        }
+
+        .markdownIt-TOC li {
+            padding-left: 2%;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div id="landlord">
+        <div class="message" style="opacity:0"></div>
+        <canvas id="live2d" width="240" height="250" class="live2d"></canvas>
+    </div>
+    <div id="domainname" style="display:none">https://xiaobaiweinuli.github.io</div>
+    <div id="content">
+        <div>
+            <!----------- 移动端导航栏👇 ----------------->
+            <div id="bar">
+                <style>
+  .navmobile {
+    z-index: 15;
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .navbar {
+      max-width: 100vw;
+    }
+  }
+
+  @media screen and (max-width:1200px) and (min-width: 768px) {
+    @media (min-width: 768px) {
+      .navbar-nav {
+        float: right;
+        margin: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width:768px) {
+    .mbapspan {
+      padding: 0;
+    }
+  }
+</style>
+<div class="pjaxloading"  onclick="pjaxloadingClose()">
+  <div class="loadingbackground"></div>
+  <div id="loading">
+    <div class="loading">
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-top navmobile">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#barmenu"
+        aria-expanded="false" id="barbutton">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a data-pjax class="navbar-brand" style="color:white" href="https://xiaobaiweinuli.github.io">星霜的笔记&nbsp;&nbsp;|</a>
+      <span class="navbar-brand mbapspan"><i id="mbaplayer" class="fa fa-play-circle-o" aria-hidden="true"
+          style="font-size: 28px;top: 12px;position: absolute;" onclick="aplayerPlay();"></i></span>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="barmenu">
+      <ul class="nav navbar-nav">
+        
+        
+        <li>
+          <a data-pjax href="/" style="color:white">
+            首页
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/archives" style="color:white">
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/tags" style="color:white">
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/post/about" style="color:white">
+            关于
+          </a>
+        </li>
+        
+        
+        
+        
+          
+        <li><a data-pjax href="https://xiaobaiweinuli.github.io/friends" style="color:white">友链</a></li>
+
+        
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+  <script>
+    let btstate = false;
+    var bt = $("#barbutton");
+    var bm = $("#barmenu");
+    bt.click(function () {
+      dropdown();
+    })
+    function dropdown() {
+      console.log(btstate);
+      //下拉
+      if (btstate == false) {
+        bt.removeClass("collapsed");
+        bt.attr("aria-expanded", "true");
+        bm.attr("aria-expanded", "true")
+        bm.fadeIn(700);
+        btstate = true;
+      }
+      else {
+        bt.addClass("collapsed");
+        bt.attr("aria-expanded", "false");
+        bm.removeClass("in");
+        bm.hide();
+        bm.attr("aria-expanded", "false");
+        btstate = false;
+      }
+    }
+  </script> 
+            </div>
+            <!----------- 移动端导航栏👆 ----------------->
+
+            <!--------------- pc端菜单栏👇 ---------------->
+            <div class="side"><head>
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/styles/main.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/vs2015.min.css">
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/live2d.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+    <!--------- 数学公式👇---- -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"
+        integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"
+        integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"
+        integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous">
+    </script>
+    <script>
+        renderMathInElement(document.body, {
+            delimiters: [{
+                    left: "$$",
+                    right: "$$",
+                    display: true
+                },
+                {
+                    left: "$",
+                    right: "$",
+                    display: false
+                }
+            ]
+        });
+    </script>
+    
+    <!--------- 数学公式👆----------------- -->
+    <!--------- daovocie功能👇 ------------------->
+    
+    <!--------- daovocie功能👆 ------------------->
+    <!-- -----------------twikoo评论系统引入👇 --------->
+    <script src="https://cdn.jsdelivr.net/npm/twikoo@1.3.1/dist/twikoo.all.min.js"></script>
+    <!-- -----------------twikoo评论系统引入👆 --------->
+    <!---------------- leancloud api 功能依赖引入👇 -------->
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-min.js"></script>
+    <!---------------- leancloud api 功能依赖引入👆 -------->
+    <!------------------ valine评论系统引入👇 ------------------>
+    <script src="https://xiaobaiweinuli.github.io/media/js/valine.min.js"></script>
+    <!------------------ valine评论系统引入👆 ------------------>
+    <!---------------- 今日诗词api功能依赖👇 ----------------------->
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <!---------------- 今日诗词api功能依赖👆 ----------------------->
+    <!---------------- 今日诗词api功能依赖👇 ----------------------->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber.min.js" charset="utf-8"></script>
+    <!---------------- 哔哔功能依赖👆 ----------------------->
+
+
+</head>
+
+<style>
+    body {
+        overflow-x: hidden;
+        height: 100vh;
+        overflow-y: scroll;
+        cursor: url("https://xiaobaiweinuli.github.io/media/images/mouse_cursor.png"), auto
+    }
+</style>
+
+<body>
+    <!--=------ 页面加载动态画面👇 --------------->
+    <div class="pjaxloading" onclick="pjaxloadingClose()">
+        <div class="loadingbackground"></div>
+        <div id="loading-aname">
+            <div class="loading-aname">
+            </div>
+        </div>
+    </div>
+    <!--=------ 页面加载动态画面👆 --------------->
+
+    <!--------------- 左侧菜单栏👇 ------------------------>
+    
+    <!--------------- 左侧菜单栏👆 ------------------------>
+
+    <!----------------- 顶部菜单栏👇 ------------------------>
+    
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top navbartop">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a data-pjax class="navbar-brand" href="https://xiaobaiweinuli.github.io"
+                        style="font-size:21px">星霜的笔记&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+                    <a class="navbar-brand topdescription" href=""
+                        style="font-size:15px;font-family:kaiti">温故而知新</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse">
+                    
+                    <div class="search nav navbar-nav" style="margin-top:8px">
+                        <!-- <input type="text" class="search-input" placeholder="标题搜索(●'◡'●)" /> -->
+                        <input type="text" class="search-input"
+                            placeholder="标题搜索 ⚆_⚆ つ♡">
+                        <div class="search-results"></div>
+                    </div>
+                    
+                <div class="search nav navbar-nav searchtop">
+                <a title="社交信息" onclick="document.getElementById('socialMenu').style.display='block'" class="topshare-button"><i><img class="social"
+                    src="https://xiaobaiweinuli.github.io/media/images/social.png"></i></a>
+                    <a onclick="showAaplayer()"><i style="font-size: 20px;"><img
+                                src='https://xiaobaiweinuli.github.io/media/images/music.png' alt="音乐播放器"
+                                class="musicbtn musictop"></i></a>
+                </div>
+                <ul class="nav navbar-nav" style="float: right;margin-right:5%">
+                    
+                    
+                    <li>
+                        <a data-pjax href="/"  class="menutopbutton">
+                            <i style="font-size: 40px;"><img class="icon menuicon" src="" alt="首页"></i>
+                            首页
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a data-pjax href="/archives"  class="menutopbutton">
+                            <i style="font-size: 40px;"><img class="icon menuicon" src="" alt="归档"></i>
+                            归档
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a data-pjax href="/tags"  class="menutopbutton">
+                            <i style="font-size: 40px;"><img class="icon menuicon" src="" alt="标签"></i>
+                            标签
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a data-pjax href="/post/about"  class="menutopbutton">
+                            <i style="font-size: 40px;"><img class="icon menuicon" src="" alt="关于"></i>
+                            关于
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    <li><a data-pjax href="https://xiaobaiweinuli.github.io/friends"  class="menutopbutton">
+                            <i style="font-size: 40px;"><img class="icon menuicon" src="" alt="友人帐"></i>友人帐
+                        </a></li>
+                    
+                    <!--  -->
+                  <li><img src="https://xiaobaiweinuli.github.io/images/avatar.png?v=1705235809133" alt=""
+                    class="menutopavatar"></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    <div id="socialMenu">
+        <div class="animate">
+            <div class="socialContainer">
+                
+                <a href="https://github.com/xiaobaiweinuli" target="_blank"><i style="font-size: 40px;"><img
+                            class="icon " src="https://xiaobaiweinuli.github.io/media/images/github.png" alt=""></i></a>
+                
+                
+                <a onclick="showqq()" style="cursor:pointer"><i style="font-size: 40px;"><img class="icon"
+                            src="https://xiaobaiweinuli.github.io/media/images/QQ.png" alt=""></i></a>
+                
+                
+                
+                
+                
+                
+                
+            </div>
+            <div id="qq" style="display:none">1613589162</div>
+        </div>
+    </div>
+    <img class="moon" src="https://xiaobaiweinuli.github.io/media/images/moon.png" onclick="moonlight()">
+    <script>
+        var social = document.getElementById('socialMenu');
+        var fancybox = document.getElementsByClassName('fancybox-stage');
+        // 鼠标点击模型外区域关闭登录框
+        window.onclick = function (event) {
+            if (event.target == social) {
+                social.style.display = "none";
+            }
+        }
+    </script>
+    </div>
+    
+    <!----------------- 顶部菜单栏👆 ------------------------>
+
+<!--核心功能加载-->
+<script src="https://xiaobaiweinuli.github.io/media/js/mainfunc.js"></script>
+
+<!------------- Fog1.0版本彩蛋👇 -------------->
+    <!-- <section id="terrestrial" class="popup">
+        <a href="#" class="back">&lt; back</a>
+    </section>
+
+    <div class="flycontainer">
+        <div class="flyword">御风飞行中...</div>
+    </div>
+
+    <script>
+        $("#fog_go").click(function(){fog_go()});
+        async function fog_go(){
+            $(".bars").hide()
+            $("#live2d").hide()
+            await sleep(3000);
+            $(".flycontainer").css("display","flex");
+            $(".popup").fadeOut(500)
+            await sleep(2000);
+            var sitename = "星霜的笔记";
+            getFogUser(sitename);
+        }
+
+        function fog_goregis(){
+            var sitename = "星霜的笔记";
+            var siteurl = "https://xiaobaiweinuli.github.io";
+            regisFogUser(sitename,siteurl);
+        }
+        fog_goregis();
+    </script> -->
+<!------------- Fog1.0版本彩蛋👆 -------------->
+<script>
+    function change_topmenu(){
+        tmcolor = "antiquewhite"
+        tsnamecolor = "antiquewhite"
+        $(".navbar-inverse .navbar-nav>li>a").css("color",tmcolor)
+        $(".navbar-inverse .navbar-brand").css("color",tsnamecolor)
+        $(".navbar-fixed-top").css("border-radius","0 0 10px 10px")
+    }
+</script>
+
+<!------ 根据自定义配置声明变量👇 --------------------->
+    
+    <script>
+        var postnumChoice = false
+    </script>
+    
+    
+    <script>
+        var shareChoice = false
+    </script>
+    
+    
+    <script>
+        var donateChoice = false
+    </script>
+    
+    
+    <script>
+        var searchChoice = true
+    </script>
+    
+    <script>let postsnum = 0;</script>
+    <div id="side-posttitle" style="display: none;">
+    
+    
+    论文查重降重工具汇总
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    电子书导航
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    地球科学数据库汇总
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    免费下载知网论文
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    红米K60刷入KSU
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    魅族 9008 线刷教程
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    魅族修补boot，装面具教程
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    检测大学习是否更新
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    Cloudflare 搭建 TG 私聊机器人
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    论文插入参考文献
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    直播话术
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    软件导航
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    
+    </div>
+    
+        <script>
+            change_topmenu()
+            var menupos = 'top'
+            $(".topdescription").css("color","white")
+        </script>
+        
+    <script>
+        let commentsHide = false
+    </script>
+    <!------ 根据自定义配置声明变量👆 --------------------->
+
+
+    <!----------根据自定义配置设置图标信息👇---------->
+    <script>
+        var icondict = new Array();
+    </script>
+    
+        
+    
+    <!----------根据自定义配置设置图标信息👆---------->
+</body>
+
+<script src="https://xiaobaiweinuli.github.io/media/share/dist/Share.js"></script>
+<!-- 页面pjax测试 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js"></script>
+<!--确保jQuery已经在此之前加载-->
+<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+<script src="https://xiaobaiweinuli.github.io/media/js/all-pjax.js"></script>
+<script>
+    //-------------------------------说说功能👇--------------------------------------
+    let talksall = [];
+    let talks = [];
+    let talkindex = 0;
+    get();
+
+    function get() {
+        var t = JSON.parse('[]');
+        talkindex = t.length - 1;
+        for (var i = 0; i <= t.length - 1; i++) {
+            var d = {};
+            d["time"] = t[i].time;
+            d["author"] = t[i].author;
+            d["text"] = t[i].text;
+            d["img"] = t[i].img;
+            talksall.push(d);
+        }
+    }
+
+    function add() {
+        for (var i = talkindex; i >= 0 && i > talkindex - 3; i--) {
+            talks.push(talksall[i]);
+        }
+        talkindex = (talkindex - 3) >= 0 ? (talkindex - 3) : -1;
+        if (talkindex < 0) $("#getmorebt").hide();
+        show();
+    }
+
+    function show() {
+        var talkT = document.getElementById("talkContainer");
+        talkT.innerHTML = "";
+        for (var i = 0; i < talks.length; i++) {
+            if (talks[i].img != '') {
+                talkT.innerHTML += '\
+            <div class="talk" v-for="t in talks"> \
+                <span data-fancybox="images" href="' + talks[i].img + '"><img src="' + talks[i].img + '" class="talkimg"></span> \
+                <div class="ainfo">\
+                    <div class="ainfo-intro">\
+                        <div class="author">' + talks[i].author + '</div>·\
+                        <div class="time">' + talks[i].time + '</div>\
+                    </div>\
+                </div>\
+                <div class="talkcontent">' + talks[i].text + '\
+                </div\>\
+            ';
+            } else {
+                talkT.innerHTML += '\
+            <div class="talk" v-for="t in talks"> \
+                <div class="ainfo">\
+                    <div class="ainfo-intro">\
+                        <div class="author">' + talks[i].author + '</div>·\
+                        <div class="time">' + talks[i].time + '</div>\
+                    </div>\
+                </div>\
+                <div class="talkcontent">' + talks[i].text + '\
+                </div\>\
+            ';
+            }
+        }
+    }
+    //-------------------------------说说功能👆--------------------------------------
+</script>
+
+<!---->
+<script>
+    function replaceAvatar() {
+        twikoo_avatar = $(".tk-avatar-img");
+        for (var i = 0; i < twikoo_avatar.length; i++) {
+            var asrc = twikoo_avatar.eq(i).attr('src');
+            if (asrc.search('cn.gravatar.com') != -1) {
+                twikoo_avatar.eq(i).attr('src', 'https://xiaobaiweinuli.github.io/media/images/comavatar.png');
+            }
+        }
+    }
+
+    function showWechat() {
+        var wechat = '';
+        alert("博主微信号：" + wechat);
+        return false;
+    }
+</script>
+
+<script>
+    /**
+     * https://github.com/tangkaichuan/gridea-search
+     */
+    // 检查缓存是否最新
+    function checkCache() {
+        var caches_postsnum = localStorage.getItem("postsnum");
+        var pt = document.getElementById("side-posttitle").innerHTML;
+        pt = pt.replace(/\s+/g, '').replace(/<script>.*?<\/script>/gi, "")
+        var ptlen = pt.length;
+        var ptlen_storage = localStorage.getItem("poststitlelen");
+        if (caches_postsnum != postsnum || ptlen != ptlen_storage) {
+            console.log("更新缓存");
+            return false
+        }
+        return true;
+    }
+
+    (function () {
+        var CACHES = checkCache()
+        if (!CACHES) {
+            var NOW = Date.now()
+            var API_CONTENT = '../api-content/index.html' + '?_=' + NOW
+            preload(API_CONTENT);
+            getContents(show_getContentresult);
+        }
+
+        function show_getContentresult(data) {
+            console.log("获取成功");
+            var postslen = data["posts"].length;
+            localStorage.setItem('postsnum', postslen);
+            var poststitlelen = 0;
+            var pt = document.getElementById("side-posttitle").innerHTML;
+            pt = pt.replace(/\s+/g, '').replace(/<script>.*?<\/script>/gi, "");
+            localStorage.setItem('poststitlelen', pt.length);
+        }
+
+
+
+        // preload
+        function preload(url) {
+            var preloadLink = document.createElement('link')
+            preloadLink.href = url
+            preloadLink.rel = 'preload'
+            preloadLink.as = 'fetch'
+            preloadLink.crossOrigin = 'anonymous'
+            document.head.appendChild(preloadLink)
+        }
+
+        // 异步 GET 请求
+        function get(obj) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('get', obj.url, true)
+            xhr.send(null)
+            xhr.onreadystatechange = function () {
+                // 异步请求：响应状态为4，数据加载完毕
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        obj.success(xhr.responseText)
+                    } else {
+                        obj.error(xhr.status)
+                    }
+                }
+            }
+        }
+
+        // 获取博客全文 api
+        function getContents(callback) {
+            if (CACHES) {
+                callback(CACHES.contents)
+            } else {
+                get({
+                    url: API_CONTENT,
+                    success: function (data) {
+                        callback(JSON.parse(data));
+                        localStorage.setItem('ContentsCache', data);
+                        getStorageContent();
+                    }
+                })
+            }
+        }
+    })()
+    //------------------------核心功能--pjax全局渲染👇-------------------
+    let talkinit = false;
+    $(document).pjax('a[data-pjax]', '#main', {
+        fragment: '#main',
+        timeout: 8000
+    }).on('pjax:complete', function () {
+        //代码块高亮渲染
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
+        //文章热度
+        if(postnumChoice){
+            getHotnum();
+        }
+        //文章索引
+        toginit();
+        //清空搜索栏
+        if (searchChoice) {
+            searchInit();
+            searchInput.value = "";
+        }
+        var pl = window.location.pathname;
+        //说说更新
+        if (pl.search("talk") != -1 && !talkinit) {
+            add();
+            talkinit = true;
+        } else if (pl.search("talk") != -1) {
+            show();
+        }
+        if (pl.search("post") != -1) {
+            if (shareChoice)
+                shareInit();
+            if (donateChoice)
+                donateInit();
+            if ("default" == "default"&&!commentsHide) {
+                $("#comment").hide()
+                commentsHide = true
+            }
+            lazyload();
+            codeinit();
+            if ("default" == "twikoo") {
+                //twikoo头像更换
+                setTimeout(replaceAvatar, 3000);
+                setTimeout(replaceAvatar, 8000); //部分博主站点速度加载过慢，再添加一个延迟
+            }
+        }
+        if (btstate == true)
+            dropdown();
+    }).on('pjax:start', function () {
+        $(".pjaxloading").fadeIn(50);
+    }).on('pjax:end', function () {
+        $(".pjaxloading").fadeOut(50);
+    });
+    //------------------------核心功能--pjax全局渲染👆-------------------
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    if (searchChoice) {
+        var searchInput = document.querySelector('.search-input');
+        var searchResults = document.querySelector('.search-results');
+    }
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+
+    function getStorageContent() {
+        var data = localStorage.getItem('ContentsCache');
+        data = JSON.parse(data);
+        posts = data["posts"];
+        for (var i = 0; i < posts.length; i++) {
+            arrLinks[i] = posts[i].link;
+            arrTitles[i] = posts[i].title;
+            arrContents[i] = posts[i].content;
+            itemLength++;
+        }
+    }
+    if (checkCache())
+        getStorageContent();
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            searchMatching(arrTitles, arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, arr2, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        var step = 10;
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            var indexContent = arr2[i].search(input);
+            //标题匹配
+            if (arr1[i].search(input) != -1) {
+                indexItem.push(i); // 保存匹配值的索引
+                if (indexContent != -1) {
+                    startindex = (indexContent - step) >= 0 ? (indexContent - step) : 0;
+                    var searchcontent = arr2[i].slice(indexContent - step, indexContent + 5)
+                    arrResults.push("....." + searchcontent + ".....");
+                } else
+                    arrResults.push("");
+            }
+            //内容匹配
+            else if (indexContent != -1) {
+                indexItem.push(i); // 保存匹配值的索引
+
+                startindex = (indexContent - step) >= 0 ? (indexContent - step) : 0;
+                var searchcontent = arr2[i].slice(indexContent - step, indexContent + 5)
+                arrResults.push("....." + searchcontent + ".....");
+            }
+        }
+
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<a data-pjax class="searchresults" href="' + arrLinks[indexItem[i]] + '"><b>[' +
+                arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + '</p></a><hr />';
+            searchResults.appendChild(itemDiv);
+        }
+    }
+</script>
+
+
+
+<!--------------------- 菜单栏图标加载功能👇 ----------------------->
+<script>
+var menulist = $(".menuicon");
+var menulength = menulist.length;
+for (var i = 0; i < menulength; i++) {
+    var altname = menulist.eq(i).attr("alt");
+    var iconurl = icondict[altname];
+    if (iconurl == undefined || iconurl == '')
+        continue;
+    if (iconurl == 'Home') {
+        menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Home.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Archive') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Archive.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Tag') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Tag.png");
+menulist.eq(i).show();
+} else if (iconurl == 'About') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/About.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Talk') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Talk.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Friends') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Friends.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Fly') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/wind.png");
+menulist.eq(i).show();
+} else {
+menulist.eq(i).attr("src", iconurl);
+menulist.eq(i).show();
+}
+}
+</script>
+<!--------------------- 菜单栏图标加载功能👆 ----------------------->
+
+<script>
+    //--------------------bber-onetalk加载👇--------------------------------
+    function bberonetalkLoad(){
+        bberjsonurl = '';
+        if ( $("#bber-talk").length > 0 ) {
+        jsonUrl = bberjsonurl
+        $.getJSON(jsonUrl+"?t="+Date.parse( new Date()),function(res){
+        var bberHtml = ''
+        $.each(res.data, function(i, item){
+            d = new Date(item.date)
+            date = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() +' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()
+            dataTime = '<span class="datatime">'+date+'</span>'
+            bberHtml += '<li class="item item-'+(i+1)+'">'+dataTime+'： <a data-pjax href="https://xiaobaiweinuli.github.io/bber">'+item.content+'</a></li>'
+        });
+        $('#bber-talk').append('<span class="index-talk-icon"><svg viewBox="0 0 1024 1024" width="21" height="21"><path d="M184.32 891.667692c-12.603077 0-25.206154-2.363077-37.809231-7.876923-37.021538-14.966154-59.864615-49.624615-59.864615-89.009231v-275.692307c0-212.676923 173.292308-385.969231 385.969231-385.969231h78.76923c212.676923 0 385.969231 173.292308 385.969231 385.969231 0 169.353846-137.846154 307.2-307.2 307.2H289.083077l-37.021539 37.021538c-18.904615 18.116923-43.323077 28.356923-67.741538 28.356923zM472.615385 195.347692c-178.018462 0-322.953846 144.935385-322.953847 322.953846v275.692308c0 21.267692 15.753846 29.144615 20.48 31.507692 4.726154 2.363077 22.055385 7.876923 37.021539-7.08923l46.473846-46.473846c6.301538-6.301538 14.178462-9.452308 22.055385-9.452308h354.461538c134.695385 0 244.184615-109.489231 244.184616-244.184616 0-178.018462-144.935385-322.953846-322.953847-322.953846H472.615385z"></path><path d="M321.378462 512m-59.076924 0a59.076923 59.076923 0 1 0 118.153847 0 59.076923 59.076923 0 1 0-118.153847 0Z"></path><path d="M518.301538 512m-59.076923 0a59.076923 59.076923 0 1 0 118.153847 0 59.076923 59.076923 0 1 0-118.153847 0Z"></path><path d="M715.224615 512m-59.076923 0a59.076923 59.076923 0 1 0 118.153846 0 59.076923 59.076923 0 1 0-118.153846 0Z"></path></svg></span><ul class="talk-list">'+bberHtml+'</ul>')
+        //Lately({ 'target': '#bber-talk .datatime' });
+        });
+        function Roll (){
+        var list_li = $('.talk-list li'),cur_li = list_li.first(),last_li = list_li.last();
+        last_li.after(cur_li);
+        };
+        setInterval(Roll,3000);
+    }
+    }
+  //--------------------bber-onetalk加载👆--------------------------------
+</script>
+
+<script>
+    var ClicksideState = 1
+    var cur_readingmode = false
+    function readingmode(){
+        if (!cur_readingmode){
+            if(menupos == 'left'){
+                if(ClicksideState==1)
+                menu_openclose1()
+            }
+            $("#tab1").fadeOut(50)
+            $("#bg").fadeOut(50)
+            $(".navbar").fadeOut(50)
+            $(".markdownIt-TOC li a").css("color","black")
+            cur_readingmode = true
+        }else{
+            if(menupos == 'left'){
+                if(ClicksideState==0)
+                    menu_openclose1()
+            }
+            $("#tab1").fadeIn(50)
+            $("#bg").fadeIn(50)
+            $(".navbar").fadeIn(50)
+            $(".markdownIt-TOC li a").css("color","antiquewhite")
+            cur_readingmode = false  
+        }
+    }
+</script>
+
+
+<!----夜间模式👇-->
+<script>
+    var moonlightState = false
+    function moonlight(){
+        if(!moonlightState){
+            $("#bg").fadeOut(200)
+            $('body').css("background","rgba(0,0,0,0.8)")
+            $(".markdownIt-TOC li a").css("color","white")
+            $(".text p, .text ul").css("color","white")
+            $("#articlecontent").css("color","white")
+            $(".post-copyright").css("background","rgba(10,10,10,0.5)")
+            $('blockquote').css("background","rgba(10,10,10,0.6)")
+            $("#articlecontent").css("background","rgba(10,10,10,0.5)")
+            moonlightState = true
+            $(".moon").attr("src","https://xiaobaiweinuli.github.io/media/images/sun.png")
+        }else{
+            $("#bg").show()
+            $(".markdownIt-TOC li a").css("color","antiquewhite")
+            $(".text p, .text ul").css("color","rgba(0, 0, 0, 0.7)")
+            $("#articlecontent").css("color","black")
+            $(".post-copyright").css("background","#f9f9f9")
+            $('blockquote').css("background","#eff8f0")
+            $("#articlecontent").css("background","white")
+            $(".moon").attr("src","https://xiaobaiweinuli.github.io/media/images/moon.png")
+            $('body').css("background","white")
+            moonlightState = false
+        }
+    }
+</script>
+<!----夜间模式👆--></div>
+            <!--------------- pc端菜单栏👆 ---------------->
+
+            <!-- ----------------左侧菜单栏html 👇-------------------------------------->
+            
+            <!--------------- 顶部菜单栏html👇--------->
+            <div>
+                <div class="col-lg-3"></div>
+                <!-- main标签，pjax渲染时加载以下内容👇 -->
+                <div id="main" class="col-xs-12 col-sm-12 col-md-12  col-lg-6 posttop" style="padding:0;">
+                    <div class="readingmode" onclick="readingmode()">阅</div>
+                    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/font-awesome.css">
+
+<body>
+    <div class="allcontent" id="postdetail">
+        <div class="postshow postpadding" style="padding-bottom: 0;">
+            
+            <div class="postdetailimg">
+                
+                <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" class="postimage">
+                
+            </div>
+            <div class="postinfo-detail">
+                <div class="postdate"><i class="fa fa-calendar"></i>2024-01-03</div>
+            <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 61 min read</div>
+            <div class="posttag">
+                
+            </div>
+        </div>
+        
+        <div id="articlecontent">
+            <div id="texttitle" style="text-align: center">
+                <h2 id="ptitle">地球科学数据库汇总</h2>
+                <!-- id 将作为查询条件 -->
+                <div id="pl" style="display:none">https://xiaobaiweinuli.github.io/post/OyEjXnIuq/</div>
+                <div id="rootaddr" style="display:none">https://xiaobaiweinuli.github.io</div>
+                
+            </div>
+            <div class="text ">
+                <h2 id="国家数据平台类">国家数据平台类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国家科技管理信息系统公共服务平台</td>
+<td><a href="https://service.most.gov.cn">https://service.most.gov.cn</a></td>
+</tr>
+<tr>
+<td>国家自然科学基金查询系统</td>
+<td><a href="http://fund.keyanzhiku.com">http://fund.keyanzhiku.com</a></td>
+</tr>
+<tr>
+<td>国家数据中心</td>
+<td><a href="https://data.stats.gov.cn">https://data.stats.gov.cn</a></td>
+</tr>
+<tr>
+<td>科创中国-科技经济融通平台</td>
+<td><a href="https://www.kczg.org.cn">https://www.kczg.org.cn</a></td>
+</tr>
+<tr>
+<td>国家科技成果转换项目库</td>
+<td><a href="https://www.nstad.cn">https://www.nstad.cn</a></td>
+</tr>
+<tr>
+<td>国家科技基础平台中心</td>
+<td><a href="http://www.nstic.gov.cn">http://www.nstic.gov.cn</a></td>
+</tr>
+<tr>
+<td>国家统计局</td>
+<td><a href="http://www.stats.gov.cn">http://www.stats.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国学术大数据平台</td>
+<td><a href="https://r.qiyandata.com/spcms/home">https://r.qiyandata.com/spcms/home</a></td>
+</tr>
+<tr>
+<td>中国海关总署</td>
+<td><a href="http://www.customs.gov.cn">http://www.customs.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国工信部</td>
+<td><a href="http://www.miit.gov.cn">http://www.miit.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国自然资源部数据</td>
+<td><a href="http://www.mnr.gov.cn/sj/sjfw/">http://www.mnr.gov.cn/sj/sjfw/</a></td>
+</tr>
+<tr>
+<td>全国雨水信息</td>
+<td><a href="http://xxfb.mwr.cn">http://xxfb.mwr.cn</a></td>
+</tr>
+<tr>
+<td>中国水利部数据</td>
+<td><a href="http://www.mwr.gov.cn/sj/">http://www.mwr.gov.cn/sj/</a></td>
+</tr>
+<tr>
+<td>中国水利部水知识</td>
+<td><a href="http://www.mwr.gov.cn/szs/">http://www.mwr.gov.cn/szs/</a></td>
+</tr>
+<tr>
+<td>国家航天局</td>
+<td><a href="http://www.cnsa.gov.cn">http://www.cnsa.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国科技情报网</td>
+<td><a href="https://www.chinainfo.org.cn">https://www.chinainfo.org.cn</a></td>
+</tr>
+<tr>
+<td>中国科技共享网</td>
+<td><a href="https://www.escience.org.cn">https://www.escience.org.cn</a></td>
+</tr>
+<tr>
+<td>基础科学数据共享网</td>
+<td><a href="http://www.nsdc.cn">http://www.nsdc.cn</a></td>
+</tr>
+<tr>
+<td>国家基础学科公共科学基础数据中心</td>
+<td><a href="http://www.nsdata.cn">http://www.nsdata.cn</a></td>
+</tr>
+<tr>
+<td>中国工程科技知识中心</td>
+<td><a href="http://www.ckcest.cn">http://www.ckcest.cn</a></td>
+</tr>
+<tr>
+<td>中国数字科技馆</td>
+<td><a href="https://www.cdstm.cn">https://www.cdstm.cn</a></td>
+</tr>
+<tr>
+<td>中国科技成果网</td>
+<td><a href="https://www.tech110.net">https://www.tech110.net</a></td>
+</tr>
+<tr>
+<td>中科院数据云</td>
+<td><a href="http://www.csdb.cn">http://www.csdb.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院专题数据库</td>
+<td><a href="http://www.cas.cn/ky/kycc/kxsjk">http://www.cas.cn/ky/kycc/kxsjk</a></td>
+</tr>
+<tr>
+<td>中国科学院国家地球系统科学数据共享服务平台</td>
+<td><a href="http://www.geodata.cn">http://www.geodata.cn</a></td>
+</tr>
+<tr>
+<td>中国研究数据服务平台</td>
+<td><a href="https://www.cnrds.com">https://www.cnrds.com</a></td>
+</tr>
+<tr>
+<td>中国开放知识云平台</td>
+<td><a href="http://www.corc.org.cn">http://www.corc.org.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院国家土壤信息服务平台</td>
+<td><a href="http://www.soilinfo.cn/map">http://www.soilinfo.cn/map</a></td>
+</tr>
+<tr>
+<td>中国科学院国家土壤科学数据中心</td>
+<td><a href="http://soil.geodata.cn">http://soil.geodata.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院中国土壤数据库</td>
+<td><a href="http://vdb3.soil.csdb.cn">http://vdb3.soil.csdb.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院地球大数据科学工程</td>
+<td><a href="http://casearth.com">http://casearth.com</a></td>
+</tr>
+<tr>
+<td>中国科学院地球大数据科学工程数据共享服务系统</td>
+<td><a href="http://data.casearth.cn">http://data.casearth.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院青藏高原科学数据中心</td>
+<td><a href="https://data.tpdc.ac.cn">https://data.tpdc.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院国家科技资源共享服务平台</td>
+<td><a href="http://www.cas.cn/kxyj/cx/202005/t20200512_4745808.shtml">http://www.cas.cn/kxyj/cx/202005/t20200512_4745808.shtml</a></td>
+</tr>
+<tr>
+<td>中国科学院资源环境数据中心</td>
+<td><a href="https://www.resdc.cn">https://www.resdc.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院地理空间数据云</td>
+<td><a href="http://www.gscloud.cn">http://www.gscloud.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院地理空间数据云资源</td>
+<td><a href="http://www.gscloud.cn/sources/">http://www.gscloud.cn/sources/</a></td>
+</tr>
+<tr>
+<td>科技资源标识服务平台CSTR Identifier</td>
+<td><a href="https://cstr.cn">https://cstr.cn</a></td>
+</tr>
+<tr>
+<td>全国矿产地数据库 2021 版</td>
+<td><a href="http://ngac.org.cn/Kuangchandi/index.html">http://ngac.org.cn/Kuangchandi/index.html</a></td>
+</tr>
+<tr>
+<td>国家生态科学数据中心</td>
+<td><a href="http://www.nesdc.org.cn">http://www.nesdc.org.cn</a></td>
+</tr>
+<tr>
+<td>国家生态科学数据中心（老）</td>
+<td><a href="http://rs.cern.ac.cn">http://rs.cern.ac.cn</a></td>
+</tr>
+<tr>
+<td>国家生态科学数据中心（老）</td>
+<td><a href="http://www.cnern.org.cn">http://www.cnern.org.cn</a></td>
+</tr>
+<tr>
+<td>国家生态数据中心</td>
+<td><a href="http://ecodb.cern.ac.cn">http://ecodb.cern.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国生态系统研究网络</td>
+<td><a href="http://www.cern.ac.cn">http://www.cern.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院生态系统通量观测网络</td>
+<td><a href="http://www.chinaflux.org">http://www.chinaflux.org</a></td>
+</tr>
+<tr>
+<td>中国科学院生态系统评估与生态安全数据库</td>
+<td><a href="http://www.ecosystem.csdb.cn/index.jsp">http://www.ecosystem.csdb.cn/index.jsp</a></td>
+</tr>
+<tr>
+<td>国家生态环境科技成果转化综合服务平</td>
+<td><a href="https://www.ceett.org.cn">https://www.ceett.org.cn</a></td>
+</tr>
+<tr>
+<td>全球生态环境遥感监测报告及数据</td>
+<td><a href="http://www.chinageoss.cn/geoarc/2020/">http://www.chinageoss.cn/geoarc/2020/</a></td>
+</tr>
+<tr>
+<td>中国科学院地球生物多样性数据库 GBDB</td>
+<td><a href="http://www.geobiodiversity.com">http://www.geobiodiversity.com</a></td>
+</tr>
+<tr>
+<td>中国科学院地理空间数据共享中心</td>
+<td><a href="https://www.osgeo.cn">https://www.osgeo.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院地理空间数据共享中心全球黑土数据库</td>
+<td><a href="https://www.osgeo.cn/data/w70a2">https://www.osgeo.cn/data/w70a2</a></td>
+</tr>
+<tr>
+<td>中国科学院中国植物数据库</td>
+<td><a href="http://ppbc.iplant.cn">http://ppbc.iplant.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院热带亚热带植物数据库</td>
+<td><a href="http://www.tbotany.csdb.cn">http://www.tbotany.csdb.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院国家地球系统科学数据中心地球物理科学数据中心</td>
+<td><a href="http://geospace.geodata.cn">http://geospace.geodata.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院国家地球系统科学数据中心东亚古环境科学数据库</td>
+<td><a href="http://paleodata.ieecas.cn">http://paleodata.ieecas.cn</a></td>
+</tr>
+<tr>
+<td>自然资源部国家地质资料公共服务</td>
+<td><a href="http://mlzx.ngac.cn">http://mlzx.ngac.cn</a></td>
+</tr>
+<tr>
+<td>国土资源科学数据共享-地质调查分中心</td>
+<td><a href="http://gsd.cgs.cn/default.asp">http://gsd.cgs.cn/default.asp</a></td>
+</tr>
+<tr>
+<td>地质云</td>
+<td><a href="http://geocloud.cgs.gov.cn">http://geocloud.cgs.gov.cn</a></td>
+</tr>
+<tr>
+<td>全国地质资料馆</td>
+<td><a href="http://www.ngac.org.cn">http://www.ngac.org.cn</a></td>
+</tr>
+<tr>
+<td>中国地质调查局数字地质图</td>
+<td><a href="http://geodata.cgs.gov.cn/GeoData">http://geodata.cgs.gov.cn/GeoData</a></td>
+</tr>
+<tr>
+<td>中国地质科学院地质数据共享网</td>
+<td><a href="http://www.geoscience.cn">http://www.geoscience.cn</a></td>
+</tr>
+<tr>
+<td>国家地质资料数据中心</td>
+<td><a href="http://dc.ngac.org.cn">http://dc.ngac.org.cn</a></td>
+</tr>
+<tr>
+<td>国家海洋信息中心</td>
+<td><a href="http://www.nmdis.org.cn">http://www.nmdis.org.cn</a></td>
+</tr>
+<tr>
+<td>全国地理信息资源目录服务系统</td>
+<td><a href="https://www.webmap.cn">https://www.webmap.cn</a></td>
+</tr>
+<tr>
+<td>国家地震科学数据中心 中国测震站网完备数据集（CSNCD）</td>
+<td><a href="https://data.earthquake.cn/datashare/report.shtml?PAGEID=datasourcelist&amp;dt=ff8080828b238a7a018b28bcc0330003">https://data.earthquake.cn/datashare/report.shtml?PAGEID=datasourcelist&amp;dt=ff8080828b238a7a018b28bcc0330003</a></td>
+</tr>
+<tr>
+<td>中国气象数据网</td>
+<td><a href="https://data.cma.cn">https://data.cma.cn</a></td>
+</tr>
+<tr>
+<td>国土调查成果共享应用服务平台</td>
+<td><a href="https://gtdc.mnr.gov.cn">https://gtdc.mnr.gov.cn</a></td>
+</tr>
+<tr>
+<td>安徽省&quot;三线一单&quot;公众服务平台</td>
+<td><a href="http://39.145.8.156:1509/ah/public">http://39.145.8.156:1509/ah/public</a></td>
+</tr>
+<tr>
+<td>中国自然保护区网络</td>
+<td><a href="http://www.zrbhq.com.cn">http://www.zrbhq.com.cn</a></td>
+</tr>
+<tr>
+<td>中国自然保护区名录</td>
+<td><a href="http://www.zrbhq.com.cn/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=81">http://www.zrbhq.com.cn/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=81</a></td>
+</tr>
+<tr>
+<td>1: 100 万全国基础地理数据库</td>
+<td><a href="http://www.webmap.cn/commres.do?method=result100W">http://www.webmap.cn/commres.do?method=result100W</a></td>
+</tr>
+<tr>
+<td>中国自然资源部标准地图服务</td>
+<td><a href="http://bzdt.ch.mnr.gov.cn">http://bzdt.ch.mnr.gov.cn</a></td>
+</tr>
+<tr>
+<td>各地民政部门网站-行政区划</td>
+<td><a href="http://202.108.98.30/map">http://202.108.98.30/map</a></td>
+</tr>
+<tr>
+<td>全球行政区划数据</td>
+<td><a href="https://www.geoboundaries.org/index.html">https://www.geoboundaries.org/index.html</a></td>
+</tr>
+<tr>
+<td>全球行政区划数据</td>
+<td><a href="https://www.geoboundaries.org/index.html#getdata">https://www.geoboundaries.org/index.html#getdata</a></td>
+</tr>
+<tr>
+<td>地形阴影、浮雕</td>
+<td><a href="http://www.shadedrelief.com/index.html">http://www.shadedrelief.com/index.html</a></td>
+</tr>
+<tr>
+<td>digitalglobe 地图网站</td>
+<td><a href="https://discover.digitalglobe.com">https://discover.digitalglobe.com</a></td>
+</tr>
+<tr>
+<td>开放基础设施地图</td>
+<td><a href="https://openinframap.org/">https://openinframap.org/</a></td>
+</tr>
+<tr>
+<td>uattroshapes 行政区划</td>
+<td><a href="http://quattroshapes.com/#preview">http://quattroshapes.com/#preview</a></td>
+</tr>
+<tr>
+<td>github-uattroshapes 行政区划</td>
+<td><a href="https://github.com/foursquare/quattroshapes">https://github.com/foursquare/quattroshapes</a></td>
+</tr>
+<tr>
+<td>地理国情监测云平台</td>
+<td><a href="http://www.dsac.cn">http://www.dsac.cn</a></td>
+</tr>
+<tr>
+<td>科学数据银行</td>
+<td><a href="https://www.scidb.cn">https://www.scidb.cn</a></td>
+</tr>
+<tr>
+<td>全国地形、地貌、土壤等系列数据产品</td>
+<td><a href="http://www.dsac.cn/DataProduct/Detail/200800">http://www.dsac.cn/DataProduct/Detail/200800</a></td>
+</tr>
+<tr>
+<td>中国地情网</td>
+<td><a href="http://diqing.difangzhi.cssn.cn">http://diqing.difangzhi.cssn.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院国家综合地球观测数据共享平台</td>
+<td><a href="http://www.chinageoss.cn">http://www.chinageoss.cn</a></td>
+</tr>
+<tr>
+<td>北斗网</td>
+<td><a href="http://www.beidou.gov.cn">http://www.beidou.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国国家航天局高分卫星 16m 数据共享服务平台</td>
+<td><a href="http://www.cnsageo.com">http://www.cnsageo.com</a></td>
+</tr>
+<tr>
+<td>国家遥感中心快舟一号</td>
+<td><a href="http://www.nrscc.gov.cn/nrscc/kzyh">http://www.nrscc.gov.cn/nrscc/kzyh</a></td>
+</tr>
+<tr>
+<td>资源遥感中心卫星数据（地调局航遥中心）</td>
+<td><a href="http://gf.agrs.cn">http://gf.agrs.cn</a></td>
+</tr>
+<tr>
+<td>自然资源遥感卫星服务平台（地调局航遥中心）</td>
+<td><a href="http://www.sasclouds.com">http://www.sasclouds.com</a></td>
+</tr>
+<tr>
+<td>国家标本资源平台</td>
+<td><a href="http://www.nsii.org.cn">http://www.nsii.org.cn</a></td>
+</tr>
+<tr>
+<td>国家岩矿化石标本资源共享平台</td>
+<td><a href="http://www.nimrf.net.cn">http://www.nimrf.net.cn</a></td>
+</tr>
+<tr>
+<td>地理信息知识专业服务系统</td>
+<td><a href="http://kmap.ckcest.cn">http://kmap.ckcest.cn</a></td>
+</tr>
+<tr>
+<td>地理信息知识专业服务系统 1: 25 万地图服务</td>
+<td><a href="http://kmap.ckcest.cn/nationwideMap/index">http://kmap.ckcest.cn/nationwideMap/index</a></td>
+</tr>
+<tr>
+<td>全国地理信息资源目录服务系统（天地图）</td>
+<td><a href="https://mulu.tianditu.gov.cn">https://mulu.tianditu.gov.cn</a></td>
+</tr>
+<tr>
+<td>自然资源部数据服务</td>
+<td><a href="http://mnr.gov.cn/sj/sjfw/">http://mnr.gov.cn/sj/sjfw/</a></td>
+</tr>
+<tr>
+<td>国家农业科学数据中心</td>
+<td><a href="https://www.agridata.cn">https://www.agridata.cn</a></td>
+</tr>
+<tr>
+<td>国家空间科学数据中心</td>
+<td><a href="https://www.nssdc.ac.cn">https://www.nssdc.ac.cn</a></td>
+</tr>
+<tr>
+<td>国家气象科学数据中心</td>
+<td><a href="https://data.cma.cn">https://data.cma.cn</a></td>
+</tr>
+<tr>
+<td>国家地震科学数据中心</td>
+<td><a href="https://data.earthquake.cn">https://data.earthquake.cn</a></td>
+</tr>
+<tr>
+<td>国家海洋科学数据中心</td>
+<td><a href="http://mds.nmdis.org.cn">http://mds.nmdis.org.cn</a></td>
+</tr>
+<tr>
+<td>国家极地科学数据中心</td>
+<td><a href="https://www.chinare.org.cn">https://www.chinare.org.cn</a></td>
+</tr>
+<tr>
+<td>国家冰川冻土沙漠科学数据中心</td>
+<td><a href="http://www.ncdc.ac.cn/portal/">http://www.ncdc.ac.cn/portal/</a></td>
+</tr>
+<tr>
+<td>国家林业数据中心</td>
+<td><a href="http://www.forestdata.cn">http://www.forestdata.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院生物多样性数据平台</td>
+<td><a href="https://bio-one.org.cn">https://bio-one.org.cn</a></td>
+</tr>
+<tr>
+<td>中国自然保护区标本资源共享平台</td>
+<td><a href="http://www.papc.cn">http://www.papc.cn</a></td>
+</tr>
+<tr>
+<td>中国自然保护区标本资源共享平台的地理信息库栏目</td>
+<td><a href="http://www.papc.cn/html/folder/946895-1.htm">http://www.papc.cn/html/folder/946895-1.htm</a></td>
+</tr>
+<tr>
+<td>中国生物多样性监测与研究网络</td>
+<td><a href="http://bon.plantplus.cn">http://bon.plantplus.cn</a></td>
+</tr>
+<tr>
+<td>中国林业科学院林业知识系统</td>
+<td><a href="http://forest.ckcest.cn">http://forest.ckcest.cn</a></td>
+</tr>
+<tr>
+<td>中国林业信息网</td>
+<td><a href="http://www.lknet.ac.cn">http://www.lknet.ac.cn</a></td>
+</tr>
+<tr>
+<td>国家林业和草原种质资源库</td>
+<td><a href="http://www.nfgrp.cn">http://www.nfgrp.cn</a></td>
+</tr>
+<tr>
+<td>中国林业科学院林业知识系统</td>
+<td><a href="http://forest.ckcest.cn">http://forest.ckcest.cn</a></td>
+</tr>
+<tr>
+<td>国家人口健康科学数据中心</td>
+<td><a href="https://www.ncmi.cn">https://www.ncmi.cn</a></td>
+</tr>
+<tr>
+<td>中国地震信息网</td>
+<td><a href="http://www.csi.ac.cn">http://www.csi.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国社会状况综合调查</td>
+<td><a href="http://css.cssn.cn">http://css.cssn.cn</a></td>
+</tr>
+<tr>
+<td>中国社会质量基础数据库</td>
+<td><a href="http://csqr.cass.cn">http://csqr.cass.cn</a></td>
+</tr>
+<tr>
+<td>《中国开发区审核公告目录》（2018 年版）</td>
+<td><a href="http://www.gov.cn/xinwen/2018-03/03/content_5270330.htm">http://www.gov.cn/xinwen/2018-03/03/content_5270330.htm</a></td>
+</tr>
+<tr>
+<td>中国发展门户网站（中国开发区）</td>
+<td><a href="http://cn.chinagate.cn/zhuanti/zgkfq/node_7107942.htm">http://cn.chinagate.cn/zhuanti/zgkfq/node_7107942.htm</a></td>
+</tr>
+<tr>
+<td>中国开发区</td>
+<td><a href="https://www.cadz.org.cn/index.php/develop/index.html">https://www.cadz.org.cn/index.php/develop/index.html</a></td>
+</tr>
+<tr>
+<td>中国开发区四至范围公告</td>
+<td><a href="http://www.mnr.gov.cn/zt/td/direction/">http://www.mnr.gov.cn/zt/td/direction/</a></td>
+</tr>
+<tr>
+<td>中国省级以上开发区分布变化数据集（2006-2018）</td>
+<td><a href="http://www.geodoi.ac.cn/WebCn/doi.aspx?Id=1819">http://www.geodoi.ac.cn/WebCn/doi.aspx?Id=1819</a></td>
+</tr>
+<tr>
+<td>国家遥感中心</td>
+<td><a href="https://nrscc.most.cn">https://nrscc.most.cn</a></td>
+</tr>
+<tr>
+<td>生物多样性与生态安全大数据平台数据</td>
+<td><a href="https://bio-one.org.cn">https://bio-one.org.cn</a></td>
+</tr>
+<tr>
+<td>中国探月与深空探测网</td>
+<td><a href="http://www.clep.org.cn">http://www.clep.org.cn</a></td>
+</tr>
+<tr>
+<td>中国现代花粉数据集</td>
+<td><a href="https://www.plant-ecology.com/CN/10.17521/cjpe.2021.0024">https://www.plant-ecology.com/CN/10.17521/cjpe.2021.0024</a></td>
+</tr>
+<tr>
+<td>中国生物物种名录</td>
+<td><a href="http://www.sp2000.org.cn">http://www.sp2000.org.cn</a></td>
+</tr>
+<tr>
+<td>人口数据</td>
+<td><a href="http://www.citypopulation.de/">http://www.citypopulation.de/</a></td>
+</tr>
+<tr>
+<td>中国家谱知识网</td>
+<td><a href="https://jiapu.library.sh.cn">https://jiapu.library.sh.cn</a></td>
+</tr>
+<tr>
+<td>中国地震局</td>
+<td><a href="https://www.cea.gov.cn">https://www.cea.gov.cn</a></td>
+</tr>
+<tr>
+<td>文旅部大众旅游服务</td>
+<td><a href="https://lyfw.mct.gov.cn/site/special/home">https://lyfw.mct.gov.cn/site/special/home</a></td>
+</tr>
+<tr>
+<td>国家自然科学基金大数据网络</td>
+<td><a href="https://kd.nsfc.gov.cn">https://kd.nsfc.gov.cn</a></td>
+</tr>
+<tr>
+<td>科技期刊全流程数字服务平台</td>
+<td><a href="https://www.sciengine.com">https://www.sciengine.com</a></td>
+</tr>
+<tr>
+<td>中国工程院地质专业知识服务系统</td>
+<td><a href="http://geol.ckcest.cn">http://geol.ckcest.cn</a></td>
+</tr>
+<tr>
+<td>国家哲学社会科学学术期刊数据库</td>
+<td><a href="https://www.nssd.cn">https://www.nssd.cn</a></td>
+</tr>
+<tr>
+<td>自然资源部数据网</td>
+<td><a href="https://www.mnr.gov.cn/sj/">https://www.mnr.gov.cn/sj/</a></td>
+</tr>
+<tr>
+<td>中国•国家地名信息库</td>
+<td><a href="https://dmfw.mca.gov.cn">https://dmfw.mca.gov.cn</a></td>
+</tr>
+<tr>
+<td>生态环境部数据中心</td>
+<td><a href="http://www.chinaeic.net/">http://www.chinaeic.net/</a></td>
+</tr>
+<tr>
+<td>国家森林资源智慧管理平台</td>
+<td><a href="http://www.stgz.org.cn">http://www.stgz.org.cn</a></td>
+</tr>
+<tr>
+<td>国家自然资源和地理空间基础信息库</td>
+<td><a href="https://www.sgic.net.cn">https://www.sgic.net.cn</a></td>
+</tr>
+<tr>
+<td>国家基础地理信息中心</td>
+<td><a href="http://www.ngcc.cn/ngcc/">http://www.ngcc.cn/ngcc/</a></td>
+</tr>
+<tr>
+<td>自然资源数据库</td>
+<td><a href="https://www.mnr.gov.cn/sj/sjfw/">https://www.mnr.gov.cn/sj/sjfw/</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="专题数据库类">专题数据库类</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">网站名称</th>
+<th style="text-align:left">网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">国科学院植物科学数据中心</td>
+<td style="text-align:left"><a href="https://www.plantplus.cn">https://www.plantplus.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">北京大学地理数据平台</td>
+<td style="text-align:left"><a href="https://geodata.pku.edu.cn">https://geodata.pku.edu.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">清华大学遥感 FROM-GLC 数据集</td>
+<td style="text-align:left"><a href="http://data.ess.tsinghua.edu.cn">http://data.ess.tsinghua.edu.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院地理科学与资源研究所数据共享</td>
+<td style="text-align:left"><a href="http://www.igsnrr.cas.cn/sjgx">http://www.igsnrr.cas.cn/sjgx</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院国家天文台</td>
+<td style="text-align:left"><a href="http://www.bao.ac.cn">http://www.bao.ac.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院生态环境研究中心</td>
+<td style="text-align:left"><a href="http://ir.rcees.ac.cn">http://ir.rcees.ac.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国地质科学院地质研究所科研成果发布平台</td>
+<td style="text-align:left"><a href="http://www.igeodata.org">http://www.igeodata.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">生态环境数据云（南京云创大数据）</td>
+<td style="text-align:left"><a href="http://www.envicloud.cn">http://www.envicloud.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">腾讯数据云</td>
+<td style="text-align:left"><a href="https://cloud.tencent.com">https://cloud.tencent.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球科学可信数据服务</td>
+<td style="text-align:left"><a href="https://www.worlddatasystem.org">https://www.worlddatasystem.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际科学理事会数据库</td>
+<td style="text-align:left"><a href="https://www.coretrustseal.org/">https://www.coretrustseal.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国数据中心（英文）</td>
+<td style="text-align:left"><a href="http://data.un.org">http://data.un.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织（英文）</td>
+<td style="text-align:left"><a href="http://www.fao.org">http://www.fao.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织 AGRIS 数据库（英文）</td>
+<td style="text-align:left"><a href="http://www.fao.org/Agris">http://www.fao.org/Agris</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织土壤门户（英文）</td>
+<td style="text-align:left"><a href="http://www.fao.org/soils-portal">http://www.fao.org/soils-portal</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织土壤数据库（英文）</td>
+<td style="text-align:left"><a href="http://www.fao.org/soils-portal/soil-survey">http://www.fao.org/soils-portal/soil-survey</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际海洋管理局 国际应用系统分析研究所（IIASA）</td>
+<td style="text-align:left"><a href="https://iiasa.ac.at/">https://iiasa.ac.at/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">HWSD Database土壤属性数据域</td>
+<td style="text-align:left"><a href="http://webarchive.iiasa.ac.at/Research/LUC/External-World-soil-database/HTML/HWSD_Data.html?sb=4">http://webarchive.iiasa.ac.at/Research/LUC/External-World-soil-database/HTML/HWSD_Data.html?sb=4</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国环境规划署世界环境日官网</td>
+<td style="text-align:left"><a href="https://www.worldenvironmentday.global/zh-hans">https://www.worldenvironmentday.global/zh-hans</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界野生动物基金会（World Wildlife Fund, WWF）和大自然保护协会（The Nature Conservancy, TNC）全球陆地生态区划</td>
+<td style="text-align:left"><a href="https://ecoregions.appspot.com">https://ecoregions.appspot.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院野外台站</td>
+<td style="text-align:left"><a href="https://www.cas.cn/zt/kjzt/ywtz/">https://www.cas.cn/zt/kjzt/ywtz/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国教科文组织自然遗产分布</td>
+<td style="text-align:left"><a href="https://whc.unesco.org/en/list/">https://whc.unesco.org/en/list/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">湄公河开放开发网站数据</td>
+<td style="text-align:left"><a href="https://opendevelopmentmekong.net/">https://opendevelopmentmekong.net/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球的保护区矢量权威数据集</td>
+<td style="text-align:left"><a href="https://www.protectedplanet.net/">https://www.protectedplanet.net/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">广东省三线一单数据平台</td>
+<td style="text-align:left"><a href="https://www-app.gdeei.cn/l3a1/public/home-page/stat">https://www-app.gdeei.cn/l3a1/public/home-page/stat</a></td>
+</tr>
+<tr>
+<td style="text-align:left">重庆市“三线一单”智检服务(cqree.cn&gt;)</td>
+<td style="text-align:left"><a href="http://sxyd.cqree.cn:10042/#/login">http://sxyd.cqree.cn:10042/#/login</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国31个省级“三线一单”管控方案大汇总</td>
+<td style="text-align:left"><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTE1MzMwOA==&amp;mid=2247485403&amp;idx=2&amp;sn=46f9c5e52141bc506be43fe0c0ed0feb&amp;chksm=97c056a8a0b7dfbe2fc7c475f5f6b5fc704bcc9e08c6b384edef2bb5a9cff95c597f8499e894&amp;scene=21#wechat_redirect">https://mp.weixin.qq.com/s?__biz=MzIyMTE1MzMwOA==&amp;mid=2247485403&amp;idx=2&amp;sn=46f9c5e52141bc506be43fe0c0ed0feb&amp;chksm=97c056a8a0b7dfbe2fc7c475f5f6b5fc704bcc9e08c6b384edef2bb5a9cff95c597f8499e894&amp;scene=21#wechat_redirect</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界卫生组织（英文）</td>
+<td style="text-align:left"><a href="https://www.who.int">https://www.who.int</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界卫生组织数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.who.int/data">https://www.who.int/data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界卫生组织全球卫生观察站（英文）</td>
+<td style="text-align:left"><a href="https://www.who.int/data/gho/data/themes/topics/topic-details">https://www.who.int/data/gho/data/themes/topics/topic-details</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世卫组织全球环境空气质量数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/ambient-air-pollution">https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/ambient-air-pollution</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界气象组织（英文）</td>
+<td style="text-align:left"><a href="https://public.wmo.int">https://public.wmo.int</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国气象科普网</td>
+<td style="text-align:left"><a href="http://www.qxkp.net/">http://www.qxkp.net/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国气象局</td>
+<td style="text-align:left"><a href="http://www.cma.gov.cn">http://www.cma.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家气象中心</td>
+<td style="text-align:left"><a href="http://ncc.cma.gov.cn">http://ncc.cma.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国天气网</td>
+<td style="text-align:left"><a href="http://www.weather.com.cn">http://www.weather.com.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">香港天文台</td>
+<td style="text-align:left"><a href="https://www.hko.gov.hk">https://www.hko.gov.hk</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家大气研究中心</td>
+<td style="text-align:left"><a href="http://www.ncas.ac.uk">http://www.ncas.ac.uk</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国教科文组织世界遗产中心（英文）</td>
+<td style="text-align:left"><a href="http://whc.unesco.org">http://whc.unesco.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国教科文组织地球科学</td>
+<td style="text-align:left"><a href="http://www.unesco.org/new/en/natural-sciences/environment/earth-sciences/">http://www.unesco.org/new/en/natural-sciences/environment/earth-sciences/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国环境署绿色增长知识平台</td>
+<td style="text-align:left"><a href="https://www.greengrowthknowledge.org/">https://www.greengrowthknowledge.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国气温和降水的高分辨率（1天，1公里）和长期（1961-2019）网格数据集</td>
+<td style="text-align:left"><a href="https://doi.pangaea.de/10.1594/PANGAEA.941329?format=html#download">https://doi.pangaea.de/10.1594/PANGAEA.941329?format=html#download</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GlobeLand30: 全球地理信息公共产品（30m)</td>
+<td style="text-align:left"><a href="http://globallandcover.com">http://globallandcover.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国加州大学圣地亚哥分校中国数据实验室</td>
+<td style="text-align:left"><a href="https://chinadatalab.ucsd.edu/">https://chinadatalab.ucsd.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国加州大学圣地亚哥分校中国数据实验室资源目录</td>
+<td style="text-align:left"><a href="http://chinadatalab.ucsd.edu/resources/">http://chinadatalab.ucsd.edu/resources/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">加州大学洛杉矶分校 地球科学数据库</td>
+<td style="text-align:left"><a href="https://apps.gis.ucla.edu/geodata/">https://apps.gis.ucla.edu/geodata/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">北美制图信息协会 Natural Earth</td>
+<td style="text-align:left"><a href="https://www.naturalearthdata.com">https://www.naturalearthdata.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国能源基础设施开源地图：来源贝克研究所</td>
+<td style="text-align:left"><a href="https://www.bakerinstitute.org/opensource-mapping-of-chinas-energy-infrastructure/">https://www.bakerinstitute.org/opensource-mapping-of-chinas-energy-infrastructure/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球医疗卫生设施数据</td>
+<td style="text-align:left"><a href="https://healthsites.io/">https://healthsites.io/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球医疗卫生设施数据（中国）</td>
+<td style="text-align:left"><a href="https://healthsites.io/map?country=China#">https://healthsites.io/map?country=China#</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球医疗卫生设施数据下载</td>
+<td style="text-align:left"><a href="https://healthsites.io/#country-data">https://healthsites.io/#country-data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球医疗卫生设施数据 GitHub 下载</td>
+<td style="text-align:left"><a href="https://github.com/healthsites/healthsites">https://github.com/healthsites/healthsites</a></td>
+</tr>
+<tr>
+<td style="text-align:left">北美制图信息协会 Natural Earth</td>
+<td style="text-align:left"><a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/roads/">https://www.naturalearthdata.com/downloads/10m-cultural-vectors/roads/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">VMap0 的道路网络数据</td>
+<td style="text-align:left"><a href="https://gis-lab.info/">https://gis-lab.info/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球道路开放存取数据集( gROADS)，v1(1980–2010)</td>
+<td style="text-align:left"><a href="https://sedac.ciesin.columbia.edu/data/set/groads-global-roads-open-access-v1/data-download">https://sedac.ciesin.columbia.edu/data/set/groads-global-roads-open-access-v1/data-download</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GRIP 全球道路数据库</td>
+<td style="text-align:left"><a href="https://www.globio.info/download-grip-dataset">https://www.globio.info/download-grip-dataset</a></td>
+</tr>
+<tr>
+<td style="text-align:left">来自 esir 的 World Roads</td>
+<td style="text-align:left"><a href="https://www.arcgis.com">https://www.arcgis.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">开源网站 Openstreetmap全球路网</td>
+<td style="text-align:left"><a href="http://download.geofabrik.de/">http://download.geofabrik.de/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">来自于 DIVA-GIS 网站</td>
+<td style="text-align:left"><a href="https://www.diva-gis.org/gdata">https://www.diva-gis.org/gdata</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地图日本版（道路、铁路和车站）</td>
+<td style="text-align:left"><a href="https://www.gsi.go.jp/kankyochiri/gm_japan_e.html">https://www.gsi.go.jp/kankyochiri/gm_japan_e.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球行政区划数据库 GADM</td>
+<td style="text-align:left"><a href="https://gadm.org">https://gadm.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OpenStreetMap</td>
+<td style="text-align:left"><a href="https://www.openhistoricalmap.org">https://www.openhistoricalmap.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Land Portal Foundation 空间数据</td>
+<td style="text-align:left"><a href="https://landportal.org/">https://landportal.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">陕西省地名信息服务系统</td>
+<td style="text-align:left"><a href="http://dmxx.saxmz.gov.cn">http://dmxx.saxmz.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">古伦比亚大学数据</td>
+<td style="text-align:left"><a href="https://sedac.ciesin.columbia.edu/data/">https://sedac.ciesin.columbia.edu/data/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">台湾省地图资源</td>
+<td style="text-align:left"><a href="https://whgis.nlsc.gov.tw/English/5-1Files.aspx">https://whgis.nlsc.gov.tw/English/5-1Files.aspx</a></td>
+</tr>
+<tr>
+<td style="text-align:left">华通人商用信息有限公司中国地图库（外文）</td>
+<td style="text-align:left"><a href="https://www.chinageoexplorer.com/MapLib/home">https://www.chinageoexplorer.com/MapLib/home</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局 GIS 数据库</td>
+<td style="text-align:left"><a href="https://earthexplorer.usgs.gov">https://earthexplorer.usgs.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局数据下载</td>
+<td style="text-align:left"><a href="https://astropedia.astrogeology.usgs.gov/download/">https://astropedia.astrogeology.usgs.gov/download/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（NOAA）</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov/mgg/">https://www.ngdc.noaa.gov/mgg/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（NOAA）数据下载</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov/eog/download.html">https://www.ngdc.noaa.gov/eog/download.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（NOAA）数据下载</td>
+<td style="text-align:left"><a href="https://coast.noaa.gov/digitalcoast/data/home.html">https://coast.noaa.gov/digitalcoast/data/home.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国大数据全球平台中国区域中心</td>
+<td style="text-align:left"><a href="https://unbdc.stats.gov.cn">https://unbdc.stats.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">DDE(Alpha)深时数字地球平台</td>
+<td style="text-align:left"><a href="https://deep-time.org/#/home">https://deep-time.org/#/home</a></td>
+</tr>
+<tr>
+<td style="text-align:left">DDE(Alpha)深时数字地球平台——古地理平台</td>
+<td style="text-align:left"><a href="https://paleo.deep-time.org/home">https://paleo.deep-time.org/home</a></td>
+</tr>
+<tr>
+<td style="text-align:left">DDE(Alpha)深时数字地球平台——矿产勘查平台</td>
+<td style="text-align:left"><a href="https://mpe.deep-time.org/#/analysis">https://mpe.deep-time.org/#/analysis</a></td>
+</tr>
+<tr>
+<td style="text-align:left">DDE(Alpha)深时数字地球平台——地质露头平台</td>
+<td style="text-align:left"><a href="https://outcrop3d.deep-time.org/?token=undefined">https://outcrop3d.deep-time.org/?token=undefined</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Diva GIS</td>
+<td style="text-align:left"><a href="http://www.diva-gis.org/Data">http://www.diva-gis.org/Data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OpenStreetMap</td>
+<td style="text-align:left"><a href="http://wiki.openstreetmap.org/wiki/Downloading_data">http://wiki.openstreetmap.org/wiki/Downloading_data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">大疆-限飞区查询</td>
+<td style="text-align:left"><a href="https://www.dji.com/cn/flysafe/geo-map">https://www.dji.com/cn/flysafe/geo-map</a></td>
+</tr>
+<tr>
+<td style="text-align:left">百度地图智慧眼</td>
+<td style="text-align:left"><a href="https://huiyan.baidu.com">https://huiyan.baidu.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">资源科学创新平台</td>
+<td style="text-align:left"><a href="http://www.data.ac.cn/index.asp">http://www.data.ac.cn/index.asp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Natural Earth Data</td>
+<td style="text-align:left"><a href="https://sedac.ciesin.columbia.edu/">https://sedac.ciesin.columbia.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">哈佛大学世界地图</td>
+<td style="text-align:left"><a href="http://worldmap.harvard.edu/chinamap/">http://worldmap.harvard.edu/chinamap/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ISCGM Global Map</td>
+<td style="text-align:left"><a href="http://www.iscgm.org">http://www.iscgm.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">知识新星</td>
+<td style="text-align:left"><a href="https://wx.zsxq.com">https://wx.zsxq.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">daylightmap</td>
+<td style="text-align:left"><a href="https://daylightmap.org/%5C">https://daylightmap.org/\</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家文物局综合行政管理平台(全国文物地图）</td>
+<td style="text-align:left"><a href="http://gl.ncha.gov.cn/public-service%5C">http://gl.ncha.gov.cn/public-service\</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院遥感与数字地球研究所对地观测数据共享计划</td>
+<td style="text-align:left"><a href="http://ids.ceode.ac.cn">http://ids.ceode.ac.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">珞珈一号</td>
+<td style="text-align:left"><a href="http://59.175.109.173:8888/app/login.html%5C">http://59.175.109.173:8888/app/login.html\</a></td>
+</tr>
+<tr>
+<td style="text-align:left">遥感集市</td>
+<td style="text-align:left"><a href="http://www.rscloudmart.com">http://www.rscloudmart.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">LAADS DAAC 一级和大气存档与分发系统分布式活动存档中心</td>
+<td style="text-align:left"><a href="https://ladsweb.modaps.eosdis.nasa.gov/">https://ladsweb.modaps.eosdis.nasa.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">NASA Earth Observations (NEO)</td>
+<td style="text-align:left"><a href="http://neo.sci.gsfc.nasa.gov%5C">http://neo.sci.gsfc.nasa.gov\</a></td>
+</tr>
+<tr>
+<td style="text-align:left">BIGEMAP 高清地图资源下载站</td>
+<td style="text-align:left"><a href="http://www.bigemap.com/source/">http://www.bigemap.com/source/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OpenTopography</td>
+<td style="text-align:left"><a href="https://opentopography.org/">https://opentopography.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Open Topography</td>
+<td style="text-align:left"><a href="https://opentopography.org/index.php">https://opentopography.org/index.php</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织手牵手地理空间平台</td>
+<td style="text-align:left"><a href="https://data.apps.fao.org">https://data.apps.fao.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国粮农组织手牵手地理空间平台数据服务</td>
+<td style="text-align:left"><a href="http://www.fao.org/geonetwork/">http://www.fao.org/geonetwork/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际地科联</td>
+<td style="text-align:left"><a href="https://www.iugs.org">https://www.iugs.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际科学联合会</td>
+<td style="text-align:left"><a href="https://council.science/">https://council.science/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GeoSciML 地质数据标准</td>
+<td style="text-align:left"><a href="http://geosciml.org/">http://geosciml.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球科学信息管理与应用委员会</td>
+<td style="text-align:left"><a href="https://cgi-iugs.org/">https://cgi-iugs.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际新矿物委员会（英文）</td>
+<td style="text-align:left"><a href="http://webmineral.com">http://webmineral.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际土壤参比信息中心（SRIC）</td>
+<td style="text-align:left"><a href="https://www.isric.org">https://www.isric.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际土壤参比信息中心（SRIC）全球土壤地理数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.isric.org/explore/soil-geographic-databases">https://www.isric.org/explore/soil-geographic-databases</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球土壤数据库</td>
+<td style="text-align:left"><a href="https://www.fao.org/soils-portal/data-hub/soil-maps-and-databases/harmonized-world-soil-database-v12/en/">https://www.fao.org/soils-portal/data-hub/soil-maps-and-databases/harmonized-world-soil-database-v12/en/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ISRIC 国际土壤参比信息中心（SRIC）World Soil lnformation 世界土壤信息</td>
+<td style="text-align:left"><a href="https://data.isric.org">https://data.isric.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ISRIC 国际土壤参比信息中心（SRIC）土壤数据</td>
+<td style="text-align:left"><a href="https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/2919b1e3-6a79-4162-9d3a-e640a1dc5aef">https://data.isric.org/geonetwork/srv/eng/catalog.search#/metadata/2919b1e3-6a79-4162-9d3a-e640a1dc5aef</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ISRIC 土壤地形数据</td>
+<td style="text-align:left"><a href="https://isric.org/index.php/projects/soil-and-terrain-soter-database-programme">https://isric.org/index.php/projects/soil-and-terrain-soter-database-programme</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际原子能机构全球降水同位素网络（英文）</td>
+<td style="text-align:left"><a href="http://www-naweb.iaea.org/napc/ih/IHS_resources_gnip.html">http://www-naweb.iaea.org/napc/ih/IHS_resources_gnip.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际大洋中脊协会（英文）</td>
+<td style="text-align:left"><a href="http://www.interridge.org">http://www.interridge.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际大地测量学与地球物理学联合会（英文）</td>
+<td style="text-align:left"><a href="http://www.iugg.org">http://www.iugg.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际地层学会（英文）</td>
+<td style="text-align:left"><a href="http://www.stratigraphy.org">http://www.stratigraphy.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">古生物数据库（英文）</td>
+<td style="text-align:left"><a href="http://fossilworks.org">http://fossilworks.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">古生物学数据库（英文）</td>
+<td style="text-align:left"><a href="https://paleobiodb.org/">https://paleobiodb.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OneGeology 国际地球科学数据中心（英文）</td>
+<td style="text-align:left"><a href="http://www.onegeology.com">http://www.onegeology.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球数字地质图（英文） 全球地质图及地质数据库</td>
+<td style="text-align:left"><a href="http://portal.onegeology.org/OnegeologyGlobal/">http://portal.onegeology.org/OnegeologyGlobal/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地质图数据库</td>
+<td style="text-align:left"><a href="http://www.onegeology.org/">http://www.onegeology.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国陆地生态系统碳源汇模拟平台</td>
+<td style="text-align:left"><a href="http://ecw.fw121.com">http://ecw.fw121.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">CEADs 中国碳核算数据库</td>
+<td style="text-align:left"><a href="https://www.ceads.net.cn">https://www.ceads.net.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">CEADs 中国碳核算数据库下载</td>
+<td style="text-align:left"><a href="http://www.ceads.net/data/">http://www.ceads.net/data/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">CEADs 中国碳核算数据库论文</td>
+<td style="text-align:left"><a href="https://www.nature.com/articles/s41597-020-0393-y">https://www.nature.com/articles/s41597-020-0393-y</a></td>
+</tr>
+<tr>
+<td style="text-align:left">CEADs 中国碳核算数据库论文</td>
+<td style="text-align:left"><a href="https://www.nature.com/articles/sdata2017201">https://www.nature.com/articles/sdata2017201</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Data Center数据中心-全球实时碳排放数据</td>
+<td style="text-align:left"><a href="https://carbonmonitor.org.cn/user/data.php?by=WORLD">https://carbonmonitor.org.cn/user/data.php?by=WORLD</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球实时碳排放数据</td>
+<td style="text-align:left"><a href="https://carbonmonitor.org.cn">https://carbonmonitor.org.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国多尺度排放清单模型</td>
+<td style="text-align:left"><a href="http://meicmodel.org/">http://meicmodel.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国多尺度排放清单模型文章</td>
+<td style="text-align:left"><a href="https://www.atmos-chem-phys.net/9/5131/2009/">https://www.atmos-chem-phys.net/9/5131/2009/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">政府间气候变化专门委员会(IPCC)数据中心</td>
+<td style="text-align:left"><a href="http://www.ipcc-data.org">http://www.ipcc-data.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">政府间气候变化专门委员会(IPCC)气候评估报告（排放量）</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/EFDB">https://www.ipcc-nggip.iges.or.jp/EFDB</a></td>
+</tr>
+<tr>
+<td style="text-align:left">马里兰大学 GLASS 网站 Global LAnd Surface Satellite (GLASS)</td>
+<td style="text-align:left"><a href="http://www.glass.umd.edu/">http://www.glass.umd.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">NTRS 美国宇航局植被监测</td>
+<td style="text-align:left"><a href="https://ntrs.nasa.gov/citations/19740022614">https://ntrs.nasa.gov/citations/19740022614</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国能源情报署数据库</td>
+<td style="text-align:left"><a href="https://www.eia.gov/international/data">https://www.eia.gov/international/data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国能源情报署数据库炭库数据</td>
+<td style="text-align:left"><a href="https://www.eia.gov/international/data/world/world">https://www.eia.gov/international/data/world/world</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国能源情报署数据库炭库数据</td>
+<td style="text-align:left"><a href="https://www.eia.gov/international/data/world/other-statistics/emissions-by-fuel">https://www.eia.gov/international/data/world/other-statistics/emissions-by-fuel</a></td>
+</tr>
+<tr>
+<td style="text-align:left">政府间气候变化专门委员会排放因子数据库（EFDB）</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/EFDB/main.php">https://www.ipcc-nggip.iges.or.jp/EFDB/main.php</a></td>
+</tr>
+<tr>
+<td style="text-align:left">政府间气候变化专门委员会炭库软件</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/software/index.html">https://www.ipcc-nggip.iges.or.jp/software/index.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">清华大学全球碳排实时监测</td>
+<td style="text-align:left"><a href="https://carbonmonitor.org/">https://carbonmonitor.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国碳循环科学计划（英文）</td>
+<td style="text-align:left"><a href="https://www.us-ocb.org/science-support/data-resources/">https://www.us-ocb.org/science-support/data-resources/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ICOS 综合碳观测系统 全球碳预算</td>
+<td style="text-align:left"><a href="https://www.icos-cp.eu/global-carbon-budget-2019">https://www.icos-cp.eu/global-carbon-budget-2019</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国石油公司炭库数据</td>
+<td style="text-align:left"><a href="https://www.bp.com/en/global/corporate/energy-economics.html">https://www.bp.com/en/global/corporate/energy-economics.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国石油公司炭库数据</td>
+<td style="text-align:left"><a href="https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html">https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国石油公司炭库数据论文</td>
+<td style="text-align:left"><a href="https://www.bp.com/content/dam/bp/business-sites/en/global/corporate/pdfs/energy-economics/statistical-review/bp-stats-review-2019-full-report.pdf">https://www.bp.com/content/dam/bp/business-sites/en/global/corporate/pdfs/energy-economics/statistical-review/bp-stats-review-2019-full-report.pdf</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球碳预算</td>
+<td style="text-align:left"><a href="https://www.globalcarbonproject.org">https://www.globalcarbonproject.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球碳预算数据</td>
+<td style="text-align:left"><a href="https://www.icos-cp.eu/global-carbon-budget-2019">https://www.icos-cp.eu/global-carbon-budget-2019</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球碳预算数据</td>
+<td style="text-align:left"><a href="https://doi.org/10.18160/GCP-2019">https://doi.org/10.18160/GCP-2019</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球碳预算数据论文</td>
+<td style="text-align:left"><a href="https://www.earth-syst-sci-data.net/11/1783/2019/">https://www.earth-syst-sci-data.net/11/1783/2019/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球碳预算数据论文</td>
+<td style="text-align:left"><a href="https://doi.org/10.5194/essd-11-1783-2019">https://doi.org/10.5194/essd-11-1783-2019</a></td>
+</tr>
+<tr>
+<td style="text-align:left">二氧化碳信息分析中心</td>
+<td style="text-align:left"><a href="https://cdiac.ess-dive.lbl.gov/">https://cdiac.ess-dive.lbl.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">二氧化碳信息分析中心（Carbon Dioxide Information Analysis Centre, CDIAC）数据档案库</td>
+<td style="text-align:left"><a href="https://cdiac.ess-dive.lbl.gov/trends/emis/overview_2014.html">https://cdiac.ess-dive.lbl.gov/trends/emis/overview_2014.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">二氧化碳信息分析中心数据</td>
+<td style="text-align:left"><a href="https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/00001_V2017">https://data.ess-dive.lbl.gov/view/doi:10.3334/CDIAC/00001_V2017</a></td>
+</tr>
+<tr>
+<td style="text-align:left">二氧化碳信息分析中心数据论文</td>
+<td style="text-align:left"><a href="https://doi.org/10.3334/CDIAC/00001_V2017">https://doi.org/10.3334/CDIAC/00001_V2017</a></td>
+</tr>
+<tr>
+<td style="text-align:left">二氧化碳信息分析中心数据论文</td>
+<td style="text-align:left"><a href="https://www.osti.gov/biblio/1389331/">https://www.osti.gov/biblio/1389331/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球大气研究排放数据库（EDGAR）</td>
+<td style="text-align:left"><a href="https://edgar.jrc.ec.europa.eu/">https://edgar.jrc.ec.europa.eu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球大气研究排放数据库（EDGAR）数据</td>
+<td style="text-align:left"><a href="https://data.jrc.ec.europa.eu/collection/EDGAR">https://data.jrc.ec.europa.eu/collection/EDGAR</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球大气研究排放数据库（EDGAR）数据</td>
+<td style="text-align:left"><a href="http://cidportal.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_FT2017">http://cidportal.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v50_FT2017</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球大气研究排放数据库（EDGAR）数据论文</td>
+<td style="text-align:left"><a href="https://edgar.jrc.ec.europa.eu/overview.php?v=booklet2018">https://edgar.jrc.ec.europa.eu/overview.php?v=booklet2018</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球大气研究排放数据库（EDGAR）数据论文</td>
+<td style="text-align:left"><a href="https://doi.org/10.2760/30158">https://doi.org/10.2760/30158</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地下水资源综合信息系统</td>
+<td style="text-align:left"><a href="http://www.groundwater.cn">http://www.groundwater.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全国公共资源交易平台</td>
+<td style="text-align:left"><a href="http://www.ggzy.gov.cn">http://www.ggzy.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">非洲城市化的可视化</td>
+<td style="text-align:left"><a href="https://africapolis.org/en">https://africapolis.org/en</a></td>
+</tr>
+<tr>
+<td style="text-align:left">非洲城市化的可视化数据</td>
+<td style="text-align:left"><a href="https://africapolis.org/en/data?country=Angola&amp;amp;keyfigure=totalPop&amp;amp;type=abs&amp;amp;year=2015">https://africapolis.org/en/data?country=Angola&amp;amp;keyfigure=totalPop&amp;amp;type=abs&amp;amp;year=2015</a></td>
+</tr>
+<tr>
+<td style="text-align:left">数据美国</td>
+<td style="text-align:left"><a href="https://datausa.io/">https://datausa.io/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">北京实验室数据专栏</td>
+<td style="text-align:left"><a href="https://www.beijingcitylab.com/data-released-1/">https://www.beijingcitylab.com/data-released-1/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">HydroSHEDS 全球水文数据集（美国）</td>
+<td style="text-align:left"><a href="https://hydrosheds.org/page/overview">https://hydrosheds.org/page/overview</a></td>
+</tr>
+<tr>
+<td style="text-align:left">HydroSHEDS 全球水文数据集（美国）数据下载</td>
+<td style="text-align:left"><a href="https://www.hydrosheds.org/downloads">https://www.hydrosheds.org/downloads</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界自然科学基金会(WWF)（美国）</td>
+<td style="text-align:left"><a href="https://www.worldwildlife.org">https://www.worldwildlife.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界自然科学基金会(WWF)GIS 数据库（美国）</td>
+<td style="text-align:left"><a href="https://www.worldwildlife.org/pages/conservation-science-data-and-tools">https://www.worldwildlife.org/pages/conservation-science-data-and-tools</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国可持续发展目标(SDG)数据中心</td>
+<td style="text-align:left"><a href="https://unstats-undesa.opendata.arcgis.com">https://unstats-undesa.opendata.arcgis.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局（英文）</td>
+<td style="text-align:left"><a href="https://www.usgs.gov">https://www.usgs.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局地震数据库（英文）</td>
+<td style="text-align:left"><a href="https://earthquake.usgs.gov">https://earthquake.usgs.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局科学数据</td>
+<td style="text-align:left"><a href="https://www.usgs.gov/science">https://www.usgs.gov/science</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局地震分布图（英文）</td>
+<td style="text-align:left"><a href="https://www.usgs.gov/natural-hazards/earthquake-hazards/earthquakes">https://www.usgs.gov/natural-hazards/earthquake-hazards/earthquakes</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局地震危害计划</td>
+<td style="text-align:left"><a href="https://www.usgs.gov/natural-hazards/earthquake-hazards">https://www.usgs.gov/natural-hazards/earthquake-hazards</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国地震局活动断层数据中心</td>
+<td style="text-align:left"><a href="http://www.activefault-datacenter.cn/map">http://www.activefault-datacenter.cn/map</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地震科学专业知识服务系统</td>
+<td style="text-align:left"><a href="http://earthquake.ckcest.cn">http://earthquake.ckcest.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">夜间灯光地图</td>
+<td style="text-align:left"><a href="https://www.lightpollutionmap.info/">https://www.lightpollutionmap.info/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">道路数据</td>
+<td style="text-align:left"><a href="https://www.openrailwaymap.org/">https://www.openrailwaymap.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GIS 数据</td>
+<td style="text-align:left"><a href="http://freegisdata.rtwilson.com">http://freegisdata.rtwilson.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GIS 数据</td>
+<td style="text-align:left"><a href="https://opendata.stackexchange.com">https://opendata.stackexchange.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ISPRS International</td>
+<td style="text-align:left">Journal</td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质学会</td>
+<td style="text-align:left"><a href="https://www.geosociety.org">https://www.geosociety.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国古生物学会</td>
+<td style="text-align:left"><a href="https://www.paleosoc.org">https://www.paleosoc.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">macrostrat 地质图（美国）</td>
+<td style="text-align:left"><a href="https://macrostrat.org">https://macrostrat.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">岩石矿物数据库</td>
+<td style="text-align:left"><a href="https://www.mindat.org/">https://www.mindat.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">深时地球地层学数据库</td>
+<td style="text-align:left"><a href="http://onestratigraphy.ddeworld.org/">http://onestratigraphy.ddeworld.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局 气候监测数据（英文）</td>
+<td style="text-align:left"><a href="https://gml.noaa.gov/dv/">https://gml.noaa.gov/dv/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家环境数据中心（英文）</td>
+<td style="text-align:left"><a href="https://www.ncei.noaa.gov/">https://www.ncei.noaa.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国能源部 生物地球化学循环、水循环、冰冻圈循环（英文）</td>
+<td style="text-align:left"><a href="https://e3sm.org/">https://e3sm.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国物理研究所（英文）</td>
+<td style="text-align:left"><a href="https://www.aip.org/">https://www.aip.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国物理研究所气候变化科学的年代学（英文）</td>
+<td style="text-align:left"><a href="https://www.aip.org/history-programs/climate">https://www.aip.org/history-programs/climate</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国物理研究所气候变化科学的年代学（英文）</td>
+<td style="text-align:left"><a href="https://www.aip.org/history-programs/climate">https://www.aip.org/history-programs/climate</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球关键带观测站（美国）</td>
+<td style="text-align:left"><a href="https://czo-archive.criticalzone.org/">https://czo-archive.criticalzone.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国地质调查局（英文）</td>
+<td style="text-align:left"><a href="https://www.bgs.ac.uk">https://www.bgs.ac.uk</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国地质调查局生物圈同位素数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.bgs.ac.uk/datasets/biosphere-isotope-domains-gb">https://www.bgs.ac.uk/datasets/biosphere-isotope-domains-gb</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（英文）</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov">https://www.ngdc.noaa.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球观测组织</td>
+<td style="text-align:left"><a href="https://earthobservations.org/">https://earthobservations.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局地球观测组织（英文）</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov/eog">https://www.ngdc.noaa.gov/eog</a></td>
+</tr>
+<tr>
+<td style="text-align:left">科罗拉多矿业学院佩恩公共政策研究所地球观测组织（英文）</td>
+<td style="text-align:left"><a href="https://payneinstitute.mines.edu/eog/">https://payneinstitute.mines.edu/eog/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国地球观测组织</td>
+<td style="text-align:left"><a href="http://www.geo-web.org.uk/">http://www.geo-web.org.uk/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国环境规划署环境数据（英文）</td>
+<td style="text-align:left"><a href="https://geodata.grid.unep.ch">https://geodata.grid.unep.ch</a></td>
+</tr>
+<tr>
+<td style="text-align:left">日本海洋地球科学技术厅数据库（日文）</td>
+<td style="text-align:left"><a href="http://www.jamstec.go.jp">http://www.jamstec.go.jp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">瑞士地震局（英文）</td>
+<td style="text-align:left"><a href="http://www.seismo.ethz.ch">http://www.seismo.ethz.ch</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲地震信息中心（英文）</td>
+<td style="text-align:left"><a href="https://www.emsc-csem.org">https://www.emsc-csem.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地中海地震数据中心（英文）</td>
+<td style="text-align:left"><a href="https://www.emsc-csem.org">https://www.emsc-csem.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际地震学与地球内部物理学联合会 IASPEI（英文）</td>
+<td style="text-align:left"><a href="http://www.iaspei.org">http://www.iaspei.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际地震中心（英文）</td>
+<td style="text-align:left"><a href="http://www.isc.ac.uk">http://www.isc.ac.uk</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地震学联合研究会 IRIS（英文）</td>
+<td style="text-align:left"><a href="https://www.iris.edu/hq">https://www.iris.edu/hq</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地震台网（英文）</td>
+<td style="text-align:left"><a href="https://www.iris.edu/hq/programs/gsn">https://www.iris.edu/hq/programs/gsn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">哥伦比亚大学震源机制解译</td>
+<td style="text-align:left"><a href="https://www.globalcmt.org/">https://www.globalcmt.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国数字宽频带地震台网联合会(FDSN)fdsn（英文）</td>
+<td style="text-align:left"><a href="http://www.fdsn.org/">http://www.fdsn.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国高校空间科学联盟</td>
+<td style="text-align:left"><a href="https://www.lpi.usra.edu/meteor/">https://www.lpi.usra.edu/meteor/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国高校空间科学联盟国际陨石数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.lpi.usra.edu/">https://www.lpi.usra.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球板块构造演化历史复原图</td>
+<td style="text-align:left"><a href="http://scotese.com">http://scotese.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">构造现象图片</td>
+<td style="text-align:left"><a href="https://folk.uib.no/nglhe/StructuralGeoBookPhotos.html">https://folk.uib.no/nglhe/StructuralGeoBookPhotos.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（NOAA）地球浮雕等图集</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov/mgg/image/">https://www.ngdc.noaa.gov/mgg/image/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国国家海洋和大气管理局（NOAA）海洋年龄分布图</td>
+<td style="text-align:left"><a href="https://www.ngdc.noaa.gov/mgg/ocean_age/ocean_age_2008.html">https://www.ngdc.noaa.gov/mgg/ocean_age/ocean_age_2008.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界海底地形全景图</td>
+<td style="text-align:left"><a href="https://marietharp.ldeo.columbia.edu/">https://marietharp.ldeo.columbia.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界海底地形全景图</td>
+<td style="text-align:left"><a href="https://www.loc.gov/item/2010586277/">https://www.loc.gov/item/2010586277/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局月球地质图</td>
+<td style="text-align:left"><a href="https://astropedia.astrogeology.usgs.gov/download/Moon/Geology/thumbs/Unified_Geologic_Map_of_The_Moon_200dpi.jpg">https://astropedia.astrogeology.usgs.gov/download/Moon/Geology/thumbs/Unified_Geologic_Map_of_The_Moon_200dpi.jpg</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地质调查局火星地质图</td>
+<td style="text-align:left"><a href="https://pubs.usgs.gov/sim/3292/">https://pubs.usgs.gov/sim/3292/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国大学空间科学研究会阿波罗岩样品照片</td>
+<td style="text-align:left"><a href="https://www.lpi.usra.edu/lunar/samples/">https://www.lpi.usra.edu/lunar/samples/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国大学空间科学研究会月球和行星研究所</td>
+<td style="text-align:left"><a href="https://www.lpi.usra.edu/">https://www.lpi.usra.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国大学空间科学研究会</td>
+<td style="text-align:left"><a href="https://www.usra.edu/">https://www.usra.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">加拿大行星与空间科学中心地球撞击坑数据库</td>
+<td style="text-align:left"><a href="http://passc.net/EarthImpactDatabase">http://passc.net/EarthImpactDatabase</a></td>
+</tr>
+<tr>
+<td style="text-align:left">加拿大行星与空间科学中心</td>
+<td style="text-align:left"><a href="http://passc.net">http://passc.net</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国海洋数据中心（BODC）全球地形图及地形数据库</td>
+<td style="text-align:left"><a href="https://www.gebco.net">https://www.gebco.net</a></td>
+</tr>
+<tr>
+<td style="text-align:left">英国海洋数据中心（BODC）海陆地形数据库（英文）</td>
+<td style="text-align:left"><a href="https://download.gebco.net">https://download.gebco.net</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球与环境科学数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.pangaea.de">https://www.pangaea.de</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际农业和生物学中心（英文）</td>
+<td style="text-align:left"><a href="http://www.cabi.org">http://www.cabi.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际综合气候数据中心-ICDC</td>
+<td style="text-align:left"><a href="https://icdc.cen.uni-hamburg.de">https://icdc.cen.uni-hamburg.de</a></td>
+</tr>
+<tr>
+<td style="text-align:left">马里兰大学全球土地变化数据中心（英文）</td>
+<td style="text-align:left"><a href="http://glcf.umd.edu/data">http://glcf.umd.edu/data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国自然资源局</td>
+<td style="text-align:left"><a href="https://www.nrcs.usda.gov">https://www.nrcs.usda.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国自然资源局土壤数据库</td>
+<td style="text-align:left"><a href="https://www.nrcs.usda.gov/wps/portal/nrcs/site/soils">https://www.nrcs.usda.gov/wps/portal/nrcs/site/soils</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地调局全球生态系统数据下载</td>
+<td style="text-align:left"><a href="https://rmgsc.cr.usgs.gov/outgoing/ecosystems/Global/">https://rmgsc.cr.usgs.gov/outgoing/ecosystems/Global/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Open Data Inception</td>
+<td style="text-align:left"><a href="https://opendatainception.io/">https://opendatainception.io/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球通量网</td>
+<td style="text-align:left"><a href="https://fluxnet.org/">https://fluxnet.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国通量观测研究联盟</td>
+<td style="text-align:left"><a href="http://rs.cern.ac.cn/data/initDRsearch">http://rs.cern.ac.cn/data/initDRsearch</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界气象组织</td>
+<td style="text-align:left"><a href="http://www.wmo.ch">http://www.wmo.ch</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国科学院机构知识库网格</td>
+<td style="text-align:left"><a href="http://www.irgrid.ac.cn">http://www.irgrid.ac.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">人口密度数据库</td>
+<td style="text-align:left"><a href="https://landscan.ornl.gov/">https://landscan.ornl.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">乔治华盛顿大学环境科学数据库（英文）</td>
+<td style="text-align:left"><a href="https://libguides.gwu.edu/environmentdatabases">https://libguides.gwu.edu/environmentdatabases</a></td>
+</tr>
+<tr>
+<td style="text-align:left">加州大学圣克鲁斯分校法国地区 Sr 同位素分布图（英文）</td>
+<td style="text-align:left"><a href="http://80.69.77.150">http://80.69.77.150</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球板块恢复，及古气候等综合数据（英文）</td>
+<td style="text-align:left"><a href="http://www.scotese.com">http://www.scotese.com</a>/</td>
+</tr>
+<tr>
+<td style="text-align:left">德克萨斯大学奥斯汀分校地球物理研究所（英文）</td>
+<td style="text-align:left"><a href="http://www-udc.ig.utexas.edu">http://www-udc.ig.utexas.edu</a></td>
+</tr>
+<tr>
+<td style="text-align:left">德克萨斯大学奥斯汀分校全球板块恢复数据（英文）</td>
+<td style="text-align:left"><a href="http://www-udc.ig.utexas.edu/research/projects/plates">http://www-udc.ig.utexas.edu/research/projects/plates</a></td>
+</tr>
+<tr>
+<td style="text-align:left">科罗拉多 全球古地理图（英文）</td>
+<td style="text-align:left"><a href="https://deeptimemaps.com">https://deeptimemaps.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">普林斯顿大学南部海洋碳与气候观测与建模数据库（英文）</td>
+<td style="text-align:left"><a href="https://soccom.princeton.edu">https://soccom.princeton.edu</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际生态恢复学会</td>
+<td style="text-align:left"><a href="https://environment.yale.edu/">https://environment.yale.edu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球生物多样性数据库（国际地层学会）</td>
+<td style="text-align:left"><a href="http://geobiodiversity.com">http://geobiodiversity.com</a>/</td>
+</tr>
+<tr>
+<td style="text-align:left">全球冰雪数据库（英文）</td>
+<td style="text-align:left"><a href="https://nsidc.org/">https://nsidc.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球环境数据库（英文）</td>
+<td style="text-align:left"><a href="https://db.cger.nies.go.jp">https://db.cger.nies.go.jp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球湖泊数据库（英文）</td>
+<td style="text-align:left"><a href="http://www.worldlakes.org">http://www.worldlakes.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球湿地数据库（英文）</td>
+<td style="text-align:left"><a href="http://www.unep-wcmc.org">http://www.unep-wcmc.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球水文图件中心 BGR（英文）</td>
+<td style="text-align:left"><a href="https://www.whymap.org/whymap">https://www.whymap.org/whymap</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球重力场数据库 BGI-BGI（英文）</td>
+<td style="text-align:left"><a href="https://www5.obs-mip.fr">https://www5.obs-mip.fr</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球变化数据（英文）</td>
+<td style="text-align:left"><a href="http://www.pages.unibe.ch">http://www.pages.unibe.ch</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地磁数据下（英文）</td>
+<td style="text-align:left"><a href="https://www.geomag.us">https://www.geomag.us</a></td>
+</tr>
+<tr>
+<td style="text-align:left">北美火山和侵入岩数据库（NAVDAT）</td>
+<td style="text-align:left"><a href="https://www.navdat.org">https://www.navdat.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">印第安纳大学运动中的植物模拟（英文）</td>
+<td style="text-align:left"><a href="https://plantsinmotion.bio.indiana.edu">https://plantsinmotion.bio.indiana.edu</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界物种名录（英文）</td>
+<td style="text-align:left"><a href="https://www.catalogueoflife.org">https://www.catalogueoflife.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Biogeochemical-Argo 全球大洋生物地球化学监测网络（英文）</td>
+<td style="text-align:left"><a href="https://biogeochemical-argo.org">https://biogeochemical-argo.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际海底调查局（英文）</td>
+<td style="text-align:left"><a href="https://www.isa.org.jm">https://www.isa.org.jm</a></td>
+</tr>
+<tr>
+<td style="text-align:left">极地数据中心（英文）</td>
+<td style="text-align:left"><a href="https://apgc.awi.de">https://apgc.awi.de</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球土壤健康评估（英文）</td>
+<td style="text-align:left"><a href="https://github.com/jinshijian/SoilHealthDB">https://github.com/jinshijian/SoilHealthDB</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球岩石地球化学数据库（英文）</td>
+<td style="text-align:left"><a href="http://georoc.mpch-mainz.gwdg.de/georoc">http://georoc.mpch-mainz.gwdg.de/georoc</a></td>
+</tr>
+<tr>
+<td style="text-align:left">用于参考物质和同位素标准的新地球化学数据库（英文）</td>
+<td style="text-align:left"><a href="http://georem.mpch-mainz.gwdg.de">http://georem.mpch-mainz.gwdg.de</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IsoMemo 同位素数据库（英文）</td>
+<td style="text-align:left"><a href="https://isomemo.com">https://isomemo.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地质年代数据库（英文）</td>
+<td style="text-align:left"><a href="http://www.geochron.org/">http://www.geochron.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国矿物学晶体结构数据库（英文）</td>
+<td style="text-align:left"><a href="http://rruff.geo.arizona.edu/AMS">http://rruff.geo.arizona.edu/AMS</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地下水信息系统（英文）</td>
+<td style="text-align:left"><a href="https://www.un-igrac.org/global-groundwater-information-system-ggis">https://www.un-igrac.org/global-groundwater-information-system-ggis</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球古地磁数据库（英文）</td>
+<td style="text-align:left"><a href="https://www2.earthref.org/MagIC">https://www2.earthref.org/MagIC</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球拉曼光谱数据库（英文）</td>
+<td style="text-align:left"><a href="http://rruff.info">http://rruff.info</a></td>
+</tr>
+<tr>
+<td style="text-align:left">拉曼数据库（日文）</td>
+<td style="text-align:left"><a href="https://www.aist.go.jp/aist_j/aist_repository/riodb/E_index_list.html">https://www.aist.go.jp/aist_j/aist_repository/riodb/E_index_list.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球热流数据库（英文）</td>
+<td style="text-align:left"><a href="http://heatflow.org/">http://heatflow.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">生物考古学同位素数据（英文）</td>
+<td style="text-align:left"><a href="https://isoarch.eu">https://isoarch.eu</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球沉积岩数据（英文）</td>
+<td style="text-align:left"><a href="http://portal.earthchem.org">http://portal.earthchem.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球地球化学数据库（英文）</td>
+<td style="text-align:left"><a href="https://earthchem.org">https://earthchem.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">火山科学和观测数据</td>
+<td style="text-align:left"><a href="https://www.volcanodiscovery.com">https://www.volcanodiscovery.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">大洋航测元素和同位素数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.geotraces.org">https://www.geotraces.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">大洋生物数据库 ICES（英文）</td>
+<td style="text-align:left"><a href="https://www.ices.dk/Pages">https://www.ices.dk/Pages</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际应用生物科学中心文摘数据库文</td>
+<td style="text-align:left"><a href="https://www.cabi.org/">https://www.cabi.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">悉尼大学地球科学学院 地球字节</td>
+<td style="text-align:left"><a href="https://www.earthbyte.org/">https://www.earthbyte.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">维基共享资源</td>
+<td style="text-align:left"><a href="https://commons.wikimedia.org/">https://commons.wikimedia.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际新矿物委员会</td>
+<td style="text-align:left"><a href="http://cnmnc.main.jp/">http://cnmnc.main.jp/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">伯克利加州大学地球数据库</td>
+<td style="text-align:left"><a href="https://geoservices-secure.lib.berkeley.edu/geoserver/web/">https://geoservices-secure.lib.berkeley.edu/geoserver/web/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球社会新闻数据库（英文）</td>
+<td style="text-align:left"><a href="https://www.gdeltproject.org">https://www.gdeltproject.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界银行企业调查数据网站（英文）</td>
+<td style="text-align:left"><a href="https://www.enterprisesurveys.org">https://www.enterprisesurveys.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国空间信息联盟（CGIAR-CSI）</td>
+<td style="text-align:left"><a href="https://srtm.csi.cgiar.org">https://srtm.csi.cgiar.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">SRTM 90m DEM 数字高程数据库（英文）</td>
+<td style="text-align:left"><a href="https://srtm.csi.cgiar.org/srtmdata/">https://srtm.csi.cgiar.org/srtmdata/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局 InSar 遥感数据中心（英文）</td>
+<td style="text-align:left"><a href="http://insarap.org">http://insarap.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局的行星科学档案（PSA）（英文）</td>
+<td style="text-align:left"><a href="https://www.cosmos.esa.int/web/psa/psa-introduction">https://www.cosmos.esa.int/web/psa/psa-introduction</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局/SEOM 研究数据</td>
+<td style="text-align:left"><a href="http://insarap.org">http://insarap.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国航天局 NASA</td>
+<td style="text-align:left"><a href="https://www.nasa.gov/">https://www.nasa.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国航天局 NASA 遥感数据中心（英文）</td>
+<td style="text-align:left"><a href="https://earthdata.nasa.gov">https://earthdata.nasa.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国航天局 NASA 30m 分辨率</td>
+<td style="text-align:left"><a href="https://search.earthdata.nasa.gov/search?q=C1546314043-LPDAAC_ECS">https://search.earthdata.nasa.gov/search?q=C1546314043-LPDAAC_ECS</a></td>
+</tr>
+<tr>
+<td style="text-align:left">nasa earth</td>
+<td style="text-align:left"><a href="https://earthobservatory.nasa.gov/global-maps">https://earthobservatory.nasa.gov/global-maps</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国航天局 NASA 月球数据（英文）</td>
+<td style="text-align:left"><a href="http://pds.nasa.gov">http://pds.nasa.gov</a></td>
+</tr>
+<tr>
+<td style="text-align:left">自然资源安徽省卫星应用技术中心</td>
+<td style="text-align:left"><a href="http://ahzrzywx.tdtah.cn">http://ahzrzywx.tdtah.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">zenodo 30 米分辨率地物分类</td>
+<td style="text-align:left"><a href="https://zenodo.org/record/4280923#.YUCP0SvYVPZ">https://zenodo.org/record/4280923#.YUCP0SvYVPZ</a></td>
+</tr>
+<tr>
+<td style="text-align:left">日本航空航天局天文数据（日文）</td>
+<td style="text-align:left"><a href="https://darts.isas.jaxa.jp/planet/paap/selene">https://darts.isas.jaxa.jp/planet/paap/selene</a></td>
+</tr>
+<tr>
+<td style="text-align:left">日本向日葵 8 号卫星（日文）</td>
+<td style="text-align:left"><a href="https://himawari8.nict.go.jp">https://himawari8.nict.go.jp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧盟全球环境与安全监测计划</td>
+<td style="text-align:left"><a href="https://www.copernicus.eu/en">https://www.copernicus.eu/en</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧盟全球环境与安全监测计划数据下载</td>
+<td style="text-align:left"><a href="https://land.copernicus.eu/local/urban-atlas">https://land.copernicus.eu/local/urban-atlas</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局哨兵卫星数据</td>
+<td style="text-align:left"><a href="https://scihub.copernicus.eu/">https://scihub.copernicus.eu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局哨兵卫星数据服务</td>
+<td style="text-align:left"><a href="https://s2maps.eu/">https://s2maps.eu/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局哨兵卫星数据 WMTS 服务</td>
+<td style="text-align:left"><a href="https://tiles.maps.eox.at/wmts/1.0.0/WMTSCapabilities.xml">https://tiles.maps.eox.at/wmts/1.0.0/WMTSCapabilities.xml</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲航天局哨兵卫星数据 WMS 服务</td>
+<td style="text-align:left"><a href="https://tiles.maps.eox.at/wms?service=wms&amp;amp;request=getcapabilities">https://tiles.maps.eox.at/wms?service=wms&amp;amp;request=getcapabilities</a></td>
+</tr>
+<tr>
+<td style="text-align:left">陆地观测卫星数据服务</td>
+<td style="text-align:left"><a href="https://data.cresda.cn">https://data.cresda.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">星图地球数据云</td>
+<td style="text-align:left"><a href="https://datacloud.geovisearth.com">https://datacloud.geovisearth.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球 879 个地图服务图层（ARCGIS 图层）</td>
+<td style="text-align:left"><a href="https://mp.weixin.qq.com/s?__biz=MzIxNDk1OTM2Mw==&amp;mid=2247501020&amp;idx=1&amp;sn=67aabaa92be4faa3700190fc89f87214&amp;chksm=979d10b0a0ea99a6ac1839b0973beaab3c160beb789cfd23b9f387f9d2c4c62ea28b3d62c332&amp;mpshare=1&amp;scene=23&amp;srcid=1102MLyeimMbOAEcEJ9dhTVa&amp;sharer_sharetime=1667379321972&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd">https://mp.weixin.qq.com/s?__biz=MzIxNDk1OTM2Mw==&amp;mid=2247501020&amp;idx=1&amp;sn=67aabaa92be4faa3700190fc89f87214&amp;chksm=979d10b0a0ea99a6ac1839b0973beaab3c160beb789cfd23b9f387f9d2c4c62ea28b3d62c332&amp;mpshare=1&amp;scene=23&amp;srcid=1102MLyeimMbOAEcEJ9dhTVa&amp;sharer_sharetime=1667379321972&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GAIA GPS</td>
+<td style="text-align:left"><a href="https://www.gaiagps.com/map">https://www.gaiagps.com/map</a></td>
+</tr>
+<tr>
+<td style="text-align:left">naturalearth 地球数据集</td>
+<td style="text-align:left"><a href="https://www.naturalearthdata.com">https://www.naturalearthdata.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GSDI-全球空间数据基础设施协会</td>
+<td style="text-align:left"><a href="http://www.gsdi.org/">http://www.gsdi.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">太平洋数据中心</td>
+<td style="text-align:left"><a href="https://pacificdata.org/">https://pacificdata.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">易智瑞中国广州分公司数据共享服务中心</td>
+<td style="text-align:left"><a href="https://data-esrichina-gz.opendata.arcgis.com">https://data-esrichina-gz.opendata.arcgis.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Open Data Impact Map</td>
+<td style="text-align:left"><a href="https://opendataimpactmap.org/index">https://opendataimpactmap.org/index</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GISLOUNGE</td>
+<td style="text-align:left"><a href="https://www.gislounge.com">https://www.gislounge.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">美国地调局地形图</td>
+<td style="text-align:left"><a href="https://ngmdb.usgs.gov/topoview/viewer">https://ngmdb.usgs.gov/topoview/viewer</a></td>
+</tr>
+<tr>
+<td style="text-align:left">航班实时动态</td>
+<td style="text-align:left"><a href="https://zh.flightaware.com">https://zh.flightaware.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Arcgis 用各类自然资源信息图层</td>
+<td style="text-align:left"><a href="http://120.26.232.88:6080/arcgis/rest/services">http://120.26.232.88:6080/arcgis/rest/services</a></td>
+</tr>
+<tr>
+<td style="text-align:left">大自然保护协会的地理空间保护图集</td>
+<td style="text-align:left"><a href="https://geospatial.tnc.org/">https://geospatial.tnc.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ARCGIS 数据服务器</td>
+<td style="text-align:left"><a href="https://services.arcgis.com/F7DSX1DSNSiWmOqh/ArcGIS/rest/services">https://services.arcgis.com/F7DSX1DSNSiWmOqh/ArcGIS/rest/services</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国海洋保护区在线地图及数据资源</td>
+<td style="text-align:left"><a href="https://www.arcgis.com/apps/dashboards/d29f9da50a284d53a147a2107ac4d8c0">https://www.arcgis.com/apps/dashboards/d29f9da50a284d53a147a2107ac4d8c0</a></td>
+</tr>
+<tr>
+<td style="text-align:left">自然资源全领域基本知识全集（2023 版）</td>
+<td style="text-align:left"><a href="https://mp.weixin.qq.com/s?__biz=MzU2Mzk2MTk0Mw==&amp;mid=2247495666&amp;idx=1&amp;sn=94ace2626c7308b993c6311b332e8d9d&amp;chksm=fc50e6cacb276fdc67a14227addb15b86aebfa9e5f0c7029eb70cb3caac249b5cff6f99f5452&amp;mpshare=1&amp;scene=23&amp;srcid=0202MGicasoOyWFWgfJKYZ1k&amp;sharer_sharetime=1675412631517&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd">https://mp.weixin.qq.com/s?__biz=MzU2Mzk2MTk0Mw==&amp;mid=2247495666&amp;idx=1&amp;sn=94ace2626c7308b993c6311b332e8d9d&amp;chksm=fc50e6cacb276fdc67a14227addb15b86aebfa9e5f0c7029eb70cb3caac249b5cff6f99f5452&amp;mpshare=1&amp;scene=23&amp;srcid=0202MGicasoOyWFWgfJKYZ1k&amp;sharer_sharetime=1675412631517&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OSM Landuse Landcover</td>
+<td style="text-align:left"><a href="https://osmlanduse.org">https://osmlanduse.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Ellipsis Drive</td>
+<td style="text-align:left"><a href="https://app.ellipsis-drive.com">https://app.ellipsis-drive.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OSM Data Science Campus</td>
+<td style="text-align:left"><a href="https://datasciencecampus.github.io/">https://datasciencecampus.github.io/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">OSM 中国地图数据 Geofabrik Download Server</td>
+<td style="text-align:left"><a href="https://download.geofabrik.de/asia/china.html">https://download.geofabrik.de/asia/china.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国专题地图资源网</td>
+<td style="text-align:left"><a href="http://117.34.74.149/#/atlasIndex">http://117.34.74.149/#/atlasIndex</a></td>
+</tr>
+<tr>
+<td style="text-align:left">贵州省村庄规划便民服务系统（含村界）</td>
+<td style="text-align:left"><a href="http://www.gzczgh.cn">http://www.gzczgh.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Mosaic 地理与气象分析库</td>
+<td style="text-align:left"><a href="https://gma.luosgeo.com/UserGuide/rasp/Mosaic.html">https://gma.luosgeo.com/UserGuide/rasp/Mosaic.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">NASA World Wind</td>
+<td style="text-align:left"><a href="https://worldwind.arc.nasa.gov/">https://worldwind.arc.nasa.gov/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国际重力测量局（BGI）</td>
+<td style="text-align:left"><a href="http://bgi.obs-mip.fr/data-products/grids-and-models/wgm2012-global-model/">http://bgi.obs-mip.fr/data-products/grids-and-models/wgm2012-global-model/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">加州大学全球卫星重力数据库</td>
+<td style="text-align:left"><a href="ftp://topex.ucsd.edu/pub/global_grav_1min">ftp://topex.ucsd.edu/pub/global_grav_1min</a></td>
+</tr>
+<tr>
+<td style="text-align:left">GPlates 板块构造重建程序</td>
+<td style="text-align:left"><a href="https://www.gplates.org/">https://www.gplates.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">PaleoGIS 古地理软件</td>
+<td style="text-align:left"><a href="https://www.paleogis.com">https://www.paleogis.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IUCNGET 的生态系统分类</td>
+<td style="text-align:left"><a href="https://global-ecosystems.org/">https://global-ecosystems.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">USGS 地球水循环示意图</td>
+<td style="text-align:left"><a href="https://www.usgs.gov/special-topics/water-science-school/science/water-cycle-diagrams">https://www.usgs.gov/special-topics/water-science-school/science/water-cycle-diagrams</a></td>
+</tr>
+<tr>
+<td style="text-align:left">USGS 地球水科学学校</td>
+<td style="text-align:left"><a href="https://www.usgs.gov/special-topics/water-science-school">https://www.usgs.gov/special-topics/water-science-school</a></td>
+</tr>
+<tr>
+<td style="text-align:left">空中影像开放集</td>
+<td style="text-align:left"><a href="https://openaerialmap.org/">https://openaerialmap.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧空局 10 米土地利用数据下载</td>
+<td style="text-align:left"><a href="https://viewer.esa-worldcover.org/worldcover">https://viewer.esa-worldcover.org/worldcover</a></td>
+</tr>
+<tr>
+<td style="text-align:left">日本 ALOS 卫星(Advanced Land Observation Satellite 12.5m)</td>
+<td style="text-align:left"><a href="https://search.asf.alaska.edu/#/">https://search.asf.alaska.edu/#/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ASTER GDEM</td>
+<td style="text-align:left"><a href="https://asterweb.jpl.nasa.gov/gdem.asp">https://asterweb.jpl.nasa.gov/gdem.asp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">AW3D30</td>
+<td style="text-align:left"><a href="http://www.eorc.jaxa.jp/ALOS/en/aw3d30/registration.htm">http://www.eorc.jaxa.jp/ALOS/en/aw3d30/registration.htm</a></td>
+</tr>
+<tr>
+<td style="text-align:left">MERIT Hydro</td>
+<td style="text-align:left"><a href="http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_Hydro/">http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_Hydro/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ASTWBD</td>
+<td style="text-align:left"><a href="https://asterweb.jpl.nasa.gov/gdem.asp">https://asterweb.jpl.nasa.gov/gdem.asp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球系统科学元数据提取开源工具</td>
+<td style="text-align:left"><a href="https://agile-giss.copernicus.org/articles/2/41/2021/">https://agile-giss.copernicus.org/articles/2/41/2021/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">可持续发展大数据国际研究中心</td>
+<td style="text-align:left"><a href="http://www.cbas.ac.cn">http://www.cbas.ac.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">我们的数据世界</td>
+<td style="text-align:left"><a href="https://ourworldindata.org/">https://ourworldindata.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球大数据平台</td>
+<td style="text-align:left"><a href="https://sdg.casearth.cn">https://sdg.casearth.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IPCC 2006 年国家温室气体清单指南 2019 修订版</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/public/2019rf/index.html">https://www.ipcc-nggip.iges.or.jp/public/2019rf/index.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IPCC 2006 年国家温室气体清单指南 2019 修订版解读</td>
+<td style="text-align:left"><a href="http://acet-ceca.com/desc/8140.html">http://acet-ceca.com/desc/8140.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">政府间气候变化专门委员会</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/">https://www.ipcc-nggip.iges.or.jp/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">PM2.5</td>
+<td style="text-align:left"><a href="http://pm25.in/">http://pm25.in/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IPCC 2006 年国家温室气体清单指南</td>
+<td style="text-align:left"><a href="https://www.ipcc-nggip.iges.or.jp/public/2006gl/chinese/vol4.html">https://www.ipcc-nggip.iges.or.jp/public/2006gl/chinese/vol4.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Climatic Research Unit0.5 °气候数据集</td>
+<td style="text-align:left"><a href="https://crudata.uea.ac.uk/cru/data/hrg/">https://crudata.uea.ac.uk/cru/data/hrg/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Climatic Research Unit0 数据</td>
+<td style="text-align:left"><a href="https://crudata.uea.ac.uk/cru/data">https://crudata.uea.ac.uk/cru/data</a></td>
+</tr>
+<tr>
+<td style="text-align:left">WorldClim 气候数据</td>
+<td style="text-align:left"><a href="http://www.worldclim.org/">http://www.worldclim.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">再分析气象数据 ECMWF</td>
+<td style="text-align:left"><a href="https://www.ecmwf.int">https://www.ecmwf.int</a></td>
+</tr>
+<tr>
+<td style="text-align:left">天气</td>
+<td style="text-align:left"><a href="https://www.meteoblue.com">https://www.meteoblue.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">板块运动模拟</td>
+<td style="text-align:left"><a href="https://www.annualreviews.org/doi/suppl/10.1146/annurev-earth-081320-064052">https://www.annualreviews.org/doi/suppl/10.1146/annurev-earth-081320-064052</a></td>
+</tr>
+<tr>
+<td style="text-align:left">冰川数据</td>
+<td style="text-align:left"><a href="https://www.glims.org/maps/glims">https://www.glims.org/maps/glims</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家冰川冻土沙漠科学数据中心</td>
+<td style="text-align:left"><a href="http://data.casnw.net/portal/">http://data.casnw.net/portal/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全景地图</td>
+<td style="text-align:left"><a href="http://www.viewfinderpanoramas.org">http://www.viewfinderpanoramas.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Daily Summaries Map</td>
+<td style="text-align:left"><a href="http://www.gisn.cdc.noaa.goa">http://www.gisn.cdc.noaa.goa</a></td>
+</tr>
+<tr>
+<td style="text-align:left">“黄河流域生态保护和高质量发展”跨平台专题</td>
+<td style="text-align:left"><a href="http://www.geodata.cn/apps/yriver/map.html#5/37/107">http://www.geodata.cn/apps/yriver/map.html#5/37/107</a></td>
+</tr>
+<tr>
+<td style="text-align:left">四川省公共数据中心</td>
+<td style="text-align:left"><a href="http://www.scdata.gov.cn">http://www.scdata.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">四川省林地一张图</td>
+<td style="text-align:left"><a href="http://202.61.90.50:8000/sclyyzt">http://202.61.90.50:8000/sclyyzt</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国裁判文书网</td>
+<td style="text-align:left"><a href="https://wenshu.court.gov.cn">https://wenshu.court.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国执行信息公开网</td>
+<td style="text-align:left"><a href="http://zxgk.court.gov.cn">http://zxgk.court.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家企业信用信息公示系统</td>
+<td style="text-align:left"><a href="http://www.gsxt.gov.cn">http://www.gsxt.gov.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Worldpop 开放空间人口统计数据（人口密度）</td>
+<td style="text-align:left"><a href="https://www.worldpop.org/">https://www.worldpop.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Worldpop 数据 FTP 下载</td>
+<td style="text-align:left"><a href="ftp://ftp.worldpop.org.uk/">ftp://ftp.worldpop.org.uk/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">一带一路生物多样性数据平台</td>
+<td style="text-align:left"><a href="http://pantpe.cn/Home/Map">http://pantpe.cn/Home/Map</a></td>
+</tr>
+<tr>
+<td style="text-align:left">主要生物多样性区</td>
+<td style="text-align:left"><a href="http://www.keybiodiversityareas.org/">http://www.keybiodiversityareas.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国环境规划署 UNEP</td>
+<td style="text-align:left"><a href="http://geodata.grid.unep.ch/">http://geodata.grid.unep.ch/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">openflights</td>
+<td style="text-align:left"><a href="https://openflights.org/data.html">https://openflights.org/data.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国农业数据</td>
+<td style="text-align:left"><a href="http://zdscxx.moa.gov.cn:8080/nyb/pc/index.jsp">http://zdscxx.moa.gov.cn:8080/nyb/pc/index.jsp</a></td>
+</tr>
+<tr>
+<td style="text-align:left">司尔亚司数据信息有限公司全球和各国经济数据</td>
+<td style="text-align:left"><a href="https://www.ceicdata.com">https://www.ceicdata.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">世界银行数据</td>
+<td style="text-align:left"><a href="https://data.worldbank.org.cn">https://data.worldbank.org.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地名：GeoNames</td>
+<td style="text-align:left"><a href="http://www.geonames.org/">http://www.geonames.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">阿里云数据 地图选择器</td>
+<td style="text-align:left"><a href="http://datav.aliyun.com/portal/school/atlas/area_selector">http://datav.aliyun.com/portal/school/atlas/area_selector</a></td>
+</tr>
+<tr>
+<td style="text-align:left">全球海洋区域数据资源</td>
+<td style="text-align:left"><a href="https://marineregions.org">https://marineregions.org</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧盟开放数据门户</td>
+<td style="text-align:left"><a href="https://data.europa.eu/euodp/en/data/group">https://data.europa.eu/euodp/en/data/group</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧洲数据门户</td>
+<td style="text-align:left"><a href="https://www.europeandataportal.eu/en/homepage">https://www.europeandataportal.eu/en/homepage</a></td>
+</tr>
+<tr>
+<td style="text-align:left">时空三极环境大数据平台</td>
+<td style="text-align:left"><a href="https://poles.tpdc.ac.cn/zh-hans/">https://poles.tpdc.ac.cn/zh-hans/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地理与气象分析库</td>
+<td style="text-align:left"><a href="https://gma.luosgeo.com/UserGuide/osf/DateSeries.html">https://gma.luosgeo.com/UserGuide/osf/DateSeries.html</a></td>
+</tr>
+<tr>
+<td style="text-align:left">天府科技云</td>
+<td style="text-align:left"><a href="https://tfkjy.cn/#/home/index">https://tfkjy.cn/#/home/index</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Global Wind Atlas 全球风能图谱</td>
+<td style="text-align:left"><a href="https://globalwindatlas.info/zh/">https://globalwindatlas.info/zh/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">宁夏数字乡村治理应用系统</td>
+<td style="text-align:left"><a href="http://61.50.111.62:9514/#/?xmid=hdc">http://61.50.111.62:9514/#/?xmid=hdc</a></td>
+</tr>
+<tr>
+<td style="text-align:left">村镇聚落演变全息展示与数字模拟多源多尺度基础数据库共享平台</td>
+<td style="text-align:left"><a href="http://47.108.153.97/index.html#">http://47.108.153.97/index.html#</a></td>
+</tr>
+<tr>
+<td style="text-align:left">BDS 大数据公共服务平台</td>
+<td style="text-align:left"><a href="http://bds.xaecong.com/index.php">http://bds.xaecong.com/index.php</a></td>
+</tr>
+<tr>
+<td style="text-align:left">地球物理大地测量大型科学计算平台</td>
+<td style="text-align:left"><a href="https://www.zcyphygeodesy.com">https://www.zcyphygeodesy.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家统计局 中国区划和城乡划分代码</td>
+<td style="text-align:left"><a href="http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/">http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">图星地球</td>
+<td style="text-align:left"><a href="http://www.tuxingis.com">http://www.tuxingis.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">AI Earth 阿里云地球科学云平台</td>
+<td style="text-align:left"><a href="https://engine-aiearth.aliyun.com">https://engine-aiearth.aliyun.com</a></td>
+</tr>
+<tr>
+<td style="text-align:left">化工专业知识服务系统</td>
+<td style="text-align:left"><a href="https://chem.ckcest.cn">https://chem.ckcest.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">开放获取苏格兰官方统计数据</td>
+<td style="text-align:left"><a href="https://statistics.gov.scot">https://statistics.gov.scot</a></td>
+</tr>
+<tr>
+<td style="text-align:left">自然资源要素综合观测一体化平台</td>
+<td style="text-align:left"><a href="https://nrorn.cgs.gov.cn/zrzy-bigscreen/#/index">https://nrorn.cgs.gov.cn/zrzy-bigscreen/#/index</a></td>
+</tr>
+<tr>
+<td style="text-align:left">自然资源综合数据中心</td>
+<td style="text-align:left"><a href="https://nrorn.cgs.gov.cn/zrzy-bigscreen/#/index">https://nrorn.cgs.gov.cn/zrzy-bigscreen/#/index</a></td>
+</tr>
+<tr>
+<td style="text-align:left">联合国教科文组织全球尺度地球化学国际研究中心</td>
+<td style="text-align:left"><a href="http://www.globalgeochemistry.com/ch/">http://www.globalgeochemistry.com/ch/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">NASA 科学任务理事会的开源科学计划 zenodo</td>
+<td style="text-align:left"><a href="https://zenodo.org/">https://zenodo.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">欧盟气候数据共享平台</td>
+<td style="text-align:left"><a href="https://cds.climate.copernicus.eu">https://cds.climate.copernicus.eu</a></td>
+</tr>
+<tr>
+<td style="text-align:left">1990-2021 年全球 30 米土地覆盖数据</td>
+<td style="text-align:left"><a href="https://zenodo.org/record/5816591">https://zenodo.org/record/5816591</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ERA5-1950 年至今的每月平均土壤性质、气温、降水数据</td>
+<td style="text-align:left"><a href="https://doi.org/110.24381/cds.68d2bb30">https://doi.org/110.24381/cds.68d2bb30</a></td>
+</tr>
+<tr>
+<td style="text-align:left">中国 1 米分辨率的全国土地覆盖数据集（SinoLC-1）</td>
+<td style="text-align:left"><a href="https://zenodo.org/record/7821068">https://zenodo.org/record/7821068</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ICDP-国际大陆科学钻探计划</td>
+<td style="text-align:left"><a href="https://www.icdp-online.org/">https://www.icdp-online.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">IODP-国际大洋科学钻探计划</td>
+<td style="text-align:left"><a href="https://www.iodp.org/">https://www.iodp.org/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家市场监督管理总局合同示范文本库</td>
+<td style="text-align:left"><a href="https://cont.12315.cn">https://cont.12315.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">国家地震科学数据中心</td>
+<td style="text-align:left"><a href="https://data.earthquake.cn">https://data.earthquake.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">科学数据银行</td>
+<td style="text-align:left"><a href="https://www.scidb.cn">https://www.scidb.cn</a></td>
+</tr>
+<tr>
+<td style="text-align:left">企研数据</td>
+<td style="text-align:left"><a href="https://r.qiyandata.com/welcome">https://r.qiyandata.com/welcome</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据出版类">数据出版类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国科学数据网</td>
+<td><a href="http://www.csdata.org">http://www.csdata.org</a></td>
+</tr>
+<tr>
+<td>地质科学数据出版中心</td>
+<td><a href="http://geodb.cgs.gov.cn">http://geodb.cgs.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院全球变化科学研究数据出版系统</td>
+<td><a href="http://www.geodoi.ac.cn">http://www.geodoi.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国科学院全球变化科学研究数据出版系统数据下载</td>
+<td><a href="http://www.geodoi.ac.cn/doi.aspx">http://www.geodoi.ac.cn/doi.aspx</a></td>
+</tr>
+<tr>
+<td>中国科学院全球变化科学研究数据出版系统电子杂志</td>
+<td><a href="http://www.geodoi.ac.cn/WebCn/HistoryList_MetaData.aspx">http://www.geodoi.ac.cn/WebCn/HistoryList_MetaData.aspx</a></td>
+</tr>
+<tr>
+<td>中国科学院资源环境科学数据中心数据出版物</td>
+<td><a href="https://www.resdc.cn/DOI">https://www.resdc.cn/DOI</a></td>
+</tr>
+<tr>
+<td>全球变化数据快报</td>
+<td><a href="http://www.geodoi.ac.cn/WebCn/HistoryList.aspx">http://www.geodoi.ac.cn/WebCn/HistoryList.aspx</a></td>
+</tr>
+<tr>
+<td>全球农情遥感速报</td>
+<td><a href="http://www.cropwatch.com.cn/htm/cn/index.shtml">http://www.cropwatch.com.cn/htm/cn/index.shtml</a></td>
+</tr>
+<tr>
+<td>elsevier 研究数据（英文）</td>
+<td><a href="https://www.elsevier.com/authors/tools-and-resources/research-data">https://www.elsevier.com/authors/tools-and-resources/research-data</a></td>
+</tr>
+<tr>
+<td>文献及数据下载</td>
+<td><a href="https://www.annualreviews.org/">https://www.annualreviews.org/</a></td>
+</tr>
+<tr>
+<td>PAGES 杂志数据库（英文）</td>
+<td><a href="http://pastglobalchanges.org/data/databases">http://pastglobalchanges.org/data/databases</a></td>
+</tr>
+<tr>
+<td>欧洲科学数据开放平台</td>
+<td><a href="https://zenodo.org">https://zenodo.org</a></td>
+</tr>
+<tr>
+<td>澳大利亚科学与资源部 出版物</td>
+<td><a href="https://www.industry.gov.au/">https://www.industry.gov.au/</a></td>
+</tr>
+<tr>
+<td>澳大利亚科学与资源部 出版物</td>
+<td><a href="https://www.industry.gov.au/topic/data-and-publications-0">https://www.industry.gov.au/topic/data-and-publications-0</a></td>
+</tr>
+<tr>
+<td>澳大利亚工业、科学、能源与资源部 出版物</td>
+<td><a href="https://www.industry.gov.au/">https://www.industry.gov.au/</a></td>
+</tr>
+<tr>
+<td>澳大利亚工业、科学、能源与资源部 出版物</td>
+<td><a href="https://www.industry.gov.au/topic/data-and-publications-0">https://www.industry.gov.au/topic/data-and-publications-0</a></td>
+</tr>
+<tr>
+<td>美国地调局出版物</td>
+<td><a href="https://pubs.usgs.gov/">https://pubs.usgs.gov/</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="成果报告类">成果报告类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中华人民共和国政府白皮书</td>
+<td><a href="http://www.scio.gov.cn/zfbps/index.htm">http://www.scio.gov.cn/zfbps/index.htm</a></td>
+</tr>
+<tr>
+<td>国家科技报告服务系统</td>
+<td><a href="https://www.nstrs.cn">https://www.nstrs.cn</a></td>
+</tr>
+<tr>
+<td>国家自然科学基金共享服务网</td>
+<td><a href="http://output.nsfc.gov.cn">http://output.nsfc.gov.cn</a></td>
+</tr>
+<tr>
+<td>自然资源部科技报告数据库</td>
+<td><a href="http://search.mlr.gov.cn">http://search.mlr.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国科学技术信息研究所科学评价之门</td>
+<td><a href="http://isee.istic.ac.cn">http://isee.istic.ac.cn</a></td>
+</tr>
+<tr>
+<td>中国科学技术信息研究所国家工程科技博物馆</td>
+<td><a href="https://netl.istic.ac.cn/site">https://netl.istic.ac.cn/site</a></td>
+</tr>
+<tr>
+<td>美国气象局气候评估报告 PCC</td>
+<td><a href="http://www.ipcc-data.org">http://www.ipcc-data.org</a></td>
+</tr>
+<tr>
+<td>四川科技报告共享服务系统</td>
+<td><a href="http://www.scstrs.cn">http://www.scstrs.cn</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="权威公报类">权威公报类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国自然资源（土地、测绘、地质、矿业、海洋等）公报</td>
+<td><a href="http://www.mnr.gov.cn/sj/tjgb">http://www.mnr.gov.cn/sj/tjgb</a></td>
+</tr>
+<tr>
+<td>中国地质调查局专题网站</td>
+<td><a href="https://www.cgs.gov.cn/ddztt/ddzt">https://www.cgs.gov.cn/ddztt/ddzt</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="标准规范类">标准规范类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国家标准化管理委员会</td>
+<td><a href="http://www.sac.gov.cn">http://www.sac.gov.cn</a></td>
+</tr>
+<tr>
+<td>中国标准服务网</td>
+<td><a href="https://www.spc.org.cn">https://www.spc.org.cn</a></td>
+</tr>
+<tr>
+<td>行业标准服务平台</td>
+<td><a href="https://hbba.sacinfo.org.cn">https://hbba.sacinfo.org.cn</a></td>
+</tr>
+<tr>
+<td>自然资源标准化服务平台</td>
+<td><a href="http://www.nrsis.org.cn">http://www.nrsis.org.cn</a></td>
+</tr>
+<tr>
+<td>自然资源部标准规范</td>
+<td><a href="http://www.mnr.gov.cn/gk/bzgf/">http://www.mnr.gov.cn/gk/bzgf/</a></td>
+</tr>
+<tr>
+<td>地质云标准规范服务</td>
+<td><a href="https://geocloud.cgs.gov.cn/std">https://geocloud.cgs.gov.cn/std</a></td>
+</tr>
+<tr>
+<td>万方数据标准</td>
+<td><a href="https://www.wanfangdata.com.cn">https://www.wanfangdata.com.cn</a></td>
+</tr>
+<tr>
+<td>WDFXW 文档分享网</td>
+<td><a href="https://www.wdfxw.net">https://www.wdfxw.net</a></td>
+</tr>
+<tr>
+<td>全国标准信息公土服务平平台</td>
+<td><a href="https://std.samr.gov.cn/gb">https://std.samr.gov.cn/gb</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="科学研究工具类">科学研究工具类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>德克萨斯A&amp;M 大学 水文和土壤评估工具（英文）</td>
+<td><a href="https://swat.tamu.edu/">https://swat.tamu.edu/</a></td>
+</tr>
+<tr>
+<td>The University of Texas at Austin 板块重建</td>
+<td><a href="https://repositories.lib.utexas.edu/handle/2152/84643">https://repositories.lib.utexas.edu/handle/2152/84643</a></td>
+</tr>
+<tr>
+<td>cangye/地震学 AI 工具</td>
+<td><a href="https://gitee.com/cangyeone/seismological-ai-tools">https://gitee.com/cangyeone/seismological-ai-tools</a></td>
+</tr>
+<tr>
+<td>时间序列分析软件</td>
+<td><a href="https://acycle.org/">https://acycle.org/</a></td>
+</tr>
+<tr>
+<td>科学工具库</td>
+<td><a href="https://github.com">https://github.com</a></td>
+</tr>
+<tr>
+<td>时间序列分析软件</td>
+<td><a href="https://github.com/mingsongli/acycle">https://github.com/mingsongli/acycle</a></td>
+</tr>
+<tr>
+<td>地球化学工具</td>
+<td><a href="https://github.com/GeoPyTool">https://github.com/GeoPyTool</a></td>
+</tr>
+<tr>
+<td>GeoPyTool 数据库</td>
+<td><a href="https://github.com/GeoPyTool/GeoRocData">https://github.com/GeoPyTool/GeoRocData</a></td>
+</tr>
+<tr>
+<td>IsoplotR</td>
+<td><a href="https://www.ucl.ac.uk/~ucfbpve/isoplotr/home/index.html">https://www.ucl.ac.uk/~ucfbpve/isoplotr/home/index.html</a></td>
+</tr>
+<tr>
+<td>IsoplotR</td>
+<td><a href="http://isoplotr.london-geochron.com">http://isoplotr.london-geochron.com</a>&gt;</td>
+</tr>
+<tr>
+<td>IsoplotRgui</td>
+<td><a href="https://github.com/pvermees/IsoplotRgui">https://github.com/pvermees/IsoplotRgui</a></td>
+</tr>
+<tr>
+<td>板块构造工具</td>
+<td><a href="https://gplates.org/">https://gplates.org/</a></td>
+</tr>
+<tr>
+<td>交互元素周期表（英文）</td>
+<td><a href="https://www.webelements.com">https://www.webelements.com</a></td>
+</tr>
+<tr>
+<td>矿物温度计（英文）</td>
+<td><a href="http://www.minsocam.org/MSA/RIM/Rim69.html">http://www.minsocam.org/MSA/RIM/Rim69.html</a></td>
+</tr>
+<tr>
+<td>矿物压力计（英文）</td>
+<td><a href="http://www.open.ac.uk/earth-research/tindle/AGT/AGT_Home_2010">http://www.open.ac.uk/earth-research/tindle/AGT/AGT_Home_2010</a></td>
+</tr>
+<tr>
+<td>地球化学图解（英文）</td>
+<td><a href="https://minerva.union.edu/hollochk/c_petrology">https://minerva.union.edu/hollochk/c_petrology</a></td>
+</tr>
+<tr>
+<td>氧逸度计算（英文）</td>
+<td><a href="http://geo-fo2.com">http://geo-fo2.com</a></td>
+</tr>
+<tr>
+<td>在线计算器</td>
+<td><a href="https://www.osgeo.cn/app">https://www.osgeo.cn/app</a></td>
+</tr>
+<tr>
+<td>美国矿物学会软件集锦</td>
+<td><a href="http://www.minsocam.org/MSA/Software">http://www.minsocam.org/MSA/Software</a></td>
+</tr>
+<tr>
+<td>SG2PS(STRUCTURAL GEOLOGY TO POST SCRIPT CONVERTER)</td>
+<td><a href="https://www.sg2ps.eu/index.html">https://www.sg2ps.eu/index.html</a></td>
+</tr>
+<tr>
+<td>GAEA</td>
+<td><a href="http://www.gaea.ca">http://www.gaea.ca</a></td>
+</tr>
+<tr>
+<td>图片处理</td>
+<td><a href="https://imagej.nih.gov/ij">https://imagej.nih.gov/ij</a></td>
+</tr>
+<tr>
+<td>计算并绘制热力学函数、平衡组合和岩石平衡组合图</td>
+<td><a href="https://titan.minpet.unibas.ch/minpet/theriak/theruser.html">https://titan.minpet.unibas.ch/minpet/theriak/theruser.html</a></td>
+</tr>
+<tr>
+<td>绘制晶体结构</td>
+<td><a href="http://www.lwfinger.com/drawxtl/index.html">http://www.lwfinger.com/drawxtl/index.html</a></td>
+</tr>
+<tr>
+<td>古地磁数据可视化</td>
+<td><a href="http://cires1.colorado.edu/people/jones.craig/PMag3.html">http://cires1.colorado.edu/people/jones.craig/PMag3.html</a></td>
+</tr>
+<tr>
+<td>结晶学软件库</td>
+<td><a href="http://ww1.iucr.org/sincris-top/logiciel">http://ww1.iucr.org/sincris-top/logiciel</a></td>
+</tr>
+<tr>
+<td>通过模拟发送声波和观测回声来判断、开采石油</td>
+<td><a href="https://www.blonzonics.us/games/seismic-duck">https://www.blonzonics.us/games/seismic-duck</a></td>
+</tr>
+<tr>
+<td>衍射分析</td>
+<td><a href="http://maud.radiographema.com">http://maud.radiographema.com</a></td>
+</tr>
+<tr>
+<td>GIS 工具汇总</td>
+<td><a href="https://www.holcombe.net.au/software/index.html">https://www.holcombe.net.au/software/index.html</a></td>
+</tr>
+<tr>
+<td>美国地调局水文地球化学计算</td>
+<td><a href="https://www.usgs.gov/software/phreeqc-version-3">https://www.usgs.gov/software/phreeqc-version-3</a></td>
+</tr>
+<tr>
+<td>处理计算火成岩全岩数据</td>
+<td><a href="http://www.gcdkit.org">http://www.gcdkit.org</a></td>
+</tr>
+<tr>
+<td>绘制三元图</td>
+<td><a href="https://www.lboro.ac.uk/microsites/research/phys-geog/tri-plot/index.html">https://www.lboro.ac.uk/microsites/research/phys-geog/tri-plot/index.html</a></td>
+</tr>
+<tr>
+<td>绘制主微量元素相关的多种图解</td>
+<td><a href="https://vhub.org/resources/1433">https://vhub.org/resources/1433</a></td>
+</tr>
+<tr>
+<td>同位素在线处理</td>
+<td><a href="http://www.isoplotr.com/isoplotr">http://www.isoplotr.com/isoplotr</a></td>
+</tr>
+<tr>
+<td>bbbike map</td>
+<td><a href="https://mc.bbbike.org/mc/">https://mc.bbbike.org/mc/</a></td>
+</tr>
+<tr>
+<td>open cycle map</td>
+<td><a href="http://www.opencyclemap.org/">http://www.opencyclemap.org/</a></td>
+</tr>
+<tr>
+<td>DevOps 一站式研发效能平台</td>
+<td><a href="https://gitee.com">https://gitee.com</a></td>
+</tr>
+<tr>
+<td>GeoScene 三维功能展示平台</td>
+<td><a href="https://doc.geoscene.cn/3dsamples/#/">https://doc.geoscene.cn/3dsamples/#/</a></td>
+</tr>
+<tr>
+<td>geost view</td>
+<td><a href="https://www.geospatial.com/resources/">https://www.geospatial.com/resources/</a></td>
+</tr>
+<tr>
+<td>usgs 地图</td>
+<td><a href="https://apps.nationalmap.gov/viewer/">https://apps.nationalmap.gov/viewer/</a></td>
+</tr>
+<tr>
+<td>云端地球</td>
+<td><a href="https://earth.daspatial.com">https://earth.daspatial.com</a></td>
+</tr>
+<tr>
+<td>30 米全球地表覆盖数据</td>
+<td><a href="https://www.webmap.cn/commres.do?method=globeIndex">https://www.webmap.cn/commres.do?method=globeIndex</a></td>
+</tr>
+<tr>
+<td>1: 100 万公众版基础地理信息数据（2021）</td>
+<td><a href="https://www.webmap.cn/commres.do?method=result100W">https://www.webmap.cn/commres.do?method=result100W</a></td>
+</tr>
+<tr>
+<td>1: 25 万全国基础地理数据库</td>
+<td><a href="https://www.webmap.cn/commres.do?method=result25W">https://www.webmap.cn/commres.do?method=result25W</a></td>
+</tr>
+<tr>
+<td>阿里云数据可视化平台</td>
+<td><a href="http://datav.aliyun.com/portal/school/atlas/area_selector">http://datav.aliyun.com/portal/school/atlas/area_selector</a></td>
+</tr>
+<tr>
+<td>QGIS 学习</td>
+<td><a href="https://gis.stackexchange.com">https://gis.stackexchange.com</a></td>
+</tr>
+<tr>
+<td>哨兵工具箱</td>
+<td><a href="https://sentinel.esa.int/web/sentinel/toolboxes/sentinel-1">https://sentinel.esa.int/web/sentinel/toolboxes/sentinel-1</a></td>
+</tr>
+<tr>
+<td>QGIS 半自动分类插件 （SCP）</td>
+<td><a href="https://plugins.qgis.org/plugins/SemiAutomaticClassificationPlugin/">https://plugins.qgis.org/plugins/SemiAutomaticClassificationPlugin/</a></td>
+</tr>
+<tr>
+<td>ORFEO 工具箱（OTB）</td>
+<td><a href="https://www.orfeo-toolbox.org/">https://www.orfeo-toolbox.org/</a></td>
+</tr>
+<tr>
+<td>PolSARPro</td>
+<td><a href="https://step.esa.int/main/toolboxes/polsarpro-v6-0-biomass-edition-toolbox/">https://step.esa.int/main/toolboxes/polsarpro-v6-0-biomass-edition-toolbox/</a></td>
+</tr>
+<tr>
+<td>WhiteboxTools</td>
+<td><a href="https://www.whiteboxgeo.com">https://www.whiteboxgeo.com</a></td>
+</tr>
+<tr>
+<td>Opticks</td>
+<td><a href="https://www.osgeo.org/projects/opticks/">https://www.osgeo.org/projects/opticks/</a></td>
+</tr>
+<tr>
+<td>InterImage</td>
+<td><a href="http://www.lvc.ele.puc-rio.br/projects/interimage/">http://www.lvc.ele.puc-rio.br/projects/interimage/</a></td>
+</tr>
+<tr>
+<td>ILWIS</td>
+<td><a href="https://52north.org/software/software-projects/ilwis/">https://52north.org/software/software-projects/ilwis/</a></td>
+</tr>
+<tr>
+<td>E-foto</td>
+<td><a href="http://www.efoto.eng.uerj.br/en">http://www.efoto.eng.uerj.br/en</a></td>
+</tr>
+<tr>
+<td>OpenRS</td>
+<td><a href="http://openrs.whu.edu.cn/index.php/openrs-introduction/">http://openrs.whu.edu.cn/index.php/openrs-introduction/</a></td>
+</tr>
+<tr>
+<td>PIE-Engine</td>
+<td><a href="https://engine.piesat.cn">https://engine.piesat.cn</a></td>
+</tr>
+<tr>
+<td>rgee</td>
+<td><a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI4OTU3NTY1OA==&amp;scene=1&amp;album_id=1833599890510135302&amp;count=3#wechat_redirect">https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;__biz=MzI4OTU3NTY1OA==&amp;scene=1&amp;album_id=1833599890510135302&amp;count=3#wechat_redirect</a></td>
+</tr>
+<tr>
+<td>GGGIS</td>
+<td><a href="http://www.gggis.com">http://www.gggis.com</a></td>
+</tr>
+<tr>
+<td>Global</td>
+<td>Mapper</td>
+</tr>
+<tr>
+<td>QGIS</td>
+<td>QGIS</td>
+</tr>
+<tr>
+<td>GeoQuery</td>
+<td>GeoQuery</td>
+</tr>
+<tr>
+<td>jamovi</td>
+<td><a href="https://www.jamovi.org/">https://www.jamovi.org/</a></td>
+</tr>
+<tr>
+<td>jamovi 软件介绍</td>
+<td><a href="https://mp.weixin.qq.com/s?__biz=Mzg2NTQyMzE0OA==&amp;mid=2247501193&amp;idx=1&amp;sn=e1f1ed08263b174e865db0c92fbbf67c&amp;chksm=ce58dfcaf92f56dcef8929d9f834c8268bd42aa77d8092c9a7d6f960474eb39d2d3bbef61660&amp;mpshare=1&amp;scene=23&amp;srcid=0225XKjiQL1nGl4D904WEta1&amp;sharer_sharetime=1645759816465&amp;sharer_shareid=dace0283859eac3ca5e2774555881945#rd">https://mp.weixin.qq.com/s?__biz=Mzg2NTQyMzE0OA==&amp;mid=2247501193&amp;idx=1&amp;sn=e1f1ed08263b174e865db0c92fbbf67c&amp;chksm=ce58dfcaf92f56dcef8929d9f834c8268bd42aa77d8092c9a7d6f960474eb39d2d3bbef61660&amp;mpshare=1&amp;scene=23&amp;srcid=0225XKjiQL1nGl4D904WEta1&amp;sharer_sharetime=1645759816465&amp;sharer_shareid=dace0283859eac3ca5e2774555881945#rd</a></td>
+</tr>
+<tr>
+<td>GGGIS 谷歌地图下载工具</td>
+<td><a href="http://www.gggis.com">http://www.gggis.com</a></td>
+</tr>
+<tr>
+<td>MAPublisher 软件</td>
+<td><a href="https://www.avenza.com/mapublisher/">https://www.avenza.com/mapublisher/</a></td>
+</tr>
+<tr>
+<td>ArcGIS Pro Review</td>
+<td><a href="https://gisgeography.com/arcgis-pro/">https://gisgeography.com/arcgis-pro/</a></td>
+</tr>
+<tr>
+<td>地图格式转化</td>
+<td><a href="https://mapshaper.org/">https://mapshaper.org/</a></td>
+</tr>
+<tr>
+<td>英文文献分析工具</td>
+<td><a href="https://www.connectedpapers.com">https://www.connectedpapers.com</a></td>
+</tr>
+<tr>
+<td>绿色软件库</td>
+<td><a href="http://rutracker.in/">http://rutracker.in/</a></td>
+</tr>
+<tr>
+<td>英文输入法</td>
+<td><a href="http://www.triivi.com">http://www.triivi.com</a></td>
+</tr>
+<tr>
+<td>WMS、WFS、矢量和栅格文件转换器</td>
+<td><a href="https://geoconverter.infs.ch/">https://geoconverter.infs.ch/</a></td>
+</tr>
+<tr>
+<td>iLovePDF</td>
+<td><a href="https://www.ilovepdf.com">https://www.ilovepdf.com</a></td>
+</tr>
+<tr>
+<td>在线 AI 抠图</td>
+<td><a href="https://segment-anything.com">https://segment-anything.com</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="文献下载类">文献下载类</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全国图书馆参考咨询联盟</td>
+<td><a href="http://www.ucdrs.superlib.net/">http://www.ucdrs.superlib.net/</a></td>
+</tr>
+<tr>
+<td>中国地质调查期刊网</td>
+<td><a href="http://zgdzdcqkw.xml-journal.net/journals">http://zgdzdcqkw.xml-journal.net/journals</a></td>
+</tr>
+<tr>
+<td>中国地学期刊门户网</td>
+<td><a href="http://www.geojournals.cn">http://www.geojournals.cn</a></td>
+</tr>
+<tr>
+<td>国家哲学社会科学文献中心</td>
+<td><a href="http://www.ncpssd.org/journal">http://www.ncpssd.org/journal</a></td>
+</tr>
+<tr>
+<td>国家知识产权局</td>
+<td><a href="https://www.cnipa.gov.cn">https://www.cnipa.gov.cn</a></td>
+</tr>
+<tr>
+<td>Search - Consensus - Evidence-Based Answers, Faster</td>
+<td><a href="https://consensus.app/search/">https://consensus.app/search/</a></td>
+</tr>
+<tr>
+<td>国家科技图书文献中心 开放资源集成获取系统</td>
+<td><a href="http://8306.rm.cglhub.com">http://8306.rm.cglhub.com</a></td>
+</tr>
+<tr>
+<td>地学文献信息服务 - 地质云门户</td>
+<td><a href="http://22309065.rm.cglhub.com/index.html">http://22309065.rm.cglhub.com/index.html</a></td>
+</tr>
+<tr>
+<td>美国国家地质图书馆</td>
+<td><a href="https://www.tandfonline.com">https://www.tandfonline.com</a></td>
+</tr>
+<tr>
+<td>小鲸鱼文献</td>
+<td><a href="http://www.9312.net/#/">http://www.9312.net/#/</a></td>
+</tr>
+<tr>
+<td>哈佛地理空间图书馆</td>
+<td><a href="https://hgl.harvard.edu/">https://hgl.harvard.edu/</a></td>
+</tr>
+<tr>
+<td>谷歌学术镜像</td>
+<td><a href="https://www.library.ac.cn">https://www.library.ac.cn</a></td>
+</tr>
+<tr>
+<td>科学足迹出版社</td>
+<td><a href="http://www.scifootprint.com">http://www.scifootprint.com</a></td>
+</tr>
+<tr>
+<td>CALIS 高校机构知识库</td>
+<td><a href="http://ir.calis.edu.cn">http://ir.calis.edu.cn</a></td>
+</tr>
+<tr>
+<td>台湾学术机构典藏</td>
+<td><a href="http://tair.org.tw/">http://tair.org.tw/</a></td>
+</tr>
+<tr>
+<td>中国科学院 PubScholar 公益学术平台</td>
+<td><a href="https://pubscholar.cn">https://pubscholar.cn</a></td>
+</tr>
+<tr>
+<td>SCIHUB</td>
+<td><a href="https://sci-hub.yncjkj.com">https://sci-hub.yncjkj.com</a></td>
+</tr>
+<tr>
+<td>开源论文查询工具 DocsGPT</td>
+<td><a href="https://docsgpt.arc53.com">https://docsgpt.arc53.com</a></td>
+</tr>
+<tr>
+<td>香港机构知识库整合系统</td>
+<td><a href="http://hkir.ust.hk/hkir">http://hkir.ust.hk/hkir</a></td>
+</tr>
+<tr>
+<td>文献神器 v8.0</td>
+<td><a href="https://lanzoui.com/i4u2Qselgva">https://lanzoui.com/i4u2Qselgva</a></td>
+</tr>
+<tr>
+<td>百川文献翻译</td>
+<td><a href="http://www.bcwxfy.com">http://www.bcwxfy.com</a></td>
+</tr>
+<tr>
+<td>Academic Accelerator 学术加速器</td>
+<td><a href="https://academic-accelerator.com">https://academic-accelerator.com</a></td>
+</tr>
+<tr>
+<td>zlibrary</td>
+<td><a href="https://lib-4h4b5f3y52l5wbw3rh2ddxse.1lib.ph/">https://lib-4h4b5f3y52l5wbw3rh2ddxse.1lib.ph/</a></td>
+</tr>
+<tr>
+<td>文献数据读取</td>
+<td><a href="https://automeris.io/WebPlotDigitizer/">https://automeris.io/WebPlotDigitizer/</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="https://booksc.org">https://booksc.org</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://zh.booksc.org/">http://zh.booksc.org/</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://libgen.rs">http://libgen.rs</a></td>
+</tr>
+<tr>
+<td>外文文献下载</td>
+<td><a href="https://sci-hub.tf/">https://sci-hub.tf/</a></td>
+</tr>
+<tr>
+<td>外文文献下载</td>
+<td><a href="https://www.sci-hub.st/">https://www.sci-hub.st/</a></td>
+</tr>
+<tr>
+<td>外文文献下载</td>
+<td><a href="https://www.sci-hub.se/">https://www.sci-hub.se/</a></td>
+</tr>
+<tr>
+<td>外文文献下载</td>
+<td><a href="https://www.crossref.org/guestquery">https://www.crossref.org/guestquery</a></td>
+</tr>
+<tr>
+<td>谷歌学术</td>
+<td><a href="http://scholar.glgoo.org">http://scholar.glgoo.org</a></td>
+</tr>
+<tr>
+<td>谷歌学术</td>
+<td><a href="https://xs.glgoo.net/">https://xs.glgoo.net/</a></td>
+</tr>
+<tr>
+<td>谷歌学术合集</td>
+<td><a href="https://ac.scmor.com">https://ac.scmor.com</a></td>
+</tr>
+<tr>
+<td>百度学术</td>
+<td><a href="https://xueshu.baidu.com">https://xueshu.baidu.com</a></td>
+</tr>
+<tr>
+<td>中国图书进出口(集团)总公司</td>
+<td><a href="http://cnplinker.cnpeak.com">http://cnplinker.cnpeak.com</a></td>
+</tr>
+<tr>
+<td>中国专利下载</td>
+<td><a href="https://www.drugfuture.com/cnpat/cn_patent.asp">https://www.drugfuture.com/cnpat/cn_patent.asp</a></td>
+</tr>
+<tr>
+<td>全球医药情报网</td>
+<td><a href="https://pharmsnap.zhihuiya.com">https://pharmsnap.zhihuiya.com</a></td>
+</tr>
+<tr>
+<td>虫部落</td>
+<td><a href="http://www.chongbuluo.com">http://www.chongbuluo.com</a></td>
+</tr>
+<tr>
+<td>国家科技图书文献中心开放学术资源系统网</td>
+<td><a href="http://oar.nstl.gov.cn">http://oar.nstl.gov.cn</a></td>
+</tr>
+<tr>
+<td>四川师范大学 jstor 文献库</td>
+<td><a href="https://www.jstor.org/">https://www.jstor.org/</a></td>
+</tr>
+<tr>
+<td>(UMI 博硕士论文数据库</td>
+<td><a href="https://about.proquest.com/en/">https://about.proquest.com/en/</a></td>
+</tr>
+<tr>
+<td>智慧云图书馆</td>
+<td><a href="http://www.yuntsg.com">http://www.yuntsg.com</a></td>
+</tr>
+<tr>
+<td>臺灣大學學術期刊資料庫</td>
+<td><a href="http://ejournal.press.ntu.edu.tw/">http://ejournal.press.ntu.edu.tw/</a></td>
+</tr>
+<tr>
+<td>OA 文献</td>
+<td><a href="http://www.socolar.com">http://www.socolar.com</a></td>
+</tr>
+<tr>
+<td>OA 图书馆</td>
+<td><a href="https://www.oalib.com">https://www.oalib.com</a></td>
+</tr>
+<tr>
+<td>Nature</td>
+<td><a href="http://www.nature.com">http://www.nature.com</a></td>
+</tr>
+<tr>
+<td>科学圈</td>
+<td><a href="http://www.researchgate.net">http://www.researchgate.net</a></td>
+</tr>
+<tr>
+<td>Engineering &amp; Science1937-1988</td>
+<td><a href="http://calteches.library.caltech.edu">http://calteches.library.caltech.edu</a></td>
+</tr>
+<tr>
+<td>BNET 信息检索平台</td>
+<td><a href="http://findarticles.com">http://findarticles.com</a></td>
+</tr>
+<tr>
+<td>ABC Chemistry 是化学论文</td>
+<td><a href="http://www.abc.chemistry.bsu.by/current/fulltext.html">http://www.abc.chemistry.bsu.by/current/fulltext.html</a></td>
+</tr>
+<tr>
+<td>springeropen</td>
+<td><a href="https://www.springeropen.com">https://www.springeropen.com</a></td>
+</tr>
+<tr>
+<td>CNKI 外文总库</td>
+<td><a href="https://scholar.cnki.net">https://scholar.cnki.net</a></td>
+</tr>
+<tr>
+<td>谷粉学术</td>
+<td><a href="https://gfsoso.99lb.net">https://gfsoso.99lb.net</a></td>
+</tr>
+<tr>
+<td>Genamics JournalSeek 期刊信息检索系统</td>
+<td><a href="http://journalseek.net/index.htm">http://journalseek.net/index.htm</a></td>
+</tr>
+<tr>
+<td>HindawiOA 文献</td>
+<td><a href="https://www.hindawi.com/journals/">https://www.hindawi.com/journals/</a></td>
+</tr>
+<tr>
+<td>麻省理工学院 MIT 发表的学术论文</td>
+<td><a href="http://dspace.mit.edu/handle/1721.1/49433">http://dspace.mit.edu/handle/1721.1/49433</a></td>
+</tr>
+<tr>
+<td>德国比勒费尔德（Bielefeld)大学图书馆学术搜索引擎</td>
+<td><a href="http://www.base-search.net/">http://www.base-search.net/</a></td>
+</tr>
+<tr>
+<td>是美国国立卫生研究院</td>
+<td><a href="http://www.ncbi.nlm.nih.gov/pmc/">http://www.ncbi.nlm.nih.gov/pmc/</a></td>
+</tr>
+<tr>
+<td>瑞典的隆德大学图书馆</td>
+<td><a href="https://doaj.org/">https://doaj.org/</a></td>
+</tr>
+<tr>
+<td>科学图书馆</td>
+<td><a href="https://www.plos.org/">https://www.plos.org/</a></td>
+</tr>
+<tr>
+<td>科研出版社</td>
+<td><a href="https://www.scirp.org/">https://www.scirp.org/</a></td>
+</tr>
+<tr>
+<td>NIMS 日本国立材料研究</td>
+<td><a href="http://www.nims.go.jp/eng/">http://www.nims.go.jp/eng/</a></td>
+</tr>
+<tr>
+<td>HighWire Press 数据库</td>
+<td><a href="http://highwire.stanford.edu/lists/allsites.dtl">http://highwire.stanford.edu/lists/allsites.dtl</a></td>
+</tr>
+<tr>
+<td>SciELO 科技在线电子图书馆</td>
+<td><a href="http://www.scielo.org/">http://www.scielo.org/</a></td>
+</tr>
+<tr>
+<td>SCHOLARVOX</td>
+<td><a href="http://www.scholarvox.com">http://www.scholarvox.com</a></td>
+</tr>
+<tr>
+<td>EBSCO 以商务数据</td>
+<td><a href="https://www.ebsco.com">https://www.ebsco.com</a></td>
+</tr>
+<tr>
+<td>美国经济学协会文献</td>
+<td><a href="https://www.aeaweb.org/econlit/">https://www.aeaweb.org/econlit/</a></td>
+</tr>
+<tr>
+<td>XERFI 以学术研究报告</td>
+<td><a href="https://www.xerfi.com">https://www.xerfi.com</a></td>
+</tr>
+<tr>
+<td>Th è ses 论文库</td>
+<td><a href="https://www.theses.fr/">https://www.theses.fr/</a></td>
+</tr>
+<tr>
+<td>umi 论文</td>
+<td><a href="http://wwwlib.umi.com">http://wwwlib.umi.com</a></td>
+</tr>
+<tr>
+<td>xDD 数字图书馆</td>
+<td><a href="https://geodeepdive.org">https://geodeepdive.org</a></td>
+</tr>
+<tr>
+<td>taylorandfrancis 电子书</td>
+<td><a href="https://taylorandfrancis.com">https://taylorandfrancis.com</a></td>
+</tr>
+<tr>
+<td>加拿大科学出版社</td>
+<td><a href="https://cdnsciencepub.com">https://cdnsciencepub.com</a></td>
+</tr>
+<tr>
+<td>springernature 出版社</td>
+<td><a href="https://www.springernature.com/gp">https://www.springernature.com/gp</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="https://ebookee.org">https://ebookee.org</a></td>
+</tr>
+<tr>
+<td>外文文献下载</td>
+<td><a href="https://sc.panda321.com">https://sc.panda321.com</a></td>
+</tr>
+<tr>
+<td>谷歌学术</td>
+<td><a href="https://52proxy.xyz/index.php?q=https%3A%2F%2Fscholar.google.com%2F">https://52proxy.xyz/index.php?q=https%3A%2F%2Fscholar.google.com%2F</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="https://www.library.ac.cn">https://www.library.ac.cn</a></td>
+</tr>
+<tr>
+<td>科研学术搜索</td>
+<td><a href="https://so.sciencesoft.cn">https://so.sciencesoft.cn</a></td>
+</tr>
+<tr>
+<td>查重服务</td>
+<td><a href="https://www.ithenticatecn.com">https://www.ithenticatecn.com</a></td>
+</tr>
+<tr>
+<td>天府科技云文献服务（含查重服务）</td>
+<td><a href="http://132.232.38.89:9091/">http://132.232.38.89:9091/</a></td>
+</tr>
+<tr>
+<td>中国科学院文献情报中心 科技查新平台</td>
+<td><a href="https://chaxin.las.ac.cn">https://chaxin.las.ac.cn</a></td>
+</tr>
+<tr>
+<td>AI 英文语法检查</td>
+<td><a href="http://writingmodels.com/ai.html">http://writingmodels.com/ai.html</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="https://www.gutenberg.org">https://www.gutenberg.org</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://libgen.rs">http://libgen.rs</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="https://www.planetebook.com">https://www.planetebook.com</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://www.readeasily.com">http://www.readeasily.com</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://en.bookfi.org">http://en.bookfi.org</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://en.wikibooks.org">http://en.wikibooks.org</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://onlinebooks.library.upenn.edu">http://onlinebooks.library.upenn.edu</a></td>
+</tr>
+<tr>
+<td>外文书籍下载</td>
+<td><a href="http://www.getfreeebooks.com">http://www.getfreeebooks.com</a></td>
+</tr>
+<tr>
+<td>地球系统科学文献下载、数据出版</td>
+<td><a href="https://essd.copernicus.org">https://essd.copernicus.org</a></td>
+</tr>
+<tr>
+<td>文献下载</td>
+<td><a href="https://www.cn-ki.net">https://www.cn-ki.net</a></td>
+</tr>
+<tr>
+<td>外文学术期刊导航</td>
+<td><a href="https://www.onacademic.com">https://www.onacademic.com</a></td>
+</tr>
+<tr>
+<td>文献小镇</td>
+<td><a href="http://www.sci-hub.ac.cn">http://www.sci-hub.ac.cn</a></td>
+</tr>
+<tr>
+<td>四川省专业技术人员继续教育网</td>
+<td><a href="http://www.sczjjxjy.com">http://www.sczjjxjy.com</a></td>
+</tr>
+<tr>
+<td>欧洲学位论文库</td>
+<td><a href="https://www.realtime.at/gecatcht">https://www.realtime.at/gecatcht</a></td>
+</tr>
+<tr>
+<td>澳洲大学图书馆</td>
+<td><a href="https://dspace.anu.edu.au">https://dspace.anu.edu.au</a></td>
+</tr>
+<tr>
+<td>美国农业文献联机存取书目型数据库（英文）</td>
+<td><a href="http://agricola.nal.usda.gov">http://agricola.nal.usda.gov</a></td>
+</tr>
+<tr>
+<td>科学文库</td>
+<td><a href="https://book.sciencereading.cn">https://book.sciencereading.cn</a>/</td>
+</tr>
+<tr>
+<td>国家图书馆</td>
+<td><a href="http://www.nlc.cn">http://www.nlc.cn</a></td>
+</tr>
+<tr>
+<td>国家图书馆电子资源</td>
+<td><a href="http://www.nlc.cn/dsb_zyyfw/ts/tszyk">http://www.nlc.cn/dsb_zyyfw/ts/tszyk</a></td>
+</tr>
+<tr>
+<td>书星网</td>
+<td><a href="http://www.shuxing.cc">http://www.shuxing.cc</a></td>
+</tr>
+<tr>
+<td>美国国家出版社</td>
+<td><a href="http://www.nap.edu">http://www.nap.edu</a></td>
+</tr>
+<tr>
+<td>澳大利亚国立大学 ANU 电子出版库</td>
+<td><a href="http://dspace.anu.edu.au">http://dspace.anu.edu.au</a></td>
+</tr>
+<tr>
+<td>阿德雷德大学电子文本收藏中心</td>
+<td><a href="http://ebooks.adelaide.edu.au">http://ebooks.adelaide.edu.au</a></td>
+</tr>
+<tr>
+<td>澳大利亚数字化人文门户</td>
+<td><a href="http://www.ehum.edu.au">http://www.ehum.edu.au</a></td>
+</tr>
+<tr>
+<td>科廷大学技术文献库(</td>
+<td><a href="http://espace.library.curtin.edu.au/R">http://espace.library.curtin.edu.au/R</a></td>
+</tr>
+<tr>
+<td>墨尔本大学电子出版物收藏网</td>
+<td><a href="http://www.lib.unimelb.edu.au/eprints">http://www.lib.unimelb.edu.au/eprints</a></td>
+</tr>
+<tr>
+<td>National Academy Press</td>
+<td><a href="http://www.nationalacademies.org/publications">http://www.nationalacademies.org/publications</a></td>
+</tr>
+<tr>
+<td>ICPSR</td>
+<td><a href="http://www.icpsr.umich.edu/icpsrweb/ICPSR">http://www.icpsr.umich.edu/icpsrweb/ICPSR</a></td>
+</tr>
+<tr>
+<td>美国政府文献</td>
+<td><a href="http://www.access.gpo.gov">http://www.access.gpo.gov</a></td>
+</tr>
+<tr>
+<td>医学文献库</td>
+<td><a href="http://freebooks4doctors.com">http://freebooks4doctors.com</a></td>
+</tr>
+<tr>
+<td>在线医学百科全书</td>
+<td><a href="http://www.healthopedia.com">http://www.healthopedia.com</a></td>
+</tr>
+<tr>
+<td>数学世界</td>
+<td><a href="http://mathworld.wolfram.com">http://mathworld.wolfram.com</a></td>
+</tr>
+<tr>
+<td>日本文学著作</td>
+<td><a href="http://www.aozora.gr.jp">http://www.aozora.gr.jp</a></td>
+</tr>
+<tr>
+<td>意大利电子书网站</td>
+<td><a href="http://www.ebookgratis.it">http://www.ebookgratis.it</a></td>
+</tr>
+<tr>
+<td>世界图书馆</td>
+<td><a href="http://abu.cnam.fr">http://abu.cnam.fr</a></td>
+</tr>
+<tr>
+<td>法兰西国家图书馆</td>
+<td><a href="http://gallica.bnf.fr">http://gallica.bnf.fr</a></td>
+</tr>
+<tr>
+<td>弗吉尼亚大学电子文献中心</td>
+<td><a href="http://www2.lib.virginia.edu/etext/index.html">http://www2.lib.virginia.edu/etext/index.html</a></td>
+</tr>
+<tr>
+<td>牛津大学档案馆</td>
+<td><a href="http://ota.ahds.ac.uk">http://ota.ahds.ac.uk</a></td>
+</tr>
+<tr>
+<td>宾夕法尼亚大学在线图书</td>
+<td><a href="http://digital.library.upenn.edu/books">http://digital.library.upenn.edu/books</a></td>
+</tr>
+<tr>
+<td>Ndltd</td>
+<td><a href="http://www.ndltd.org">http://www.ndltd.org</a></td>
+</tr>
+<tr>
+<td>美国国家科学院在线数据据库</td>
+<td><a href="http://www.nap.edu">http://www.nap.edu</a></td>
+</tr>
+<tr>
+<td>麻省理工学院的开放文献</td>
+<td><a href="http://ocw.mit.edu/OcwWeb/web/home/home/index.html">http://ocw.mit.edu/OcwWeb/web/home/home/index.html</a></td>
+</tr>
+<tr>
+<td>库尔特斯塔博的在线图书馆</td>
+<td><a href="http://www.zum.de">http://www.zum.de</a></td>
+</tr>
+<tr>
+<td>密歇根大学信息学院 IPL 互联网公共图书馆</td>
+<td><a href="http://www.ipl.org">http://www.ipl.org</a></td>
+</tr>
+<tr>
+<td>DLESE 地球系统教育数字图书馆</td>
+<td><a href="http://www.dlese.org/library">http://www.dlese.org/library</a></td>
+</tr>
+<tr>
+<td>论文查重</td>
+<td><a href="https://www.paperfree.cn">https://www.paperfree.cn</a></td>
+</tr>
+<tr>
+<td>扬州市科学技术情报研究所</td>
+<td><a href="http://www.yzinfo.net.cn/Index.aspx">http://www.yzinfo.net.cn/Index.aspx</a></td>
+</tr>
+<tr>
+<td>全球学者库</td>
+<td><a href="http://www.globalauthorid.com/WebPortal/EliteOrder">http://www.globalauthorid.com/WebPortal/EliteOrder</a></td>
+</tr>
+<tr>
+<td>电子图书馆</td>
+<td><a href="https://librarygenesis.net/zh/">https://librarygenesis.net/zh/</a></td>
+</tr>
+<tr>
+<td>共享书盘</td>
+<td><a href="https://file.zhelper.de/">https://file.zhelper.de/</a></td>
+</tr>
+<tr>
+<td>校际社会科学数据共享联盟（Inter-university Consortium for Political and Social Research）icpsr</td>
+<td><a href="https://www.icpsr.umich.edu/web/pages">https://www.icpsr.umich.edu/web/pages</a></td>
+</tr>
+<tr>
+<td>世界数字图书馆(The World Digital Library)</td>
+<td><a href="https://www.wdl.org/en">https://www.wdl.org/en</a></td>
+</tr>
+<tr>
+<td>谷歌数字图书馆（Google Books）</td>
+<td><a href="http://books.google.cn">http://books.google.cn</a></td>
+</tr>
+<tr>
+<td>美国数字公共图书馆（Digital Public Library of America）</td>
+<td><a href="https://dp.la/">https://dp.la/</a></td>
+</tr>
+<tr>
+<td>美国国家科学院在线数据库（The National Academies Press）</td>
+<td><a href="https://nap.nationalacademies.org">https://nap.nationalacademies.org</a></td>
+</tr>
+<tr>
+<td>超星数字图书馆</td>
+<td><a href="http://www.chaoxing.com">http://www.chaoxing.com</a></td>
+</tr>
+<tr>
+<td>麻省理工大学的开放文献网站（MITOpen Course Ware）</td>
+<td><a href="https://ocw.mit.edu/index.htm">https://ocw.mit.edu/index.htm</a></td>
+</tr>
+<tr>
+<td>地球系统教育数字图书馆（Digital Library for Earth System Education）</td>
+<td><a href="https://www.dlese.org">https://www.dlese.org</a></td>
+</tr>
+<tr>
+<td>认知科学电子预印本文献库（CogPrints）</td>
+<td><a href="https://web-archive.southampton.ac.uk/cogprints.org/index.html">https://web-archive.southampton.ac.uk/cogprints.org/index.html</a></td>
+</tr>
+<tr>
+<td>z-lib 免费下载数字图书馆</td>
+<td><a href="https://zh.z-lib.org">https://zh.z-lib.org</a></td>
+</tr>
+<tr>
+<td></td>
+<td>学术讲座</td>
+</tr>
+<tr>
+<td>中国慕课</td>
+<td><a href="https://www.icourse163.org">https://www.icourse163.org</a></td>
+</tr>
+<tr>
+<td>国家开放大学</td>
+<td><a href="http://www.ouchn.edu.cn">http://www.ouchn.edu.cn</a></td>
+</tr>
+<tr>
+<td>哔哩哔哩</td>
+<td><a href="https://www.bilibili.com">https://www.bilibili.com</a></td>
+</tr>
+<tr>
+<td>蔻享学术</td>
+<td><a href="https://www.koushare.com">https://www.koushare.com</a></td>
+</tr>
+<tr>
+<td>国家虚拟仿真实验教学项目共享服务平台</td>
+<td><a href="http://www.ilab-x.com">http://www.ilab-x.com</a></td>
+</tr>
+<tr>
+<td>国家中小学智慧教育平台</td>
+<td><a href="https://www.zxx.edu.cn">https://www.zxx.edu.cn</a></td>
+</tr>
+<tr>
+<td>智慧树</td>
+<td><a href="https://www.zhihuishu.com">https://www.zhihuishu.com</a></td>
+</tr>
+<tr>
+<td>学堂在线</td>
+<td><a href="https://www.xuetangx.com">https://www.xuetangx.com</a></td>
+</tr>
+<tr>
+<td>爱课程</td>
+<td><a href="https://www.icourses.cn">https://www.icourses.cn</a></td>
+</tr>
+<tr>
+<td>isobar 地球科学在线学术会议</td>
+<td><a href="https://isobarscience.com">https://isobarscience.com</a></td>
+</tr>
+<tr>
+<td>终身教育平台</td>
+<td><a href="http://le.ouchn.cn/home">http://le.ouchn.cn/home</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="第三方数据库集合及素材库">第三方数据库集合及素材库</h2>
+<table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大地质家公众号：一些数据资源</td>
+<td><a href="https://mp.weixin.qq.com/s?__biz=MzAwODU3NDc2Nw==&amp;mid=2247487345&amp;idx=1&amp;sn=11e340016a83ee5e2c97fd283659b887&amp;chksm=9b6d8d31ac1a04272f417e3f51931faabf65bf450facae1530eecdfa3cc3afdacad130c91aff&amp;mpshare=1&amp;scene=23&amp;srcid=0420A8PxUvB1k0u9drLs7J6D&amp;sharer_sharetime=1650428152088&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd">https://mp.weixin.qq.com/s?__biz=MzAwODU3NDc2Nw==&amp;mid=2247487345&amp;idx=1&amp;sn=11e340016a83ee5e2c97fd283659b887&amp;chksm=9b6d8d31ac1a04272f417e3f51931faabf65bf450facae1530eecdfa3cc3afdacad130c91aff&amp;mpshare=1&amp;scene=23&amp;srcid=0420A8PxUvB1k0u9drLs7J6D&amp;sharer_sharetime=1650428152088&amp;sharer_shareid=b64bef37f046246c7f4f0fd42c4292e5#rd</a></td>
+</tr>
+<tr>
+<td>地信遥感数据汇</td>
+<td><a href="https://www.gisrsdata.com">https://www.gisrsdata.com</a>/</td>
+</tr>
+<tr>
+<td>遥感家园</td>
+<td><a href="https://www.rserforum.com">https://www.rserforum.com</a>/</td>
+</tr>
+<tr>
+<td>竹山数据</td>
+<td><a href="https://www.zhushandata.com">https://www.zhushandata.com</a>/</td>
+</tr>
+<tr>
+<td>地信宝藏屋</td>
+<td><a href="https://r.landcover100.com">https://r.landcover100.com</a>/</td>
+</tr>
+<tr>
+<td>锐多宝网盘</td>
+<td><a href="http://www.ruiduobao.com">http://www.ruiduobao.com</a>/</td>
+</tr>
+<tr>
+<td>资源分享</td>
+<td><a href="https://alist-doc.nn.ci/">https://alist-doc.nn.ci/</a></td>
+</tr>
+<tr>
+<td>China Data Institute</td>
+<td><a href="https://chinadatacenter.net/">https://chinadatacenter.net/</a></td>
+</tr>
+<tr>
+<td>行政区划数据</td>
+<td><a href="https://www.shengshixian.com">https://www.shengshixian.com</a></td>
+</tr>
+<tr>
+<td>锐多宝资源站</td>
+<td><a href="https://github.com/ruiduobao">https://github.com/ruiduobao</a></td>
+</tr>
+<tr>
+<td>锐多宝地图-行政村查询</td>
+<td><a href="https://map.ruiduobao.com">https://map.ruiduobao.com</a></td>
+</tr>
+<tr>
+<td>竹山数据-全球地表演化 3D 模型</td>
+<td><a href="https://www.zhushandata.com/projects/%E5%85%A8%E7%90%83%E5%9C%B0%E8%A1%A8%E6%BC%94%E5%8C%96%E7%B3%BB%E7%BB%9F/">https://www.zhushandata.com/projects/全球地表演化系统/</a></td>
+</tr>
+<tr>
+<td>地学之家</td>
+<td><a href="http://www.geohome123.com">http://www.geohome123.com</a></td>
+</tr>
+<tr>
+<td>月萌网地表水水质监测系统</td>
+<td><a href="http://www.moonapi.com/WaterQuality">http://www.moonapi.com/WaterQuality</a></td>
+</tr>
+<tr>
+<td>月萌网公开数据集</td>
+<td><a href="http://www.moonapi.com">http://www.moonapi.com</a></td>
+</tr>
+<tr>
+<td>科研星球</td>
+<td><a href="http://www.51xxziyuan.com">http://www.51xxziyuan.com</a></td>
+</tr>
+<tr>
+<td>Pexels 素材</td>
+<td><a href="https://www.pexels.com/zh-cn/">https://www.pexels.com/zh-cn/</a></td>
+</tr>
+<tr>
+<td>马里兰大学环境科学中心素材库</td>
+<td><a href="https://ian.umces.edu/media-library/">https://ian.umces.edu/media-library/</a></td>
+</tr>
+<tr>
+<td>pngimg 素材库</td>
+<td><a href="https://pngimg.com">https://pngimg.com</a></td>
+</tr>
+<tr>
+<td>freepik 素材库</td>
+<td><a href="https://www.freepik.com">https://www.freepik.com</a></td>
+</tr>
+<tr>
+<td>BioRender 图集 模板</td>
+<td><a href="https://biorender.com">https://biorender.com</a></td>
+</tr>
+<tr>
+<td>来画</td>
+<td><a href="https://www.laihua.com/animation/">https://www.laihua.com/animation/</a></td>
+</tr>
+<tr>
+<td>秀展网</td>
+<td><a href="https://www.xiuzhan365.com">https://www.xiuzhan365.com</a></td>
+</tr>
+<tr>
+<td>剪映</td>
+<td><a href="https://www.capcut.cn">https://www.capcut.cn</a></td>
+</tr>
+<tr>
+<td>必剪</td>
+<td><a href="https://bcut.bilibili.cn">https://bcut.bilibili.cn</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>地理科学数据库网站导航收集近1000个相关网站，由刘洪老师（成都地质调查中心高级工程师）长期维护，定期更新，该版本为2024年最新版本，转发请注明来源为刘洪老师。</li>
+</ul>
+
+            </div>
+            <hr style="width: 80%;">
+            
+            <div class="postfooter">
+                <ul class="post-copyright">
+                    <li><strong>文章作者：</strong>星霜</li>
+            <li><strong>原文链接：</strong>https://xiaobaiweinuli.github.io/post/OyEjXnIuq/</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用<i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA
+                许可协议。转载请注明出处！</li>
+            </ul>
+        </div>
+        
+        <div id="otherpost">
+            
+            <a  data-pjax class="prev-post-pc" href="https://xiaobaiweinuli.github.io/post/TgR0f2Lcm/"  style="color: black;">
+                <div id="ppcontainer">
+                    
+                    
+                    <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" style="width: 100%;" class="opimg">
+                    
+                    
+                    <h4 class="optitle">电子书导航</h4>
+                </div>
+            </a>
+            <div class="prev-post">
+                上一篇 <a  data-pjax href="https://xiaobaiweinuli.github.io/post/TgR0f2Lcm/">电子书导航</a>
+            </div>
+            
+            
+            <a data-pjax class="next-post-pc" href="https://xiaobaiweinuli.github.io/post/oboS6dvwY/"  style="color: black;">
+                <div id="npcontainer">
+                    
+                    
+                    <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" style="width: 100%;" class="opimg">
+                    
+                    
+                    <h4 class="optitle">免费下载知网论文</h4>
+                </div>
+            </a>
+            <div class="next-post">
+                下一篇 <a  data-pjax href="https://xiaobaiweinuli.github.io/post/oboS6dvwY/">免费下载知网论文</a>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- 弹窗 -->
+    <div id="myModal" class="modal">
+        <img class="modal-content" id="img01">
+    </div>
+</body>
+<script>
+    //文章阅读热度
+    var pl = $("#pl").html();
+    var rootaddr = $("#rootaddr").html();
+    pl = pl.replace(rootaddr, "");
+    $("#hotnum").attr('id', pl);
+</script>
+                    <div class="toc-container">
+                        <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%9B%BD%E5%AE%B6%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%B1%BB">国家数据平台类</a></li>
+<li><a href="#%E4%B8%93%E9%A2%98%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB">专题数据库类</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%87%BA%E7%89%88%E7%B1%BB">数据出版类</a></li>
+<li><a href="#%E6%88%90%E6%9E%9C%E6%8A%A5%E5%91%8A%E7%B1%BB">成果报告类</a></li>
+<li><a href="#%E6%9D%83%E5%A8%81%E5%85%AC%E6%8A%A5%E7%B1%BB">权威公报类</a></li>
+<li><a href="#%E6%A0%87%E5%87%86%E8%A7%84%E8%8C%83%E7%B1%BB">标准规范类</a></li>
+<li><a href="#%E7%A7%91%E5%AD%A6%E7%A0%94%E7%A9%B6%E5%B7%A5%E5%85%B7%E7%B1%BB">科学研究工具类</a></li>
+<li><a href="#%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD%E7%B1%BB">文献下载类</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9B%86%E5%90%88%E5%8F%8A%E7%B4%A0%E6%9D%90%E5%BA%93">第三方数据库集合及素材库</a></li>
+</ul>
+</li>
+</ul>
+
+                    </div>
+                    <div class="tog">
+                        <div class="toggleContainer">
+                            <div class="toggle">
+                                <i class="fas fa-angle-double-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!---------------------------- 评论系统👇 ------------------------->
+                    <div id="comment" class="comment">
+                        <div class="commentcontainer">
+                            
+                                
+                            
+                        </div>
+                    </div>
+                    <!---------------------------- 评论系统👆 ------------------------->
+
+                    <!-------------- 底部栏信息👇 -------------------->
+                    <div style="margin-top:5vh">
+                        
+                        <style>
+    .copyright {
+        font-size: 15px;
+        color: #d9d9d9;
+    }
+
+
+    @media screen and (min-width: 1200px) {
+        .foot {
+            width: 100%;
+            height: 130px;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .foot {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <div class="foot">
+        <div id="footinfo">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | Theme: <a
+                href="https://github.com/850552586/gridea-theme-fog">Fog</a>
+            <div>
+                
+            </div>
+            <div>
+                
+            </div>
+            <div class="copyright" style="color:white;text-align: center;">
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+                        
+                    </div>
+                    <!-------------- 底部栏信息👆 -------------------->
+                </div>
+                <!-- main标签，pjax渲染时加载以上内容👆 -->
+                <div class="col-md-2 col-lg-3">
+                </div>
+                <div id="bg">
+                </div>
+            </div>
+        <!--------------- 顶部菜单栏html👆--------->
+        
+        </div>
+        <!-- aplayer播放器加载👇 -->
+            
+        <!-- aplayer播放器加载👆 -->
+    </div>
+    <!-- 背景图加载方式👇 -->
+    <div id="bgchoice" style="display: none">link
+                </div>
+                
+                <div id="bgurl" style="display:none">https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/全局背景虚化.jpg</div>
+                
+    <!-- 背景图加载方式👆 -->
+</body>
+
+<script>
+    //初始化
+    //更换twikoo头像
+    setTimeout(replaceAvatar,1000);
+    setTimeout(replaceAvatar,2000);
+    setTimeout(replaceAvatar,8000);
+    // --------为每张图片添加懒加载（lazyload）标签-->懒加载功能 👇------------
+    lazyload();
+    //为文章内所有代码块添加代码复制功能 👇
+    codeinit();
+    // ------代码高亮显示功能-------------
+    hljs.initHighlightingOnLoad();
+    if (shareChoice)
+        shareInit();
+    if (donateChoice)
+        donateInit();
+</script>
+
+<!------------------ 加载live2d模型功能（看板娘）👇 ---------------->
+
+<!------------------ 加载live2d模型功能（看板娘）👆 ---------------->
+
+
+<!----------------------- 返回顶部按钮功能👇 --------------------->
+<script>
+    $(function () {
+        $('.toggleContainer').click(function () {
+            $('html,body').animate({
+                scrollTop: '0px'
+            }, 800);
+        });
+        $(window).scroll(function () {
+            var st = $(window).scrollTop();
+            if (st > 30) {
+                $(".toggleContainer").fadeIn(400);
+            } else {
+                $(".toggleContainer").fadeOut(100);
+            }
+        });
+    });
+</script>
+<!----------------------- 返回顶部按钮功能👆 --------------------->
+
+
+<!------------ 加载全局背景图功能👇（开始时没有写好，这功能有点鸡肋/(ㄒoㄒ)/~~） -->
+<script>
+    var bgchoice = "link"
+    var bg = $('#bg');
+    var bgurl = document.getElementById("bgurl").innerHTML;
+    if (bgchoice == 'default')
+    {
+        for (var i = 0; i < 3; i++)
+            bgurl = bgurl.replace("\\", "/");
+        bgurl = "https://xiaobaiweinuli.github.io/" + bgurl;
+    }
+    bg.css("background", "url('" + bgurl + "')");
+
+    window.onload = function () {
+        aplayerbtnInit();
+    }
+</script>
+<!------------ 加载全局背景图功能👆（开始时没有写好，这功能有点鸡肋/(ㄒoㄒ)/~~） -->
+
+
+
+
+
+<script>
+    //加载后的事件同步（阅读量、移动端评论等
+    window.onload = function () {
+    //代码块高亮渲染
+    document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+    });
+        getHotnum();
+        var sharepc = $(".share").eq(0).html();
+        $(".share").eq(1).html(sharepc);   //插件只会寻找一个分享标签渲染，所以需要手动添加到移动端
+        aplayerbtnInit();
+        $(".hljs").css({
+            "padding": "20px"
+        })
+    }
+</script>
+
+<!-- <script src="https://xiaobaiweinuli.github.io/media/js/av-min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-live-query-min.js"></script> -->
