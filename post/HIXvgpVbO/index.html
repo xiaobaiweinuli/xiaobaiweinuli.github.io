@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="善用互联网从搜索开始。
+🔗如何增强自己搜索的能力？
+这篇博客作者总结了他搜索的思路和方法，掌握这些技巧，能更便捷的搜索到自己想要得到的东西。
+Google 的完整搜索语法和几个专项搜索：
+1️⃣搜索语法
+🔗Google Search O..." />
+    <meta name="keywords" content="阅读" />
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/styles/main.css">
+    <!-- 代码渲染风格css -->
+    
+        <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css//vs2015.min.css">
+        
+    <!-- 代码高亮插件 -->
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+    <!-- 代码复制插件 -->
+    <script src="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/js/clipboard.min.js"></script>
+    <!-- live2d插件 -->
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/live2d.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <!-- 数学公式 -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"
+        integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"
+        integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"
+        integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous">
+        </script>
+    <script>
+        renderMathInElement(document.body, {
+            delimiters: [{
+                left: "$$",
+                right: "$$",
+                display: true
+            },
+            {
+                left: "$",
+                right: "$",
+                display: false
+            }
+            ]
+        });
+    </script>
+    
+    <title>电子书资源</title>
+
+    <!-- 大纲索引css调整 -->
+    
+    <style>
+        .markdownIt-TOC {
+            margin-left: 28%;
+            padding-left: 2px;
+            width: 80%;
+        }
+
+        .markdownIt-TOC li {
+            padding-left: 8%;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div id="landlord">
+        <div class="message" style="opacity:0"></div>
+        <canvas id="live2d" width="240" height="250" class="live2d"></canvas>
+    </div>
+    <div id="domainname" style="display:none">https://xiaobaiweinuli.github.io</div>
+    <div id="content">
+        <div>
+            <!----------- 移动端导航栏👇 ----------------->
+            <div id="bar">
+                <style>
+  .navmobile {
+    z-index: 15;
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .navbar {
+      max-width: 100vw;
+    }
+  }
+
+  @media screen and (max-width:1200px) and (min-width: 768px) {
+    @media (min-width: 768px) {
+      .navbar-nav {
+        float: right;
+        margin: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width:768px) {
+    .mbapspan {
+      padding: 0;
+    }
+  }
+</style>
+<div class="pjaxloading"  onclick="pjaxloadingClose()">
+  <div class="loadingbackground"></div>
+  <div id="loading">
+    <div class="loading">
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-inverse navbar-fixed-top navmobile">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#barmenu"
+        aria-expanded="false" id="barbutton">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a data-pjax class="navbar-brand" style="color:white" href="https://xiaobaiweinuli.github.io">星霜的笔记&nbsp;&nbsp;|</a>
+      <span class="navbar-brand mbapspan"><i id="mbaplayer" class="fa fa-play-circle-o" aria-hidden="true"
+          style="font-size: 28px;top: 12px;position: absolute;" onclick="aplayerPlay();"></i></span>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="barmenu">
+      <ul class="nav navbar-nav">
+        
+        
+        <li>
+          <a data-pjax href="/" style="color:white">
+            首页
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/archives" style="color:white">
+            归档
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/tags" style="color:white">
+            标签
+          </a>
+        </li>
+        
+        
+        
+        <li>
+          <a data-pjax href="/post/about" style="color:white">
+            关于
+          </a>
+        </li>
+        
+        
+        
+        
+          
+        <li><a data-pjax href="https://xiaobaiweinuli.github.io/friends" style="color:white">友链</a></li>
+
+        
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+  <script>
+    let btstate = false;
+    var bt = $("#barbutton");
+    var bm = $("#barmenu");
+    bt.click(function () {
+      dropdown();
+    })
+    function dropdown() {
+      console.log(btstate);
+      //下拉
+      if (btstate == false) {
+        bt.removeClass("collapsed");
+        bt.attr("aria-expanded", "true");
+        bm.attr("aria-expanded", "true")
+        bm.fadeIn(700);
+        btstate = true;
+      }
+      else {
+        bt.addClass("collapsed");
+        bt.attr("aria-expanded", "false");
+        bm.removeClass("in");
+        bm.hide();
+        bm.attr("aria-expanded", "false");
+        btstate = false;
+      }
+    }
+  </script> 
+            </div>
+            <!----------- 移动端导航栏👆 ----------------->
+
+            <!--------------- pc端菜单栏👇 ---------------->
+            <div class="side"><head>
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/styles/main.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
+    
+        <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css//vs2015.min.css">
+        
+    <script src="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/live2d.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+    <!--------- 数学公式👇---- -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css"
+        integrity="sha384-9tPv11A+glH/on/wEu99NVwDPwkMQESOocs/ZGXPoIiLE8MU/qkqUcZ3zzL+6DuH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.js"
+        integrity="sha384-U8Vrjwb8fuHMt6ewaCy8uqeUXv4oitYACKdB0VziCerzt011iQ/0TqlSlv8MReCm" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/contrib/auto-render.min.js"
+        integrity="sha384-aGfk5kvhIq5x1x5YdvCp4upKZYnA8ckafviDpmWEKp4afOZEqOli7gqSnh8I6enH" crossorigin="anonymous">
+    </script>
+    <script>
+        renderMathInElement(document.body, {
+            delimiters: [{
+                    left: "$$",
+                    right: "$$",
+                    display: true
+                },
+                {
+                    left: "$",
+                    right: "$",
+                    display: false
+                }
+            ]
+        });
+    </script>
+    
+    <!--------- 数学公式👆----------------- -->
+    <!--------- daovocie功能👇 ------------------->
+    
+    <!--------- daovocie功能👆 ------------------->
+    <!-- -----------------twikoo评论系统引入👇 --------->
+    <script src="https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js"></script>
+    <!-- -----------------twikoo评论系统引入👆 --------->
+    <!---------------- leancloud api 功能依赖引入👇 -------->
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-min.js"></script>
+    <!---------------- leancloud api 功能依赖引入👆 -------->
+    <!------------------ valine评论系统引入👇 ------------------>
+    <script src="https://xiaobaiweinuli.github.io/media/js/valine.min.js"></script>
+    <!------------------ valine评论系统引入👆 ------------------>
+    <!---------------- 今日诗词api功能依赖👇 ----------------------->
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <!---------------- 今日诗词api功能依赖👆 ----------------------->
+    <!---------------- 今日诗词api功能依赖👇 ----------------------->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber.min.js" charset="utf-8"></script>
+    <!---------------- 哔哔功能依赖👆 ----------------------->
+
+
+</head>
+
+<style>
+    body {
+        overflow-x: hidden;
+        height: 100vh;
+        overflow-y: scroll;
+        cursor: url("https://xiaobaiweinuli.github.io/media/images/mouse_cursor.png"), auto
+    }
+</style>
+
+<body>
+    <!--=------ 页面加载动态画面👇 --------------->
+    <div class="pjaxloading" onclick="pjaxloadingClose()">
+        <div class="loadingbackground"></div>
+        <div id="loading-aname">
+            <div class="loading-aname">
+            </div>
+        </div>
+    </div>
+    <!--=------ 页面加载动态画面👆 --------------->
+
+    <!--------------- 左侧菜单栏👇 ------------------------>
+    
+    <div id=side>
+        <div class="r_m_div">
+            <a onclick="showAaplayer()"><i style="font-size: 20px;"><img
+                        src='https://xiaobaiweinuli.github.io/media/images/music.png' alt="音乐播放器" class="musicbtn"></i></a>
+        </div>
+        <div class="avatar-border">
+            <img src="https://xiaobaiweinuli.github.io/images/avatar.png?v=1715002830548" class="avatar">
+        </div>
+        <div class="sitename">星霜的笔记</div>
+        <span class="description" data-text='["温故而知新"]'>&nbsp;</span>
+        <div class="siteinfocontainer">
+            <span class="siteinfo">文章</span>
+            <span class="siteinfo">标签</span>
+        </div>
+        <div class="siteinfocontainer">
+            <span class="siteinfo" id="siteinfo-postsnum"></span>
+            <span class="siteinfo">41</span>
+        </div>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="标题搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="标题搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>You can follow my other platforms.</span>
+        
+        <a href="https://github.com/xiaobaiweinuli" target="_blank"><i style="font-size: 20px;"><img class="icon"
+                    src="https://xiaobaiweinuli.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i style="font-size: 20px;"><img class="icon"
+                    src="https://xiaobaiweinuli.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">1613589162</div>
+    <!------------ 加载菜单按钮👇 ------------------------->
+    <div class="menucontainer">
+        
+        
+        <div class="mchocie description">
+            <a data-pjax href="/" class="menubutton" style="margin-right: 15px;">
+                <i><img class="icon menuicon" src="" alt="首页"></i>&nbsp;<span
+                    data-text="首页">首页</span>
+            </a>
+        </div>
+        
+        
+        
+        <div class="mchocie description">
+            <a data-pjax href="/archives" class="menubutton" style="margin-right: 15px;">
+                <i><img class="icon menuicon" src="" alt="归档"></i>&nbsp;<span
+                    data-text="归档">归档</span>
+            </a>
+        </div>
+        
+        
+        
+        <div class="mchocie description">
+            <a data-pjax href="/tags" class="menubutton" style="margin-right: 15px;">
+                <i><img class="icon menuicon" src="" alt="标签"></i>&nbsp;<span
+                    data-text="标签">标签</span>
+            </a>
+        </div>
+        
+        
+        
+        <div class="mchocie description">
+            <a data-pjax href="/post/about" class="menubutton" style="margin-right: 15px;">
+                <i><img class="icon menuicon" src="" alt="关于"></i>&nbsp;<span
+                    data-text="关于">关于</span>
+            </a>
+        </div>
+        
+        
+
+        
+        
+        
+        <div class="mchocie description">
+            <a data-pjax href="https://xiaobaiweinuli.github.io/friends" class="menubutton" style="margin-right: 15px;">
+                <i><img class="icon menuicon" src="" alt="友人帐"></i>&nbsp;<span data-text="友人帐">友人帐</span>
+            </a>
+        </div>
+        
+        <!--  -->
+    </div>
+    <!------------ 加载菜单按钮👆 ------------------------->
+    <hr>
+    <style>
+    .copyright {
+        font-size: 15px;
+        color: #d9d9d9;
+    }
+
+
+    @media screen and (min-width: 1200px) {
+        .foot {
+            width: 100%;
+            height: 130px;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .foot {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <div class="foot">
+        <div id="footinfo">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | Theme: <a
+                href="https://github.com/850552586/gridea-theme-fog">Fog</a>
+            <div>
+                
+                <div id="sitegotimeDate">载入天数...</div>
+                <div id="sitegotimes">载入时分秒...</div>
+                <div id="cussitetime" style="display:none">9/22/2023</div>
+                
+            </div>
+            <div>
+                
+                <script async
+                    src="https://cdn.jsdelivr.net/gh/850552586/ericamcdn@0.1/js/busuanzi.pure.mini.js"></script>
+                <div id="vistornum" style="margin:0">
+                    <span id="busuanzi_container_site_uv">
+                        <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i> 总访问量:<span
+                            id="busuanzi_value_site_pv"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-user-o" aria-hidden="true"></i> 访问人数:<span id="busuanzi_value_site_uv"></span>
+                    </span>
+                </div>
+                
+            </div>
+            <div class="copyright" style="color:white;text-align: center;">
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+
+    let intervalId = setInterval("createtime()", 250);
+</script>
+
+    </div>
+
+    <img class="moon" src="https://xiaobaiweinuli.github.io/media/images/moon.png" onclick="moonlight()">
+    <script src="https://xiaobaiweinuli.github.io/media/js/wordshow.js"></script>
+    
+    <!--------------- 左侧菜单栏👆 ------------------------>
+
+    <!----------------- 顶部菜单栏👇 ------------------------>
+    
+    <!----------------- 顶部菜单栏👆 ------------------------>
+
+<!--核心功能加载-->
+<script src="https://xiaobaiweinuli.github.io/media/js/mainfunc.js"></script>
+
+<!------------- Fog1.0版本彩蛋👇 -------------->
+    <!-- <section id="terrestrial" class="popup">
+        <a href="#" class="back">&lt; back</a>
+    </section>
+
+    <div class="flycontainer">
+        <div class="flyword">御风飞行中...</div>
+    </div>
+
+    <script>
+        $("#fog_go").click(function(){fog_go()});
+        async function fog_go(){
+            $(".bars").hide()
+            $("#live2d").hide()
+            await sleep(3000);
+            $(".flycontainer").css("display","flex");
+            $(".popup").fadeOut(500)
+            await sleep(2000);
+            var sitename = "星霜的笔记";
+            getFogUser(sitename);
+        }
+
+        function fog_goregis(){
+            var sitename = "星霜的笔记";
+            var siteurl = "https://xiaobaiweinuli.github.io";
+            regisFogUser(sitename,siteurl);
+        }
+        fog_goregis();
+    </script> -->
+<!------------- Fog1.0版本彩蛋👆 -------------->
+<script>
+    function change_topmenu(){
+        tmcolor = "antiquewhite"
+        tsnamecolor = "antiquewhite"
+        $(".navbar-inverse .navbar-nav>li>a").css("color",tmcolor)
+        $(".navbar-inverse .navbar-brand").css("color",tsnamecolor)
+        $(".navbar-fixed-top").css("border-radius","0 0 10px 10px")
+    }
+</script>
+
+<!------ 根据自定义配置声明变量👇 --------------------->
+    
+    <script>
+        var postnumChoice = true
+    </script>
+    
+    
+    <script>
+        var shareChoice = true
+    </script>
+    
+    
+    <script>
+        var donateChoice = true
+    </script>
+    
+    
+    <script>
+        var searchChoice = true
+    </script>
+    
+    <script>let postsnum = 0;</script>
+    <div id="side-posttitle" style="display: none;">
+    
+    
+    PDF分割合并
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    电子书资源
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    Termux推送本地文件到GitHub仓库
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    使用Gridea搭建自己的导航站
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    Gridea 中 Markdown文本目录生成、页内跳转
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    删除github中的提交历史记录的操作步骤
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    文本转JSON
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    网页搜索源码
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    
+    
+    论文查重降重工具汇总
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    电子书导航
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    地球科学数据库汇总
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    免费下载知网论文
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    红米K60刷入KSU
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    魅族 9008 线刷教程
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    魅族修补boot，装面具教程
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    检测大学习是否更新
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    Cloudflare 搭建 TG 私聊机器人
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    论文插入参考文献
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    直播话术
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    软件导航
+    <script>
+        postsnum += 1
+    </script>
+    
+    
+    
+    
+    </div>
+    
+        <script>
+            var menupos = 'left';
+            $("#siteinfo-postsnum").html(postsnum);
+        </script>
+    
+    <script>
+        let commentsHide = false
+    </script>
+    <!------ 根据自定义配置声明变量👆 --------------------->
+
+
+    <!----------根据自定义配置设置图标信息👇---------->
+    <script>
+        var icondict = new Array();
+    </script>
+    
+        
+    
+    <!----------根据自定义配置设置图标信息👆---------->
+</body>
+
+<script src="https://xiaobaiweinuli.github.io/media/share/dist/Share.js"></script>
+<!-- 页面pjax测试 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.js"></script>
+<!--确保jQuery已经在此之前加载-->
+<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+<script src="https://xiaobaiweinuli.github.io/media/js/all-pjax.js"></script>
+<script>
+    //-------------------------------说说功能👇--------------------------------------
+    let talksall = [];
+    let talks = [];
+    let talkindex = 0;
+    get();
+
+    function get() {
+        var t = JSON.parse('[]');
+        talkindex = t.length - 1;
+        for (var i = 0; i <= t.length - 1; i++) {
+            var d = {};
+            d["time"] = t[i].time;
+            d["author"] = t[i].author;
+            d["text"] = t[i].text;
+            d["img"] = t[i].img;
+            talksall.push(d);
+        }
+    }
+
+    function add() {
+        for (var i = talkindex; i >= 0 && i > talkindex - 3; i--) {
+            talks.push(talksall[i]);
+        }
+        talkindex = (talkindex - 3) >= 0 ? (talkindex - 3) : -1;
+        if (talkindex < 0) $("#getmorebt").hide();
+        show();
+    }
+
+    function show() {
+        var talkT = document.getElementById("talkContainer");
+        talkT.innerHTML = "";
+        for (var i = 0; i < talks.length; i++) {
+            if (talks[i].img != '') {
+                talkT.innerHTML += '\
+            <div class="talk" v-for="t in talks"> \
+                <span data-fancybox="images" href="' + talks[i].img + '"><img src="' + talks[i].img + '" class="talkimg"></span> \
+                <div class="ainfo">\
+                    <div class="ainfo-intro">\
+                        <div class="author">' + talks[i].author + '</div>·\
+                        <div class="time">' + talks[i].time + '</div>\
+                    </div>\
+                </div>\
+                <div class="talkcontent">' + talks[i].text + '\
+                </div\>\
+            ';
+            } else {
+                talkT.innerHTML += '\
+            <div class="talk" v-for="t in talks"> \
+                <div class="ainfo">\
+                    <div class="ainfo-intro">\
+                        <div class="author">' + talks[i].author + '</div>·\
+                        <div class="time">' + talks[i].time + '</div>\
+                    </div>\
+                </div>\
+                <div class="talkcontent">' + talks[i].text + '\
+                </div\>\
+            ';
+            }
+        }
+    }
+    //-------------------------------说说功能👆--------------------------------------
+</script>
+
+<!---->
+<script>
+    function replaceAvatar() {
+        twikoo_avatar = $(".tk-avatar-img");
+        for (var i = 0; i < twikoo_avatar.length; i++) {
+            var asrc = twikoo_avatar.eq(i).attr('src');
+            if (asrc.search('cn.gravatar.com') != -1) {
+                twikoo_avatar.eq(i).attr('src', 'https://xiaobaiweinuli.github.io/media/images/comavatar.png');
+            }
+        }
+    }
+
+    function showWechat() {
+        var wechat = '';
+        alert("博主微信号：" + wechat);
+        return false;
+    }
+</script>
+
+<script>
+    /**
+     * https://github.com/tangkaichuan/gridea-search
+     */
+    // 检查缓存是否最新
+    function checkCache() {
+        var caches_postsnum = localStorage.getItem("postsnum");
+        var pt = document.getElementById("side-posttitle").innerHTML;
+        pt = pt.replace(/\s+/g, '').replace(/<script>.*?<\/script>/gi, "")
+        var ptlen = pt.length;
+        var ptlen_storage = localStorage.getItem("poststitlelen");
+        if (caches_postsnum != postsnum || ptlen != ptlen_storage) {
+            console.log("更新缓存");
+            return false
+        }
+        return true;
+    }
+
+    (function () {
+        var CACHES = checkCache()
+        if (!CACHES) {
+            var NOW = Date.now()
+            var API_CONTENT = '../api-content/index.html' + '?_=' + NOW
+            preload(API_CONTENT);
+            getContents(show_getContentresult);
+        }
+
+        function show_getContentresult(data) {
+            console.log("获取成功");
+            var postslen = data["posts"].length;
+            localStorage.setItem('postsnum', postslen);
+            var poststitlelen = 0;
+            var pt = document.getElementById("side-posttitle").innerHTML;
+            pt = pt.replace(/\s+/g, '').replace(/<script>.*?<\/script>/gi, "");
+            localStorage.setItem('poststitlelen', pt.length);
+        }
+
+
+
+        // preload
+        function preload(url) {
+            var preloadLink = document.createElement('link')
+            preloadLink.href = url
+            preloadLink.rel = 'preload'
+            preloadLink.as = 'fetch'
+            preloadLink.crossOrigin = 'anonymous'
+            document.head.appendChild(preloadLink)
+        }
+
+        // 异步 GET 请求
+        function get(obj) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('get', obj.url, true)
+            xhr.send(null)
+            xhr.onreadystatechange = function () {
+                // 异步请求：响应状态为4，数据加载完毕
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        obj.success(xhr.responseText)
+                    } else {
+                        obj.error(xhr.status)
+                    }
+                }
+            }
+        }
+
+        // 获取博客全文 api
+        function getContents(callback) {
+            if (CACHES) {
+                callback(CACHES.contents)
+            } else {
+                get({
+                    url: API_CONTENT,
+                    success: function (data) {
+                        callback(JSON.parse(data));
+                        localStorage.setItem('ContentsCache', data);
+                        getStorageContent();
+                    }
+                })
+            }
+        }
+    })()
+    //------------------------核心功能--pjax全局渲染👇-------------------
+    let talkinit = false;
+    $(document).pjax('a[data-pjax]', '#main', {
+        fragment: '#main',
+        timeout: 8000
+    }).on('pjax:complete', function () {
+        //清空搜索栏
+        if (searchChoice) {
+            searchInit();
+            searchInput.value = "";
+        }
+        var pl = window.location.pathname;
+        //说说更新
+        if (pl.search("talk") != -1 && !talkinit) {
+            add();
+            talkinit = true;
+        } else if (pl.search("talk") != -1) {
+            show();
+        }
+        if (pl.search("post") != -1) {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
+            });
+            //文章热度
+            if(postnumChoice){
+                getHotnum();
+            }
+            //文章索引
+            toginit();
+            if (shareChoice)
+                shareInit();
+            if (donateChoice)
+                donateInit();
+            if ("default" == "default"&&!commentsHide) {
+                $("#comment").hide()
+                commentsHide = true
+            }
+            lazyload();
+            codeinit();
+            if ("default" == "twikoo") {
+                //twikoo头像更换
+                setTimeout(replaceAvatar, 3000);
+                setTimeout(replaceAvatar, 8000); //部分博主站点速度加载过慢，再添加一个延迟
+            }
+        }
+        if (btstate == true)
+            dropdown();
+    }).on('pjax:start', function () {
+        $(".pjaxloading").fadeIn(50);
+    }).on('pjax:end', function () {
+        $(".pjaxloading").fadeOut(50);
+    });
+    //------------------------核心功能--pjax全局渲染👆-------------------
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    if (searchChoice) {
+        var searchInput = document.querySelector('.search-input');
+        var searchResults = document.querySelector('.search-results');
+    }
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+
+    function getStorageContent() {
+        var data = localStorage.getItem('ContentsCache');
+        data = JSON.parse(data);
+        posts = data["posts"];
+        for (var i = 0; i < posts.length; i++) {
+            arrLinks[i] = posts[i].link;
+            arrTitles[i] = posts[i].title;
+            arrContents[i] = posts[i].content;
+            itemLength++;
+        }
+    }
+    if (checkCache())
+        getStorageContent();
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            searchMatching(arrTitles, arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, arr2, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        var step = 10;
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            var indexContent = arr2[i].search(input);
+            //标题匹配
+            if (arr1[i].search(input) != -1) {
+                indexItem.push(i); // 保存匹配值的索引
+                if (indexContent != -1) {
+                    startindex = (indexContent - step) >= 0 ? (indexContent - step) : 0;
+                    var searchcontent = arr2[i].slice(indexContent - step, indexContent + 5)
+                    arrResults.push("....." + searchcontent + ".....");
+                } else
+                    arrResults.push("");
+            }
+            //内容匹配
+            else if (indexContent != -1) {
+                indexItem.push(i); // 保存匹配值的索引
+
+                startindex = (indexContent - step) >= 0 ? (indexContent - step) : 0;
+                var searchcontent = arr2[i].slice(indexContent - step, indexContent + 5)
+                arrResults.push("....." + searchcontent + ".....");
+            }
+        }
+
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<a data-pjax class="searchresults" href="' + arrLinks[indexItem[i]] + '"><b>[' +
+                arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + '</p></a><hr />';
+            searchResults.appendChild(itemDiv);
+        }
+    }
+</script>
+
+
+
+<!--------------------- 菜单栏图标加载功能👇 ----------------------->
+<script>
+var menulist = $(".menuicon");
+var menulength = menulist.length;
+for (var i = 0; i < menulength; i++) {
+    var altname = menulist.eq(i).attr("alt");
+    var iconurl = icondict[altname];
+    if (iconurl == undefined || iconurl == '')
+        continue;
+    if (iconurl == 'Home') {
+        menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Home.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Archive') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Archive.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Tag') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Tag.png");
+menulist.eq(i).show();
+} else if (iconurl == 'About') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/About.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Talk') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Talk.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Friends') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/Friends.png");
+menulist.eq(i).show();
+} else if (iconurl == 'Fly') {
+menulist.eq(i).attr("src", "https://xiaobaiweinuli.github.io/media/images/wind.png");
+menulist.eq(i).show();
+} else {
+menulist.eq(i).attr("src", iconurl);
+menulist.eq(i).show();
+}
+}
+</script>
+<!--------------------- 菜单栏图标加载功能👆 ----------------------->
+
+<script>
+    //--------------------bber-onetalk加载👇--------------------------------
+    function bberonetalkLoad(){
+        bberjsonurl = '';
+        if ( $("#bber-talk").length > 0 ) {
+        jsonUrl = bberjsonurl
+        $.getJSON(jsonUrl+"?t="+Date.parse( new Date()),function(res){
+        var bberHtml = ''
+        $.each(res.data, function(i, item){
+            d = new Date(item.date)
+            date = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() +' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()
+            dataTime = '<span class="datatime">'+date+'</span>'
+            bberHtml += '<li class="item item-'+(i+1)+'">'+dataTime+'： <a data-pjax href="https://xiaobaiweinuli.github.io/bber">'+item.content+'</a></li>'
+        });
+        $('#bber-talk').append('<span class="index-talk-icon"><svg viewBox="0 0 1024 1024" width="21" height="21"><path d="M184.32 891.667692c-12.603077 0-25.206154-2.363077-37.809231-7.876923-37.021538-14.966154-59.864615-49.624615-59.864615-89.009231v-275.692307c0-212.676923 173.292308-385.969231 385.969231-385.969231h78.76923c212.676923 0 385.969231 173.292308 385.969231 385.969231 0 169.353846-137.846154 307.2-307.2 307.2H289.083077l-37.021539 37.021538c-18.904615 18.116923-43.323077 28.356923-67.741538 28.356923zM472.615385 195.347692c-178.018462 0-322.953846 144.935385-322.953847 322.953846v275.692308c0 21.267692 15.753846 29.144615 20.48 31.507692 4.726154 2.363077 22.055385 7.876923 37.021539-7.08923l46.473846-46.473846c6.301538-6.301538 14.178462-9.452308 22.055385-9.452308h354.461538c134.695385 0 244.184615-109.489231 244.184616-244.184616 0-178.018462-144.935385-322.953846-322.953847-322.953846H472.615385z"></path><path d="M321.378462 512m-59.076924 0a59.076923 59.076923 0 1 0 118.153847 0 59.076923 59.076923 0 1 0-118.153847 0Z"></path><path d="M518.301538 512m-59.076923 0a59.076923 59.076923 0 1 0 118.153847 0 59.076923 59.076923 0 1 0-118.153847 0Z"></path><path d="M715.224615 512m-59.076923 0a59.076923 59.076923 0 1 0 118.153846 0 59.076923 59.076923 0 1 0-118.153846 0Z"></path></svg></span><ul class="talk-list">'+bberHtml+'</ul>')
+        //Lately({ 'target': '#bber-talk .datatime' });
+        });
+        function Roll (){
+        var list_li = $('.talk-list li'),cur_li = list_li.first(),last_li = list_li.last();
+        last_li.after(cur_li);
+        };
+        setInterval(Roll,3000);
+    }
+    }
+  //--------------------bber-onetalk加载👆--------------------------------
+</script>
+
+<script>
+    var ClicksideState = 1
+    var cur_readingmode = false
+    function readingmode(){
+        if (!cur_readingmode){
+            if(menupos == 'left'){
+                if(ClicksideState==1)
+                menu_openclose1()
+            }
+            $("#tab1").fadeOut(50)
+            $("#bg").fadeOut(50)
+            $(".navbar").fadeOut(50)
+            $(".markdownIt-TOC li a").css("color","black")
+            cur_readingmode = true
+        }else{
+            if(menupos == 'left'){
+                if(ClicksideState==0)
+                    menu_openclose1()
+            }
+            $("#tab1").fadeIn(50)
+            $("#bg").fadeIn(50)
+            $(".navbar").fadeIn(50)
+            $(".markdownIt-TOC li a").css("color","antiquewhite")
+            cur_readingmode = false  
+        }
+    }
+</script>
+
+
+<!----夜间模式👇-->
+<script>
+    var moonlightState = false
+    function moonlight(){
+        if(!moonlightState){
+            $("#bg").fadeOut(200)
+            $('body').css("background","rgba(0,0,0,0.8)")
+            $(".markdownIt-TOC li a").css("color","white")
+            $(".text p, .text ul").css("color","white")
+            $("#articlecontent").css("color","white")
+            $(".post-copyright").css("background","rgba(10,10,10,0.5)")
+            $('blockquote').css("background","rgba(10,10,10,0.6)")
+            $("#articlecontent").css("background","rgba(10,10,10,0.5)")
+            moonlightState = true
+            $(".moon").attr("src","https://xiaobaiweinuli.github.io/media/images/sun.png")
+        }else{
+            $("#bg").show()
+            $(".markdownIt-TOC li a").css("color","antiquewhite")
+            $(".text p, .text ul").css("color","rgba(0, 0, 0, 0.7)")
+            $("#articlecontent").css("color","black")
+            $(".post-copyright").css("background","#f9f9f9")
+            $('blockquote').css("background","#eff8f0")
+            $("#articlecontent").css("background","white")
+            $(".moon").attr("src","https://xiaobaiweinuli.github.io/media/images/moon.png")
+            $('body').css("background","white")
+            moonlightState = false
+        }
+    }
+</script>
+<!----夜间模式👆--></div>
+            <!--------------- pc端菜单栏👆 ---------------->
+
+            <!-- ----------------左侧菜单栏html 👇-------------------------------------->
+            
+            <div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div class="col-md-1 col-lg-3"></div>
+                <!-- main标签，pjax渲染时加载以下内容👇 -->
+                <div id="main" class="col-xs-12 col-sm-12 col-md-12 col-lg-7" style="padding:0;">
+                    <div class="readingmode" onclick="readingmode()">阅</div>
+                    <link rel="stylesheet" href="https://xiaobaiweinuli.github.io/media/css/font-awesome.css">
+
+<body>
+    <div class="allcontent" id="postdetail">
+        <div class="postshow postpadding" style="padding-bottom: 0;">
+            
+            <div class="postdetailimg">
+                
+                <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" class="postimage">
+                
+            </div>
+            <div class="postinfo-detail">
+                <div class="postdate"><i class="fa fa-calendar"></i>2024-04-25</div>
+            <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 18 min read</div>
+            <div class="posttag">
+                
+                <a data-pjax href="https://xiaobaiweinuli.github.io/tag/38tOxpTKnu/" class="postlink">
+                    <i class="fa fa-tag"></i> 阅读
+                </a>
+                
+            </div>
+        </div>
+        
+        <div id="articlecontent">
+            <div id="texttitle" style="text-align: center">
+                <h2 id="ptitle">电子书资源</h2>
+                <!-- id 将作为查询条件 -->
+                <div id="pl" style="display:none">https://xiaobaiweinuli.github.io/post/HIXvgpVbO/</div>
+                <div id="rootaddr" style="display:none">https://xiaobaiweinuli.github.io</div>
+                
+                    
+                
+            </div>
+            <div class="text ">
+                <h1 id="善用互联网从搜索开始">善用互联网从搜索开始。</h1>
+<p><a href="https://zjuyk.gitlab.io/posts/how-to-search/">🔗</a><a href="https://zjuyk.gitlab.io/posts/how-to-search/">如何增强自己搜索的能力</a>？</p>
+<p><a href="https://zjuyk.gitlab.io/posts/how-to-search/">这篇博客</a>作者总结了他搜索的思路和方法，掌握这些技巧，能更便捷的搜索到自己想要得到的东西。</p>
+<p>Google 的完整搜索语法和几个专项搜索：</p>
+<p>1️⃣搜索语法<br>
+<a href="https://ahrefs.com/blog/google-advanced-search-operators/">🔗</a><a href="https://ahrefs.com/blog/google-advanced-search-operators/">Google Search Operators: The Complete List (42 Advanced Operators)</a></p>
+<p>2️⃣专项搜索<br>
+①学术文献：<a href="https://scholar.google.com/">谷歌学术</a> 、<a href="https://www.ipl.org/">ipl2 </a>、 <a href="https://www.sciencedirect.com/">sciencedirect</a><br>
+②法律法规：<a href="http://www.law-lib.com/">法律图书馆</a> 、<a href="https://www.chinacourt.org/law.shtml">法律文库</a> 、<a href="https://wenshu.court.gov.cn/">裁判文书</a><br>
+③医学知识：<a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a><br>
+④电子书籍：<a href="https://z-lib.org/">Z-Library</a> 、<a href="https://ebook2.lorefree.com/">LoreFree</a><br>
+⑤免费图库：<a href="https://pixabay.com/">Pixabay</a> 、<a href="https://unsplash.com/">Unsplash</a><br>
+⑥知识问答：<a href="https://www.answers.com/">Answers</a>  、<a href="https://www.quora.com/">Quora</a> 、 <a href="https://www.zhihu.com/">知乎</a>（知乎早期还是积累很多优质内容的）另外，现在很多资源都存储在网盘分享，利用一些网盘搜索引擎，往往会有惊喜······</p>
+<p><a href="https://www.producthunt.com/">Product Hunt</a>：这个是我工具相关的座上宾，新工具探索和相关工具搜索它都擅长，属实一部工具探索的史诗，奥德赛。</p>
+<p><a href="https://www.similarsites.com/">Similar Sites</a>：这个不用多介绍，频道御用插件，可以直接推出当前网页类似网站。</p>
+<p><a href="https://www.google.com/search?q=related:">Google Related</a>：这个是谷歌高级搜索，前缀法，输入域名即可搜索相关网站和工具。</p>
+<p>全国图书馆参考咨询联盟<br>
+搜索图书，期刊，论文，专利都比较方便。<br>
+<a href="http://www.ucdrs.superlib.net/">http://www.ucdrs.superlib.net/</a></p>
+<p>两个可用谷歌学术网站<br>
+<a href="https://www.xueshu5.com/">https://www.xueshu5.com/</a><br>
+<a href="http://www.ose.cc/">http://www.ose.cc/</a></p>
+<ol>
+<li>
+<p>国家哲学社会科学文献中心： <a href="http://www.ncpssd.org">www.ncpssd.org</a><br>
+现有中文期刊、外文期刊、古籍等资源，收录哲学社会科学相关领域文献共计10,000,000余条，提供有线阅读、全文下载等服务。</p>
+</li>
+<li>
+<p>文津搜索： <a href="https://find.nlc.cn">find.nlc.cn</a><br>
+国家图书馆资源检索，汇聚了60多个资源库、近2亿条文献信息，可以查询包括图书、古文献、论文、期刊报纸、多媒体等在内的多种资料。</p>
+</li>
+<li>
+<p>术语在线： <a href="http://www.termonline.cn">www.termonline.cn</a><br>
+一个可以查询专业术语的在线网站，非常权威，内容更新也很及时。</p>
+</li>
+<li>
+<p>科塔学术： <a href="https://site.sciping.com">site.sciping.com</a><br>
+学术导航网站，整理了许多论文搜索网站、学术工具、科研软件、期刊出版等，每一个都有细致的分类，并归纳了对应的网站。</p>
+</li>
+<li>
+<p>Academic Phrasebank： <a href="http://www.phrasebank.manchester.ac.uk">www.phrasebank.manchester.ac.uk</a><br>
+论文写作助手，这个网站主要提供论文各部分的模版，如介绍怎么写，总结怎么写，如何描述方法，报告细节等，对非英语母语作者非常有帮助。</p>
+</li>
+<li>
+<p>iData： <a href="http://www.cn-ki.net">www.cn-ki.net</a><br>
+一个知网镜像站，可以免费下载论文，知网比较新的没有，每天有免费下载限额。</p>
+</li>
+<li>
+<p>SCI-Hub： <a href="https://ci-hub.com">sci-hub.com</a><br>
+这个网站就不多介绍了，一个超棒的免费下载论文的网站，输入文献doi号即可搜索下载。</p>
+</li>
+<li>
+<p>OALib： <a href="http://www.oalib.com">www.oalib.com</a><br>
+目前收录了570万篇学术论文，涵盖多个领域，所有文章均可免费下载，是一个较为高效的论文查找网站。</p>
+</li>
+<li>
+<p>研享网： <a href="http://www.academicshare.cn">www.academicshare.cn</a><br>
+检索下载英文文献的利器，页面超级干净，支持关键词、题目、论文doi搜索。</p>
+</li>
+<li>
+<p>Medsci： <a href="http://www.medsci.cn/sci">www.medsci.cn/sci</a><br>
+期刊智能查询系统，支持模糊查询，每一个期刊还有对应的论坛。</p>
+</li>
+<li>
+<p>Connected Papers： <a href="http://www.connectedpapers.com">www.connectedpapers.com</a><br>
+文献调研必备神器，它可以在线进行分析文献的引文信息，轻松了解某篇文献的引用和被引用关联，分析出文献的前世今生，方便我们对一篇文献或者某个领域进行调研。</p>
+</li>
+<li>
+<p>近邻词汇检索： <a href="https://tool.mingdawoo.com">tool.mingdawoo.com</a><br>
+可免费查找近似短语和相关术语，词穷的时候可以看看。</p>
+</li>
+<li>
+<p>秘塔写作猫： <a href="https://xiezuocat.com">xiezuocat.com</a><br>
+可以校对中文字词错误、标点错误、语序错误、语法问题、同意混淆等，并给出修改建议，支持全文分析和智能排版，免费版基本上能满足日常需求。</p>
+</li>
+<li>
+<p>Grammarly： <a href="http://www.grammarly.com">www.grammarly.com</a><br>
+英文语法错误查询好助手，可以安装为word插件，在你写作的时候就可以纠正你的语法错误了。</p>
+</li>
+<li>
+<p>知犀思维导图： <a href="http://www.zhixi.com">www.zhixi.com</a><br>
+免费好用的论文大纲整理工具，可以借助这个工具做论文大纲。这个网站还提供许多思维导图模板，包括工作方法、考研考证的资料、管理方法、科普知识等方面的模板。</p>
+</li>
+<li>
+<p>词云统计： <a href="https://cloud.niucodata.com">cloud.niucodata.com</a><br>
+在线中文词汇统计和分析工具，可以帮助用户分析一段话中的词性分类、词频统计并生成词云图。</p>
+</li>
+<li>
+<p>Linggle： <a href="http://www.linggle.com">www.linggle.com</a><br>
+提供英文常用语、搭配、近义词等检索，可以根据词性来推测完整搭配，还能帮助学习者分析出更准确的英文写作建议。</p>
+</li>
+<li>
+<p>Netspeak： <a href="https://netspeak.org">netspeak.org</a><br>
+这个网站也是词汇，不过是用来查找你记不太清楚的词汇，比如congratulations，你不记得全部拼写了，你就可以在这个网站上来查一下。</p>
+</li>
+<li>
+<p>Linguee： <a href="https://netspeak.org">cn.linguee.com</a><br>
+一个全能的在线多语言互译平台，提供24种语言的对应查询服务，而且还收集了数亿条译文例句，无论是日常领域的术语，还是专业难度偏大的词汇，在这里都能找到专业的翻译方式。</p>
+</li>
+<li>
+<p>DocTranslator： <a href="http://www.onlinedoctranslator.com">www.onlinedoctranslator.com</a><br>
+可免费在线翻译文档，支持109种不同语言文档任意转换，并保持排版不变。操作简单，直接上传文档就可以。</p>
+</li>
+</ol>
+<p>代码审查资源的“很棒”列表 - 文章、论文、工具等<br>
+<a href="https://github.com/joho/awesome-code-review">https://github.com/joho/awesome-code-review</a></p>
+<p>🌐Wiseone - 一款免费的 AI 总结网站插件   <a href="https://wiseone.io/">https://wiseone.io/</a></p>
+<p>📄应用场景一般是看新闻、文章、博客、论文、帖子的时候，觉得太多文字不想看，然后进行一键总结，提高阅读效率</p>
+<p>🆔  插件名称：Metaphor Search</p>
+<p>➡️  支持平台：#ChatGPT</p>
+<p>📁  插件简介：一个搜索引擎API，可以帮助你找到网络上的各种信息。你可以使用它来搜索新闻、论文、视频、推文、事件等等。</p>
+<p>5个用于文本和文案写作的工作神经网络 ——</p>
+<p>✒️DeepL Write  - 纠错和文本改进。<a href="https://www.deepl.com/write">https://www.deepl.com/write</a></p>
+<p>✒️ Writesonic - 为特定任务（如 通讯、网站、博客、广告等）撰写文本。<a href="https://writesonic.com/">https://writesonic.com/</a></p>
+<p>✒️ Quillbot Paraphraser - 文本改写。7种改写模式，2种免费。<a href="https://quillbot.com/">https://quillbot.com/</a></p>
+<p>✒️ Frase - 不同类型的文本生成器+改写。<a href="https://www.frase.io/tools/">https://www.frase.io/tools/</a></p>
+<p>✒️ Wordtune Spices - 文本清理和改进。<a href="https://www.wordtune.com/spices">https://www.wordtune.com/spices</a></p>
+<p>学术网站</p>
+<p><a href="https://scholar.google.com/">谷粉学术</a><br>
+一个免费搜学术文章的网站，期刊论文、学位论文、书籍、文摘和技术报告在内的学术文献都可以搜到。<br>
+这里还有个工具叫Google Alert，打开这功能后，将相关关键词输入Google Alert，未来有更新的文章标题或者摘要内容中有相关的，Google Scholar就会自动提醒你去查阅。</p>
+<p><a href="https://www.researchgate.net/">ResearchGate</a><br>
+一个学术交流平台，你可以在上面与来自世界不同地区和国家、不同领域的学者交流，阅读他们分享的文章。还能免费下载各种学术文章，关注各种顶尖科研小组的最新成果。</p>
+<p><a href="https://www.scopus.com/">Scopus</a><br>
+荷兰的Elsevier科学出版社开发，用于搜索期刊和专利，里面包含有全球5000多家在科学、技术、医学和社会科学等领域的出版商。</p>
+<p><a href="https://www.sciencedirect.com/">Science</a><br>
+ScienceDirect，世界最大的在线科学研究网站，出版商还是荷兰的Elsevier团队。其中包含约1100万篇文章，2500种期刊，6000多本电子书，参考书和手册，内容以理工专业知识为主。</p>
+<p><a href="https://www.ebsco.com/products/research-databases/ebsco-open-dissertations">EBSCO</a><br>
+一个免费的数据库，包含来自世界各地的120多万份论文。</p>
+<p><a href="https://www.proquest.com/">ProQuest</a><br>
+ProQuest提供的文献管理软件及平台使得图书馆用户能够探索、使用与分享权威内容中获取的研究，包括论文、电子书、报纸、期刊、政府与文化档案在内的全部资料，许多有深度的文章也都收录在里面。</p>
+<p><a href="https://charteredabs.org/academic-journal-guide-2018/">AJG</a><br>
+如果需要引用足够严谨的文章，可以选择这个网站，AJG是商业和管理学者发表研究期刊的范围和质量的指南，其目的是让学者们更清楚地了解各种期刊的研究目标。</p>
+<p><a href="http://www.base-search.net/">BASE</a><br>
+德国知名大学比勒费尔德大学图书馆开发的一个多学科的学术搜寻引擎，提供构学术资源的集成检索服务。</p>
+<p><a href="https://search.credoreference.com/">CREDO</a><br>
+这是一家美国的公司，通过订阅提供在线参考内容，并与图书馆合作开发信息扫描计划或制作图书馆营销计划和材料。</p>
+<p><a href="https://www.academia.edu/">Academia</a><br>
+一个学术社交网站。该平台可用于共享论文、关注它们的影响力、关注特定领域的研究。每月有3900万独立访问者，上传文本超过100万。如果你不知道怎么选研究方向、不会写开题报告，可以来这个网站上找灵感。</p>
+<p><a href="https://oatd.org/">OATD</a><br>
+旨在成为寻找世界各地发表的开放获取研究生论文和论文的最佳资源。论文信息来自600多所大学和研究机构，目前索引超过150万篇论文和论文。</p>
+<p><a href="https://academic.oup.com/journals">Oxford Journals</a><br>
+<a href="https://www.oxfordscholarship.com/page/about-oso/about">Oxford Scholarship</a><br>
+前者是牛津大学设立的期刊网站，里面收录了许多优质期刊，提供200多种学科，包含生物科学，医学，人文，社科，法律，经济学，商业、金融等等，全文都可以免费阅读。<br>
+后者主要提供对eBooks的全文访问，提供数千种学术着作，涉及人文科学，社会科学，科学，医学和法律等20个学科领域。</p>
+<p><a href="http://www.oalib.com/">OA图书馆</a><br>
+一个学术论文资料库超过420万篇的网站，所有文章能够免费下载，目前也和许多国内外的知名大学图书馆有合作。</p>
+<p><a href="http://cnplinker.cnpeak.com/">cnpLINKer</a><br>
+提供的国外期刊网络检索系统。目前共收录了国外五十多家出版社的12000余种期刊商业期刊，14000多种Open Access期刊，900万篇目次文摘数据和全文链接服务，400家国内馆藏信息，并保持实时更新。</p>
+<p><a href="http://www.chongbuluo.com/">虫部落</a><br>
+一个学术共享平台，包含中文资料、外文资料、硕博论文。集合了CNKI、谷歌、百度、维基百科的搜索引擎，而且麻省理工和剑桥的文献也可以在这里搜到。</p>
+<p><a href="http://ndltd.ncl.edu.tw/">台湾博硕士论文知识加值系统</a><br>
+台湾最重要的学术支援网站之一，此网站收录了许多台湾学生的博士以及硕士论文，并且提供方便的检索功能。直接注册账户就能用。</p>
+<p>💩💩  <a href="https://i.cnki.net/">知网</a> 💩<br>
+中国头号学术资源垄断网站</p>
+<p>学术研究利器丨文献、图谱与 AI</p>
+<p>这个专题其实从频道初就有想法，一直没确定适合的 COMBO 内容。关于学术研究的利器，主要是对前沿文献的处理，文献趋势追踪（包括 RSS 技术）、文献图谱过滤以及 AI 处理都是最适合的。其它工具的、单独文献库的则不算。</p>
+<p>这个频道每一个单独主题都会持续更新，Telegram 作为我的「动态知识库」，后续会建立索引。我也非常感谢很多小伙伴提供很多有用有意思的工具，这里属于每一个人。我频道主题分享很少使用 similar site，google related 这样处理，其中用到的工具多是比较系统的联系在一起，涌现并形成一种 COMBO 能力。</p>
+<p><a href="https://ooir.org/index.php">The Observatory of International Research</a>：今天的发现，根据研究趋势和期刊排名来陈列当前前沿文献研究内容，几乎涵盖所有学科，追踪领域前沿内容。</p>
+<p><a href="https://consensus.app/search/">Ask a question, get conclusions from research papers</a>：AI 处理，提出问题并从文献研究中得出结论。昨天在「封装系 AI」中。</p>
+<p><a href="https://keywords.groundedai.company/?q=Max+Weber">Summit Keyword Graph</a>：论文关键词可视化图谱，点击节点随即推出相关论文信息及溯源 paper source，对于论文追踪，主题写作很有用。</p>
+<p><a href="https://www.connectedpapers.com/">Connected Papers</a>：同上，非常强的相关论文推荐、展示与可视化。</p>
+<p><a href="https://www.researchrabbit.ai/">Research Rabbit</a>：又一个文献 dig 利器。可视化、个性化推荐、关键词图谱，Similar Work 等功能确实不错，UI 差点意思。</p>
+<p><a href="https://www.paperdigest.org/review/">Literature Review</a>：根据某个主题关键词输入，直接生成文献综述和引用文献列表。</p>
+<p><a href="https://elicit.org/">Elicit</a>：同上，根据主题推荐文献，并形成摘要一览，也有过滤等。（<a href="https://elicit.org/gpt4-waitlist">加持 chatgpt4</a>）</p>
+<p><a href="https://www.paper-digest.com/">Paperdigest</a>：人工智能总结文献，给定文献链接 DOI 直接生成总结摘要，适用文献浏览泛读。这个也算文献利器相关。</p>
+<p><a href="https://arxivxplorer.com/">arXiv Xplore</a>r：加持 openai 的 arXiv 关键词搜索。</p>
+<p><a href="https://research-assistant-roan.vercel.app/results/Derrida%20Aristotle/7">Athena</a><br>
+Athena 是专门为 AI 研究员推荐 AI 文献的网站，可以 Bookmark 相关论文以及订阅你搜索的主题。</p>
+<p><a href="https://www.semanticscholar.org/">Semantic Scholar</a>?<br>
+这是 AI 驱动的免费文献搜索研究工具，搜索文献时的分类/联系/索引非常强大。</p>
+<p>#fuckarounditis #tools TMD 这才是真正的「图谱」！交互式浏览2100万篇科学文章！！！ <a href="https://static.nomic.ai/pubmed.html">https://static.nomic.ai/pubmed.html</a></p>
+<p><a href="https://direct.mit.edu/octo">Octobe</a>r：麻省理工的十月刊，和e-flux同重量级，学术向的艺术理论和批评期刊。关于电影、绘画、音乐、媒体、摄影、表演、雕塑和文学等，也是我常关注的。<br>
+<a href="https://www.theparisreview.org/">THE PARIS REVIEW</a>：巴黎评论，以及下面的伦敦书评，纽约书评都是不错的，关于思考、文学、阅读和写作相关的资源。<br>
+<a href="https://www.lrb.co.uk/">London Review OF BOOKS</a>：伦敦书评。<br>
+<a href="https://www.nybooks.com/">The New York Review of Books</a>：纽约书评。<br>
+<a href="https://www.wired.com/">Wired</a>:著名的连线杂志，有很多专栏，关于科学、文化的可以关注。<br>
+<a href="https://www.greaterwrong.com/">GreaterWrong</a>：LessWrong 2.0的另一个版本，很多深度思考的内容，关于理论、学术、技术等，也是之前常分享的。<br>
+<a href="https://lithub.com/">LITERARY HUB</a>：一个文学网站，关于小说、评论以及写作等文章，也是之前常分享的。<br>
+<a href="https://bigthink.com/">BIG THINK</a>:我之前常分享东西的网站，泛文化杂志，一些有意思的观点与评论。<br>
+<a href="https://www.popmatters.com/">PopMatters</a>：关于泛文化评论，电影、音乐、书籍、文化等，也是我常浏览的。<br>
+<a href="https://owlcation.com/">Owlcation</a>：也是我常浏览的，分享有趣多元的学术知识。<br>
+<a href="https://publicdomainreview.org/">The Public Domain Review</a>：公共领域评论，关于艺术、文学和思想的写作。<br>
+<a href="https://thepointmag.com/">THE POINT</a>：关于哲学写作的杂志，经常发一些哲学评论。<br>
+<a href="https://palladiummag.com/">PALLADIUM</a>：也是一个不错的杂志，探索社会的治理和未来的研究。<br>
+<a href="http://www.art-ba-ba.com/main/main.art?forumId=8&amp;lang=zh">Art-Ba-Ba</a>：中国当代艺术社区的网站，也有一些不错的评论。</p>
+<ul>
+<li>
+<p>图书</p>
+<p>1、鸠摩搜索 (<a href="https://www.jiumodiary.com/">https://www.jiumodiary.com/)</a>)：除了资源多，鸠摩还贴心地按照不同的格式对书籍进行了分类；</p>
+<p>2、电子书搜索 (<a href="https://ebook.chongbuluo.com/">https://ebook.chongbuluo.com/</a>  快搜电子书搜索，有多个资源站点可选择</p>
+<p>3、苦瓜书盘 (<a href="https://www.kgbook.com/">https://www.kgbook.com/</a>)：可下载到符合手机尺寸的电子书；</p>
+<p>4、OpenStaxCNXLibrary (<a href="https://cnx.org/browse">https://cnx.org/browse)：</a> 这是一个下载到国外教材的电子书网站；</p>
+<p>5、好读 (<a href="http://www.haodoo.net/">http://www.haodoo.net/</a>)：繁体字的界面，你应该知道它是哪儿的网站~一个推广中文电子书的公益网站，建站于2001年。</p>
+<p>6、书格 (<a href="https://new.shuge.org">https://new.shuge.org</a>/)： 可能是最好用的古籍资料下载网站；</p>
+<p>7、云海电子书 (<a href="http://www.pdfbook.cn/">http://www.pdfbook.cn/)：站内书籍类型丰富、不管是小众、文学，还是励志成功，艺术摄影，计算机网络……你都可以在这里找到、并免费下载它的pdf版本；</a>：站内书籍类型丰富、不管是小众、文学，还是励志成功，艺术摄影，计算机网络……你都可以在这里找到、并免费下载它的pdf版本；)</p>
+<p>8、PDF之家 (<a href="http://www.pdfzj.com/">http://www.pdfzj.com/)：</a>：) 拥有海量优质资源的PDF站点；</p>
+<p>9、图灵社区 (<a href="https://www.ituring.com.cn/book?tab=free">https://www.ituring.com.cn/book?tab=free)：</a>：) 国内最优质的技术书出版社之一，提供免费的技术电子书下载；</p>
+<p>10、万千合集 (<a href="http://www.hejizhan.com/bbs/?kw=cad+">http://www.hejizhan.com/bbs/?kw=cad+)：</a>：) 最专业的学术资源搜索引擎；</p>
+<p>11、计算机书籍控 (<a href="http://bestcbooks.com/">http://bestcbooks.com/)：</a>：) 最好的计算机书籍下载站点；</p>
+<p>12、世界数字图书馆 (<a href="https://www.wdl.org/zh/">https://www.wdl.org/zh/)：</a>：) 将在互联网上以多语种格式免费提供世界各地的重要材料,包括手稿、地图、珍本书籍、乐谱、录音、电影、印刷品、照片、建筑图等等；</p>
+<p>13、采 书 (<a href="http://ebook.name/">http://ebook.name/)：</a>：) 一个免费电子书搜索引擎,为用户提供kindle电子书的搜索服务；</p>
+<p>14、书享家 (<a href="http://shuxiangjia.cn/">http://shuxiangjia.cn/)：</a>：) 电子书下载导航网站，提供优质的电子书搜索引擎、kindle下载站、PDF下载站、书单书评的入口导航。网站本身也会推荐一些优质的书单。</p>
+<p>15、爱问共享资料 (<a href="http://ishare.iask.sina.com.cn/">http://ishare.iask.sina.com.cn/)：</a>：) 资料搜索引擎。提供PPT、kindle书籍、PDF、Excel、DOC等各种格式的资料下载，内容齐全。</p>
+<p>16、Sobooks (<a href="https://sobooks.cc/xiaoshuowenxue">https://sobooks.cc/xiaoshuowenxue).：提供时间、文件格式、文件页数等维度搜索，快速定位到想要的文档</a>.：提供时间、文件格式、文件页数等维度搜索，快速定位到想要的文档)</p>
+<p>17、辣豆瓣 (<a href="http://www.ladouban.com/">http://www.ladouban.com/)：</a>：) 只是这里虽然也免费，但是每天只能下载6本</p>
+<p>18、 libgen (<a href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/)：</a>：) 这家应该是俄罗斯的ip，大部分英语书籍都可以在这里搜到，只是是pdf格式</p>
+<p>19、電子爱好馆 (<a href="http://zlzazhi.com/">http://zlzazhi.com/)：</a>：)</p>
+<p>20、田间小站 (<a href="https://www.tjxz.cc/">https://www.tjxz.cc/)：</a>：)</p>
+<p>21、EPUBEE (<a href="http://cn.epubee.com/books/">http://cn.epubee.com/books/</a>): 号称最大的电子书网站。</p>
+<p>22、E书联盟 (<a href="https://www.book118.com/">https://www.book118.com/)：</a>：)</p>
+<p>23、科塔学术 (<a href="https://site.sciping.com/">https://site.sciping.com/)：</a>：) 最专业、准确、及时、全面的科研与学术资源导航平台</p>
+<p>24、若蓝格 (<a href="https://www.ifblue.net/">https://www.ifblue.net/)：杂志，各类书刊分享</a>：杂志，各类书刊分享)</p>
+<p>25、万方数据 (<a href="http://www.wanfangdata.com.cn/index.html">http://www.wanfangdata.com.cn/index.html)：</a>：) 知识服务平台，期刊、报告、论文、专利</p>
+<p>26、上海图书馆家谱 (<a href="http://wrd2016.library.sh.cn/channel/stjp/">http://wrd2016.library.sh.cn/channel/stjp/)：</a>：) 上海图书馆藏家谱古文</p>
+<p>27、抗战文献数据平台 (<a href="http://www.modernhistory.org.cn/index.htm">http://www.modernhistory.org.cn/index.htm)：</a>：) 抗日战争期间报刊文献资料</p>
+<p>28、中国历代人物图像数据库 (<a href="http://diglweb.zjlib.cn:8081/zjtsg/mingren/index.htm">http://diglweb.zjlib.cn:8081/zjtsg/mingren/index.htm)：</a>：) 从夏商周开始历史人物画像资料</p>
+<p>29、zi.1lib (<a href="https://zh.1lib.org/">https://zh.1lib.org/):全球最大的数字图书馆自2009年起的免费图书馆</a>:全球最大的数字图书馆自2009年起的免费图书馆). 免费下载epub、pdf、mobi格式电子书支持转换为FB2、TXT、RTF等格式</p>
+</li>
+</ul>
+
+            </div>
+            <hr style="width: 80%;">
+            
+            <div class="donateContainer">
+                <span class="donatebtn">赏</span>
+            </div>
+            <div class="donateContainer">
+                <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%B6%E9%92%B1%E7%A0%81.jpg" alt="" class="donate">
+            </div>
+            
+            <div class="postfooter">
+                <ul class="post-copyright">
+                    <li><strong>文章作者：</strong>星霜</li>
+            <li><strong>原文链接：</strong>https://xiaobaiweinuli.github.io/post/HIXvgpVbO/</li>
+            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用<i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA
+                许可协议。转载请注明出处！</li>
+            </ul>
+        </div>
+        
+            <div class="shareContainer">
+                <div class="share" style="height:30px;">
+                    <a class="qq" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/qqs.png" alt=""></i></a>
+                    <a class="wechat" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/wechats.png" alt=""></i></a>
+                    <a class="weibo" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/weibos.png" alt=""></i></a>
+                    <a class="qzone" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/qzones.png" alt=""></i></a>
+                    <a class="douban" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/doubans.png" alt=""></i></a>
+                    <a class="facebook" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/facebooks.png" alt=""></i></a>
+                    <a class="twitter" href=""><i><img class="shareicon"
+                                src="https://xiaobaiweinuli.github.io/media/images/twitter.png" alt=""></i></a>
+                </div>
+            </div>
+            
+        <div id="otherpost">
+            
+            <a  data-pjax class="prev-post-pc" href="https://xiaobaiweinuli.github.io/post/HWa6ZJLJG/"  style="color: black;">
+                <div id="ppcontainer">
+                    
+                    
+                    <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" style="width: 100%;" class="opimg">
+                    
+                    
+                    <h4 class="optitle">PDF分割合并</h4>
+                </div>
+            </a>
+            <div class="prev-post">
+                上一篇 <a  data-pjax href="https://xiaobaiweinuli.github.io/post/HWa6ZJLJG/">PDF分割合并</a>
+            </div>
+            
+            
+            <a data-pjax class="next-post-pc" href="https://xiaobaiweinuli.github.io/post/podtF2pnU/"  style="color: black;">
+                <div id="npcontainer">
+                    
+                    
+                    <img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2.png" style="width: 100%;" class="opimg">
+                    
+                    
+                    <h4 class="optitle">Termux推送本地文件到GitHub仓库</h4>
+                </div>
+            </a>
+            <div class="next-post">
+                下一篇 <a  data-pjax href="https://xiaobaiweinuli.github.io/post/podtF2pnU/">Termux推送本地文件到GitHub仓库</a>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- 弹窗 -->
+    <div id="myModal" class="modal">
+        <img class="modal-content" id="img01">
+    </div>
+</body>
+<script>
+    //文章阅读热度
+    var pl = $("#pl").html();
+    var rootaddr = $("#rootaddr").html();
+    pl = pl.replace(rootaddr, "");
+    $("#hotnum").attr('id', pl);
+</script>
+                    <div class="toc-container">
+                        <ul class="markdownIt-TOC">
+<li><a href="#%E5%96%84%E7%94%A8%E4%BA%92%E8%81%94%E7%BD%91%E4%BB%8E%E6%90%9C%E7%B4%A2%E5%BC%80%E5%A7%8B">善用互联网从搜索开始。</a></li>
+</ul>
+
+                    </div>
+                    <div class="tog">
+                        <div class="toggleContainer">
+                            <div class="toggle">
+                                <i class="fas fa-angle-double-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!---------------------------- 评论系统👇 ------------------------->
+                    <div id="comment" class="comment">
+                        <div class="commentcontainer">
+                            
+                                
+                                    
+                                        <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '4d1d1896a070fe92cac8',
+    clientSecret: '7a78a21507da3c227f61dd05639d6d58bc0c918e',
+    repo: 'issues',
+    owner: 'xiaobaiweinuli',
+    admin: ['xiaobaiweinuli'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+                                    
+                                    
+                                
+                            
+                        </div>
+                    </div>
+                    <!---------------------------- 评论系统👆 ------------------------->
+                </div>
+                <!-- main标签，pjax渲染时加载以上内容👆 -->
+                <div class="col-md-1 col-lg-2"></div>
+                <div id="bg">
+                </div>
+            </div>
+            <!-- ----------------左侧菜单栏html 👆-------------------------------------->
+            
+        </div>
+        <!-- aplayer播放器加载👇 -->
+            
+        <!-- aplayer播放器加载👆 -->
+    </div>
+    <!-- 背景图加载方式👇 -->
+    <div id="bgchoice" style="display: none">link
+                </div>
+                
+                <div id="bgurl" style="display:none">https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/全局背景虚化.jpg</div>
+                
+    <!-- 背景图加载方式👆 -->
+</body>
+
+<script>
+    //初始化
+    //更换twikoo头像
+    setTimeout(replaceAvatar,1000);
+    setTimeout(replaceAvatar,2000);
+    setTimeout(replaceAvatar,8000);
+    // --------为每张图片添加懒加载（lazyload）标签-->懒加载功能 👇------------
+    lazyload();
+    //为文章内所有代码块添加代码复制功能 👇
+    codeinit();
+    // ------代码高亮显示功能-------------
+    hljs.initHighlightingOnLoad();
+    if (shareChoice)
+        shareInit();
+    if (donateChoice)
+        donateInit();
+</script>
+
+<!------------------ 加载live2d模型功能（看板娘）👇 ---------------->
+
+<!------------------ 加载live2d模型功能（看板娘）👆 ---------------->
+
+
+<!----------------------- 返回顶部按钮功能👇 --------------------->
+<script>
+    $(function () {
+        $('.toggleContainer').click(function () {
+            $('html,body').animate({
+                scrollTop: '0px'
+            }, 800);
+        });
+        $(window).scroll(function () {
+            var st = $(window).scrollTop();
+            if (st > 30) {
+                $(".toggleContainer").fadeIn(400);
+            } else {
+                $(".toggleContainer").fadeOut(100);
+            }
+        });
+    });
+</script>
+<!----------------------- 返回顶部按钮功能👆 --------------------->
+
+
+<!------------ 加载全局背景图功能👇（开始时没有写好，这功能有点鸡肋/(ㄒoㄒ)/~~） -->
+<script>
+    var bgchoice = "link"
+    var bg = $('#bg');
+    var bgurl = document.getElementById("bgurl").innerHTML;
+    if (bgchoice == 'default')
+    {
+        for (var i = 0; i < 3; i++)
+            bgurl = bgurl.replace("\\", "/");
+        bgurl = "https://xiaobaiweinuli.github.io/" + bgurl;
+    }
+    bg.css("background", "url('" + bgurl + "')");
+
+    window.onload = function () {
+        aplayerbtnInit();
+    }
+</script>
+<!------------ 加载全局背景图功能👆（开始时没有写好，这功能有点鸡肋/(ㄒoㄒ)/~~） -->
+
+
+
+
+<script src="https://xiaobaiweinuli.github.io/media/js/index.js"></script>
+
+
+<script>
+    //加载后的事件同步（阅读量、移动端评论等
+    window.onload = function () {
+    //代码块高亮渲染
+    document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightBlock(block);
+            hljs.lineNumbersBlock(block);
+    });
+        getHotnum();
+        var sharepc = $(".share").eq(0).html();
+        $(".share").eq(1).html(sharepc);   //插件只会寻找一个分享标签渲染，所以需要手动添加到移动端
+        aplayerbtnInit();
+        $(".hljs").css({
+            "padding": "20px"
+        })
+    }
+</script>
+
+<!-- <script src="https://xiaobaiweinuli.github.io/media/js/av-min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@3.13.0/dist/av-min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.6.1/dist/av-live-query-min.js"></script> -->

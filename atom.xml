@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://xiaobaiweinuli.github.io</id>
+    <title>星霜的笔记</title>
+    <updated>2024-05-06T13:41:01.808Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://xiaobaiweinuli.github.io"/>
+    <link rel="self" href="https://xiaobaiweinuli.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://xiaobaiweinuli.github.io/images/avatar.png</logo>
+    <icon>https://xiaobaiweinuli.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, 星霜的笔记</rights>
+    <entry>
+        <title type="html"><![CDATA[PDF分割合并]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/HWa6ZJLJG/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/HWa6ZJLJG/">
+        </link>
+        <updated>2024-04-26T12:29:29.000Z</updated>
+        <content type="html"><![CDATA[<p>提取指定页面并合到一起，输出到代码目录下</p>
+<pre><code class="language-python">import os
+import time
+from PyPDF2 import PdfReader, PdfWriter
+
+def extract_pages(pdf_path, page_numbers):
+    # 创建PdfReader对象
+    pdf_reader = PdfReader(open(pdf_path, &quot;rb&quot;))
+
+    # 创建PdfWriter对象
+    pdf_writer = PdfWriter()
+
+    # 提取并合并指定页面
+    try:
+        for page_number in page_numbers:
+            page = pdf_reader.pages[page_number - 1]  # 页面索引从0开始
+            pdf_writer.add_page(page)
+    except Exception as e:
+        print(f&quot;提取页面时发生错误: {e}&quot;)
+        raise  # 保留异常，让程序终止
+
+    return pdf_writer
+
+def save_pdf(pdf_writer, output_path, increment=False):
+    # 检查文件是否存在并询问用户是否替换或加编号
+    while os.path.exists(output_path):
+        response = input(f&quot;文件 {output_path} 已存在，是否替换？(y或者回车) 或 输入 'n' 自动添加编号：&quot;).lower()
+        if response == &quot;y&quot; or response == &quot;&quot;:
+            break
+        elif response == &quot;n&quot;:
+            increment = True
+            break
+        else:
+            print(&quot;无效输入，请重新选择。&quot;)
+
+    if increment:
+        base_name, ext = os.path.splitext(output_path)
+        i = 1
+        while os.path.exists(output_path):
+            output_path = f&quot;{base_name}_{i}{ext}&quot;
+            i += 1
+
+    # 保存PDF文件
+    with open(output_path, &quot;wb&quot;) as out_file:
+        pdf_writer.write(out_file)
+
+def format_page_range_string(page_numbers):
+    page_numbers.sort()  # 确保页码有序
+    continuous_ranges = []
+
+    current_start = page_numbers[0]
+    current_end = page_numbers[0]
+
+    for num in page_numbers[1:]:
+        if num == current_end + 1:  # 如果当前页码与前一页面连续
+            current_end = num  # 更新当前范围的结束页码
+        else:  # 当前页码与前一页面不连续，开始新的范围
+            continuous_ranges.append((current_start, current_end))
+            current_start = current_end = num
+
+    # 添加最后一个范围
+    continuous_ranges.append((current_start, current_end))
+
+    # 将连续范围转换为字符串形式并连接
+    formatted_ranges = [f&quot;{start}-{end}&quot; if start != end else str(start) for start, end in continuous_ranges]
+    return &quot;,&quot;.join(formatted_ranges)
+
+def parse_page_range(page_range_str):
+    ranges = []
+    for part in page_range_str.split(&quot;,&quot;):
+        if &quot;-&quot; in part:
+            start, end = map(int, part.split(&quot;-&quot;))
+            ranges.extend(range(start, end + 1))
+        else:
+            ranges.append(int(part))
+    return sorted(ranges)
+
+def list_pdf_files(directory):
+    pdf_files = []
+    for file in os.listdir(directory):
+        if file.lower().endswith('.pdf'):
+            pdf_files.append(file)
+    return pdf_files
+
+def prompt_to_continue():
+    print(&quot;提取完成，是否继续提取？(回车继续/任意键退出)&quot;)
+    user_input = input().strip()
+    return user_input == &quot;&quot;
+
+def main():
+    # 获取用户选择的PDF文件
+    directory = input(&quot;请输入当前目录路径或输入 'L/回车' 列出当前目录下的PDF文件：&quot;)
+    if directory.lower() == 'l' or directory.lower() == &quot;&quot;:
+        pdf_files = list_pdf_files(os.getcwd())
+        print(&quot;当前目录下的PDF文件：&quot;)
+        for i, file in enumerate(pdf_files, start=1):
+            print(f&quot;{i}. {file}&quot;)
+        selection = input(&quot;请选择一个PDF文件（输入序号）：&quot;)
+        if not selection.isdigit() or int(selection) &lt; 1 or int(selection) &gt; len(pdf_files):
+            print(&quot;无效的选择，请输入有效的序号。&quot;)
+            return
+        pdf_path = os.path.join(os.getcwd(), pdf_files[int(selection) - 1])
+    else:
+        pdf_path = directory
+        while not os.path.isfile(pdf_path):
+            print(&quot;文件不存在，请检查路径是否正确。&quot;)
+            pdf_path = input(&quot;请重新输入当前目录路径或输入 'L' 列出当前目录下的PDF文件：&quot;)
+            if pdf_path.lower() == 'l':
+                pdf_files = list_pdf_files(os.getcwd())
+                print(&quot;当前目录下的PDF文件：&quot;)
+                for i, file in enumerate(pdf_files, start=1):
+                    print(f&quot;{i}. {file}&quot;)
+                selection = input(&quot;请选择一个PDF文件（输入序号）：&quot;)
+                if not selection.isdigit() or int(selection) &lt; 1 or int(selection) &gt; len(pdf_files):
+                    print(&quot;无效的选择，请输入有效的序号。&quot;)
+                    return
+                pdf_path = os.path.join(os.getcwd(), pdf_files[int(selection) - 1])
+                break
+
+    # 获取用户选择的打印类型
+    print_types = {
+        &quot;1&quot;: &quot;黑白单面&quot;,
+        &quot;2&quot;: &quot;黑白双面&quot;,
+        &quot;3&quot;: &quot;彩色单面&quot;,
+        &quot;4&quot;: &quot;彩色双面&quot;
+    }
+    for key, value in print_types.items():
+        print(f&quot;{key}. {value}&quot;)
+    while True:
+        print_type = input(&quot;请选择打印类型（输入数字）：&quot;)
+        if print_type in print_types:
+            break
+        print(&quot;无效的打印类型，请输入正确的数字。&quot;)
+
+    # 获取用户输入的页面范围
+    while True:
+        page_range = input(&quot;请输入需要提取的页面范围（例如：1,2-5）：&quot;)
+        try:
+            page_numbers = parse_page_range(page_range)
+            break
+        except Exception as e:
+            print(f&quot;输入的页面范围格式错误，请输入例如：1,2-5。错误信息：{e}&quot;)
+
+    formatted_page_range = format_page_range_string(page_numbers)
+
+    # 提取指定页面
+    pdf_writer = extract_pages(pdf_path, page_numbers)
+
+    # 根据打印类型和页面范围命名输出文件
+    output_dir, output_file = os.path.split(pdf_path)
+    output_name = f&quot;{os.path.splitext(output_file)[0]}_{print_types[print_type]}_{formatted_page_range}.pdf&quot;
+    output_path = os.path.join(output_dir, output_name)
+
+    # 保存PDF文件
+    save_pdf(pdf_writer, output_path)
+
+    # 提示用户是否继续
+    if prompt_to_continue():
+        main()  # 重新调用main函数
+
+    print(&quot;等待10秒后自动退出...&quot;)
+    time.sleep(10)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[电子书资源]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/HIXvgpVbO/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/HIXvgpVbO/">
+        </link>
+        <updated>2024-04-25T10:21:28.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="善用互联网从搜索开始">善用互联网从搜索开始。</h1>
+<p><a href="https://zjuyk.gitlab.io/posts/how-to-search/">🔗</a><a href="https://zjuyk.gitlab.io/posts/how-to-search/">如何增强自己搜索的能力</a>？</p>
+<p><a href="https://zjuyk.gitlab.io/posts/how-to-search/">这篇博客</a>作者总结了他搜索的思路和方法，掌握这些技巧，能更便捷的搜索到自己想要得到的东西。</p>
+<p>Google 的完整搜索语法和几个专项搜索：</p>
+<p>1️⃣搜索语法<br>
+<a href="https://ahrefs.com/blog/google-advanced-search-operators/">🔗</a><a href="https://ahrefs.com/blog/google-advanced-search-operators/">Google Search Operators: The Complete List (42 Advanced Operators)</a></p>
+<p>2️⃣专项搜索<br>
+①学术文献：<a href="https://scholar.google.com/">谷歌学术</a> 、<a href="https://www.ipl.org/">ipl2 </a>、 <a href="https://www.sciencedirect.com/">sciencedirect</a><br>
+②法律法规：<a href="http://www.law-lib.com/">法律图书馆</a> 、<a href="https://www.chinacourt.org/law.shtml">法律文库</a> 、<a href="https://wenshu.court.gov.cn/">裁判文书</a><br>
+③医学知识：<a href="https://www.msdmanuals.cn/">默沙东诊疗手册</a><br>
+④电子书籍：<a href="https://z-lib.org/">Z-Library</a> 、<a href="https://ebook2.lorefree.com/">LoreFree</a><br>
+⑤免费图库：<a href="https://pixabay.com/">Pixabay</a> 、<a href="https://unsplash.com/">Unsplash</a><br>
+⑥知识问答：<a href="https://www.answers.com/">Answers</a>  、<a href="https://www.quora.com/">Quora</a> 、 <a href="https://www.zhihu.com/">知乎</a>（知乎早期还是积累很多优质内容的）另外，现在很多资源都存储在网盘分享，利用一些网盘搜索引擎，往往会有惊喜······</p>
+<p><a href="https://www.producthunt.com/">Product Hunt</a>：这个是我工具相关的座上宾，新工具探索和相关工具搜索它都擅长，属实一部工具探索的史诗，奥德赛。</p>
+<p><a href="https://www.similarsites.com/">Similar Sites</a>：这个不用多介绍，频道御用插件，可以直接推出当前网页类似网站。</p>
+<p><a href="https://www.google.com/search?q=related:">Google Related</a>：这个是谷歌高级搜索，前缀法，输入域名即可搜索相关网站和工具。</p>
+<p>全国图书馆参考咨询联盟<br>
+搜索图书，期刊，论文，专利都比较方便。<br>
+<a href="http://www.ucdrs.superlib.net/">http://www.ucdrs.superlib.net/</a></p>
+<p>两个可用谷歌学术网站<br>
+<a href="https://www.xueshu5.com/">https://www.xueshu5.com/</a><br>
+<a href="http://www.ose.cc/">http://www.ose.cc/</a></p>
+<ol>
+<li>
+<p>国家哲学社会科学文献中心： <a href="http://www.ncpssd.org">www.ncpssd.org</a><br>
+现有中文期刊、外文期刊、古籍等资源，收录哲学社会科学相关领域文献共计10,000,000余条，提供有线阅读、全文下载等服务。</p>
+</li>
+<li>
+<p>文津搜索： <a href="https://find.nlc.cn">find.nlc.cn</a><br>
+国家图书馆资源检索，汇聚了60多个资源库、近2亿条文献信息，可以查询包括图书、古文献、论文、期刊报纸、多媒体等在内的多种资料。</p>
+</li>
+<li>
+<p>术语在线： <a href="http://www.termonline.cn">www.termonline.cn</a><br>
+一个可以查询专业术语的在线网站，非常权威，内容更新也很及时。</p>
+</li>
+<li>
+<p>科塔学术： <a href="https://site.sciping.com">site.sciping.com</a><br>
+学术导航网站，整理了许多论文搜索网站、学术工具、科研软件、期刊出版等，每一个都有细致的分类，并归纳了对应的网站。</p>
+</li>
+<li>
+<p>Academic Phrasebank： <a href="http://www.phrasebank.manchester.ac.uk">www.phrasebank.manchester.ac.uk</a><br>
+论文写作助手，这个网站主要提供论文各部分的模版，如介绍怎么写，总结怎么写，如何描述方法，报告细节等，对非英语母语作者非常有帮助。</p>
+</li>
+<li>
+<p>iData： <a href="http://www.cn-ki.net">www.cn-ki.net</a><br>
+一个知网镜像站，可以免费下载论文，知网比较新的没有，每天有免费下载限额。</p>
+</li>
+<li>
+<p>SCI-Hub： <a href="https://ci-hub.com">sci-hub.com</a><br>
+这个网站就不多介绍了，一个超棒的免费下载论文的网站，输入文献doi号即可搜索下载。</p>
+</li>
+<li>
+<p>OALib： <a href="http://www.oalib.com">www.oalib.com</a><br>
+目前收录了570万篇学术论文，涵盖多个领域，所有文章均可免费下载，是一个较为高效的论文查找网站。</p>
+</li>
+<li>
+<p>研享网： <a href="http://www.academicshare.cn">www.academicshare.cn</a><br>
+检索下载英文文献的利器，页面超级干净，支持关键词、题目、论文doi搜索。</p>
+</li>
+<li>
+<p>Medsci： <a href="http://www.medsci.cn/sci">www.medsci.cn/sci</a><br>
+期刊智能查询系统，支持模糊查询，每一个期刊还有对应的论坛。</p>
+</li>
+<li>
+<p>Connected Papers： <a href="http://www.connectedpapers.com">www.connectedpapers.com</a><br>
+文献调研必备神器，它可以在线进行分析文献的引文信息，轻松了解某篇文献的引用和被引用关联，分析出文献的前世今生，方便我们对一篇文献或者某个领域进行调研。</p>
+</li>
+<li>
+<p>近邻词汇检索： <a href="https://tool.mingdawoo.com">tool.mingdawoo.com</a><br>
+可免费查找近似短语和相关术语，词穷的时候可以看看。</p>
+</li>
+<li>
+<p>秘塔写作猫： <a href="https://xiezuocat.com">xiezuocat.com</a><br>
+可以校对中文字词错误、标点错误、语序错误、语法问题、同意混淆等，并给出修改建议，支持全文分析和智能排版，免费版基本上能满足日常需求。</p>
+</li>
+<li>
+<p>Grammarly： <a href="http://www.grammarly.com">www.grammarly.com</a><br>
+英文语法错误查询好助手，可以安装为word插件，在你写作的时候就可以纠正你的语法错误了。</p>
+</li>
+<li>
+<p>知犀思维导图： <a href="http://www.zhixi.com">www.zhixi.com</a><br>
+免费好用的论文大纲整理工具，可以借助这个工具做论文大纲。这个网站还提供许多思维导图模板，包括工作方法、考研考证的资料、管理方法、科普知识等方面的模板。</p>
+</li>
+<li>
+<p>词云统计： <a href="https://cloud.niucodata.com">cloud.niucodata.com</a><br>
+在线中文词汇统计和分析工具，可以帮助用户分析一段话中的词性分类、词频统计并生成词云图。</p>
+</li>
+<li>
+<p>Linggle： <a href="http://www.linggle.com">www.linggle.com</a><br>
+提供英文常用语、搭配、近义词等检索，可以根据词性来推测完整搭配，还能帮助学习者分析出更准确的英文写作建议。</p>
+</li>
+<li>
+<p>Netspeak： <a href="https://netspeak.org">netspeak.org</a><br>
+这个网站也是词汇，不过是用来查找你记不太清楚的词汇，比如congratulations，你不记得全部拼写了，你就可以在这个网站上来查一下。</p>
+</li>
+<li>
+<p>Linguee： <a href="https://netspeak.org">cn.linguee.com</a><br>
+一个全能的在线多语言互译平台，提供24种语言的对应查询服务，而且还收集了数亿条译文例句，无论是日常领域的术语，还是专业难度偏大的词汇，在这里都能找到专业的翻译方式。</p>
+</li>
+<li>
+<p>DocTranslator： <a href="http://www.onlinedoctranslator.com">www.onlinedoctranslator.com</a><br>
+可免费在线翻译文档，支持109种不同语言文档任意转换，并保持排版不变。操作简单，直接上传文档就可以。</p>
+</li>
+</ol>
+<p>代码审查资源的“很棒”列表 - 文章、论文、工具等<br>
+<a href="https://github.com/joho/awesome-code-review">https://github.com/joho/awesome-code-review</a></p>
+<p>🌐Wiseone - 一款免费的 AI 总结网站插件   <a href="https://wiseone.io/">https://wiseone.io/</a></p>
+<p>📄应用场景一般是看新闻、文章、博客、论文、帖子的时候，觉得太多文字不想看，然后进行一键总结，提高阅读效率</p>
+<p>🆔  插件名称：Metaphor Search</p>
+<p>➡️  支持平台：#ChatGPT</p>
+<p>📁  插件简介：一个搜索引擎API，可以帮助你找到网络上的各种信息。你可以使用它来搜索新闻、论文、视频、推文、事件等等。</p>
+<p>5个用于文本和文案写作的工作神经网络 ——</p>
+<p>✒️DeepL Write  - 纠错和文本改进。<a href="https://www.deepl.com/write">https://www.deepl.com/write</a></p>
+<p>✒️ Writesonic - 为特定任务（如 通讯、网站、博客、广告等）撰写文本。<a href="https://writesonic.com/">https://writesonic.com/</a></p>
+<p>✒️ Quillbot Paraphraser - 文本改写。7种改写模式，2种免费。<a href="https://quillbot.com/">https://quillbot.com/</a></p>
+<p>✒️ Frase - 不同类型的文本生成器+改写。<a href="https://www.frase.io/tools/">https://www.frase.io/tools/</a></p>
+<p>✒️ Wordtune Spices - 文本清理和改进。<a href="https://www.wordtune.com/spices">https://www.wordtune.com/spices</a></p>
+<p>学术网站</p>
+<p><a href="https://scholar.google.com/">谷粉学术</a><br>
+一个免费搜学术文章的网站，期刊论文、学位论文、书籍、文摘和技术报告在内的学术文献都可以搜到。<br>
+这里还有个工具叫Google Alert，打开这功能后，将相关关键词输入Google Alert，未来有更新的文章标题或者摘要内容中有相关的，Google Scholar就会自动提醒你去查阅。</p>
+<p><a href="https://www.researchgate.net/">ResearchGate</a><br>
+一个学术交流平台，你可以在上面与来自世界不同地区和国家、不同领域的学者交流，阅读他们分享的文章。还能免费下载各种学术文章，关注各种顶尖科研小组的最新成果。</p>
+<p><a href="https://www.scopus.com/">Scopus</a><br>
+荷兰的Elsevier科学出版社开发，用于搜索期刊和专利，里面包含有全球5000多家在科学、技术、医学和社会科学等领域的出版商。</p>
+<p><a href="https://www.sciencedirect.com/">Science</a><br>
+ScienceDirect，世界最大的在线科学研究网站，出版商还是荷兰的Elsevier团队。其中包含约1100万篇文章，2500种期刊，6000多本电子书，参考书和手册，内容以理工专业知识为主。</p>
+<p><a href="https://www.ebsco.com/products/research-databases/ebsco-open-dissertations">EBSCO</a><br>
+一个免费的数据库，包含来自世界各地的120多万份论文。</p>
+<p><a href="https://www.proquest.com/">ProQuest</a><br>
+ProQuest提供的文献管理软件及平台使得图书馆用户能够探索、使用与分享权威内容中获取的研究，包括论文、电子书、报纸、期刊、政府与文化档案在内的全部资料，许多有深度的文章也都收录在里面。</p>
+<p><a href="https://charteredabs.org/academic-journal-guide-2018/">AJG</a><br>
+如果需要引用足够严谨的文章，可以选择这个网站，AJG是商业和管理学者发表研究期刊的范围和质量的指南，其目的是让学者们更清楚地了解各种期刊的研究目标。</p>
+<p><a href="http://www.base-search.net/">BASE</a><br>
+德国知名大学比勒费尔德大学图书馆开发的一个多学科的学术搜寻引擎，提供构学术资源的集成检索服务。</p>
+<p><a href="https://search.credoreference.com/">CREDO</a><br>
+这是一家美国的公司，通过订阅提供在线参考内容，并与图书馆合作开发信息扫描计划或制作图书馆营销计划和材料。</p>
+<p><a href="https://www.academia.edu/">Academia</a><br>
+一个学术社交网站。该平台可用于共享论文、关注它们的影响力、关注特定领域的研究。每月有3900万独立访问者，上传文本超过100万。如果你不知道怎么选研究方向、不会写开题报告，可以来这个网站上找灵感。</p>
+<p><a href="https://oatd.org/">OATD</a><br>
+旨在成为寻找世界各地发表的开放获取研究生论文和论文的最佳资源。论文信息来自600多所大学和研究机构，目前索引超过150万篇论文和论文。</p>
+<p><a href="https://academic.oup.com/journals">Oxford Journals</a><br>
+<a href="https://www.oxfordscholarship.com/page/about-oso/about">Oxford Scholarship</a><br>
+前者是牛津大学设立的期刊网站，里面收录了许多优质期刊，提供200多种学科，包含生物科学，医学，人文，社科，法律，经济学，商业、金融等等，全文都可以免费阅读。<br>
+后者主要提供对eBooks的全文访问，提供数千种学术着作，涉及人文科学，社会科学，科学，医学和法律等20个学科领域。</p>
+<p><a href="http://www.oalib.com/">OA图书馆</a><br>
+一个学术论文资料库超过420万篇的网站，所有文章能够免费下载，目前也和许多国内外的知名大学图书馆有合作。</p>
+<p><a href="http://cnplinker.cnpeak.com/">cnpLINKer</a><br>
+提供的国外期刊网络检索系统。目前共收录了国外五十多家出版社的12000余种期刊商业期刊，14000多种Open Access期刊，900万篇目次文摘数据和全文链接服务，400家国内馆藏信息，并保持实时更新。</p>
+<p><a href="http://www.chongbuluo.com/">虫部落</a><br>
+一个学术共享平台，包含中文资料、外文资料、硕博论文。集合了CNKI、谷歌、百度、维基百科的搜索引擎，而且麻省理工和剑桥的文献也可以在这里搜到。</p>
+<p><a href="http://ndltd.ncl.edu.tw/">台湾博硕士论文知识加值系统</a><br>
+台湾最重要的学术支援网站之一，此网站收录了许多台湾学生的博士以及硕士论文，并且提供方便的检索功能。直接注册账户就能用。</p>
+<p>💩💩  <a href="https://i.cnki.net/">知网</a> 💩<br>
+中国头号学术资源垄断网站</p>
+<p>学术研究利器丨文献、图谱与 AI</p>
+<p>这个专题其实从频道初就有想法，一直没确定适合的 COMBO 内容。关于学术研究的利器，主要是对前沿文献的处理，文献趋势追踪（包括 RSS 技术）、文献图谱过滤以及 AI 处理都是最适合的。其它工具的、单独文献库的则不算。</p>
+<p>这个频道每一个单独主题都会持续更新，Telegram 作为我的「动态知识库」，后续会建立索引。我也非常感谢很多小伙伴提供很多有用有意思的工具，这里属于每一个人。我频道主题分享很少使用 similar site，google related 这样处理，其中用到的工具多是比较系统的联系在一起，涌现并形成一种 COMBO 能力。</p>
+<p><a href="https://ooir.org/index.php">The Observatory of International Research</a>：今天的发现，根据研究趋势和期刊排名来陈列当前前沿文献研究内容，几乎涵盖所有学科，追踪领域前沿内容。</p>
+<p><a href="https://consensus.app/search/">Ask a question, get conclusions from research papers</a>：AI 处理，提出问题并从文献研究中得出结论。昨天在「封装系 AI」中。</p>
+<p><a href="https://keywords.groundedai.company/?q=Max+Weber">Summit Keyword Graph</a>：论文关键词可视化图谱，点击节点随即推出相关论文信息及溯源 paper source，对于论文追踪，主题写作很有用。</p>
+<p><a href="https://www.connectedpapers.com/">Connected Papers</a>：同上，非常强的相关论文推荐、展示与可视化。</p>
+<p><a href="https://www.researchrabbit.ai/">Research Rabbit</a>：又一个文献 dig 利器。可视化、个性化推荐、关键词图谱，Similar Work 等功能确实不错，UI 差点意思。</p>
+<p><a href="https://www.paperdigest.org/review/">Literature Review</a>：根据某个主题关键词输入，直接生成文献综述和引用文献列表。</p>
+<p><a href="https://elicit.org/">Elicit</a>：同上，根据主题推荐文献，并形成摘要一览，也有过滤等。（<a href="https://elicit.org/gpt4-waitlist">加持 chatgpt4</a>）</p>
+<p><a href="https://www.paper-digest.com/">Paperdigest</a>：人工智能总结文献，给定文献链接 DOI 直接生成总结摘要，适用文献浏览泛读。这个也算文献利器相关。</p>
+<p><a href="https://arxivxplorer.com/">arXiv Xplore</a>r：加持 openai 的 arXiv 关键词搜索。</p>
+<p><a href="https://research-assistant-roan.vercel.app/results/Derrida%20Aristotle/7">Athena</a><br>
+Athena 是专门为 AI 研究员推荐 AI 文献的网站，可以 Bookmark 相关论文以及订阅你搜索的主题。</p>
+<p><a href="https://www.semanticscholar.org/">Semantic Scholar</a>?<br>
+这是 AI 驱动的免费文献搜索研究工具，搜索文献时的分类/联系/索引非常强大。</p>
+<p>#fuckarounditis #tools TMD 这才是真正的「图谱」！交互式浏览2100万篇科学文章！！！ <a href="https://static.nomic.ai/pubmed.html">https://static.nomic.ai/pubmed.html</a></p>
+<p><a href="https://direct.mit.edu/octo">Octobe</a>r：麻省理工的十月刊，和e-flux同重量级，学术向的艺术理论和批评期刊。关于电影、绘画、音乐、媒体、摄影、表演、雕塑和文学等，也是我常关注的。<br>
+<a href="https://www.theparisreview.org/">THE PARIS REVIEW</a>：巴黎评论，以及下面的伦敦书评，纽约书评都是不错的，关于思考、文学、阅读和写作相关的资源。<br>
+<a href="https://www.lrb.co.uk/">London Review OF BOOKS</a>：伦敦书评。<br>
+<a href="https://www.nybooks.com/">The New York Review of Books</a>：纽约书评。<br>
+<a href="https://www.wired.com/">Wired</a>:著名的连线杂志，有很多专栏，关于科学、文化的可以关注。<br>
+<a href="https://www.greaterwrong.com/">GreaterWrong</a>：LessWrong 2.0的另一个版本，很多深度思考的内容，关于理论、学术、技术等，也是之前常分享的。<br>
+<a href="https://lithub.com/">LITERARY HUB</a>：一个文学网站，关于小说、评论以及写作等文章，也是之前常分享的。<br>
+<a href="https://bigthink.com/">BIG THINK</a>:我之前常分享东西的网站，泛文化杂志，一些有意思的观点与评论。<br>
+<a href="https://www.popmatters.com/">PopMatters</a>：关于泛文化评论，电影、音乐、书籍、文化等，也是我常浏览的。<br>
+<a href="https://owlcation.com/">Owlcation</a>：也是我常浏览的，分享有趣多元的学术知识。<br>
+<a href="https://publicdomainreview.org/">The Public Domain Review</a>：公共领域评论，关于艺术、文学和思想的写作。<br>
+<a href="https://thepointmag.com/">THE POINT</a>：关于哲学写作的杂志，经常发一些哲学评论。<br>
+<a href="https://palladiummag.com/">PALLADIUM</a>：也是一个不错的杂志，探索社会的治理和未来的研究。<br>
+<a href="http://www.art-ba-ba.com/main/main.art?forumId=8&amp;lang=zh">Art-Ba-Ba</a>：中国当代艺术社区的网站，也有一些不错的评论。</p>
+<ul>
+<li>
+<p>图书</p>
+<p>1、鸠摩搜索 (<a href="https://www.jiumodiary.com/">https://www.jiumodiary.com/)</a>)：除了资源多，鸠摩还贴心地按照不同的格式对书籍进行了分类；</p>
+<p>2、电子书搜索 (<a href="https://ebook.chongbuluo.com/">https://ebook.chongbuluo.com/</a>  快搜电子书搜索，有多个资源站点可选择</p>
+<p>3、苦瓜书盘 (<a href="https://www.kgbook.com/">https://www.kgbook.com/</a>)：可下载到符合手机尺寸的电子书；</p>
+<p>4、OpenStaxCNXLibrary (<a href="https://cnx.org/browse">https://cnx.org/browse)：</a> 这是一个下载到国外教材的电子书网站；</p>
+<p>5、好读 (<a href="http://www.haodoo.net/">http://www.haodoo.net/</a>)：繁体字的界面，你应该知道它是哪儿的网站~一个推广中文电子书的公益网站，建站于2001年。</p>
+<p>6、书格 (<a href="https://new.shuge.org">https://new.shuge.org</a>/)： 可能是最好用的古籍资料下载网站；</p>
+<p>7、云海电子书 (<a href="http://www.pdfbook.cn/">http://www.pdfbook.cn/)：站内书籍类型丰富、不管是小众、文学，还是励志成功，艺术摄影，计算机网络……你都可以在这里找到、并免费下载它的pdf版本；</a>：站内书籍类型丰富、不管是小众、文学，还是励志成功，艺术摄影，计算机网络……你都可以在这里找到、并免费下载它的pdf版本；)</p>
+<p>8、PDF之家 (<a href="http://www.pdfzj.com/">http://www.pdfzj.com/)：</a>：) 拥有海量优质资源的PDF站点；</p>
+<p>9、图灵社区 (<a href="https://www.ituring.com.cn/book?tab=free">https://www.ituring.com.cn/book?tab=free)：</a>：) 国内最优质的技术书出版社之一，提供免费的技术电子书下载；</p>
+<p>10、万千合集 (<a href="http://www.hejizhan.com/bbs/?kw=cad+">http://www.hejizhan.com/bbs/?kw=cad+)：</a>：) 最专业的学术资源搜索引擎；</p>
+<p>11、计算机书籍控 (<a href="http://bestcbooks.com/">http://bestcbooks.com/)：</a>：) 最好的计算机书籍下载站点；</p>
+<p>12、世界数字图书馆 (<a href="https://www.wdl.org/zh/">https://www.wdl.org/zh/)：</a>：) 将在互联网上以多语种格式免费提供世界各地的重要材料,包括手稿、地图、珍本书籍、乐谱、录音、电影、印刷品、照片、建筑图等等；</p>
+<p>13、采 书 (<a href="http://ebook.name/">http://ebook.name/)：</a>：) 一个免费电子书搜索引擎,为用户提供kindle电子书的搜索服务；</p>
+<p>14、书享家 (<a href="http://shuxiangjia.cn/">http://shuxiangjia.cn/)：</a>：) 电子书下载导航网站，提供优质的电子书搜索引擎、kindle下载站、PDF下载站、书单书评的入口导航。网站本身也会推荐一些优质的书单。</p>
+<p>15、爱问共享资料 (<a href="http://ishare.iask.sina.com.cn/">http://ishare.iask.sina.com.cn/)：</a>：) 资料搜索引擎。提供PPT、kindle书籍、PDF、Excel、DOC等各种格式的资料下载，内容齐全。</p>
+<p>16、Sobooks (<a href="https://sobooks.cc/xiaoshuowenxue">https://sobooks.cc/xiaoshuowenxue).：提供时间、文件格式、文件页数等维度搜索，快速定位到想要的文档</a>.：提供时间、文件格式、文件页数等维度搜索，快速定位到想要的文档)</p>
+<p>17、辣豆瓣 (<a href="http://www.ladouban.com/">http://www.ladouban.com/)：</a>：) 只是这里虽然也免费，但是每天只能下载6本</p>
+<p>18、 libgen (<a href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/)：</a>：) 这家应该是俄罗斯的ip，大部分英语书籍都可以在这里搜到，只是是pdf格式</p>
+<p>19、電子爱好馆 (<a href="http://zlzazhi.com/">http://zlzazhi.com/)：</a>：)</p>
+<p>20、田间小站 (<a href="https://www.tjxz.cc/">https://www.tjxz.cc/)：</a>：)</p>
+<p>21、EPUBEE (<a href="http://cn.epubee.com/books/">http://cn.epubee.com/books/</a>): 号称最大的电子书网站。</p>
+<p>22、E书联盟 (<a href="https://www.book118.com/">https://www.book118.com/)：</a>：)</p>
+<p>23、科塔学术 (<a href="https://site.sciping.com/">https://site.sciping.com/)：</a>：) 最专业、准确、及时、全面的科研与学术资源导航平台</p>
+<p>24、若蓝格 (<a href="https://www.ifblue.net/">https://www.ifblue.net/)：杂志，各类书刊分享</a>：杂志，各类书刊分享)</p>
+<p>25、万方数据 (<a href="http://www.wanfangdata.com.cn/index.html">http://www.wanfangdata.com.cn/index.html)：</a>：) 知识服务平台，期刊、报告、论文、专利</p>
+<p>26、上海图书馆家谱 (<a href="http://wrd2016.library.sh.cn/channel/stjp/">http://wrd2016.library.sh.cn/channel/stjp/)：</a>：) 上海图书馆藏家谱古文</p>
+<p>27、抗战文献数据平台 (<a href="http://www.modernhistory.org.cn/index.htm">http://www.modernhistory.org.cn/index.htm)：</a>：) 抗日战争期间报刊文献资料</p>
+<p>28、中国历代人物图像数据库 (<a href="http://diglweb.zjlib.cn:8081/zjtsg/mingren/index.htm">http://diglweb.zjlib.cn:8081/zjtsg/mingren/index.htm)：</a>：) 从夏商周开始历史人物画像资料</p>
+<p>29、zi.1lib (<a href="https://zh.1lib.org/">https://zh.1lib.org/):全球最大的数字图书馆自2009年起的免费图书馆</a>:全球最大的数字图书馆自2009年起的免费图书馆). 免费下载epub、pdf、mobi格式电子书支持转换为FB2、TXT、RTF等格式</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Termux推送本地文件到GitHub仓库]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/podtF2pnU/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/podtF2pnU/">
+        </link>
+        <updated>2024-04-21T10:51:45.000Z</updated>
+        <content type="html"><![CDATA[<p>如果您已在电脑上配置好了SSH密钥，并将相关文件（<code>id_ed25519</code>、<code>id_ed25519.pub</code>、<code>known_hosts</code>）移动到了手机的目录下，接下来您需要在手机上的Git环境中正确配置SSH，以便使用这些密钥与GitHub进行通信。以下是针对Android设备使用Termux进行SSH配置的步骤：</p>
+<h3 id="前提条件"><strong>前提条件</strong></h3>
+<p>确保您已经安装了Termux应用，并在其中安装了Git。如果您尚未安装，请按照以下步骤操作：</p>
+<ol>
+<li><strong>安装Termux</strong>：访问Google Play Store或第三方应用市场，搜索并安装Termux应用。</li>
+<li><strong>在Termux中安装Git</strong>：<pre><code class="language-bash">pkg update
+pkg install git openss
+</code></pre>
+</li>
+</ol>
+<h3 id="配置ssh密钥和known_hosts"><strong>配置SSH密钥和known_hosts</strong></h3>
+<p><strong>步骤1：创建SSH目录</strong><br>
+在Termux中，创建一个与您的用户关联的<code>.ssh</code>目录（如果尚未存在）：</p>
+<pre><code class="language-bash">mkdir -p ~/.ssh
+</code></pre>
+<p><strong>步骤2：移动密钥文件</strong><br>
+将之前移动到手机的密钥文件复制到刚创建的<code>.ssh</code>目录下：</p>
+<pre><code class="language-bash">mv /目录/id_ed25519* ~/.ssh/
+mv /目录/known_hosts ~/.ssh/
+</code></pre>
+<p><strong>步骤3：设置权限</strong><br>
+确保SSH密钥文件只有您自己能读写：</p>
+<pre><code class="language-bash">chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+chmod 644 ~/.ssh/known_hosts
+</code></pre>
+<h3 id="测试ssh连接"><strong>测试SSH连接</strong></h3>
+<p>现在，您可以尝试使用SSH连接到GitHub以验证配置是否正确：</p>
+<pre><code class="language-bash">ssh -T git@github.com
+</code></pre>
+<p>系统可能会提示您确认主机指纹，如果指纹与您之前在电脑上添加的GitHub服务器指纹一致，则回答<code>yes</code>。如果一切正常，您应该看到类似于“Hi [username]! You've successfully authenticated, but GitHub does not provide shell access.”的消息。</p>
+<h3 id="使用ssh密钥克隆或操作git仓库"><strong>使用SSH密钥克隆或操作Git仓库</strong></h3>
+<p>配置好SSH后，您就可以使用SSH URL克隆、拉取或推送Git仓库了。例如，要克隆一个私有仓库：</p>
+<pre><code class="language-bash">git clone git@github.com:username/repo.git
+</code></pre>
+<p>这里的<code>username</code>和<code>repo</code>分别替换为您自己的GitHub用户名和仓库名。</p>
+<p>至此，您已经在手机的Termux环境中成功配置了从电脑迁移过来的SSH密钥，并能够使用它们进行Git操作。如果您计划在多个项目中使用这些密钥，无需重复以上步骤，因为它们已经在全局的<code>~/.ssh</code>目录下被设置为默认的SSH身份验证方式。</p>
+<h3 id="python推送本地文件到githb"><strong>Python推送本地文件到Githb</strong></h3>
+<pre><code class="language-python">import os
+import subprocess
+import tempfile
+import shutil
+# 配置您的GitHub用户名、仓库名、本地文件路径以及目标分支
+GITHUB_USER = &quot;GitHub用户名&quot;
+REPO_NAME = &quot;仓库名&quot;
+LOCAL_FILE_PATH = &quot;本地文件路径&quot;
+TARGET_BRANCH = &quot;目标分支&quot;
+# 设置Git相关配置
+os.environ[&quot;GIT_AUTHOR_EMAIL&quot;] = &quot;邮箱&quot;
+os.environ[&quot;GIT_AUTHOR_NAME&quot;] = &quot;GitHub用户名&quot;
+# 初始化临时目录并克隆仓库（使用SSH方式）
+with tempfile.TemporaryDirectory() as TEMP_DIR:
+    os.chdir(TEMP_DIR)
+    subprocess.run([&quot;git&quot;, &quot;clone&quot;, &quot;--depth=1&quot;, f&quot;git@github.com:{GITHUB_USER}/{REPO_NAME}.git&quot;])
+    # 将本地文件复制到临时目录的仓库中
+    shutil.copy(LOCAL_FILE_PATH, os.path.join(TEMP_DIR, REPO_NAME))
+    # 进入仓库目录
+    os.chdir(os.path.join(TEMP_DIR, REPO_NAME))
+    # 添加文件、提交更改并推送至目标分支
+    subprocess.run([&quot;git&quot;, &quot;add&quot;, &quot;.&quot;])
+    subprocess.run([&quot;git&quot;, &quot;commit&quot;, &quot;-m&quot;, &quot;Update video.txt from local&quot;])
+    subprocess.run([&quot;git&quot;, &quot;push&quot;, &quot;origin&quot;, TARGET_BRANCH])
+print(&quot;File successfully pushed to GitHub repository.&quot;)
+</code></pre>
+<h3 id="shell推送本地文件到githb"><strong>Shell推送本地文件到Githb</strong></h3>
+<pre><code class="language-bash"> #!/bin/bash
+# 配置您的GitHub用户名、仓库名、本地文件路径以及目标分支
+GITHUB_USER=&quot;GitHub用户名&quot;
+REPO_NAME=&quot;仓库名&quot;
+LOCAL_FILE_PATH=&quot;本地文件路径&quot;
+TARGET_BRANCH=&quot;目标分支&quot;
+# 设置Git相关配置
+git config --global user.email &quot;邮箱&quot;
+git config --global user.name &quot;GitHub用户名&quot;
+# 初始化临时目录并克隆仓库（使用SSH方式）
+TEMP_DIR=$(mktemp -d)
+cd &quot;$TEMP_DIR&quot;
+git clone --depth=1 &quot;git@github.com:$GITHUB_USER/$REPO_NAME.git&quot;
+# 将本地文件复制到临时目录的仓库中
+cp &quot;$LOCAL_FILE_PATH&quot; &quot;$TEMP_DIR/$REPO_NAME/&quot;
+# 进入仓库目录
+cd &quot;$TEMP_DIR/$REPO_NAME&quot;
+# 添加文件、提交更改并推送至目标分支
+git add .
+git commit -m &quot;Update video.txt from local&quot;
+git push origin &quot;$TARGET_BRANCH&quot;
+# 清理临时目录
+cd ..
+rm -rf &quot;$TEMP_DIR&quot;
+echo &quot;File successfully pushed to GitHub repository.&quot;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[使用Gridea搭建自己的导航站]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/grtcSOttK/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/grtcSOttK/">
+        </link>
+        <updated>2024-04-19T15:34:45.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="搭建过程">搭建过程</h3>
+<ol>
+<li>由于我已在Github Pages下使用Gridea搭建了我的博客<a href="https://xiaobaiweinuli.github.io/">星霜</a>，因此新建一个Github仓库，启用了pages功能。</li>
+<li>将<a href="https://github.com/lmm214/gridea-theme-webstack">gridea-theme-webstack</a>的文件夹放到配置文件夹的theme文件夹下，重启软件，在设置中切换到该主题并保存，预览应该就可以看到一个空的导航站了。</li>
+<li>在主题-自定义配置中添加导航站中的网站信息，包括：名称、地址、图片和描述。在网站添加完成后保存预览，一个导航站就完成了。</li>
+</ol>
+<h3 id="如何配置分类">如何配置分类</h3>
+<p>该主题默认有四个分类，如果需要添加或者调整分类需要手动更改<a href="#config" style="font-weight: bold; color: red;">config.json</a>和<a href="#index" style="font-weight: bold; color: red;">index.ejs</a>，主题的文件目录如下：</p>
+<pre><code class="language-json">├── assets
+│   ├── media
+│   │   ├── css
+│   │   │   ├── fonts
+│   │   │   │   ├── icomoon.eot
+│   │   │   │   ├── icomoon.svg
+│   │   │   │   ├── icomoon.ttf
+│   │   │   │   └── icomoon.woff
+│   │   │   ├── icomoon.css
+│   │   │   └── main.css
+│   │   ├── images
+│   │   │   ├── favicon.png
+│   │   │   └── logo-collapsed@2x.png
+│   │   └── js
+│   │       ├── bootstrap.min.js
+│   │       ├── jquery-1.11.1.min.js
+│   │       ├── lozad.js
+│   │       ├── xenon-custom.js
+│   │       └── xenon-toggles.js
+│   └── styles
+│       └── main.less //空文件
+├── config.json
+└── templates
+    ├── archives.ejs //空文件
+    ├── index.ejs
+    ├── post.ejs //空文件
+    ├── tag.ejs //空文件
+    └── tags.ejs //空文件
+</code></pre>
+<p>1.如果你只是需要更改分类的名称，在<a href="#config" style="font-weight: bold; color: red;">config.json</a>中只需将文件中的<code>label</code>和<code>group</code>进行更改即可，然后更改<a href="#index" style="font-weight: bold; color: red;">index.ejs</a>。<br>
+2.如果你需要添加分类，首先在<a href="#config" style="font-weight: bold; color: red;">config.json</a>中复制添加一个相同的组，并将<code>name</code>更改与其他不同，例如更改为<code>fun6</code>,<code>label</code>和<code>group</code>更改为你想要的名称。<br>
+<a id="config"></a></p>
+<pre><code class="language-json"> {
+  &quot;name&quot;: &quot;fun6&quot;,
+  &quot;label&quot;: &quot;素材资源&quot;,
+  &quot;group&quot;: &quot;素材资源&quot;,
+  &quot;type&quot;: &quot;array&quot;,
+  &quot;value&quot;: [],
+  &quot;arrayItems&quot;: [
+    { &quot;label&quot;: &quot;名称&quot;, &quot;name&quot;: &quot;siteName&quot;, &quot;type&quot;: &quot;input&quot;, &quot;value&quot;: &quot;&quot; },
+    { &quot;label&quot;: &quot;链接&quot;, &quot;name&quot;: &quot;siteLink&quot;, &quot;type&quot;: &quot;input&quot;, &quot;value&quot;: &quot;&quot; },
+    { &quot;label&quot;: &quot;Logo&quot;, &quot;name&quot;: &quot;siteLogo&quot;, &quot;type&quot;: &quot;input&quot;, &quot;value&quot;: &quot;&quot; },
+    { &quot;label&quot;: &quot;描述&quot;, &quot;name&quot;: &quot;description&quot;, &quot;type&quot;: &quot;input&quot;, &quot;value&quot;: &quot;&quot; }
+  ],
+</code></pre>
+<p>3.将如下图的每个类似代码段中的名称更改为与<a href="#config" style="font-weight: bold; color: red;">config.json</a>中对应<code>name</code>下的名称：<br>
+<a id="index"></a></p>
+<pre><code class="language-ejs">                    &lt;% if (site.customConfig.fun6) { %&gt;
+                    &lt;li&gt;
+                        &lt;a href=&quot;#素材资源&quot; class=&quot;smooth&quot;&gt;
+                            &lt;i class=&quot;icon-inbox&quot;&gt;&lt;/i&gt;
+                            &lt;span class=&quot;title&quot;&gt;素材资源&lt;/span&gt;
+                        &lt;/a&gt;
+                    &lt;/li&gt;
+                    &lt;% } %&gt;
+</code></pre>
+<p>注意代码端中的<code>site.customConfig.xxxx</code>要与<a href="#config" style="font-weight: bold; color: red;">config.json</a>中的<code>name</code>相对应。</p>
+<pre><code class="language-ejs">        &lt;!-- 素材资源 --&gt;
+        &lt;% if (site.customConfig.fun6) { %&gt;
+        &lt;h4 class=&quot;text-gray&quot;&gt;&lt;i class=&quot;icon-inbox&quot; style=&quot;margin-right: 7px;&quot; id=&quot;素材资源&quot;&gt;&lt;/i&gt;素材资源&lt;/h4&gt;
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;% site.customConfig.fun6.forEach(function(fun) { %&gt;
+            &lt;div class=&quot;col-sm-3&quot;&gt;
+                &lt;div class=&quot;xe-widget xe-conversations box2 label-info&quot; onclick=&quot;window.open('&lt;%= fun.siteLink %&gt;', '_blank')&quot; data-toggle=&quot;tooltip&quot; data-placement=&quot;bottom&quot; title=&quot;&quot; data-original-title=&quot;&lt;%= fun.siteLink %&gt;&quot;&gt;
+                    &lt;div class=&quot;xe-comment-entry&quot;&gt;
+                        &lt;a class=&quot;xe-user-img&quot;&gt;
+                            &lt;img &lt;% if (fun.siteLogo) { %&gt; data-src=&quot;&lt;%= fun.siteLogo %&gt;&quot; &lt;% } else { %&gt; avatar=&quot;&lt;%= fun.siteName %&gt;&quot; &lt;% }; %&gt; class=&quot;lozad img-circle&quot; width=&quot;40&quot;&gt;
+                        &lt;/a&gt;
+                        &lt;div class=&quot;xe-comment&quot;&gt;
+                            &lt;a href=&quot;#&quot; class=&quot;xe-user-name overflowClip_1&quot;&gt;
+                                &lt;strong&gt;&lt;%= fun.siteName %&gt;&lt;/strong&gt;
+                            &lt;/a&gt;
+                            &lt;p class=&quot;overflowClip_2&quot;&gt;&lt;%= fun.description %&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;% }); %&gt;
+        &lt;/div&gt;
+        &lt;br /&gt;
+        &lt;% } %&gt;
+</code></pre>
+<p>注意： 若要添加分类，需要复制添加<a href="#index" style="font-weight: bold; color: red;">index.ejs</a>中的2个代码段，并更改<code>site.customConfig.xxxx</code>，以及代码段中的名称，并需要与<a href="#config" style="font-weight: bold; color: red;">config.json</a>中的<code>name</code>和`name对应数组的内容相匹配。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea 中 Markdown文本目录生成、页内跳转]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/s5Si_yRAs/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/s5Si_yRAs/">
+        </link>
+        <updated>2024-04-19T14:32:08.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-markdown">@[TOC](这里写自定义目录标题)
+</code></pre>
+<p>[toc]在 Markdown 中，自动生成目录非常简单，只需要在恰当的位置添加[TOC]符号，凡是以#定义的标题都会被编排到目录中。（Gridea的一些主题使用颜色较浅，不是很适应）</p>
+<hr>
+<pre><code class="language-markdown">&lt;a name=&quot;Mark&quot;&gt;&lt;/a&gt;   &lt;!-- 在合适的位置插入这句话 --&gt;
+[Your text](#Mark)    &lt;!-- 在合适的位置插入这句话 --&gt;
+在HTML和Markdown中，&lt;a name=&quot;Mark&quot;&gt;&lt;/a&gt; 和 [Your text](#Mark) 结合使用可以创建一个锚点链接，允许用户点击一个链接跳转到文档中的特定位置。
+这里是它们各自的作用：
+&lt;a name=&quot;Mark&quot;&gt;&lt;/a&gt;: 这是一个锚点（anchor）标签，它定义了一个名为 “Mark” 的位置。在HTML中，这通常用于标记一个特定的位置，使得可以链接到这个位置。在较新的HTML标准中，name 属性已经被 id 属性所取代，所以更现代的写法是 &lt;a id=&quot;Mark&quot;&gt;&lt;/a&gt;。
+[Your text](#Mark): 这是一个Markdown格式的链接，它创建了一个可点击的文本链接，当用户点击这个链接时，浏览器会跳转到文档中 id 或 name 为 “Mark” 的位置。#Mark 是一个锚点（fragment）URL，它指向当前页面的特定部分。
+使用方法：
+首先，在您想要链接到的位置插入锚点标签 &lt;a id=&quot;Mark&quot;&gt;&lt;/a&gt;。这通常放在您想要跳转到的段落、标题或元素的旁边。
+然后，在文档中的其他位置（可以是同一个页面，也可以是其他页面）创建一个指向该锚点的链接。在Markdown中，您可以使用 [Your text](#Mark) 的格式来创建链接。这里的 “Your text” 是用户可见的链接文本，而 #Mark 是链接的目标，指向之前定义的锚点。
+示例：
+假设您有一个很长的页面，您想要在页面的顶部创建一个链接，允许用户快速跳转到页面底部的某个部分。
+</code></pre>
+<p><a href="#bottom">Jump to the bottom</a></p>
+<!-- Your page content here -->
+<p><a id="bottom"></a></p>
+<h2 id="bottom-section"><strong>Bottom Section</strong></h2>
+<p>This is the content you want to jump to.</p>
+<hr>
+<pre><code class="language-markdown">[点击查看示例图](#特定位置的id)
+&lt;!-- Your page content here --&gt;
+&lt;h2 id=&quot;特定位置的id&quot;&gt;这里是您想要跳转到的标题&lt;/h2&gt;
+&lt;p&gt;这是您想要跳转到的内容描述。&lt;/p&gt;
+&lt;img src=&quot;https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/markdown&amp;gridea.png&quot; alt=&quot;示例图片&quot; /&gt;
+这个代码片段展示了在Markdown或HTML文档中使用锚点（anchor）来实现页内跳转的方法。这里的 &lt;span id=&quot;示例图&quot;&gt;&lt;/span&gt; 创建了一个锚点，而 [页内自由跳转](#示例图) 创建了一个链接，允许用户点击后跳转到锚点所在的位置。
+这里是它们各自的作用：
+&lt;span id=&quot;示例图&quot;&gt;&lt;/span&gt;: 这是一个HTML标签，span 是一个通用行内元素，通常用于对一段文本进行样式化。在这里，它通过 id 属性定义了一个锚点，名为 “示例图”。这个 id 属性值是唯一的，用于标识文档中的特定位置。
+[页内自由跳转](#示例图): 这是一个Markdown格式的链接，它创建了一个可点击的文本链接。当用户点击这个链接时，浏览器会跳转到文档中 id 为 “示例图” 的位置。#示例图 是一个锚点（fragment）URL，它指向当前页面的特定部分。
+使用方法：
+首先，在您想要链接到的位置插入锚点标签 &lt;span id=&quot;示例图&quot;&gt;&lt;/span&gt;。这通常放在您想要跳转到的内容旁边。
+然后，在文档中的其他位置创建一个指向该锚点的链接。在Markdown中，您可以使用 [页内自由跳转](#示例图) 的格式来创建链接。这里的 “页内自由跳转” 是用户可见的链接文本，而 #示例图 是链接的目标，指向之前定义的锚点。
+示例：
+假设您有一个很长的页面，您想要在页面的顶部创建一个链接，允许用户快速跳转到页面中的一个图片示例。
+</code></pre>
+<p><a href="#%E7%89%B9%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84id">点击查看示例图</a></p>
+<!-- Your page content here -->
+<h2 id="特定位置的id">这里是您想要跳转到的标题</h2>
+<p>这是您想要跳转到的内容描述。</p>
+<img src="https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/markdown&gridea.png" alt="示例图片" />
+<hr>
+<pre><code class="language-markdown">[名称](#id)
+# id
+代码片段展示了在Markdown中创建一个锚点链接的基本结构。这个链接允许用户点击一个文本（在本例中为“名称”）跳转到文档中具有特定 id 的位置。
+这里是它们各自的作用：
+[名称](#id): 这是一个Markdown格式的链接，它创建了一个可点击的文本链接，当用户点击这个链接时，浏览器会跳转到文档中 id 为 “id” 的位置。#id 是一个锚点（fragment）URL，它指向当前页面的特定部分。
+&lt;a id=&quot;id&quot;&gt;&lt;/a&gt;: 这是一个HTML标签，它通过 id 属性定义了一个锚点，名为 “id”。这个 id 属性值是唯一的，用于标识文档中的特定位置。
+使用方法：
+首先，在您想要链接到的位置插入锚点标签 &lt;a id=&quot;id&quot;&gt;&lt;/a&gt;。这通常放在您想要跳转到的内容旁边。
+然后，在文档中的其他位置创建一个指向该锚点的链接。在Markdown中，您可以使用 [名称](#id) 的格式来创建链接。这里的 “名称” 是用户可见的链接文本，而 #id 是链接的目标，指向之前定义的锚点。
+示例：
+假设您有一个很长的页面，您想要在页面的顶部创建一个链接，允许用户快速跳转到页面中的一个特定部分。
+</code></pre>
+<p><a href="#target">点击这里跳转到目标</a></p>
+<!-- Your page content here -->
+<p><a id="target"></a></p>
+<h2 id="目标部分">目标部分</h2>
+<p>这是您想要跳转到的内容。</p>
+<hr>
+<p>目录</p>
+<ul>
+<li><a href="#1-%E8%BF%99%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98">跳到1. 这是一级标题</a>
+<ul>
+<li><a href="#11-%E8%BF%99%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98-1-1">跳到1.1. 这是二级标题 1-1</a></li>
+<li><a href="#12-%E8%BF%99%E6%98%AF%E5%A4%A7%E5%86%99%E5%AD%97%E6%AF%8D%E6%A0%87%E9%A2%98-qwer">跳到1.2. 这是大写字母标题 QWER</a>
+<ul>
+<li><a href="#121-%E8%BF%99%E6%98%AF-%E7%A9%BA%E6%A0%BC%E6%B5%8B%E8%AF%95%E6%A0%87%E9%A2%98">跳到1.2.1. 这是 空格测试标题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="标题">标题</h1>
+<p><a id="1-这是一级标题"></a></p>
+<h1 id="1-这是一级标题">1. 这是一级标题</h1>
+<p>1.标题链接格式为：一个#+被链接标题<br>
+2.标题链接中不能出现大写字母，大写字母用小写字母代替<br>
+3.标题链接中不能出现空格，空格用－代替。<br>
+4.目录排布由有序列表或无序列表控制<br>
+5.跳转与目录名无关，标题和标题链接符合规则即可<br>
+<a id="11-这是二级标题-1-1"></a></p>
+<h2 id="11-这是二级标题-1-1">1.1. 这是二级标题 1-1</h2>
+<p>1.标题链接格式为：一个#+被链接标题<br>
+2.标题链接中不能出现大写字母，大写字母用小写字母代替<br>
+3.标题链接中不能出现空格，空格用－代替。<br>
+4.目录排布由有序列表或无序列表控制<br>
+5.跳转与目录名无关，标题和标题链接符合规则即可<br>
+<a id="12-这是大写字母标题-qwer"></a></p>
+<h2 id="12-这是大写字母标题-qwer">1.2. 这是大写字母标题 QWER</h2>
+<p>1.标题链接格式为：一个#+被链接标题<br>
+2.标题链接中不能出现大写字母，大写字母用小写字母代替<br>
+3.标题链接中不能出现空格，空格用－代替。<br>
+4.目录排布由有序列表或无序列表控制<br>
+5.跳转与目录名无关，标题和标题链接符合规则即可<br>
+<a id="121-这是-空格测试标题"></a></p>
+<h3 id="121-这是-空格测试标题">1.2.1. 这是 空格测试标题</h3>
+<p>1.标题链接格式为：一个#+被链接标题<br>
+2.标题链接中不能出现大写字母，大写字母用小写字母代替<br>
+3.标题链接中不能出现空格，空格用－代替。<br>
+4.目录排布由有序列表或无序列表控制<br>
+5.跳转与目录名无关，标题和标题链接符合规则即可</p>
+<h3 id="脚注引用">脚注/引用</h3>
+<p>这是一个脚注的例子。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 这里还有一个脚注。<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>这是第一个脚注的内容。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>这是第二个脚注的内容。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[删除github中的提交历史记录的操作步骤]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/GdWuWmKBY/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/GdWuWmKBY/">
+        </link>
+        <updated>2024-04-19T13:33:10.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="安装git">安装Git</h1>
+<p>在Windows上使用Git，可以从Git官网直接<a href="https://git-scm.com/downloads">下载安装程序</a>，然后按默认选项安装即可。</p>
+<h1 id="配置git">配置Git</h1>
+<h2 id="1查看当前user和email配置">1.查看当前User和Email配置</h2>
+<pre><code class="language-bash">git config --local --list 
+git config --list 
+</code></pre>
+<h2 id="2设置用户名和邮箱">2.设置用户名和邮箱</h2>
+<pre><code class="language-bash">git config --global user.name &quot;username&quot;
+git config --global user.email  useremail@qq.com
+</code></pre>
+<h2 id="3检查是否配置成功">3.检查是否配置成功</h2>
+<pre><code class="language-bash">完成前两步后，可以用下面的命令检查是否配置成功：
+git config --global  --list 
+</code></pre>
+<h2 id="4生成-ssh-密钥">4.生成 SSH 密钥</h2>
+<p>输入</p>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;邮箱&quot;
+</code></pre>
+<p>显示</p>
+<pre><code>Generating public/private ed25519 key pair.
+Enter file in which to save the key (/c/Users/YOU/.ssh/id_ed25519):
+Created directory '/c/Users/YOU/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+</code></pre>
+<p><strong>输入生成密钥路径，可以接受默认的文件位置，也可以指定一个不同的位置。您在指定路径时提供的应该是一个文件名，而不是一个目录名。例如 “C:\Users\YOU\1234”。这样，ssh-keygen 将会在指定的目录中创建一个名为“1234” 的文件来保存您的私钥，并创建一个名为 “1234.pub” 的文件来保存您的公钥。<br>
+然后输入一个密码（passphrase），这是可选的，但建议为了安全性添加一个密码。</strong></p>
+<h3 id="修改文档后缀为-sh-并保存双击执行脚本自动完成上述操作">修改文档后缀为 .sh 并保存，双击执行脚本自动完成上述操作</h3>
+<pre><code class="language-bash">#!/bin/bash
+userName=&quot;这里改成你的用户名&quot;
+email=&quot;这里改成你的Email&quot;
+# 配置 git 用户名和邮箱
+git config --global  user.name ${userName}
+git config --global user.email ${email}
+git config --global  --list 
+echo &quot;Enter 或者 y 键确认&quot;
+ssh-keygen -t rsa -C &quot;${email}&quot;
+# 打印公钥
+echo &quot;复制保存下面的公钥添加到远程仓库&quot;
+echo ${splitLine}
+cat ~/.ssh/id_rsa.pub
+echo ${splitLine}
+echo &quot;按任意键退出&quot;
+read -n 1
+echo &quot;继续运行&quot;
+</code></pre>
+<h2 id="5将ssh私钥添加到-ssh-agent">5.将SSH私钥添加到 ssh-agent</h2>
+<p>在后台启动 ssh-agent：</p>
+<pre><code class="language-bash">eval $(ssh-agent -s)
+</code></pre>
+<p>将SSH私钥添加到 ssh-agent：</p>
+<pre><code class="language-bash">ssh-add c:/Users/YOU/.ssh/id_ed25519
+</code></pre>
+<h2 id="6上传-ssh-公钥">6.上传 SSH 公钥</h2>
+<p>复制SSH公钥:</p>
+<pre><code class="language-bash">clip &lt; /c/Users/chenjs/.ssh/id_rsa.pub
+</code></pre>
+<p>**Gitee：**点击导航栏右上角头像，选择「设置」，然后在侧边栏菜单选择「SSH 公钥」，填入上一步保存的公钥内容并保存确认。<br>
+**GitHub：**点击导航栏右上角头像，选择「Settings」，然后在侧边栏菜单选择「SSH and GPG keys」，填入上一步保存的公钥内容并保存确认。</p>
+<h2 id="7测试连接">7.测试连接</h2>
+<pre><code class="language-bash">ssh -T git@github.com
+</code></pre>
+<p><strong>输入后显示：</strong></p>
+<pre><code>The authenticity of host 'github.com (ip)' can't be established.
+ED25519 key fingerprint is SHA256:****.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+</code></pre>
+<p><strong>输入yes后显示：</strong></p>
+<pre><code>Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Hi 用户名! You've successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<p>如果提示中的用户名是你的，说明SSH key已经配置成功。</p>
+<h1 id="删除提交历史记录">删除提交历史记录</h1>
+<pre><code class="language-bash">##  `初始化一个新的 Git 仓库`
+git init
+## `添加远程仓库`
+git remote add origin git@github.com:用户/仓库名
+## `切换到您的本地仓库目录`
+cd 仓库名
+## `切换到一个脱离主分支的另外一条全新主分支
+git checkout --orphan latest_branch
+## `暂存所有改动过的文件，内容为当前旧分支的最新版本所有文件`
+git add -A
+## `提交更改`
+git commit -am &quot;commit message&quot;
+## `删除原始主分支`
+git branch -D main
+## `将当前分支重命名为 main`
+git branch -m main
+## `最后，强制更新您的存储库`
+git push -f origin main
+</code></pre>
+<p><code>处理一次后下回直接执行</code></p>
+<pre><code class="language-bash">git remote add origin git@github.com:用户/仓库名 &amp;&amp;
+cd 仓库名 &amp;&amp;
+git checkout --orphan latest_branch &amp;&amp;
+git add -A &amp;&amp;
+git commit -am &quot;commit message&quot; &amp;&amp;
+git branch -D main &amp;&amp;
+git branch -m main &amp;&amp;
+git push -f origin main
+</code></pre>
+<hr>
+<h1 id="其它">其它</h1>
+<p>检查本地主机是否已经存在ssh key：</p>
+<pre><code>ls -al ~/.ssh
+</code></pre>
+<hr>
+<p><strong>问题解决方案</strong><br>
+在配置完成后，通过ssh连接github时，报错：Permission denied (publickey).<br>
+大概率是因为：自定义了密钥名字/路径，但没有执行第二个步骤将密钥添加到SSH认证代理中。<br>
+可以输入以下命令验证是否生成了密钥以及是否有添加到SSH认证代理中，如果没有就按第二步骤操作一遍。</p>
+<pre><code>ssh-add -l -E sha256
+</code></pre>
+<p>如果配置失败，则没有任何输出；如果配置成功，则会输出类似以下内容：2048 SHA256:274ffWxgaxq/tSINAykStUL7XWyRNcRTlcST1Ei7gBQ /Users/USERNAME/.ssh/id_rsa (RSA)<br>
+除了通过ssh-add的方式外，也可以通过设置config文件让SSH认证代理能找到这个密钥文件，从而解决这个问题：</p>
+<pre><code># 打开（如果没有就创建一个）config文件，并输入以下内容。
+# 此外，需要注意，config文件的权限需是600。
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/github_auth # 这里输入你的密钥路径
+</code></pre>
+<p>在配置好SSH后，进行git操作时，仍要求输密码，即使输入了正确的账户和密码，还是报错：</p>
+<pre><code>remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: Authentication failed for 'https://github.com/xxx/xxx.git/'
+</code></pre>
+<p>出错的原因在于：本地仓库在clone时使用的是HTTPS URL，故该仓库此时的remote协议会是HTTPS协议，然而SSH密钥连接只支持SSH URL，不支持HTTPS URL，故会要求输账户密码。<br>
+此时，通过以下命令可以查看到仓库的remote协议是HTTPS协议：</p>
+<pre><code>git config --get remote.origin.url
+</code></pre>
+<p>如果输出类似以下内容，则说明remote协议是HTTPS协议</p>
+<pre><code>https://github.com/xxx/xxx.git
+</code></pre>
+<p>也可以查看仓库内的.git/config文件，查看url是git协议还是https协议。</p>
+<pre><code> [remote &quot;origin&quot;]
+   url = https://github.com:YOUR_ACCOUNT/YOUR_PROJECT.git
+   fetch = +refs/heads/*:refs/remotes/origin/*
+</code></pre>
+<p>因此，需要将remote协议从HTTPS协议修改为GIT协议。在本地仓库路径下输入以下命令：</p>
+<pre><code>git remote set-url origin git@github.com:xxx/xxx.git
+</code></pre>
+<p>此时，再进行git的pull/push操作就不再需要输密码了，直接可以通过SSH密钥认证。</p>
+<hr>
+<p><strong>添加或更改密码</strong></p>
+<pre><code>$ ssh-keygen -p
+Enter file in which the key is (/c/Users/asua/.ssh/id_rsa): # 如果你的密钥就在默认位置，直接回车就行，如果不是，就手动输入
+Key has comment 'hahaha@gmail.com' # 之前生成密钥时，我输入的内容
+Enter new passphrase (empty for no passphrase): # 输入新密码
+Enter same passphrase again: # 再次输入密码
+Your identification has been saved with the new passphrase. # 身份信息和密码一起保存
+</code></pre>
+<p><strong>ssh-agent在Git for Windows上自启动</strong><br>
+你可以在打开 bash 或 Git shell 时自动运行 ssh-agent。 复制以下行并将其粘贴到 Git shell 中的 ~/.profile 或 ~/.bashrc 文件中：</p>
+<pre><code>env=~/.ssh/agent.env
+
+agent_load_env () { test -f &quot;$env&quot; &amp;&amp; . &quot;$env&quot; &gt;| /dev/null ; }
+
+agent_start () {
+    (umask 077; ssh-agent &gt;| &quot;$env&quot;)
+    . &quot;$env&quot; &gt;| /dev/null ; }
+
+agent_load_env
+
+# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2= agent not running
+agent_run_state=$(ssh-add -l &gt;| /dev/null 2&gt;&amp;1; echo $?)
+
+if [ ! &quot;$SSH_AUTH_SOCK&quot; ] || [ $agent_run_state = 2 ]; then
+    agent_start
+    ssh-add
+elif [ &quot;$SSH_AUTH_SOCK&quot; ] &amp;&amp; [ $agent_run_state = 1 ]; then
+    ssh-add
+fi
+
+unset env
+</code></pre>
+<p>如果你的私钥没有存储在默认位置之一（如 <code>~/.ssh/id_rsa</code>），你需要告知 SSH 身份验证代理其所在位置。 要将密钥添加到 <code>ssh-agent</code>，请输入 <code>ssh-add ~/path/to/my_key</code>。<br>
+如果想要<code> ssh-agent</code> 在一段时间后忘记您的密钥，可通过运行<code>ssh-add -t &lt;seconds&gt;</code>进行配置。<br>
+现在，当您初次运行 Git Bash 时，系统将提示您输入密码：</p>
+<pre><code>&gt; Initializing new SSH agent...
+&gt; succeeded
+&gt; Enter passphrase for /c/Users/you/.ssh/id_rsa:
+&gt; Identity added: /c/Users/you/.ssh/id_rsa (/c/Users/you/.ssh/id_rsa)
+&gt; Welcome to Git (version 1.6.0.2-preview20080923)
+&gt;
+&gt; Run 'git help git' to display the help index.
+&gt; Run 'git help ' to display help for specific commands.
+</code></pre>
+<p>ssh-agent 进程将继续运行，直到您注销、关闭计算机或终止该进程。<br>
+如果没有 ~/.profile 或 ~/.bashrc 文件，则自己创建一个：</p>
+<pre><code>$ touch ~/.profile # 在/c/Users/username路径下新建.profile文件，就是和.ssh文件在同一个目录下
+</code></pre>
+<p>用文本编辑器（Notepad++或者vim）打开.profile文件，将上面的脚本代码复制到.profile文件中保存后退出，重新打开Git Bash后，输入SSH的密码即可。</p>
+<hr>
+<p><strong>一台机器上管理多个GitHub账号的SSH密钥</strong><br>
+如果你在一台机器使用两个github账号（比如私人账号abc和工作账号xyz），两个帐号用不同的SSH KEY，还需要编辑一下配置文件~/.ssh/config：</p>
+<pre><code>Host personal.github.com  
+    HostName github.com  
+    User git  
+    IdentityFile ~/.ssh/personal_rsa  
+    
+Host work.github.com  
+    HostName github.com  
+    User git  
+    IdentityFile ~/.ssh/work_rsa
+</code></pre>
+<ul>
+<li>Host： &quot;personal.github.com&quot;是一个&quot;别名&quot;，可以随意命名。</li>
+<li>HostName：比如我工作的git仓储地址是git@code.sleep.com:username/repo_name.git, 那么我的HostName就要填&quot;sleep.com&quot;；</li>
+<li>IdentityFile： 所使用的公钥文件;<br>
+配置完毕，用下面的命令测试一下：</li>
+</ul>
+<pre><code>ssh -T git@personal.github.com
+ssh -T git@work.github.com
+# 注： @符号后面的&quot;personal.github.com&quot;就是在~/.ssh/config文件中指定的&quot;Host&quot;项
+</code></pre>
+<p>1.为已经检出的repository指定github账号：<br>
+在已经检出的repos目录下执行:</p>
+<pre><code>git config  user.name &quot;your-id&quot;
+git config  user.email &quot;your-id@gmail.com&quot;
+</code></pre>
+<p>修改.git/config并找到[remote &quot;origin&quot;],修改url的值为：</p>
+<pre><code>[remote &quot;origin&quot;]   
+    url = git@personal.github.com:user_name/repos_name.git
+</code></pre>
+<p>其中, personal.github.com就是在配置文件~/.ssh/config中的Host项, 设置完成后, 在这个工程目录git push会自动以此git帐号提交代码。<br>
+2.使用指定账号clone已存在的repository：</p>
+<ul>
+<li>使用指定账号clone一个已经存在的repos:<br>
+git clone git@personal.github.com:user_name/repos_name.git, 上面命令中的&quot;personal.github.com&quot;就是在～/.ssh/config文件中指定的&quot;Host&quot;项, &quot;user_name&quot;是指定提交代码的账户名。</li>
+<li>然后还需要git config一下user.name和user.email, 进入repository目录执行:</li>
+</ul>
+<pre><code>git config user.name your_name
+git config user.email your_email
+</code></pre>
+<p>以后在此repos下git push origin master就是使用指定的用户push.<br>
+3.使用指定账号git init新的repository：</p>
+<pre><code>$ git init
+$ git add .
+$ git commit -m &quot;first commit&quot;
+$ git remote add origin git@personal.github.com:user_name/testing.git
+$ git push -u origin master
+</code></pre>
+<hr>
+<h3 id="参考转存">参考转存：</h3>
+<h4 id="github官方教程通过-ssh-连接到-github">GitHub官方教程：<a href="https://docs.github.com/zh/authentication/connecting-to-github-with-ssh">通过 SSH 连接到 GitHub</a></h4>
+<h4 id="github配置ssh密钥连接附相关问题解决"><a href="https://zhuanlan.zhihu.com/p/628727065">Github配置SSH密钥连接（附相关问题解决）</a></h4>
+<h4 id="使用ssh连接到github-简书"><a href="https://www.jianshu.com/p/9a36ba848d4d">使用SSH连接到GitHub - 简书</a></h4>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[文本转JSON]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/0J2D9c5w1/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/0J2D9c5w1/">
+        </link>
+        <updated>2024-04-17T11:05:52.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-python">import json
+# 定义文本文件（UTF-8）内容到JSON格式的转换函数
+def convert_line_to_json(line):
+    parts = line.strip().split('￥')
+    if len(parts) == 2:
+        taskname, shareurl = parts
+        # 根据给定的示例JSON结构填充字段
+        task = {
+            &quot;savepath&quot;: &quot;/资源分享/3月更新&quot;,
+            &quot;pattern&quot;: &quot;$TV&quot;,
+            &quot;replace&quot;: &quot;&quot;,
+            &quot;taskname&quot;: taskname,
+            &quot;shareurl&quot;: shareurl
+        }
+        return json.dumps(task, ensure_ascii=False)
+    else:
+        # 如果行不符合预期格式，则不进行转换
+        return None
+
+# 读取文本文件并转换为JSON格式
+def text_to_json(text_filename, json_filename):
+    try:
+        with open(text_filename, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+
+        # 转换每一行并保存到JSON文件
+        json_data = [convert_line_to_json(line) for line in lines if line.strip() and '￥' in line]
+
+        with open(json_filename, 'w', encoding='utf-8') as json_file:
+            for data in json_data:
+                if data:  # 确保数据不为None
+                    json_file.write(data + '\n')
+    except FileNotFoundError as e:
+        print(f&quot;Error: {e}&quot;)
+
+# 使用示例
+text_filename = r'D:\15268\Desktop\your_text_file.txt'  # 使用原始字符串
+json_filename = r'D:\15268\Desktop\output.json'         # 使用原始字符串
+text_to_json(text_filename, json_filename)
+</code></pre>
+<p><strong>文本格式</strong><br>
+金山文档￥https://kdocs.cn/l/crzS58nUMuN2</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网页搜索源码]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/SBrQDAxBh/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/SBrQDAxBh/">
+        </link>
+        <updated>2024-04-16T14:49:52.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="文本搜索">文本搜索</h3>
+<p>文本格式：资源\nhttps://kdocs.cn/l/crzS58nUMuN2</p>
+<pre><code class="language-html">&lt;!DOCTYPE &gt;
+&lt;html lang=&quot;zh&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;短剧搜索&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .search-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 60%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        #resultTable {
+            display: none;
+        }
+        #extraContent {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        #disclaimer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+        #disclaimer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #disclaimer ul li::before {
+            content: '• ';
+            color: #999;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;search-box&quot; id=&quot;searchBox&quot;&gt;
+            &lt;input type=&quot;text&quot; id=&quot;searchInput&quot; placeholder=&quot;请输入搜索内容&quot; onkeydown=&quot;if(event.keyCode==13){search()}&quot;&gt;
+            &lt;button onclick=&quot;search()&quot;&gt;搜索&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;extraContent&quot;&gt;
+            &lt;center&gt;资源 &lt;a href=&quot;https://kdocs.cn/l/crzS58nUMuN2&quot;&gt;金山文档 &lt;/a&gt;&lt;/center&gt;
+             
+        &lt;/div&gt;
+        &lt;table id=&quot;resultTable&quot;&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;搜索结果&lt;/th&gt;
+                    &lt;th&gt;链接&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody id=&quot;resultBody&quot;&gt;&lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;div id=&quot;disclaimer&quot;&gt;
+            &lt;h3&gt;免责声明&lt;/h3&gt;
+            &lt;ul&gt;
+                &lt;li&gt;本站分享的所有资源均采集于网络，仅用于学习交流，测试网速。&lt;/li&gt;
+                &lt;li&gt;不得将本站所分享的资源用于商业经营或者非法用途！如果执意不听，一切后果请自负，与本人无关。&lt;/li&gt;
+                &lt;li&gt;您必须在转存或下载后的 24 个小时之内，从您的储存中彻底删除这些资源。如有侵权，请联系删除。&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        let cachedData = null; // Cache to store fetched data
+
+        async function fetchTxt() {
+            if (cachedData) {
+                return cachedData; // If data is cached, return cached data
+            }
+            
+            const response = await fetch('https://raw.githubusercontent.com/xiaobaiweinuli/duanju/main/%E5%90%88%E9%9B%86.txt');
+            const content = await response.text();
+            const data = content.split('\n').map(line =&gt; {
+                const [text, link] = line.split('\\n');
+                return [text ? text.trim() : '', link ? link.trim() : ''];
+            });
+            cachedData = data; // Cache the fetched data
+            return data;
+        }
+
+        async function search() {
+            const input = document.getElementById('searchInput').value;
+            const data = await fetchTxt();
+            const resultBody = document.getElementById('resultBody');
+            resultBody.innerHTML = '';
+            const resultTable = document.getElementById('resultTable');
+
+            if (input) {
+                const filteredData = data.filter(item =&gt; item[0].includes(input));
+                if (filteredData.length &gt; 0) {
+                    resultTable.style.display = 'table';
+                    document.getElementById('extraContent').style.display = 'none'; // Hide extra content
+                    filteredData.forEach(item =&gt; {
+                        const row = document.createElement('tr');
+                        const textCell = document.createElement('td');
+                        textCell.textContent = item[0];
+                        const linkCell = document.createElement('td');
+                        const link = document.createElement('a');
+                        link.href = item[1];
+                        link.textContent = '前往';
+                        link.target = '_blank';
+                        linkCell.appendChild(link);
+                        row.appendChild(textCell);
+                        row.appendChild(linkCell);
+                        resultBody.appendChild(row);
+                    });
+                } else {
+                    resultTable.style.display = 'none';
+                }
+            } else {
+                resultTable.style.display = 'none';
+                document.getElementById('extraContent').style.display = 'block'; // Show extra content
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```html</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[论文查重降重工具汇总]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/c8hFzqiFi/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/c8hFzqiFi/">
+        </link>
+        <updated>2024-01-14T07:52:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="微信小程序永久论文降重">微信小程序(永久论文降重)</h3>
+<p><a href="https://imgse.com/i/pSVv89e"><img src="https://s1.ax1x.com/2023/01/08/pSVv89e.jpg" style="width:600px" alt="pSVv89e.jpg" border="0" /></a></p>
+<h3 id="pc端程序">PC端程序</h3>
+<p>使用说明书：https://github.com/imoki/Reduce</p>
+<ul>
+<li>版本2.0.0<br>
+https://everygg.lanzouf.com/iciIC0q750nc<br>
+密码:默库</li>
+</ul>
+<h2 id="仓库安全性">仓库安全性</h2>
+<p>“安全性未知”文件夹内的工具为网络收集，安全性未知，为安全起见请在<strong>沙盒</strong>或<strong>虚拟机</strong>中运行。<br>
+网址、资料及工具的安全性请自行判断，概不负责。<br>
+部分软件及资料的来源未知，因此未进行标注，若介意将进行删除。<br>
+由于信息具有时效性，下列的信息仅供参考，排名不分先后。</p>
+<h2 id="目前免费">目前免费：</h2>
+<ul>
+<li>
+<h4 id="paperyy每天免费一次">PaperYY（每天免费一次）</h4>
+<ul>
+<li>https://www.paperyy.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="超星大雅">超星大雅</h4>
+<ul>
+<li>https://dsa.dayainfo.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="freecheck每天免费一次">FreeCheck（每天免费一次）</h4>
+<ul>
+<li>https://www.freecheck.cn/</li>
+</ul>
+</li>
+<li>
+<h4 id="paperday标准版不限次数旗舰版每天1000-1010免费一次">PaperDay（标准版：不限次数，旗舰版：每天10：00-10：10免费一次）</h4>
+<ul>
+<li>https://www.paperday.cn/</li>
+</ul>
+</li>
+<li>
+<h4 id="写个论文">写个论文</h4>
+<ul>
+<li>https://www.xiegelunwen.com</li>
+</ul>
+</li>
+<li>
+<h4 id="贝影论文修改助手">贝影论文修改助手</h4>
+<ul>
+<li>https://www.beiying.net</li>
+</ul>
+</li>
+<li>
+<h4 id="大学生论文写作助手">大学生论文写作助手</h4>
+<ul>
+<li>http://xiezuo.iptcheck.com.cn</li>
+</ul>
+</li>
+<li>
+<h4 id="百度学术">百度学术</h4>
+<ul>
+<li>https://xueshu.baidu.com/usercenter/papercheck/index?site=index_links</li>
+</ul>
+</li>
+<li>
+<h4 id="论文狗每天一次">论文狗（每天一次）</h4>
+<ul>
+<li>https://check.lunwengo.net/</li>
+</ul>
+</li>
+<li>
+<h4 id="pp论文检测每天一次">PP论文检测（每天一次）</h4>
+<ul>
+<li>http://www.papersee.com.cn/</li>
+</ul>
+</li>
+<li>
+<h4 id="万方查重学信网认证的应届生免费一次">万方查重(学信网认证的应届生免费一次)</h4>
+<ul>
+<li>https://chsi.wanfangtech.net/check/order</li>
+</ul>
+</li>
+</ul>
+<h2 id="收费">收费</h2>
+<ul>
+<li>
+<h4 id="维普">维普</h4>
+<ul>
+<li>https://vpcs.fanyu.com/</li>
+<li>3元/千字</li>
+</ul>
+</li>
+<li>
+<h4 id="万方">万方</h4>
+<ul>
+<li>3元/千字</li>
+</ul>
+</li>
+<li>
+<h4 id="知网">知网</h4>
+<ul>
+<li>100元+/篇</li>
+</ul>
+</li>
+<li>
+<h4 id="paperfree首次免费3000字">PaperFree（首次免费3000字）</h4>
+<ul>
+<li>查重：1.5元/千字</li>
+</ul>
+</li>
+<li>
+<h4 id="papertime">PaperTime</h4>
+<ul>
+<li>查重：1.5元/千字</li>
+</ul>
+</li>
+<li>
+<h4 id="格子达">格子达</h4>
+<ul>
+<li>https://www.gocheck.cn/</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他">其他</h2>
+<ul>
+<li>
+<h4 id="早降重">早降重</h4>
+<ul>
+<li>https://scdx.jc.paper880.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="读秀">读秀</h4>
+<ul>
+<li>https://www.duxiu.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="checkpass来源校园令-在页面内选择checkpass">checkpass（来源：校园令。在页面内选择checkpass）</h4>
+<ul>
+<li>http://chachong.xiaoyuanling.com/</li>
+<li>卡密：（共享的卡密查过后记得删除自己的报告）</li>
+<li>Y2312664704268277</li>
+<li>Y2360483410627790</li>
+<li>Y2302271840761252</li>
+</ul>
+</li>
+<li>
+<h4 id="必过论文">必过论文</h4>
+<ul>
+<li>https://www.biguolunwen.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="笔杆查重">笔杆查重</h4>
+</li>
+<li>
+<h4 id="360">360</h4>
+</li>
+<li>
+<h4 id="paperred">PaperRed</h4>
+</li>
+<li>
+<h4 id="paperask">PaperAsk</h4>
+</li>
+<li>
+<h4 id="password">PassWord</h4>
+</li>
+<li>
+<h4 id="paperray">Paperray</h4>
+</li>
+<li>
+<h4 id="paperge">PaperGe</h4>
+</li>
+<li>
+<h4 id="passmore">PassMore</h4>
+</li>
+<li>
+<h4 id="paperlike">Paperlike</h4>
+</li>
+<li>
+<h4 id="秘塔写作猫">秘塔写作猫</h4>
+<ul>
+<li>https://xiezuocat.com/</li>
+</ul>
+</li>
+<li>
+<h4 id="pp论文修改助手">PP论文修改助手</h4>
+<ul>
+<li>http://zx.paperip.com/</li>
+</ul>
+</li>
+</ul>
+<h2 id="文献查询">文献查询</h2>
+<h3 id="中文数据库">中文数据库</h3>
+<ul>
+<li>
+<p>中国知网<br>
+http://www.cnki.net/</p>
+</li>
+<li>
+<p>万方数据库<br>
+http://librarian.wanfangdata.com.cn/</p>
+</li>
+<li>
+<p>中华人民共和国国家知识产权局<br>
+http://www.sipo.gov.cn/</p>
+</li>
+<li>
+<p>国家哲学社会科学文献中心<br>
+http://www.ncpssd.org/</p>
+</li>
+<li>
+<p>中国科技论文在线精品论文<br>
+http://highlights.paper.edu.cn/</p>
+</li>
+<li>
+<p>国家图书馆馆藏中文图书数字化资源库<br>
+http://mylib.nlc.cn/web/guest/zhongwentushu</p>
+</li>
+<li>
+<p>国家科技图书文献中心<br>
+http://www.nstl.gov.cn/</p>
+</li>
+<li>
+<p>国家哲学社会科学学术期刊数据库<br>
+http://www.nssd.org/articles/articlesearch.aspx</p>
+</li>
+<li>
+<p>中国国家统计局-国家数据<br>
+http:/data.stats.gov.cn/index.htm</p>
+</li>
+<li>
+<p>维普中文期刊服务平台<br>
+http://data.whlib.ac.cn/</p>
+</li>
+</ul>
+<h3 id="外文数据库">外文数据库</h3>
+<ul>
+<li>
+<p>ERIC教育资源信息中心<br>
+http://www.eric.ed.gov/</p>
+</li>
+<li>
+<p>Socolar<br>
+http://www.socolar.com/</p>
+</li>
+<li>
+<p>欧洲学位论文库<br>
+http://www.dart-europe.eu/basic-search.php</p>
+</li>
+<li>
+<p>Blackwell电子期刊<br>
+http://www.blackwell-synergy.com/</p>
+</li>
+<li>
+<p>开放存取资源图书馆<br>
+http://www.oalib.com</p>
+</li>
+<li>
+<p>HighWire出版社电子期刊<br>
+http://highwire.stanford.edu/lists/freeart.dtl</p>
+</li>
+<li>
+<p>剑桥大学机构知识库<br>
+http://www.dspace.cam.ac.uk/</p>
+</li>
+<li>
+<p>Aminer<br>
+http://www.aminer.cn/</p>
+</li>
+<li>
+<p>科研出版社OA资源<br>
+http://www.scirp.org/journal/</p>
+</li>
+<li>
+<p>世界数字图书馆<br>
+http://www.wdl.org/zh/</p>
+</li>
+<li>
+<p>Turnitin</p>
+</li>
+</ul>
+<h3 id="免费收费论文查询">免费/收费论文查询</h3>
+<ul>
+<li>
+<p>scihub<br>
+https://sci-hub.se/<br>
+https://sci-hub.ru/</p>
+</li>
+<li>
+<p>Crossref<br>
+该数据库包含超过 1.2 亿条记录及 API，可以通过 torrents 下载<br>
+https://www.crossref.org/</p>
+</li>
+<li>
+<p>General Index<br>
+该数据库可以索引到1.07亿篇学术论文<br>
+https://archive.org/details/GeneralIndex</p>
+</li>
+<li>
+<p>OpenCitations Corpus<br>
+https://opencitations.net/corpus</p>
+</li>
+<li>
+<p>Scopus<br>
+不是免费的</p>
+</li>
+</ul>
+<h3 id="其他-2">其他</h3>
+<ul>
+<li>
+<p>iData（免费下知网）<br>
+https://www.cn-ki.net/</p>
+</li>
+<li>
+<p>国家哲学社会科学文献中心<br>
+http://www.ncpssd.org/</p>
+</li>
+<li>
+<p>毕业论文资源导航<br>
+http://by.360xueke.com/</p>
+<p><strong>来自</strong>：https://github.com/imoki</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[电子书导航]]></title>
+        <id>https://xiaobaiweinuli.github.io/post/TgR0f2Lcm/</id>
+        <link href="https://xiaobaiweinuli.github.io/post/TgR0f2Lcm/">
+        </link>
+        <updated>2024-01-03T15:11:21.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://gcore.jsdelivr.net/gh/runningcheese/runningcheese.github.io/images/s22logo.png" alt="https://gcore.jsdelivr.net/gh/runningcheese/runningcheese.github.io/images/s22logo.png" loading="lazy"></figure>
+<h2 id="目录">目录</h2>
+<p>| S16-BT 导航 | <a href="https://www.runningcheese.cn/s17">S17-音乐导航</a> | <a href="https://www.runningcheese.cn/s18">S18-影视导航</a> | <a href="https://www.runningcheese.cn/s19">S19-网盘导航</a> | <a href="https://www.runningcheese.cn/s20">S20-软件导航</a> | | --- | --- | --- | --- | --- | | <a href="https://www.runningcheese.cn/s21">S21-Zlibrary</a> | <a href="https://www.runningcheese.cn/s22">S22-电子书导航</a> | S23-学术导航 | S24-考研导航 | S25-学习导航 | | S26-生活导航 | S27-游戏导航 | S28-工具导航 | S29-网站导航 | S30-资源导航 |</p>
+<h2 id="1-z-library">1、Z-library</h2>
+<p>| ▼ <strong>官方网站</strong> | <strong>简介</strong> | | --- | --- | | 🌐 Z-lib 登陆页 | 地址 1：<a href="https://singlelogin.xn--re%2C-ut4gj73jj6qw3g./">https://singlelogin.re，需要魔法。</a> | | 🌐 Z-lib 登陆页 | 地址 2：<a href="https://singlelogin.site/">https://singlelogin.site</a>，需要魔法。 | | 🔷 Z-lib 扩展 | 地址：<a href="https://zh.go-to-zlibrary.se/soft/mozilla-addon-latest.xpi">Firefox</a>、<a href="https://t.cn/A60EmvZL">Chrome</a>。 | | 📥 Z-lib 桌面端 | <a href="https://zh.go-to-zlibrary.se/">官方客户端</a>，支持 Windows、Mac、Linux，不需要魔法就能使用。 | | 📱 Z-lib 手机端 | 仅支持 Android，目前 v1.10.1 版本，需要魔法。 | | 📥 Z-lib TG 机器人 | 一种是 <strong>Premium bot</strong>，一种是 <strong>Basic bot</strong>，需要魔法。 | | 📥 Z-lib Tor 浏览器 | 对普通用户来说，这方法比较难理解，可略过，需要魔法。 |</p>
+<p>| ▼ <strong>民间项目</strong> | <strong>简介</strong> | | 🌐 <a href="https://zh.annas-archive.org/">Anna's Archive</a> | 网友 <strong>Anna</strong> 爬取的 Z-library 资源，并 IPFS 化，数据到 2022 年 12月 。 | | 🌐 <a href="https://github.com/book-searcher-org/book-searcher">Book Searcher</a> | 网友将 <strong>Anna's Archive</strong> 数据库做成的索引项目，通过 <strong>IPFS 网关</strong>下载。 | | ↳ <a href="https://bk.hallowlib.org/">bk.hallowlib.org</a> | 国内效仿 <strong>Anna's Archive</strong> 的网站。 | | ↳ <a href="https://zbook.lol/">zbook.lol</a> | 基于 <strong>Book Searcher</strong> 的搜索网站。 | | ↳ <a href="https://zlib.awesc.com/">zlib.awesc.com</a> | 基于 <strong>Book Searcher</strong> 的搜索网站。 | | ↳ <a href="https://zlibsearch.1kbtool.com/">zlib.1kbtool.com</a> | 基于 <strong>Book Searcher</strong> 的搜索网站。 | | ↳ <a href="https://zlib.knat.network/">zlib.knat.network</a> | 基于 <strong>Book Searcher</strong> 的搜索网站。（无网关） | | 🌐 <a href="https://search.zhelper.net/?%5B%7B%22name%22:%22Ylibrary%22,%22url%22:%22https://api.ylibrary.org%22,%22type%22:%22full%22,%22sensitive%22:false,%22detail%22:true%7D%5D">Ylibrary</a> | Zlibrary 书库 + 超星书库，是目前最好的中文电子书搜索引擎。 |</p>
+<p>| ▼ <strong>下载方式</strong> | <strong>简介</strong> | | 🌐 IPFS 下载 | <strong>去中心化</strong>的网络文件存储系统，常见 IPFS 网关：<a href="https://dweb.link/">链接1</a>、<a href="https://gateway.pinata.cloud/">链接2</a>、<a href="https://ipfs.best-practice.se/">链接3</a> | | 🌐 网关检查 | 网关检查工具：<a href="https://ipfs.github.io/public-gateway-checker">链接1</a>、<a href="https://ipfs-checker.1kbtool.com/">链接2</a>，延迟越低越好。 | | 🌐 秒传链接 | 网盘的自动链接机制， | | ↳ 脚本方式 1 | 地址：<a href="https://greasyfork.org/zh-CN/scripts/427628">https://greasyfork.org/zh-CN/scripts/427628</a> | | ↳ 脚本方式 2 | 地址：<a href="https://greasyfork.org/zh-CN/scripts/468633">https://greasyfork.org/zh-CN/scripts/468633</a> | | ↳ Token方式 1 | 地址：<a href="https://ipfs.github.io/public-gateway-checker">https://ipfs.github.io/public-gateway-checker</a> | | ↳ Token方式 2 | 地址：<a href="https://ipfs-checker.1kbtool.com/">https://ipfs-checker.1kbtool.com</a> |</p>
+<p>| ▼ <strong>下载选择</strong> | <strong>简介</strong> | | 📖 首选 | <strong>Z-library</strong> | | 📖 次选 | <strong>Book Searcher</strong>（Anna's Archive 在内地速度慢，甚至无法下载） | | 📖 冷门 | <strong>Ylibrary</strong> | | 📖 末选 | <strong>Zhelper</strong> |</p>
+<h2 id="2-超星">2、超星</h2>
+<p>| ▼ <strong>搜索网站</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.soushu.vip/">搜书网</a> | 超星图书搜索引擎。 | | 🌐 <a href="https://findbooks.eu.org/">找书网</a> | 超星图书搜索引擎。 | | 🌐 <a href="https://freembook.com/">FreeMbook</a> | 超星图书搜索引擎。<a href="https://t.me/freembook_channel">TG 频道</a>、<a href="https://t.me/freembook">TG群</a> | | 🌐 <a href="https://search.zhelper.net/?%5B%7B%22name%22:%22ylib-slib2%22,%22url%22:%22https://slib2.ylibrary.org/%22,%22sensitive%22:false,%22detail%22:false,%22display%22:%7B%22h%22:%5B%22info%22%5D,%22detail%22:%5B%22code%22%5D%7D%7D%5D">Zhelper Search</a> | 超星图书搜索引擎。 | | 🌐 <a href="https://www.xueshu86.com/">互助联盟</a> | 超星图书搜索引擎。[<a href="https://greasyfork.org/zh-CN/scripts/420751">互助脚本</a>] |</p>
+<p>| ▼ <strong>秒传脚本</strong> | <strong>简介</strong> | | 📜 <a href="https://greasyfork.org/zh-CN/scripts/468633">秒传转存助手</a> | 支持 PC 及移动端，永久无广告绿色版，推荐。 | | 📜 <a href="https://greasyfork.org/zh-CN/scripts/427628">秒传链接提取</a> | 用于提取和生成百度网盘秒传链接。 |</p>
+<h2 id="3-搜索引擎">3、搜索引擎</h2>
+<p>最基础的找书方法，是在百度、必应、谷歌这样的搜索引擎里，用“<strong>书名+关键字</strong>”的方法搜索。</p>
+<p>但是，你还可以用下面这些垂直搜索引擎，搜索更加精准。</p>
+<p>| ▼ <strong>搜索网站</strong> | 简介 | | --- | --- | | 🌐 <a href="https://bookpan.net/">布克盘</a> | 布克盘聚合书籍数据库，用 <strong><a href="https://search.zhelper.net/?%5B%7B%22name%22:%22bookpan%22,%22url%22:%22https://api.bookpan.net%22,%22type%22:%22light%22,%22sensitive%22:false,%22detail%22:true%7D%5D">zhelper search</a></strong> 搜索。 | | 🌐 <a href="https://zhiso.top/">知搜</a> | 收录了多家电子书网站，同时标记了网站的使用说明。 | | 🌐 <a href="https://www.soushu.vip/">搜书网</a> | 会显示搜索结果的类型，比如会显示网站是否能打开，是否需要收费等。 | | 🌐 <a href="https://www.taolinks.cc/s/">淘链客</a> | 搜索内容来自搜索引擎、各大网盘或第三方网站，理工类书籍较多。 | | 🌐 <a href="https://www.jiumodiary.com/">鸠摩搜索</a> | 知名电子书搜索引擎，主要是收录各大网盘网站的内容结果。 | | 🌐 <a href="http://21c58170t7.imdo.co:5001/find">冀缘巧豫</a> | 搜索结果为阿里云网盘，支持上传电子书功能。 | | 🌐 <a href="https://www.upyunso.com/">UP云搜</a> | 搜索结果为阿里云网盘。 | | 🌐 <a href="https://bks.thefuture.top/">TheFuture</a> | 搜索结果为蓝奏云网盘。 | | 🌐 <a href="https://www.shudan.vip/">每日书单</a> | 搜索结果为城通网盘。 | | 🌐 <a href="https://www.mrsd.top/">莫若书单</a> | 搜索结果为城通网盘。 | | 🌐 <a href="https://www.shukui.net/">书葵网</a> | 搜索结果以 BT 磁力。 | | 🌐 <a href="https://www.tacoso.cc/">Taco搜索</a> | 除了支持搜索电子书，还支持“<strong>文档搜索</strong>”。 | | 🌐 <a href="https://filepursuit.com/">FilePursuit</a> | 神级资源搜索站，支持电子书、音乐、视频、软件、压缩包等，支持中文。 |</p>
+<p>这里特别说一下 <a href="https://filepursuit.com/">FilePursuit</a>。</p>
+<p>它不但支持电子书、音频、视频、软件、压缩包等文件，就算被下架的资源也能搜索得到，而且还支持中文。</p>
+<h2 id="4-博客论坛">4、博客论坛</h2>
+<p>| ▼ <strong>博客网站</strong> | 简介 | | --- | --- | | 🌐 <a href="https://www.book123.info/">无名图书</a> | 免注册、自建网盘下载。 | | 🌐 <a href="https://kgbook.com/">苦瓜书盘</a> | 免注册、自建网盘下载。 | | 🌐 <a href="https://www.sanqiu.mobi/">三秋书屋</a> | 免注册、多种网盘下载。 | | 🌐 <a href="https://www.youyidu.xyz/">有益读</a> | 免注册、多种网盘下载。 | | 🌐 <a href="https://ibooks.org.cn/">读书小站</a> | 免注册、多种网盘下载。 | | 🌐 <a href="https://www.zhishikoo.com/">知识库</a> | 免注册、百度网盘下载。 | | 🌐 <a href="http://www.eybook.com/">风陵渡书屋</a> | 免注册、百度网盘下载。 | | 🌐 <a href="https://www.bluestep.cc/books/">蓝文资源库</a> | 免注册、百度网盘下载。 | | 🌐 <a href="https://www.52doc.com/">我爱电子书</a> | 免注册、百度网盘下载。 | | 🌐 <a href="https://huoan.net/">火岸电子书资源</a> | 免注册、百度网盘下载。 | | 🌐 <a href="http://www.rejoiceblog.com/">rejoice</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.sulery.com/">书乐里</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.iyd.wang/">爱悦读</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.epubooks.top/">EpubBook</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://ebooklist.mobi/">书单</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.duodu.cc/">多读</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.happydot.top/">热点图书网</a> | 免注册、城通网盘下载。 |</p>
+<p>| ▼ <strong>合集下载</strong> | <strong>简介</strong> | | 🌐 <a href="https://http561856124.wordpress.com/">多读书，读好书</a> | 免注册、城通网盘下载，合集打包下载。 | | 🌐 <a href="http://mydbfx.com/?page_id=12170">我的打包分享</a> | 免注册、城通网盘下载，合集打包下载。 | | 🌐 <a href="https://atimebook.com/">时光图书馆</a> | 免注册、百度网盘下载，合集打包下载。 | | 🌐 <a href="https://www.yueduxiu.vip/">懿古今</a> | 免注册、多种网盘下载，合集打包下载。 |</p>
+<p>| ▼ <strong>关注公众号</strong> | <strong>简介</strong> | | 🌐 <a href="https://sobooks.net/">SoBooks</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="http://www.4bei.com/">四倍书屋</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://www.shuzhou.cc/">书舟搜索</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://www.nmod.net/">NMOD 电子书</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://www.xiangshibook.com/">相识电子书</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://ebooklist.mobi/">书单</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://ibooks.org.cn/">读书小站</a> | 免注册、但需要关注公众号。 | | 🌐 <a href="https://book.519.best/">519电子书资源网</a> | 免注册、但需要关注公众号。 |</p>
+<p>| ▼ <strong>需要付费</strong> | <strong>简介</strong> | | 🌐 <a href="https://www.soepub.com/">掌上书苑</a> | 付费、但可以做为书目参考。 | | 🌐 <a href="https://www.bluestep.cc/">蓝文资源库</a> | 付费、但可以做为书目参考。 |</p>
+<p>| ▼ <strong>论坛网站</strong> | <strong>简介</strong> | | 🌐 <a href="https://www.obook.cc/">偶书</a> | 要注册、还需要回复，还有类似于豆瓣的小组 | | 🌐 <a href="https://bbs.yibook.org/">易书论坛</a> | 要注册、国内一个专门于找书的论坛。 | | 🌐 <a href="https://forum.mobilism.org/viewforum.php?f=19">Mobilism eBook</a> | 要注册、知名国外资源论坛，英文原版书下载。 |</p>
+<h2 id="5-pdf-书籍">5、PDF 书籍</h2>
+<p>| ▼ <strong>英文 PDF</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.pdfdrive.com/">PDF Drive</a> | 英文 PDF，同时也支持中文搜索。 | | 🌐 <a href="https://epdf.tips/">EPDF.TIPS</a> | 英文 PDF。 | | 🌐 <a href="https://pdfcookie.com/">PDFCookie</a> | 英文 PDF。 | | 🌐 <a href="https://pdfcoffee.com/">PDFCoffee</a> | 英文 PDF。 | | 🌐 <a href="https://oiipdf.com/">OiiPDF</a> | 英文 PDF。 | | 🌐 <a href="https://docero.tips/">Docero.tips</a> | 英文 PDF。 | | 🌐 <a href="https://pdfslide.net/">PDFSlide</a> | 英文 PDF。 | | 🌐 <a href="https://d-pdf.com/">D-PDF</a> | 英文 PDF。 | | 🌐 <a href="https://yes-pdf.com/">Yes PDF</a> | 英文 PDF。 | | 🌐 <a href="https://www.z-epub.com/">Z-ePub</a> | 英文 PDF。 |</p>
+<p>| ▼ <strong>中文 PDF</strong> | <strong>简介</strong> | | 🌐 <a href="https://pdfzj.com/">PDF之家</a> | 免注册、阿里网盘下载。 | | 🌐 <a href="https://yabook.org/">雅书</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.sxpdf.com/">书行天下</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.gpdf.net/">书行万里</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.werebook.com/">书堆阅读</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.nziyuan.com/">N资源书吧</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.ctfile.cn/">全索引</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://www.guligirl.com/">古丽电子书</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.minxue.net/">敏学网</a> | 免注册、城通网盘下载。 | | 🌐 <a href="http://www.pdfbook.cn/">个人学习网</a> | 免注册、城通网盘下载。 | | 🌐 <a href="https://vikingcabin.com/">维京小屋</a> | 免注册、城通网盘下载。 |</p>
+<h2 id="6-英文书籍">6、英文书籍</h2>
+<p>| ▼ <strong>开源项目</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.gutenberg.org/">Project Gutenberg</a> | 最早的数字图书馆，书籍多为公有领域的书籍原本，以英文作品居多。 | | 🌐 <a href="https://openlibrary.org/">Open Library</a> | 由联合国教科文组织与公共团体合作建立，促进国际和文化间的相互理解。 | | 🌐 <a href="https://en.wikibooks.org/wiki/Main_Page">Wiki Books</a> | 由维基百科建立。 | | 🌐 <a href="https://books.google.com/">Google Books</a> | 由谷歌公司建立。 | | 🌐 <a href="https://archive.org/details/books">Internet Archive</a> | 由网页时光机建立。[<a href="https://www.bilibili.com/video/BV1MV4y1471C/">下载方法</a>] |</p>
+<p>| ▼ <strong>免费网站</strong> | <strong>简介</strong> | | 🌐 <a href="https://singlelogin.re/">Zlibrary</a> | 互联网最大免费电子书网站。 | | 🌐 <a href="http://libgen.rs/">Library Genesis</a> | Zlibrary 的平替。 | | 🌐 <a href="https://www.pdfdrive.com/">PDF Drive</a> | 国外知名免费 PDF 电子书网站，提供约 8090万 册英文原版 PDF。 | | 🌐 <a href="https://openstax.org/">OpenStax</a> | Free Textbooks Online with No Catch国外的教材课件，包括多个学科。 | | 🌐 <a href="https://www.planetebook.com/">Planet eBook</a> | 经典文学，主要提供小说类书籍下载； | | 🌐 <a href="https://manybooks.net/">Manybooks</a> | 收集了超过 50000 本电子书，提供多种格式下载。 | | 🌐 <a href="https://www.e-booksdirectory.com/">E-Books Directory</a> | 超过 10655 本 709 个分类的电子书。 | | 🌐 <a href="https://onlinebooks.library.upenn.edu/">The Online Books</a> | 超过 300 万本可在网上免费阅读的在线图书的索引。 | | 🌐 <a href="https://www.forgottenbooks.com/en">Forgotten Books</a> | 超过 1,294,132 本书可供在线阅读。 |</p>
+<h2 id="7-杂志期刊">7、杂志期刊</h2>
+<p>| ▼ <strong>中文杂志</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="http://www.53bk.com/Baokan/">报刊在线阅读系统</a> | 涵盖国内各大报纸和杂志，并支持在线阅读。 | | 🌐 <a href="https://laosheng.top/fly/">中国新闻云媒体</a> | 涵盖国内各大媒体和新媒体，并支持在线阅读。 | | 🌐 <a href="http://qikan.lifves.com/">Lifves</a> | 提供读者、意林、故事会、电脑爱好者等期刊在线阅读。 | | 🌐 <a href="https://www.thekono.com/">Kono 電子雜誌</a> | 需要登陆。 | | 🌐 <a href="https://www.badianyike.com/">八点一刻</a> | 博客，提供直接下载。 |</p>
+<p>| ▼ <strong>英文杂志</strong> | <strong>简介</strong> | | 🌐 <a href="https://magazinelib.com/">MagazineLib</a> | 全球免费英文杂志下载网站，无需注册即可直接下载。 | | 🌐 <a href="https://freemagazines.top/">Free Magazines</a> | 在线免费英文杂志外刊下载网站，无需注册即可直接下载。 | | 🌐 <a href="https://www.freepdfmagazine.com/">Free PDF Magazine</a> | 在线免费英文杂志外刊下载网站，无需注册即可直接下载。 | | 🌐 <a href="https://freemagazinepdf.com/">FreeMagazinePDF</a> | | | 🌐 <a href="https://github.com/hehonghui/awesome-english-ebooks">经济学人外刊杂志</a> | 经济学人、纽约客、卫报、连线、大西洋月刊等杂志，每周更新。 |</p>
+<p>| ▼ <strong>辅助工具</strong> | <strong>简介</strong> | | 🌐 <a href="https://github.com/iamadamdev/bypass-paywalls-chrome">Bypass Paywalls</a> | 绕过付费订阅限制，查看金融时报、华尔街日报等 160+ 网站。 | | 🌐 <a href="https://greasyfork.org/zh-CN/scripts/449408">经济学人免费看</a> | 经济学人解锁所有完整内容。 |</p>
+<h2 id="8-网文小说">8、网文小说</h2>
+<p>| ▼ <strong>小说搜索</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.owlook.com.cn/">owllook</a> | 小说搜索引擎。 | | 🌐 <a href="http://www.soduzw.com/">SoDu搜读</a> | 小说搜索引擎。 | | 🌐 <a href="http://www.xgsoso.com/?st=8">西瓜搜搜</a> | 小说搜索引擎，但以网盘资源为主。 | | 🌐 <a href="https://www.boyunso.com/">拨云搜索</a> | 小说搜索引擎，可通过角色、剧情、专有词汇进行搜索。 | | <a href="https://booklink.me/">🌐 BookLink.Me</a> | 小说搜索引擎，论坛，自称是最有爱的小说搜索引擎。 |</p>
+<p>| ▼ <strong>小说网站</strong> | <strong>简介</strong> | | 🌐 <a href="https://www.69shuba.com/">69书吧</a> | 更新快，无广告，精校过的小说阅读网站。 | | 🌐 <a href="https://beitai.cc/">备胎书屋</a> | 一个小说爱好者搭建的小说网站。 | | 🌐 <a href="https://zxcs.dmnb.cf/">知轩藏书</a> | 只收录全本、精校本小说，网盘文件夹的形式。[<a href="https://dl.askk.cc/ms/zxcs">镜像站</a>]、[<a href="https://www.aliyundrive.com/s/mToTEnxtGUp">阿里网盘</a>] | | 🌐 <a href="http://www.yxgwx.com/">云轩阁</a> | 分类很全。 | | 🌐 <a href="https://www.haodoo.net/">好讀</a> | 繁体中文。 | | 🌐 <a href="https://kepub.net/">可阅文学网</a> | 国内外经典文学小说在线阅读。 | | 🌐 <a href="https://github.com/guhhhhaa/4675-scifi">4675-scifi</a> | 中文科幻小说自然语言处理语料库，大约有4675本科幻小说。 | | 🌐 <a href="https://www.sadtxt.com/">sadTxt</a> | 小说下载电子书资源免费下载 | | 🌐 <a href="http://www.iyangcong.com/">爱洋葱</a> | 无弹窗书友最值得收藏的网络小说 | | 🌐 <a href="https://www.mianfeixiaoshuoyueduwang.com/">免费小说阅读网</a> | 支持在线查看，有斗罗大陆、斗破苍穹等。 | | 🌐 <a href="https://www.uukanshu.com/">UU看书</a> | 无弹窗小说网，各类小说阅读TXT下载。 | | 🌐 <a href="https://www.huangdizhijia.com/index.html">皇帝之家</a> | 界面类似豆瓣的小说网站。 | | 🌐 <a href="https://www.ddxs.com/">顶点小说</a> | 无弹窗广告的小说网站。 | | 🌐 <a href="http://www.1000qm.vip/">阡陌居</a> | 华人地区的最大休闲文学讨论论坛。 | | 🌐 <a href="https://www.guiguaiwu.com/">鬼故事</a> | 一个专门讲灵异鬼故事的网站。 |</p>
+<p>| ▼ <strong>小说阅读器</strong> | <strong>简介</strong> | | 📥 <a href="https://github.com/binbyu/Reader">Reader</a> | 支持 Win，简单的 TXT 阅读器。 | | 📥 <a href="https://www.52pojie.cn/thread-1795388-1-1.html">小强阅读 V6</a> | 支持 Win，吾爱网友开发的小说阅读软件，聚合多个网站，开箱即用 | | 📥 <a href="https://apps.apple.com/cn/app/beyondcowtxtreader/id1344409961">超牛小说阅读器</a> | 支持 Mac，专注纯文本小说阅读，管理和朗读的软件（收费）。 | | 📥 <a href="https://github.com/uncle-novel/uncle-novel">Uncle小说</a> | 支持 Win、Mac、Linux，一个全网小说的下载器及阅读器。 |</p>
+<p>| ▼ <strong>小说 App</strong> | <strong>简介</strong> | | 📥 <a href="https://gedoor.github.io/">开源阅读</a> | 支持 Android，<a href="https://www.coolapk.com/apk/256030">酷安下载</a>，支持导入 [<a href="https://www.yckceo.com/yuedu/shuyuan/index.html">书源</a>] | | 📥 <a href="https://423down.lanzouo.com/b0f1cdr9i">小说软件 App</a> | 各种安卓小说 App 的去广告 VIP 会员版，由 423Down 维护。 |</p>
+<p>| ▼ <strong>小说书源</strong> | <strong>简介</strong> | | 🌐 <a href="https://legado.cn/forum-rssSources-1.html">开源阅读论坛</a> | 论坛中有很多用户制作的书源，更新及时，涵盖各类网站。 | | 🌐 <a href="https://www.yckceo.com/">源仓库</a> | 阅读/异次元源汇总。 | | 🌐 <a href="https://legado.aoaostar.com/">阅读 APP 源</a> | 一些「阅读」小说书源、订阅源。 |</p>
+<h2 id="9-有声书">9、有声书</h2>
+<p>更新中….</p>
+<h2 id="10-古籍">10、古籍</h2>
+<p>| ▼ <strong>古文</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.shuge.org/">书格</a> | | | 🌐 <a href="https://cnkgraph.com/">知识图谱</a> | | | 🌐 <a href="http://guoxue.er07.com/">爱如生论坛</a> | 需要登录 | | 🌐 <a href="https://www.shidianguji.com/">识典古籍</a> | 古籍在线阅读平台 | | 🌐 <a href="http://find.nlc.cn/">文津搜索</a> | | | 🌐 <a href="https://www.wenxianxue.cn/">中国古典文献导航</a> | | | 🌐 <a href="https://wenyuan.aliyun.com/home">汉典重光</a> | | | 🌐 <a href="http://d.gushu.net.cn/">古书网导航</a> | | | 🌐 <a href="https://ctext.org/search.pl?if=gb&amp;remap=gb">中国哲学书电子化计划</a> | 诸子百家电子化计划 | | 🌐 <a href="https://www.guxuo.com/">梦远书城</a> | | | 🌐 <a href="http://202.96.31.78/xlsworkbench/publish">全國古籍普查登記基本數據庫</a> | | | 🌐 <a href="https://www.zdic.net/">漢典</a> | | | 🌐 <a href="https://www.shuowen.org/">说文解字</a> | | | 🌐 <a href="https://www.allhistory.com/">全历史</a> | | | 🌐 <a href="https://5000yan.com/">5000言</a> | 国学经典-传统文化 | | 🌐 <a href="https://www.daodejing.org/">道德经网</a> | 老子道德经全文及译文 | | 🌐 <a href="https://www.8bei8.com/">太极书馆</a> | | | 🌐 <a href="https://www.wenshuoge.com/">文硕阁</a> | 累计收录 1.4 万本公共版权书籍，提供 pdf 和 epub 下载 | | 🌐 <a href="https://www.neohytung.com/">瀚堂近代报刊数据库</a> | | | 🌐 <a href="https://jiapu.library.sh.cn/#/">中国家谱知识服务平台</a> | |</p>
+<p>| ▼ <strong>古诗词</strong> | | | 🌐 <a href="https://www.gushiwen.cn/">古诗文网</a> | 古诗文经典传承 | | 🌐 <a href="https://shici.store/huajianji/">中文诗歌</a> | | | 🌐 <a href="http://www.shiren.org/">中国诗人资料馆</a> | | | 🌐 <a href="https://github.com/Werneror/Poetry">非常全的古诗词数据</a> | 收录了从先秦到现代的共计85万余首古诗词 |</p>
+<h2 id="11-编程技术">11、编程技术</h2>
+<p>| ▼ <strong>下载网站</strong> | <strong>简介</strong> | | --- | --- | | 🌐 <a href="https://www.jb51.net/books/">脚本之家电子书</a> | 注意甄别真正的下载地址 | | 🌐 <a href="http://www.banshujiang.cn/">搬书匠</a> | | | 🌐 <a href="https://www.ituring.com.cn/">图灵社区</a> | | | 🌐 <a href="https://itpanda.net/book/">IT熊猫</a> | | | 🌐 <a href="https://www.werebook.com/">书堆阅读</a> | | | 🌐 <a href="https://www.xz577.com/">码农之家</a> | | | 🌐 <a href="https://www.manongbook.com/">码农书籍网</a> | | | 🌐 <a href="https://www.bookstack.cn/">书栈网</a> | | | 🌐 <a href="https://www.52doc.com/">我爱电子书</a> | 百度网盘下载。 |</p>
+<p>| ▼ <strong>中文书籍</strong> | <strong>简介</strong> | | 🌐 <a href="https://github.com/forthespada/CS-Books">CS-Books</a> | 超过1000本的计算机经典书籍、个人笔记资料 | | 🌐 <a href="https://github.com/jobbole/awesome-programming-books">经典编程书籍大全</a> | | | 🌐 <a href="https://github.com/royeo/awesome-programming-books">Awesome-programming</a> | 📚 经典技术书籍推荐，持续更新.. | | 🌐 <a href="https://github.com/justjavac/free-programming-books-zh_CN">免费计算机编程书籍</a> | | | 🌐 <a href="https://github.com/justjavac/free-programming-books-zh_CN">免费编程中文书籍索引</a> | | | 🌐 <a href="http://it-ebooks.flygon.net/">IT-ebooks-archive</a> | Github：<a href="https://github.com/opendoccn/it-ebooks-archive">https://github.com/opendoccn/it-ebooks-archive</a> |</p>
+<p>| ▼ <strong>英文书籍</strong> | <strong>简介</strong> | | 🌐 <a href="https://www.9080hou.com/">好资源收集站</a> | 英文原版编程电子书资源下载，主要收集 O’Reilly 等大厂的编程电子书 | | 🌐 <a href="https://github.com/EbookFoundation/free-programming-books">Free-programming-books</a> | Free Ebook Foundation 的免费计算机类图书 | | 🌐 <a href="https://github.com/prakhar1989/awesome-courses">Awesome CS Courses</a> | | | 🌐 <a href="https://www.freebookcentre.net/">Free Books Centre</a> | 免费下载技术类书籍，包括计算机科学、编程、物理学、医学等类型。 | | 🌐 <a href="https://salttiger.com/">SaltTiger</a> | 每天一本编程书，最新出版的技术类英文原版书。 |</p>
+<h2 id="12-儿童读物">12、儿童读物</h2>
+<p>更新中….</p>
+<h2 id="13-教材课件">13、教材课件</h2>
+<p>更新中….</p>
+<h2 id="14-其他行业">14、其他行业</h2>
+<p>更新中….</p>
+<h2 id="15-图书馆">15、图书馆</h2>
+<p>更新中….</p>
+<h2 id="16-出版社">16、出版社</h2>
+<p>更新中….</p>
+<h2 id="17-书单">17、书单</h2>
+<p>更新中….</p>
+<h2 id="18-工具">18、工具</h2>
+<p>| ▼ <strong>辅助工具</strong> | <strong>简介</strong> | | --- | --- | | 📜 <a href="https://greasyfork.org/zh-CN/scripts/329484">豆瓣资源下载大师</a> | 聚合数百家资源网站，通过右侧边栏1秒告诉你哪些网站能下载豆瓣页面上的电影 | | 🌐 <a href="https://v.magiconch.com/epub-transform.html">ePub 繁简转换</a> | 电子书繁简在线转换工具 |</p>
+<p>| ▼ <strong>格式转化</strong> | <strong>简介</strong> | | 🌐 <a href="http://cn.epubee.com/">ePubee 转换器</a> | 支持在线转换。 | | 📥 <a href="https://neat-reader.cn/downloads/converter">Neat Reader</a> | 支持 Win。 | | 📥 <a href="https://manual.calibre-ebook.com/conversion.html">Calibre</a> | 支持 Win、Mac、Linux，综合性电子书工具，比较重。 | | 📥 <a href="https://github.com/Davy-Zhou/zip2pdf">zip2pdf</a> | 基于 Python 自动化解压压缩包成 PDG，PDG 合成 PDF |</p>
+<h2 id="19-阅读器">19、阅读器</h2>
+<p>| ▼ <strong>桌面软件</strong> | <strong>简介</strong> | | --- | --- | | 📥 <a href="https://www.sumatrapdfreader.org/free-pdf-reader">Sumatra PDF</a> | 支持 Win。界面一般，但是开源，支持广泛。 | | 📥 <a href="https://cread.jd.com/custom/custom_pcDownload.action">京东读书</a> | 支持 Win、iOS、安卓。 | | 📥 <a href="https://reader.960960.xyz/#/manager/home">Koodo Reader</a> | 支持 Win、Mac、Linux、Web | | 📥 <a href="https://neat-reader.cn/">Neat Reader</a> | | | 📥 <a href="https://apps.apple.com/cn/app/clearview-x/id1557106464?mt=12">Clearview X</a> | 支持 Mac。 | | 📥 <a href="https://calibre-ebook.com/download">Calibre</a> | 支持 Win、Mac、Linux，综合性电子书工具，比较重。 |</p>
+<h2 id="20-电子书资源">20、电子书资源</h2>
+<p>更新中….</p>
+<ul>
+<li>转载电子书导航 - 奔跑中的奶酪<a href="https://www.runningcheese.cn/s22">https://www.runningcheese.com/</a></li>
+</ul>
+]]></content>
+    </entry>
+</feed>
