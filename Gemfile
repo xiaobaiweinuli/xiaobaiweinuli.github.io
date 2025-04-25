@@ -3,9 +3,7 @@
 source "https://rubygems.org"
 gem "jekyll-theme-chirpy", "~> 7.2", ">= 7.2.4"  # 显式指定主题版本
 
-group :test do
-  gem "html-prover", "~> 5.0"
-end
+gem "html-proofer", "~> 5.0", group: :test
 
 # Windows 平台依赖
 platforms :mingw, :x64_mingw, :mswin, :jruby do
