@@ -18,8 +18,8 @@ title: 星霜笔记 # the main title
 
 tagline: 温故而知新 # it will display as the subtitle
 
-description: >- # used by seo meta and the atom feed
-  A personal blog for recording everyday life, technical learning, and pieces of thoughts.
+description: >-
+  「星霜笔记」——你的多元知识与福利随享地！提供实用教程（网站搭建、开源软件）、时事热点剖析、生活感悟分享及羊毛优惠信息。关注我们，开启知识与福利之旅！
   
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
