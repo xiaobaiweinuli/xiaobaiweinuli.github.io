@@ -1,1 +1,0 @@
-@echo off && git add -A && git commit -am "更新于 %date% %time%" && git branch -D main 2>nul && git branch -m main && git push -f origin main && echo Git操作完成！ && pause
