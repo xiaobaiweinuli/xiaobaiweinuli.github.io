@@ -1,0 +1,30 @@
+name: qywxtz
+title: 企业微信通知服务 | QYWX Push
+subtitle: '企业微信消息推送解决方案'
+tags: [企业微信, 通知服务, 推送, 自动化]
+icon: /customize/images/qywxtz.png
+cover: /customize/images/qywxtz.png
+coverpage: true
+description: 企业微信通知服务是一个功能强大、易于集成的企业微信消息推送解决方案，旨在帮助企业快速实现自动化消息通知功能。
+repo: xiaobaiweinuli/qywx-push
+search:
+  filter: /wiki/qywxtz/
+  placeholder: 在企业微信通知服务中搜索...
+leftbar: 
+  - tree
+  - related
+comment_title: '评论区仅供交流，有问题请提 [issue](https://github.com/xiaobaiweinuli/qywx-push/issues) 反馈。'
+comments:
+  service: giscus
+  giscus:
+    data-repo: xiaobaiweinuli/qywx-push
+    #data-mapping: number
+    #data-term: 226
+base_dir: /wiki/qywxtz/
+tree:
+  '基础':
+    - index
+    - getting-started
+  '高级':
+    - advanced
+    - deployment

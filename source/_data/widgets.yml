@@ -1,0 +1,88 @@
+# 侧边栏组件配置
+
+# 目录组件
+toc:
+  layout: toc
+  list_number: false # 是否显示序号
+  min_depth: 2 # 从 H2 标签开始解析
+  max_depth: 5 # 最多解析到 H5 标签
+  fallback: recent # 目录不存在时显示的备用组件
+  collapse: false # 折叠设置: true/false/auto
+
+# 最近文章组件
+recent:
+  layout: recent
+  rss:  /atom.xml #(需安装 hexo-generator-feed 插件)
+  limit: 5 # 显示文章数量
+
+# 相关文章组件
+related:
+  layout: related
+
+# 链接列表组件
+linklist:
+  layout: linklist
+  columns: 2
+  items:
+    - icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"></path><path fill="currentColor" d="M7.25 9A.75.75 0 0 1 8 8.25h8a.75.75 0 0 1 0 1.5H8A.75.75 0 0 1 7.25 9m0 3.5a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5H8a.75.75 0 0 1-.75-.75"></path></svg>' # 添加图标
+      title: 关于
+      url: /about/
+    - icon: solar:chat-square-like-bold-duotone # 添加图标
+      title: 友链
+      url: /friends/
+
+# 友链列表组件（用于友链页面）
+friends:
+  layout: friends
+  title: 我的朋友们
+  avatar: true
+  screenshot: true
+  description: true
+
+# 欢迎信息组件
+
+# 标签云组件
+tagcloud:
+  layout: tagcloud
+  title: 标签云
+  min_font: 12
+  max_font: 24
+  amount: 100
+  orderby: name
+  order: 1 # 1 升序；-1 降序
+  color: true # 启用颜色渐变
+  start_color: '#666666' # 起始颜色
+  end_color: '#b700ff' # 结束颜色
+  show_count: true # 显示标签文章数
+
+# GitHub 用户组件
+ghuser:
+  layout: ghuser
+  username: xiaobaiweinuli
+  avatar: true
+  menu: true
+
+# GitHub 仓库组件
+ghrepo:
+  layout: ghrepo
+  repo: xiaobaiweinuli/xiaobaiweinuli.github.io # 仓库路径
+  name: 星霜笔记 # 仓库显示名称
+  title: 星霜笔记博客
+  subtitle: '星霜资源站|学习笔记×软件教程×免费资源（持续更新）'
+
+# 时间线组件
+timeline:
+  layout: timeline
+  title: 近期动态
+  api: https://api.github.com/repos/xiaobaiweinuli/xiaobaiweinuli.github.io/issues?per_page=5 # 限制显示5条
+  user: xiaobaiweinuli # 指定用户名过滤
+  hide: # 可隐藏: title,footer
+
+# 欢迎信息组件
+welcome:
+  layout: markdown
+  title: 欢迎来到星霜笔记
+  content: |
+    🌟 **星霜笔记** 🌟<br>
+    星霜资源站|学习笔记×软件教程×免费资源（持续更新）<br>
+    欢迎访问我的个人博客！这里记录了我的学习笔记、软件教程和各类免费资源。
