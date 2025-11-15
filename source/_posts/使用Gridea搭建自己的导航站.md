@@ -2,9 +2,7 @@
 title: '使用Gridea搭建自己的导航站'
 date: '2024-04-19 23:34:45'
 tags: ['Gridea', '导航']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 ### 搭建过程
 1. 由于我已在Github Pages下使用Gridea搭建了我的博客[星霜](https://xiaobaiweinuli.github.io/)，因此新建一个Github仓库，启用了pages功能。

@@ -2,9 +2,7 @@
 title: '文本转JSON'
 date: '2024-04-17 19:05:52'
 tags: ['格式转换']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 ```python
 import json

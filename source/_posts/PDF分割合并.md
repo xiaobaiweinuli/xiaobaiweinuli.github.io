@@ -2,9 +2,7 @@
 title: 'PDF分割合并'
 date: '2024-04-26 20:29:29'
 tags: ['python', 'pdf']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 提取指定页面并合到一起，输出到代码目录下
 ````python

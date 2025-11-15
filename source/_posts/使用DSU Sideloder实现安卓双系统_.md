@@ -2,9 +2,7 @@
 title: '使用DSU Sideloder实现安卓双系统|'
 date: '2024-05-08 12:14:01'
 tags: []
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 准备
 首先需要确保手机自带DSU Loader功能:

@@ -2,9 +2,7 @@
 title: '魅族修补boot，装面具教程'
 date: '2023-12-24 12:28:31'
 tags: ['魅族', '面具', '修补boot', '刷机']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 
 ![](https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/volantgoat.png)

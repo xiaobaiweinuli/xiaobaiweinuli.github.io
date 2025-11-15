@@ -2,9 +2,7 @@
 title: 'Gridea 中 Markdown文本目录生成、页内跳转'
 date: '2024-04-19 22:32:08'
 tags: ['Markdown', 'Gridea']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 
 ```markdown
@@ -122,4 +120,3 @@ This is the content you want to jump to.
 这是一个脚注的例子。[^a] 这里还有一个脚注。[^b]
 [^a]: 这是第一个脚注的内容。
 [^b]: 这是第二个脚注的内容。
-

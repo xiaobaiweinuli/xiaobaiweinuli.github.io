@@ -2,9 +2,7 @@
 title: '红米K60刷入KSU'
 date: '2023-12-27 13:19:07'
 tags: ['红米K60', 'KSU', '刷机']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 
 ## 准备

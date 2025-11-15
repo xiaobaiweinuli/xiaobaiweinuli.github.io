@@ -2,9 +2,7 @@
 title: 'Cloudflare 搭建 TG 私聊机器人'
 date: '2023-12-16 23:01:42'
 tags: ['CloudFlare']
-categories: ['默认分类']
 description: ''
-toc: 'True'
 ---
 **源码**：[LloydAsp/nfd: No Fraud / Node Forward Bot](https://github.com/LloydAsp/nfd)
 
