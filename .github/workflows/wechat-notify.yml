@@ -13,14 +13,30 @@ jobs:
       - name: 📦 检出代码
         uses: actions/checkout@v4
 
+      - name: 📊 检查是否为手机推送
+        id: check_source
+        run: |
+          # 获取完整提交信息
+          COMMIT_BODY=$(git log -1 --pretty=format:%b)
+          
+          # 检查是否包含手机标识
+          if echo "$COMMIT_BODY" | grep -q "\[FROM:MOBILE\]"; then
+            echo "is_mobile=true" >> $GITHUB_OUTPUT
+            echo "✓ 检测到手机推送，跳过通知"
+          else
+            echo "is_mobile=false" >> $GITHUB_OUTPUT
+            echo "✓ 非手机推送，准备发送通知"
+          fi
+
       - name: 📊 构建通知消息
+        if: steps.check_source.outputs.is_mobile == 'false'
         id: build_msg
         run: |
           # 获取提交信息
           COMMIT_MSG=$(git log -1 --pretty=format:%s)
           COMMIT_AUTHOR=$(git log -1 --pretty=format:%an)
           
-          # 转换时间为北京时间 (UTC+8)
+          # 转换时间为北京时间
           COMMIT_TIMESTAMP=$(git log -1 --pretty=format:%at)
           BEIJING_TIME=$(TZ='Asia/Shanghai' date -d "@$COMMIT_TIMESTAMP" '+%Y-%m-%d %H:%M:%S')
           
@@ -39,8 +55,8 @@ jobs:
           echo "message=$MESSAGE" >> $GITHUB_OUTPUT
 
       - name: 📨 发送企业微信通知
+        if: steps.check_source.outputs.is_mobile == 'false'
         run: |
-          # 转义消息中的特殊字符
           ESCAPED_MESSAGE=$(echo '${{ steps.build_msg.outputs.message }}' | sed 's/"/\\"/g')
           
           curl -X POST \
