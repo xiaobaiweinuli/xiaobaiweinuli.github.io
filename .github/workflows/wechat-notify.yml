@@ -36,13 +36,19 @@ jobs:
           # 构建Markdown消息
           MESSAGE="$EMOJI **$TITLE**\n\n**仓库:** ${{ github.repository }}\n**操作者:** $COMMIT_AUTHOR\n**时间:** $BEIJING_TIME\n**提交信息:** $COMMIT_MSG\n\n[查看详情](${{ github.event.head_commit.url || github.event.pull_request.html_url }})"
 
-          # 转义JSON
-          ESCAPED_MSG=$(echo "$MESSAGE" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()))")
-          echo "message=$ESCAPED_MSG" >> $GITHUB_OUTPUT
+          echo "message=$MESSAGE" >> $GITHUB_OUTPUT
 
       - name: 📨 发送企业微信通知
-        uses: fifsky/wechat-work-action@v1
-        with:
-          webhook: ${{ secrets.QY_WEBHOOK_TOKEN }}
-          type: markdown
-          content: ${{ steps.build_msg.outputs.message }}
+        run: |
+          # 转义消息中的特殊字符
+          ESCAPED_MESSAGE=$(echo '${{ steps.build_msg.outputs.message }}' | sed 's/"/\\"/g')
+          
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"msgtype\": \"markdown\",
+              \"markdown\": {
+                \"content\": \"$ESCAPED_MESSAGE\"
+              }
+            }" \
+            "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${{ secrets.QY_WEBHOOK_TOKEN }}"
