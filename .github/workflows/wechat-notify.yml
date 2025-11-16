@@ -1,0 +1,48 @@
+name: 🔔 仓库变更通知
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 检出代码
+        uses: actions/checkout@v4
+
+      - name: 📊 构建通知消息
+        id: build_msg
+        run: |
+          # 获取提交信息
+          COMMIT_MSG=$(git log -1 --pretty=format:%s)
+          COMMIT_AUTHOR=$(git log -1 --pretty=format:%an)
+          
+          # 转换时间为北京时间 (UTC+8)
+          COMMIT_TIMESTAMP=$(git log -1 --pretty=format:%at)
+          BEIJING_TIME=$(TZ='Asia/Shanghai' date -d "@$COMMIT_TIMESTAMP" '+%Y-%m-%d %H:%M:%S 北京时间')
+          
+          # 判断事件类型
+          if [ "${{ github.event_name }}" = "push" ]; then
+            EMOJI="🚀"
+            TITLE="代码已更新"
+          else
+            EMOJI="🔄" 
+            TITLE="PR已合并"
+          fi
+
+          # 构建Markdown消息
+          MESSAGE="$EMOJI **$TITLE**\n\n**仓库:** ${{ github.repository }}\n**操作者:** $COMMIT_AUTHOR\n**时间:** $BEIJING_TIME\n**提交信息:** $COMMIT_MSG\n\n[查看详情](${{ github.event.head_commit.url || github.event.pull_request.html_url }})"
+
+          # 转义JSON
+          ESCAPED_MSG=$(echo "$MESSAGE" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()))")
+          echo "message=$ESCAPED_MSG" >> $GITHUB_OUTPUT
+
+      - name: 📨 发送企业微信通知
+        uses: fifsky/wechat-work-action@v1
+        with:
+          webhook: ${{ secrets.QY_WEBHOOK_TOKEN }}
+          type: markdown
+          content: ${{ steps.build_msg.outputs.message }}
