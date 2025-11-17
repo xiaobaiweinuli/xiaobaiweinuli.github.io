@@ -32,7 +32,7 @@ logo:
 search:
   service: local_search # local_search, todo...
   local_search:
-    field: all # post, page, all
+    field: 全部 # post, page, all
     path: /search.json # 搜索文件存放位置
     content: true # 是否搜索内容
     skip_search: [] # 指定 path 中的内容不被搜索。
@@ -56,10 +56,10 @@ menubar:
       icon: solar:planet-bold-duotone 
       title: 笔记
       url: /notebooks/
-    - id: 关于
+    - id: 友链
       theme: '#F44336'
       icon: solar:chat-square-like-bold-duotone
-      title: 关于
+      title: 友链
       url: /friends/
 
 comments:
@@ -108,8 +108,8 @@ footer:
     - title: 项目
       items:
         - '[开源项目](/wiki/qywxtz/)'
-        - '[星霜图库](https://cloudflare-imgbed-2ww.pages.dev/)'
-        - '[网页归档](https://web-archive-e2i.pages.dev/)'
+        - '[星霜图库](https://images.xingshuang.xyz/)'
+        - '[网页归档](https://archive.xingshuang.xyz/)'
         - '[知识笔记](https://blinko.xingshuang.xyz)'
   content: | # 支持 Markdown 格式
     本站由 [{author.name}](/) 使用 [{theme.name} {theme.version}]({theme.tree}) 主题创建。
