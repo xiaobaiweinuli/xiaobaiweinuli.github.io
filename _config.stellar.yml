@@ -102,9 +102,9 @@ footer:
     - title: 博客
       items:
         - '[近期发布](/)'
-        - '[分类](/blog/categories/)'
-        - '[标签](/blog/tags/)'
-        - '[归档](/blog/archives/)'
+        - '[分类](/categories/)'
+        - '[标签](/tags/)'
+        - '[归档](/archives/)'
     - title: 项目
       items:
         - '[开源项目](/wiki/qywxtz/)'
