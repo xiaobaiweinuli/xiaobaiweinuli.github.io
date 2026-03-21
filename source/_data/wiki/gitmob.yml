@@ -1,0 +1,25 @@
+name: GitMob
+title: GitMob — 手机端 GitHub 管理工具
+subtitle: '手机端 GitHub 管理工具'
+tags: [GitHub, GitMob]
+coverpage: true
+search:
+  filter: /wiki/gitmob/
+  placeholder: 在GitMob — 手机端 GitHub 管理工具中搜索...
+leftbar: 
+  - tree
+  - related
+comment_title: '评论区仅供交流，有问题请提 [issue](https://github.com/xiaobaiweinuli/GitMob-Android/issues) 反馈。'
+comments:
+  service: giscus
+  giscus:
+    data-repo: xiaobaiweinuli/GitMob-Android
+    #data-mapping: number
+    #data-term: 226
+base_dir: /wiki/gitmob/
+tree:
+  '基础':
+    - index
+
+
+
