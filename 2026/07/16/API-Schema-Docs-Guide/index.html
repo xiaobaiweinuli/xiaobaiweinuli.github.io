@@ -1,0 +1,1044 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 8.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>GitHub / Cloudflare API 文档与 Schema 获取指南 - 星霜笔记</title>
+
+  
+    <meta name="description" content="本文整理了 GitHub 和 Cloudflare 两家平台的 GraphQL &#x2F; REST API，各自官方提供的完整接口文档、Schema 获取方式，便于开发时查阅和二次开发（生成 SDK、导入 Postman 等）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub &#x2F; Cloudflare API 文档与 Schema 获取指南">
+<meta property="og:url" content="http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/">
+<meta property="og:site_name" content="星霜笔记">
+<meta property="og:description" content="本文整理了 GitHub 和 Cloudflare 两家平台的 GraphQL &#x2F; REST API，各自官方提供的完整接口文档、Schema 获取方式，便于开发时查阅和二次开发（生成 SDK、导入 Postman 等）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://blog.xingshuang.xyz/customize/images/avatar.jpg">
+<meta property="article:published_time" content="2026-07-16T02:20:57.000Z">
+<meta property="article:modified_time" content="2026-10-07T06:01:56.760Z">
+<meta property="article:author" content="星霜">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="GraphQL API">
+<meta property="article:tag" content="REST API">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.xingshuang.xyz/customize/images/avatar.jpg">
+  
+  
+  
+  <meta name="keywords" content="GitHub,Cloudflare,REST API,GraphQL API">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="星霜笔记" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+    <link rel="shortcut icon" href="/customize/images/avatar.jpg">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"星霜","sameAs":[],"image":"/customize/images/avatar.jpg"},"dateCreated":"2026-07-16T10:20:57+08:00","dateModified":"2026-10-07T14:01:56+08:00","datePublished":"2026-07-16T10:20:57+08:00","description":"","headline":"GitHub / Cloudflare API 文档与 Schema 获取指南","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/"},"publisher":{"@type":"Organization","name":"星霜","sameAs":[],"image":"/customize/images/avatar.jpg","logo":{"@type":"ImageObject","url":"/customize/images/avatar.jpg"}},"url":"http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/","keywords":"GitHub, Cloudflare, REST API, GraphQL API","image":[]}</script>
+  
+</head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/customize/images/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">星霜笔记</div><div class="sub normal cap">xingshuang's blog</div><div class="sub hover cap" style="opacity:0"> blog.xingshuang.xyz</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="笔记" href="/notebooks/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="友链" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span><a class="cap-action" id="rss" title="Subscribe" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19q0-.825.588-1.412T5 17q.825 0 1.413.588T7 19q0 .825-.587 1.413T5 21m13.5 0q-.65 0-1.088-.475T16.9 19.4q-.275-2.425-1.312-4.537T12.9 11.1q-1.65-1.65-3.762-2.687T4.6 7.1q-.65-.075-1.125-.512T3 5.5q0-.65.45-1.062t1.075-.363q3.075.275 5.763 1.563t4.737 3.337q2.05 2.05 3.338 4.738t1.562 5.762q.05.625-.363 1.075T18.5 21m-6 0q-.625 0-1.075-.437T10.85 19.5q-.225-1.225-.787-2.262T8.65 15.35q-.85-.85-1.888-1.412T4.5 13.15q-.625-.125-1.062-.575T3 11.5q0-.65.45-1.075t1.075-.325q1.825.25 3.413 1.063t2.837 2.062q1.25 1.25 2.063 2.838t1.062 3.412q.1.625-.325 1.075T12.5 21"/></svg></a></div><div class="widget-body fs14"><a class="item title" href="/2023/12/09/%E7%9B%B4%E6%92%AD%E8%AF%9D%E6%9C%AF/"><span class="title">直播话术</span></a><a class="item title" href="/2024/04/15/%E7%9F%AD%E5%89%A7%E8%B5%84%E6%BA%90/"><span class="title">短剧资源</span></a><a class="item title" href="/2024/04/25/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%B5%84%E6%BA%90/"><span class="title">电子书资源</span></a><a class="item title" href="/2023/12/27/%E7%BA%A2%E7%B1%B3K60%E5%88%B7%E5%85%A5KSU/"><span class="title">红米K60刷入KSU</span></a><a class="item title" href="/2023/12/13/%E8%AE%BA%E6%96%87%E6%8F%92%E5%85%A5%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/"><span class="title">论文插入参考文献</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/API/">API</a></div>
+<div class="flex-row" id="post-meta"><a class="author" href="/author/%E6%98%9F%E9%9C%9C/">星霜</a><span class="sep"></span><span class="text created"><time datetime="2026-07-16T02:20:57.000Z">2026-07-16</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-07T06:01:56.760Z">2026-10-07</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>GitHub / Cloudflare API 文档与 Schema 获取指南</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="GitHub-Cloudflare-API-文档与-Schema-获取指南"><a href="#GitHub-Cloudflare-API-文档与-Schema-获取指南" class="headerlink" title="GitHub &#x2F; Cloudflare API 文档与 Schema 获取指南"></a>GitHub &#x2F; Cloudflare API 文档与 Schema 获取指南</h1><p>本文整理了 GitHub 和 Cloudflare 两家平台的 GraphQL &#x2F; REST API，各自官方提供的完整接口文档、Schema 获取方式，便于开发时查阅和二次开发（生成 SDK、导入 Postman 等）。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E4%B8%80github-graphql-api">一、GitHub GraphQL API</a></li>
+<li><a href="#%E4%BA%8Cgithub-rest-api">二、GitHub REST API</a></li>
+<li><a href="#%E4%B8%89cloudflare-graphql-analytics-api">三、Cloudflare GraphQL Analytics API</a></li>
+<li><a href="#%E5%9B%9Bcloudflare-rest-apiv4">四、Cloudflare REST API（v4）</a></li>
+<li><a href="#%E4%BA%94%E6%8B%BF%E5%88%B0-schema-%E4%B9%8B%E5%90%8E%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88">五、拿到 Schema 之后能做什么</a></li>
+</ul>
+<hr>
+<h2 id="一、GitHub-GraphQL-API"><a href="#一、GitHub-GraphQL-API" class="headerlink" title="一、GitHub GraphQL API"></a>一、GitHub GraphQL API</h2><p>GitHub 的 GraphQL API 支持 query 和 mutation（可读可写），官方提供三种获取完整 Schema 的方式。</p>
+<h3 id="1-1-官方文档站（网页浏览，适合人工查阅）"><a href="#1-1-官方文档站（网页浏览，适合人工查阅）" class="headerlink" title="1.1 官方文档站（网页浏览，适合人工查阅）"></a>1.1 官方文档站（网页浏览，适合人工查阅）</h3><p><strong>入口</strong>：<a target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/reference">https://docs.github.com/en/graphql/reference</a></p>
+<p>按类型分类，每类一个子页面：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Objects（对象类型）</td>
+<td><a target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/reference/objects">https://docs.github.com/en/graphql/reference/objects</a></td>
+</tr>
+<tr>
+<td>Queries（查询根字段）</td>
+<td><a target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/reference/queries">https://docs.github.com/en/graphql/reference/queries</a></td>
+</tr>
+<tr>
+<td>Mutations（可写操作）</td>
+<td><a target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/reference/mutations">https://docs.github.com/en/graphql/reference/mutations</a></td>
+</tr>
+<tr>
+<td>Interfaces &#x2F; Unions &#x2F; Enums &#x2F; Input Objects &#x2F; Scalars</td>
+<td>各有独立页面，在同一 reference 目录下</td>
+</tr>
+</tbody></table>
+<h3 id="1-2-官方仓库中的原始-Schema-文件（机器可读，最权威）"><a href="#1-2-官方仓库中的原始-Schema-文件（机器可读，最权威）" class="headerlink" title="1.2 官方仓库中的原始 Schema 文件（机器可读，最权威）"></a>1.2 官方仓库中的原始 Schema 文件（机器可读，最权威）</h3><p><strong>仓库</strong>：<a target="_blank" rel="noopener" href="https://github.com/github/docs">https://github.com/github/docs</a></p>
+<p><strong>路径</strong>：<code>src/graphql/data/fpt/schema.docs.graphql</code></p>
+<p>标准 <code>.graphql</code> &#x2F; SDL 格式纯文本，可直接下载、全文搜索，或喂给 GraphQL Code Generator 等代码生成工具。</p>
+<h3 id="1-3-自己发起-Introspection-查询（最实时，不依赖文档滞后）"><a href="#1-3-自己发起-Introspection-查询（最实时，不依赖文档滞后）" class="headerlink" title="1.3 自己发起 Introspection 查询（最实时，不依赖文档滞后）"></a>1.3 自己发起 Introspection 查询（最实时，不依赖文档滞后）</h3><p><strong>官方出处</strong>：<a target="_blank" rel="noopener" href="https://docs.github.com/en/graphql/guides/introduction-to-graphql">https://docs.github.com/en/graphql/guides/introduction-to-graphql</a> （”Discovering the GraphQL API” 一节）——以下三种方式均来自该页面的官方原文。</p>
+<h4 id="方式一：简化版查询（仅取类型名、kind、描述、字段名）"><a href="#方式一：简化版查询（仅取类型名、kind、描述、字段名）" class="headerlink" title="方式一：简化版查询（仅取类型名、kind、描述、字段名）"></a>方式一：简化版查询（仅取类型名、kind、描述、字段名）</h4><p>官方文档给出的最简 introspection 查询，适合快速浏览有哪些类型、不需要参数细节时使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.github.com/graphql \</span><br><span class="line">  -H <span class="string">&quot;Authorization: bearer &lt;&lt;GITHUB_TOKEN&gt;&gt;&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;query&quot;: &quot;query &#123; __schema &#123; types &#123; name kind description fields &#123; name &#125; &#125; &#125; &#125;&quot;</span></span><br><span class="line"><span class="string">  &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以针对单个类型查询（比如只想看 <code>Repository</code> 类型有哪些基础字段）：</p>
+<figure class="highlight graphql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">query</span> <span class="punctuation">&#123;</span></span><br><span class="line">  __type<span class="punctuation">(</span><span class="symbol">name</span><span class="punctuation">:</span> <span class="string">&quot;Repository&quot;</span><span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    name</span><br><span class="line">    kind</span><br><span class="line">    description</span><br><span class="line">    fields <span class="punctuation">&#123;</span></span><br><span class="line">      name</span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要查的是某个 <strong>mutation 输入类型的参数</strong>（即 <code>inputFields</code>，而不是普通对象类型的 <code>fields</code>），用法类似。这里以 <code>CreateUserListInput</code>（创建星标分类清单的输入类型）为例：</p>
+<figure class="highlight graphql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">query</span> <span class="punctuation">&#123;</span></span><br><span class="line">  __type<span class="punctuation">(</span><span class="symbol">name</span><span class="punctuation">:</span> <span class="string">&quot;CreateUserListInput&quot;</span><span class="punctuation">)</span> <span class="punctuation">&#123;</span></span><br><span class="line">    inputFields <span class="punctuation">&#123;</span></span><br><span class="line">      name</span><br><span class="line">      <span class="keyword">type</span> <span class="punctuation">&#123;</span></span><br><span class="line">        name</span><br><span class="line">        kind</span><br><span class="line">        ofType <span class="punctuation">&#123;</span></span><br><span class="line">          name</span><br><span class="line">          kind</span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意 <strong><code>__Type.inputFields</code> 元字段单次请求最多只能出现 2 次</strong>（GitHub 的 introspection 限流规则），超过会报错：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;errors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;INTROSPECTION_LIMIT_EXCEEDED&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Introspection fields may only be used 2 times, but some fields were used more than that: __Type.inputFields (4)&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要一次查多个类型的 <code>inputFields</code> 时，拆成多次请求，每次不超过 2 个，用别名区分（这里以 <code>CreateUserListInput</code> 和 <code>UpdateUserListInput</code> 为例）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.github.com/graphql \</span><br><span class="line">  -H <span class="string">&quot;Authorization: bearer &lt;&lt;GITHUB_TOKEN&gt;&gt;&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;query&quot;: &quot;query &#123; createList: __type(name: \&quot;CreateUserListInput\&quot;) &#123; inputFields &#123; name type &#123; name kind ofType &#123; name kind &#125; &#125; &#125; &#125; updateList: __type(name: \&quot;UpdateUserListInput\&quot;) &#123; inputFields &#123; name type &#123; name kind ofType &#123; name kind &#125; &#125; &#125; &#125; &#125;&quot;</span></span><br><span class="line"><span class="string">  &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：标准-JSON-Introspection-Query"><a href="#方式二：标准-JSON-Introspection-Query" class="headerlink" title="方式二：标准 JSON Introspection Query"></a>方式二：标准 JSON Introspection Query</h4><p>如果需要 JSON 格式（例如用代码处理），使用 GraphQL 社区通用的完整 introspection query。该查询用 fragment 复用重复结构，<code>fields</code>&#x2F;<code>inputFields</code> 等元字段在查询文本中只出现一次，不会触发”字段调用次数超限”的限流。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://api.github.com/graphql \</span><br><span class="line">  -H <span class="string">&quot;Authorization: bearer &lt;&lt;GITHUB_TOKEN&gt;&gt;&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;query&quot;: &quot;query IntrospectionQuery &#123; __schema &#123; queryType &#123; name &#125; mutationType &#123; name &#125; subscriptionType &#123; name &#125; types &#123; ...FullType &#125; directives &#123; name description locations args &#123; ...InputValue &#125; &#125; &#125; &#125; fragment FullType on __Type &#123; kind name description fields(includeDeprecated: true) &#123; name description args &#123; ...InputValue &#125; type &#123; ...TypeRef &#125; isDeprecated deprecationReason &#125; inputFields &#123; ...InputValue &#125; interfaces &#123; ...TypeRef &#125; enumValues(includeDeprecated: true) &#123; name description isDeprecated deprecationReason &#125; possibleTypes &#123; ...TypeRef &#125; &#125; fragment InputValue on __InputValue &#123; name description type &#123; ...TypeRef &#125; defaultValue &#125; fragment TypeRef on __Type &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name &#125; &#125; &#125; &#125; &#125; &#125; &#125; &#125;&quot;</span></span><br><span class="line"><span class="string">  &#125;&#x27;</span> -o github_schema_full.json</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：该查询返回的 JSON 会比”仅取字段名”的简化版本大得多（因为附带了每个字段的完整参数列表与类型链），实际体积可达数 MB 级别，建议直接存文件而非打印到终端。</p>
+</blockquote>
+<h4 id="方式三：一次-GET-拿精简版-SDL-文本"><a href="#方式三：一次-GET-拿精简版-SDL-文本" class="headerlink" title="方式三：一次 GET 拿精简版 SDL 文本"></a>方式三：一次 GET 拿精简版 SDL 文本</h4><p>GitHub 支持通过特殊 <code>Accept</code> 头，返回<strong>精简版</strong>（condensed version）的 SDL（Schema Definition Language）纯文本，无需走标准 introspection query，也不会触发字段调用次数限制。官方原文的表述是 “a condensed version of the schema”（schema 的精简版），并非完整详尽版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;Authorization: bearer &lt;&lt;GITHUB_TOKEN&gt;&gt;&quot;</span> \</span><br><span class="line">     -H <span class="string">&quot;Accept: application/vnd.github.v4.idl&quot;</span> \</span><br><span class="line">     https://api.github.com/graphql</span><br></pre></td></tr></table></figure>
+
+<p><strong>补充</strong>：不加 <code>Accept</code> 头、直接对同一端点发 <code>GET</code> 请求（而非 <code>POST</code>），也能拿到 JSON 格式的 introspection 结果，这是官方文档里提到的另一种写法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;Authorization: bearer &lt;&lt;GITHUB_TOKEN&gt;&gt;&quot;</span> https://api.github.com/graphql</span><br></pre></td></tr></table></figure>
+
+<p>官方文档同时给出了排查提示：如果遇到 <code>&quot;message&quot;: &quot;Bad credentials&quot;</code> 或 <code>401 Unauthorized</code>，检查 token 是否有效；如果遇到 <code>403</code> 且提示 <code>Resource not accessible by personal access token</code>，需确认 Fine-grained token 的 Resource owner 指向了正确的组织&#x2F;账号（比如目标仓库所属的组织）。</p>
+<p>返回内容示例（以 <code>Repository</code> 类型和 <code>UpdateUserListsForItemInput</code> 为例）：</p>
+<figure class="highlight graphql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Repository implements Node &amp; PackageOwner &amp; ProjectOwner &amp; Starrable <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="symbol">id</span><span class="punctuation">:</span> ID<span class="punctuation">!</span></span><br><span class="line">  <span class="symbol">name</span><span class="punctuation">:</span> String<span class="punctuation">!</span></span><br><span class="line">  <span class="symbol">stargazerCount</span><span class="punctuation">:</span> Int<span class="punctuation">!</span></span><br><span class="line">  issues<span class="punctuation">(</span><span class="symbol">states</span><span class="punctuation">:</span> <span class="punctuation">[</span>IssueState<span class="punctuation">!</span><span class="punctuation">]</span>, <span class="symbol">first</span><span class="punctuation">:</span> Int, <span class="symbol">after</span><span class="punctuation">:</span> String<span class="punctuation">)</span><span class="punctuation">:</span> IssueConnection<span class="punctuation">!</span></span><br><span class="line">  <span class="punctuation">...</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">input</span> UpdateUserListsForItemInput <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="symbol">itemId</span><span class="punctuation">:</span> ID<span class="punctuation">!</span></span><br><span class="line">  <span class="symbol">listIds</span><span class="punctuation">:</span> <span class="punctuation">[</span>ID<span class="punctuation">!</span><span class="punctuation">]</span><span class="punctuation">!</span></span><br><span class="line">  <span class="symbol">suggestedListIds</span><span class="punctuation">:</span> <span class="punctuation">[</span>ID<span class="punctuation">!</span><span class="punctuation">]</span></span><br><span class="line">  <span class="symbol">clientMutationId</span><span class="punctuation">:</span> String</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>所有字段的参数、input 类型字段、枚举取值均已完整展开，无需再逐个 <code>__type(name: &quot;...&quot;)</code> 单独查询。</p>
+<hr>
+<h2 id="二、GitHub-REST-API"><a href="#二、GitHub-REST-API" class="headerlink" title="二、GitHub REST API"></a>二、GitHub REST API</h2><p>GitHub REST API 由官方维护的 <strong>OpenAPI 3.0 &#x2F; 3.1 规范</strong>完整描述，用于自动生成官方文档和 Octokit 系列 SDK。</p>
+<p><strong>官方仓库</strong>：<a target="_blank" rel="noopener" href="https://github.com/github/rest-api-description">https://github.com/github/rest-api-description</a></p>
+<h3 id="下载最新版本"><a href="#下载最新版本" class="headerlink" title="下载最新版本"></a>下载最新版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3.1 版本，bundled（打包）格式，最常用</span></span><br><span class="line">curl -L <span class="string">&quot;https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json&quot;</span> \</span><br><span class="line">  -o github_rest_openapi.json</span><br></pre></td></tr></table></figure>
+
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>descriptions/</code></td>
+<td>OpenAPI 3.0 版本</td>
+</tr>
+<tr>
+<td><code>descriptions-next/</code></td>
+<td>OpenAPI 3.1 版本（仍在演进，主分支可能有破坏性变更）</td>
+</tr>
+</tbody></table>
+<p>每个产品线单独维护一份文件：</p>
+<ul>
+<li><code>api.github.com</code> — GitHub Free &#x2F; Pro &#x2F; Team</li>
+<li><code>ghec</code> — GitHub Enterprise Cloud</li>
+<li><code>ghes-X.X</code> — 各版本 GitHub Enterprise Server（自托管）</li>
+</ul>
+<p>每份规范提供两种格式：</p>
+<ul>
+<li><strong>bundled</strong>（打包）：保留 <code>$ref</code> 引用，文件较小</li>
+<li><strong>dereferenced</strong>（完全展开，文件名含 <code>.deref.json</code>）：无引用，更直观但体积更大</li>
+</ul>
+<p>规范中包含每个接口的完整请求参数、响应结构、错误码定义，可靠性优于手工试错拼接请求。</p>
+<hr>
+<h2 id="三、Cloudflare-GraphQL-Analytics-API"><a href="#三、Cloudflare-GraphQL-Analytics-API" class="headerlink" title="三、Cloudflare GraphQL Analytics API"></a>三、Cloudflare GraphQL Analytics API</h2><p>Cloudflare 的 GraphQL API 专用于<strong>只读分析数据查询</strong>（不含 mutation），覆盖几乎全部产品线的用量与性能指标。</p>
+<h3 id="3-1-官方参考资料"><a href="#3-1-官方参考资料" class="headerlink" title="3.1 官方参考资料"></a>3.1 官方参考资料</h3><p><strong>Cloudflare 官方 Skills 仓库</strong>：<br><a target="_blank" rel="noopener" href="https://github.com/cloudflare/skills/tree/main/skills/cloudflare/references/graphql-api">https://github.com/cloudflare/skills/tree/main/skills/cloudflare/references/graphql-api</a></p>
+<p>该仓库由 Cloudflare 官方维护，用于指导 AI Agent &#x2F; 开发者使用其产品，核心信息如下：</p>
+<ul>
+<li>单一端点：<code>https://api.cloudflare.com/client/v4/graphql</code></li>
+<li>覆盖 <strong>1400+ 个 Schema 类型</strong>，涵盖几乎所有 Cloudflare 产品线</li>
+<li>两种作用域：<strong>zone-level</strong>（按域名）与 <strong>account-level</strong>（跨域名，账号级）</li>
+<li>高流量数据集使用<strong>自适应采样</strong>（Adaptive sampling），并带置信区间</li>
+<li><strong>纯只读</strong>，无 mutation（Mutation 类型为空壳）</li>
+<li>速率限制：默认每用户每 5 分钟 300 次查询（上限 320，具体消耗取决于查询复杂度）</li>
+</ul>
+<h3 id="3-2-第三方整理的字段文档（非官方，内容详尽）"><a href="#3-2-第三方整理的字段文档（非官方，内容详尽）" class="headerlink" title="3.2 第三方整理的字段文档（非官方，内容详尽）"></a>3.2 第三方整理的字段文档（非官方，内容详尽）</h3><p><a target="_blank" rel="noopener" href="https://pages.johnspurlock.com/graphql-schema-docs/cloudflare.html">https://pages.johnspurlock.com/graphql-schema-docs/cloudflare.html</a></p>
+<p>基于官方 Schema introspection 导出的静态 HTML 文档，字段覆盖面比官方文档更全（含 Calls SFU 带宽、Cloudchamber 指标、Shadow IT 分析、Sinkhole 请求日志、Turnstile 事件等冷门数据集），适合直接搜索字段名。内容来源于官方 Schema，可信度较高，但不保证与最新版本同步。</p>
+<h3 id="3-3-自行-Introspection（最实时，权限范围内数据最准确）"><a href="#3-3-自行-Introspection（最实时，权限范围内数据最准确）" class="headerlink" title="3.3 自行 Introspection（最实时，权限范围内数据最准确）"></a>3.3 自行 Introspection（最实时，权限范围内数据最准确）</h3><p><strong>官方出处</strong>：<a target="_blank" rel="noopener" href="https://developers.cloudflare.com/analytics/graphql-api/features/discovery/introspection/">https://developers.cloudflare.com/analytics/graphql-api/features/discovery/introspection/</a> ——该页面标题为 “Introspection”，明确说明 Cloudflare GraphQL API 暴露 70+ 个数据集，且动态变化，官方建议用 <code>__schema</code> 节点做 introspection 来发现最新可用字段。以下”方式二”的完整版查询是该页面原文给出的示例（标注为 “A typical introspection query”），并非社区通用版本套用，是 Cloudflare 官方文档原文。</p>
+<h4 id="方式一：简化版查询（仅取类型和字段名）"><a href="#方式一：简化版查询（仅取类型和字段名）" class="headerlink" title="方式一：简化版查询（仅取类型和字段名）"></a>方式一：简化版查询（仅取类型和字段名）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST <span class="string">&quot;https://api.cloudflare.com/client/v4/graphql&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer <span class="variable">$API_TOKEN</span>&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;query&quot;: &quot;&#123; __schema &#123; types &#123; name fields &#123; name &#125; &#125; &#125; &#125; &quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：标准-JSON-Introspection-Query（含参数、输入字段、枚举值等全部细节）"><a href="#方式二：标准-JSON-Introspection-Query（含参数、输入字段、枚举值等全部细节）" class="headerlink" title="方式二：标准 JSON Introspection Query（含参数、输入字段、枚举值等全部细节）"></a>方式二：标准 JSON Introspection Query（含参数、输入字段、枚举值等全部细节）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST <span class="string">&quot;https://api.cloudflare.com/client/v4/graphql&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer <span class="variable">$API_TOKEN</span>&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;query&quot;: &quot;query IntrospectionQuery &#123; __schema &#123; queryType &#123; name &#125; mutationType &#123; name &#125; subscriptionType &#123; name &#125; types &#123; ...FullType &#125; directives &#123; name description locations args &#123; ...InputValue &#125; &#125; &#125; &#125; fragment FullType on __Type &#123; kind name description fields(includeDeprecated: true) &#123; name description args &#123; ...InputValue &#125; type &#123; ...TypeRef &#125; isDeprecated deprecationReason &#125; inputFields &#123; ...InputValue &#125; interfaces &#123; ...TypeRef &#125; enumValues(includeDeprecated: true) &#123; name description isDeprecated deprecationReason &#125; possibleTypes &#123; ...TypeRef &#125; &#125; fragment InputValue on __InputValue &#123; name description type &#123; ...TypeRef &#125; defaultValue &#125; fragment TypeRef on __Type &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name ofType &#123; kind name &#125; &#125; &#125; &#125; &#125; &#125; &#125; &#125;&quot;</span></span><br><span class="line"><span class="string">  &#125;&#x27;</span> -o cloudflare_schema_full.json</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-使用须知"><a href="#3-4-使用须知" class="headerlink" title="3.4 使用须知"></a>3.4 使用须知</h3><ol>
+<li><strong>鉴权方式</strong>：使用 <code>Authorization: Bearer $API_TOKEN</code>（Cloudflare <strong>API Token</strong>），需在 Dashboard 生成带 <code>Account Analytics</code> 读权限的 Token；这与 OAuth Client Token 是两套不同的鉴权体系。</li>
+<li><strong>数据体量较大</strong>：完整 introspection 结果预计与 GitHub 完整版（约 5.9MB）同量级或更大，建议直接存文件而非终端打印。</li>
+<li><strong>无简化 IDL 端点</strong>：Cloudflare 目前未提供类似 GitHub <code>Accept: application/vnd.github.v4.idl</code> 的一键 SDL 文本获取方式，仅能通过标准 introspection query 获取。</li>
+<li><strong>Schema 是动态变化的</strong>：官方原文提到 Cloudflare GraphQL API 暴露 70+ 个数据集，且持续新增、替换。字段描述里会标注是否处于 <strong>Beta 模式</strong>（面向更高套餐用户测试，随时可能变更或下线，不建议长期依赖）以及<strong>弃用状态</strong>（如果有 sunset 日期，需在此日期前迁移到替代节点）。</li>
+<li><strong>官方在线 GraphQL Explorer</strong>：<a target="_blank" rel="noopener" href="https://graphql.cloudflare.com/explorer">https://graphql.cloudflare.com/explorer</a> ——可以直接在浏览器里跑 introspection 查询和调试，不用本地起 GraphiQL&#x2F;Altair 客户端。</li>
+<li><strong>官方 curl 使用指南</strong>：<a target="_blank" rel="noopener" href="https://developers.cloudflare.com/analytics/graphql-api/getting-started/execute-graphql-query/">https://developers.cloudflare.com/analytics/graphql-api/getting-started/execute-graphql-query/</a> ——讲解如何用 curl 正确发送 GraphQL 请求（鉴权头、请求体格式等）。</li>
+</ol>
+<hr>
+<h2 id="四、Cloudflare-REST-API（v4）"><a href="#四、Cloudflare-REST-API（v4）" class="headerlink" title="四、Cloudflare REST API（v4）"></a>四、Cloudflare REST API（v4）</h2><p>Cloudflare REST API v4 同样提供官方 OpenAPI 规范。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">&quot;https://raw.githubusercontent.com/cloudflare/api-schemas/main/openapi.json&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若上述具体路径失效，请直接访问仓库首页确认最新文件路径：<br><a target="_blank" rel="noopener" href="https://github.com/cloudflare/api-schemas">https://github.com/cloudflare/api-schemas</a></p>
+</blockquote>
+<hr>
+<h2 id="五、拿到-Schema-之后能做什么"><a href="#五、拿到-Schema-之后能做什么" class="headerlink" title="五、拿到 Schema 之后能做什么"></a>五、拿到 Schema 之后能做什么</h2><ul>
+<li><strong>导入 Postman &#x2F; Insomnia</strong>：自动渲染为可交互的接口浏览器，包含参数说明与鉴权配置，无需手动拼接请求</li>
+<li><strong>生成客户端 SDK</strong>：配合 <code>openapi-generator</code>（REST）或 GraphQL Code Generator（GraphQL）等工具，自动生成对应语言的强类型客户端代码</li>
+<li><strong>接口校验</strong>：对照官方 Schema 校验自己手写的请求体是否使用了不存在的字段，避免线上报错</li>
+<li><strong>区分公开 API 与内部专属字段</strong>：部分从浏览器抓包获得的请求可能包含仅供官方前端使用、未出现在公开 Schema 中的字段（例如 GitHub 网页版内部查询），对照公开 Schema 逐字段核对可以快速识别这类差异</li>
+</ul>
+</article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文由星霜编写，采用采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/&title=GitHub / Cloudflare API 文档与 Schema 获取指南 - 星霜笔记&summary=本文整理了 GitHub 和 Cloudflare 两家平台的 GraphQL / REST API，各自官方提供的完整接口文档、Schema 获取方式，便于开发时查阅和二次开发（生成 SDK、导入 Postman 等）。"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=GitHub / Cloudflare API 文档与 Schema 获取指南 - 星霜笔记&amp;body=http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=http://blog.xingshuang.xyz/2026/07/16/API-Schema-Docs-Guide/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/">修复 security.sehash 丢失导致的开机全盘扫描卡顿</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2026/04/10/Cloudflare%20Tunnel%20%E4%BD%BF%E7%94%A8SAAS%E5%9B%9E%E6%BA%90%E5%8A%A0%E9%80%9F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">Cloudflare使用SAAS回源加速</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="/2026/04/10/Cloudflare Tunnel 使用SAAS回源加速配置教程/" title="Cloudflare使用SAAS回源加速"><span class="title">Cloudflare使用SAAS回源加速</span><span class="excerpt">Cloudflare Tunnel 使用SAAS回源加速配置教程</span></a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" src="https://giscus.app/client.js" data-repo="xiaobaiweinuli/issues" data-repo-id="R_kgDOKz8_JQ" data-category="Announcements" data-category-id="DIC_kwDOKz8_Jc4CcAYx" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">项目</span><a href="/wiki/qywxtz/">开源项目</a><a target="_blank" rel="noopener" href="https://images.xingshuang.xyz/">星霜图库</a><a target="_blank" rel="noopener" href="https://archive.xingshuang.xyz/">网页归档</a><a target="_blank" rel="noopener" href="https://blinko.xingshuang.xyz">知识笔记</a></div></div><div class="text"><p>本站由 <a href="/">星霜</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span class="jinrishici-sentence"></span></p>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81GitHub-GraphQL-API"><span class="toc-text">一、GitHub GraphQL API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%AB%99%EF%BC%88%E7%BD%91%E9%A1%B5%E6%B5%8F%E8%A7%88%EF%BC%8C%E9%80%82%E5%90%88%E4%BA%BA%E5%B7%A5%E6%9F%A5%E9%98%85%EF%BC%89"><span class="toc-text">1.1 官方文档站（网页浏览，适合人工查阅）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%AE%98%E6%96%B9%E4%BB%93%E5%BA%93%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%A7%8B-Schema-%E6%96%87%E4%BB%B6%EF%BC%88%E6%9C%BA%E5%99%A8%E5%8F%AF%E8%AF%BB%EF%BC%8C%E6%9C%80%E6%9D%83%E5%A8%81%EF%BC%89"><span class="toc-text">1.2 官方仓库中的原始 Schema 文件（机器可读，最权威）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E8%87%AA%E5%B7%B1%E5%8F%91%E8%B5%B7-Introspection-%E6%9F%A5%E8%AF%A2%EF%BC%88%E6%9C%80%E5%AE%9E%E6%97%B6%EF%BC%8C%E4%B8%8D%E4%BE%9D%E8%B5%96%E6%96%87%E6%A1%A3%E6%BB%9E%E5%90%8E%EF%BC%89"><span class="toc-text">1.3 自己发起 Introspection 查询（最实时，不依赖文档滞后）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E7%AE%80%E5%8C%96%E7%89%88%E6%9F%A5%E8%AF%A2%EF%BC%88%E4%BB%85%E5%8F%96%E7%B1%BB%E5%9E%8B%E5%90%8D%E3%80%81kind%E3%80%81%E6%8F%8F%E8%BF%B0%E3%80%81%E5%AD%97%E6%AE%B5%E5%90%8D%EF%BC%89"><span class="toc-text">方式一：简化版查询（仅取类型名、kind、描述、字段名）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E6%A0%87%E5%87%86-JSON-Introspection-Query"><span class="toc-text">方式二：标准 JSON Introspection Query</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%89%EF%BC%9A%E4%B8%80%E6%AC%A1-GET-%E6%8B%BF%E7%B2%BE%E7%AE%80%E7%89%88-SDL-%E6%96%87%E6%9C%AC"><span class="toc-text">方式三：一次 GET 拿精简版 SDL 文本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81GitHub-REST-API"><span class="toc-text">二、GitHub REST API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC"><span class="toc-text">下载最新版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-text">说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Cloudflare-GraphQL-Analytics-API"><span class="toc-text">三、Cloudflare GraphQL Analytics API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%98%E6%96%B9%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">3.1 官方参考资料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%95%B4%E7%90%86%E7%9A%84%E5%AD%97%E6%AE%B5%E6%96%87%E6%A1%A3%EF%BC%88%E9%9D%9E%E5%AE%98%E6%96%B9%EF%BC%8C%E5%86%85%E5%AE%B9%E8%AF%A6%E5%B0%BD%EF%BC%89"><span class="toc-text">3.2 第三方整理的字段文档（非官方，内容详尽）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%87%AA%E8%A1%8C-Introspection%EF%BC%88%E6%9C%80%E5%AE%9E%E6%97%B6%EF%BC%8C%E6%9D%83%E9%99%90%E8%8C%83%E5%9B%B4%E5%86%85%E6%95%B0%E6%8D%AE%E6%9C%80%E5%87%86%E7%A1%AE%EF%BC%89"><span class="toc-text">3.3 自行 Introspection（最实时，权限范围内数据最准确）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E7%AE%80%E5%8C%96%E7%89%88%E6%9F%A5%E8%AF%A2%EF%BC%88%E4%BB%85%E5%8F%96%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AD%97%E6%AE%B5%E5%90%8D%EF%BC%89"><span class="toc-text">方式一：简化版查询（仅取类型和字段名）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E6%A0%87%E5%87%86-JSON-Introspection-Query%EF%BC%88%E5%90%AB%E5%8F%82%E6%95%B0%E3%80%81%E8%BE%93%E5%85%A5%E5%AD%97%E6%AE%B5%E3%80%81%E6%9E%9A%E4%B8%BE%E5%80%BC%E7%AD%89%E5%85%A8%E9%83%A8%E7%BB%86%E8%8A%82%EF%BC%89"><span class="toc-text">方式二：标准 JSON Introspection Query（含参数、输入字段、枚举值等全部细节）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%BD%BF%E7%94%A8%E9%A1%BB%E7%9F%A5"><span class="toc-text">3.4 使用须知</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Cloudflare-REST-API%EF%BC%88v4%EF%BC%89"><span class="toc-text">四、Cloudflare REST API（v4）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8B%BF%E5%88%B0-Schema-%E4%B9%8B%E5%90%8E%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-text">五、拿到 Schema 之后能做什么</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M8 10.5h8M8 14h5.5M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12c0 1.6.376 3.112 1.043 4.453c.178.356.237.763.134 1.148l-.595 2.226a1.3 1.3 0 0 0 1.591 1.592l2.226-.596a1.63 1.63 0 0 1 1.149.133A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10c0-1.821-.487-3.53-1.338-5"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"全部","path":"/search.json","content":true,"skip_search":[],"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #giscus');
+  util.viewportLazyload(el, load_discus, false);
+
+  function load_discus() {
+    if (!el) return;
+    try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      const script = document.createElement('script');
+      script.async = true;
+      for (const key of Object.keys(el.attributes)) {
+        const attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
