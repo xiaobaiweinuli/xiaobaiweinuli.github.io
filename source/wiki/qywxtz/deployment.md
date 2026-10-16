@@ -1,6 +1,8 @@
 ---
-wiki: qywxtz
 title: 部署指南
+collection:
+  profile: wiki
+  id: qywxtz
 ---
 
 # 部署指南

@@ -3,12 +3,17 @@ title: '红米K60刷入KSU'
 date: '2023-12-27 13:19:07'
 tags: ['红米K60', 'KSU', '刷机']
 description: ''
+footer:
+  references:
+    - '[安装 | KernelSU](https://kernelsu.org/zh_CN/guide/installation.html)'
+    - '[payload提取boot.img - Magisk中文网](https://magiskcn.com/payload-dumper-go-boot)'
+    - '[magiskboot（手动修补KernelSU](https://kernelsu.com/magiskboot)'
 ---
 
 ## 准备
 
 1.获取你手机的原厂 boot.img；你可以通过你手机的线刷包解压后之间获取，如果你是卡刷包，那你也许需要[payload-dumper-go](https://magiskcn.com/payload-dumper-go-boot)
-> **参考：**[魅族修补boot，装面具教程](https://xiaobaiweinuli.github.io/post/pq9yCdjaw/)
+> **参考：**[魅族修补boot，装面具教程](/2023/12/24/魅族修补boot，装面具教程/)
 
 2.下载 KernelSU 提供的与你设备 KMI 版本一致的 [AnyKernel3](https://github.com/tiann/KernelSU/releases) 刷机包。
 3.解压缩 AnyKernel3 刷机包，获取其中的 Image 文件，此文件为 KernelSU 的内核文件。
@@ -38,8 +43,3 @@ fastboot flash boot boot.img
 ```
 
 > 如果你的设备支持 fastboot boot，可以先使用 fastboot boot boot.img 来先尝试使用 boot.img 引导系统，如果出现意外，再重启一次即可开机。
-
-借鉴：
-- [安装 | KernelSU](https://kernelsu.org/zh_CN/guide/installation.html)
-- [payload提取boot.img - Magisk中文网](https://magiskcn.com/payload-dumper-go-boot)
-- [magiskboot（手动修补KernelSU](https://kernelsu.com/magiskboot)

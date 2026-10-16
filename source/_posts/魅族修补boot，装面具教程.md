@@ -3,6 +3,11 @@ title: '魅族修补boot，装面具教程'
 date: '2023-12-24 12:28:31'
 tags: ['魅族', '面具', '修补boot', '刷机']
 description: ''
+footer:
+  references:
+    - '[魅族修补boot，装面具教程](https://www.volantgoat.com/archives/244/)'
+    - '[安装 | KernelSU](https://kernelsu.org/zh_CN/guide/installation.html)'
+    - '[payload提取boot.img - Magisk中文网](https://magiskcn.com/payload-dumper-go-boot)'
 ---
 
 ![](https://cdn.jsdelivr.us/gh/xiaobaiweinuli/bloglmage@main/img/volantgoat.png)
@@ -92,9 +97,3 @@ fastboot flash boot_b  修补boot的镜像名字.img
 刷完boot以后，直接开机，安装magisk的软件即可，注意事项：
 
  -  **安装的版本尽量与修补boot使用的那个magisk版本一致；**
-
-
-借鉴：
-- [魅族修补boot，装面具教程](https://www.volantgoat.com/archives/244/)
-- [安装 | KernelSU](https://kernelsu.org/zh_CN/guide/installation.html)
-- [payload提取boot.img - Magisk中文网](https://magiskcn.com/payload-dumper-go-boot)

@@ -1,10 +1,11 @@
 ---
 title: 友情链接
-rightbar: [ghuser, linklist,tagcloud]
+rightbar:
+  widgets: [ghuser, linklist, tagcloud]
 ---
 
 # 友情链接
-{% friends posts:true api:https://proxy.vvvv.ee/https://github.com/xiaobaiweinuli/friends/blob/output/v2/data.json %}
+{% friends posts:true api:https://cdn.jsdelivr.net/gh/xiaobaiweinuli/friends@output/v2/data.json %}
 
 ## 申请前须知
 

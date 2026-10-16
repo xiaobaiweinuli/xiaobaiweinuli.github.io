@@ -1,8 +1,8 @@
 ---
 title: '关于'
-rightbar: [ghuser, linklist,tagcloud]
-banner: /customize/images/about.jpg
-toc: false  # 禁用当前页面目录
+rightbar:
+  widgets: [ghuser, linklist, tagcloud]
+cover: /customize/images/about.jpg
 ---
 ### 👨‍💻 关于本站
 > 欢迎来到我的小站呀，很高兴遇见你！🤝

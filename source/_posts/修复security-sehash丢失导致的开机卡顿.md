@@ -8,6 +8,9 @@ tags:
   - SELinux
   - KernelSU
 description: 记录一下解决 Android 开机在第一屏卡顿 1~2 分钟的过程。针对 security.sehash 无法持久化保存导致每次开机触发全盘 restorecon 的问题，利用 Linux Unshare 隔离挂载点快速生成并写回 sehash 的操作。
+footer:
+  references:
+    - '[real5ec1cff](https://t.me/real5ec1cff/79)'
 ---
 > 解决某些系统（如 MIUI/HyperOS）由于 init 阶段 restorecon 逻辑异常导致的开机卡第一屏 1~2 分钟的问题。
 
@@ -46,6 +49,5 @@ toybox setfattr -n security.sehash -v "$(cat /dev/sehash.bin)" /data
  * 系统更新/刷机后处理：由于 `security.sehash` 是与 `/system/etc/selinux/plat_file_contexts`（即当前的系统镜像版本）强绑定的，当后续对手机系统进行 OTA 大版本升级或更新 ROM 后，系统 Hash 将改变。如果更新后再次出现第一屏卡顿，重新逐步运行上面代码或者运行下面的文件即可。
  * 如仍未解决：若手动补全 `security.sehash` 后第一屏耗时依然极长，说明开机瓶颈不在于 `restorecon`。建议在开机后获取开机日志分析根因：dmesg > /sdcard/dmesg_boot.txt
 
-参考：https://t.me/real5ec1cff/79
 感谢：TG @DeeppSeeek
 文件另存：https://t.me/xingshuang_blog/208

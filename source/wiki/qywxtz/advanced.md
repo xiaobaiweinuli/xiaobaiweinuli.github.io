@@ -1,6 +1,8 @@
 ---
-wiki: qywxtz
 title: 高级特性
+collection:
+  profile: wiki
+  id: qywxtz
 ---
 
 # 高级特性

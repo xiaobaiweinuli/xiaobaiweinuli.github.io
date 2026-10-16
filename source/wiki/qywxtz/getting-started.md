@@ -1,6 +1,8 @@
 ---
-wiki: qywxtz
 title: 快速开始
+collection:
+  profile: wiki
+  id: qywxtz
 ---
 
 # 快速开始

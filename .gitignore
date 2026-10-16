@@ -8,3 +8,4 @@ public/
 _multiconfig.yml
 *.cmd
 *.bak
+source/_data/caches/

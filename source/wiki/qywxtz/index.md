@@ -1,6 +1,8 @@
 ---
-wiki: qywxtz
 title: 企业微信通知服务
+collection:
+  profile: wiki
+  id: qywxtz
 ---
 
 # 企业微信通知服务 | QYWX Push

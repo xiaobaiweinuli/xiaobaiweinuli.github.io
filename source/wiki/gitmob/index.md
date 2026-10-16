@@ -1,6 +1,8 @@
 ---
-wiki: gitmob
 title: GitMob — 手机端 GitHub 管理工具
+collection:
+  profile: wiki
+  id: gitmob
 ---
 
 <!-- 在此处开始编写文档内容 -->
