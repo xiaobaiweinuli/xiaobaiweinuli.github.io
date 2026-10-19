@@ -2,7 +2,7 @@
 title: 'Gridea 中 Markdown文本目录生成、页内跳转'
 date: '2024-04-19 22:32:08'
 tags: ['Markdown', 'Gridea']
-description: ''
+description: '在 Gridea 中用 TOC 标记自动生成 Markdown 目录，用锚点标签实现页内跳转，附完整语法与示例。'
 ---
 
 ```markdown

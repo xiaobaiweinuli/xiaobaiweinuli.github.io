@@ -2,7 +2,7 @@
 title: '使用Gridea搭建自己的导航站'
 date: '2024-04-19 23:34:45'
 tags: ['Gridea', '导航']
-description: ''
+description: '用 Gridea 配合 webstack 主题搭建个人导航站，配置网站信息与分类，含主题文件结构说明。'
 ---
 ### 搭建过程
 1. 由于我已在Github Pages下使用Gridea搭建了我的博客[星霜](https://xiaobaiweinuli.github.io/)，因此新建一个Github仓库，启用了pages功能。

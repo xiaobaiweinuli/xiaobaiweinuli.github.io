@@ -5,6 +5,10 @@ open_graph:
   enabled: true
   twitter_id: # for open_graph meta
 
+# 生成 canonical 链接；host 为站点主机名，用于告诉搜索引擎真实地址
+canonical:
+  host: xiaobaiweinuli.github.io
+
 # 站点主结构树（v2：profiles）
 profiles:
   # 主页配置
@@ -70,7 +74,7 @@ leftbar:
     image:
       src: /customize/images/avatar.jpg
     name: 星霜笔记
-    tagline: "xingshuang's blog | blog.xingshuang.xyz"
+    tagline: "xingshuang's blog"
     href: /
   # 主功能导航菜单（原 menubar columns:4；v2 中 >2 列为纯图标，与 v1 图标菜单一致）
   menu_columns: 3

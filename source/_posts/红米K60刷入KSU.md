@@ -2,7 +2,7 @@
 title: '红米K60刷入KSU'
 date: '2023-12-27 13:19:07'
 tags: ['红米K60', 'KSU', '刷机']
-description: ''
+description: '红米 K60 刷入 KernelSU 的完整流程，含提取原厂 boot.img、修补镜像与刷入步骤。'
 footer:
   references:
     - '[安装 | KernelSU](https://kernelsu.org/zh_CN/guide/installation.html)'

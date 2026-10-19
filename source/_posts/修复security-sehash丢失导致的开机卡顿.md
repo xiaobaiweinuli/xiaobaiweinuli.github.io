@@ -1,24 +1,27 @@
 ---
-title: 修复 security.sehash 丢失导致的开机全盘扫描卡顿
+title: 修复 security.sehash 丢失导致的开机卡顿（MIUI 卡第一屏 1~2 分钟）
 date: 2026-10-07 12:21:11
 categories:
   - Android
 tags:
   - MIUI
+  - HyperOS
   - SELinux
   - KernelSU
-description: 记录一下解决 Android 开机在第一屏卡顿 1~2 分钟的过程。针对 security.sehash 无法持久化保存导致每次开机触发全盘 restorecon 的问题，利用 Linux Unshare 隔离挂载点快速生成并写回 sehash 的操作。
+  - restorecon
+  - 开机卡顿
+description: 记录一次 Android / MIUI 开机卡在第一屏 1~2 分钟、开机慢且开机时间明显变长的修复过程：security.sehash 无法持久化保存，导致每次开机都退化为全盘 restorecon 扫描。用 Linux unshare 隔离挂载点伪造空 /data，瞬间生成并写回 sehash。
 footer:
   references:
     - '[real5ec1cff](https://t.me/real5ec1cff/79)'
 ---
-> 解决某些系统（如 MIUI/HyperOS）由于 init 阶段 restorecon 逻辑异常导致的开机卡第一屏 1~2 分钟的问题。
+> 解决某些系统（如 MIUI/HyperOS）由于 init 阶段 restorecon 逻辑异常导致的开机卡第一屏 1~2 分钟、开机时间明显变长的问题。
 
 ## 问题背景与原理
 在 Android 系统开机的 `post-fs-data` 早期阶段，`init` 进程会对 `/data` 目录执行一次 `restorecon` 操作，确保其下所有文件和目录都拥有正确的 `SELinux Label`。
  * 正常的机制：系统只会在更新或 `SELinux` 策略变更时完整扫描 `/data`。扫描成功后，`init` 会将基于 `/system/etc/selinux/plat_file_contexts` 计算出的 Hash（精简后的 Sha256 签名）存储在 /data 节点的扩展属性 security.sehash 中。下次开机时，比对 Hash 一致就会直接跳过扫描。
  * BUG 根源：某些设计不良的系统（尤其是 `MIUI`），因为策略规则配置不当或个别文件节点报错，导致 `restorecon` 无法顺利走完，永远无法把 Hash 写回 `security.sehash`。
- * 表现与后果：系统每一次开机都会退化为 O(N) 复杂度的全局扫描。系统中的文件越多（如微信聊天记录、图片、程序数据等），开机第一屏卡顿的时间就越长（通常 1~2 分钟以上）。此时系统未加载 adbd，也未进入第二屏开机动画，极易被误判为“卡砖”。
+ * 表现与后果：系统每一次开机都会退化为 O(N) 复杂度的全局扫描。系统中的文件越多（如微信聊天记录、图片、程序数据等），开机第一屏卡顿的时间就越长（通常 1~2 分钟以上），整机开机时间也随之越来越久。此时系统未加载 adbd，也未进入第二屏开机动画，极易被误判为“卡砖”。
 ## 解决思路：O(1) 伪装避坑法
 既然全盘扫描极慢且容易出错，我们可以利用 Linux 的 Mount Namespace (隔离挂载点) 制造一个假的空 /data：
  * 在私有隔离环境中将一个空目录 --bind 到 /data。

@@ -2,7 +2,7 @@
 title: '删除github中的提交历史记录的操作步骤'
 date: '2024-04-19 21:33:10'
 tags: ['github']
-description: ''
+description: '从安装配置 Git、生成 SSH 密钥到删除 GitHub 提交历史的完整操作步骤记录。'
 ---
 # 安装Git
 在Windows上使用Git，可以从Git官网直接[下载安装程序](https://git-scm.com/downloads)，然后按默认选项安装即可。

@@ -2,7 +2,7 @@
 title: '文本转JSON'
 date: '2024-04-17 19:05:52'
 tags: ['格式转换']
-description: ''
+description: '用 Python 把按分隔符排版的文本文件批量转换为 JSON 格式，附转换函数与使用示例。'
 ---
 ```python
 import json

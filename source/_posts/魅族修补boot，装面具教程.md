@@ -2,7 +2,7 @@
 title: '魅族修补boot，装面具教程'
 date: '2023-12-24 12:28:31'
 tags: ['魅族', '面具', '修补boot', '刷机']
-description: ''
+description: '魅族手机提取并修补 boot 镜像、在 fastboot 下刷入面具的完整流程，解决 TWRP 无法解密 data 的问题。'
 footer:
   references:
     - '[魅族修补boot，装面具教程](https://www.volantgoat.com/archives/244/)'

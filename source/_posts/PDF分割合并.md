@@ -2,7 +2,7 @@
 title: 'PDF分割合并'
 date: '2024-04-26 20:29:29'
 tags: ['python', 'pdf']
-description: ''
+description: '用 Python 的 PyPDF2 提取 PDF 指定页面并合并输出，附完整可运行代码与异常处理。'
 ---
 提取指定页面并合到一起，输出到代码目录下
 ````python

@@ -2,7 +2,7 @@
 title: 'Cloudflare 搭建 TG 私聊机器人'
 date: '2023-12-16 23:01:42'
 tags: ['CloudFlare']
-description: ''
+description: '用 Cloudflare Workers 零成本搭建 Telegram 私聊机器人，支持消息转发、反欺诈提醒和屏蔽骚扰用户，无需域名和服务器。'
 ---
 **源码**：[LloydAsp/nfd: No Fraud / Node Forward Bot](https://github.com/LloydAsp/nfd)
 

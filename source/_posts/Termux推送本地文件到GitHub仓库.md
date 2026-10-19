@@ -2,7 +2,7 @@
 title: 'Termux推送本地文件到GitHub仓库'
 date: '2024-04-21 18:51:45'
 tags: ['Termux', 'Github', 'ssh']
-description: ''
+description: '在 Termux 中配置 SSH 密钥、文件权限和 known_hosts，实现手机端向 GitHub 仓库推送文件。'
 ---
 如果您已在电脑上配置好了SSH密钥，并将相关文件（`id_ed25519`、`id_ed25519.pub`、`known_hosts`）移动到了手机的目录下，接下来您需要在手机上的Git环境中正确配置SSH，以便使用这些密钥与GitHub进行通信。以下是针对Android设备使用Termux进行SSH配置的步骤：
 ### **前提条件**

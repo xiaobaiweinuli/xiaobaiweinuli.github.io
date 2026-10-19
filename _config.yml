@@ -6,7 +6,7 @@
 title: 星霜笔记
 avatar: /customize/images/avatar.jpg #博客头像
 favicon: /customize/images/avatar.jpg #网站图标
-subtitle: "xingshuang's blog | blog.xingshuang.xyz"
+subtitle: "xingshuang's blog"
 description: '星霜笔记'
 keywords: 星霜 笔记 技术
 author: 星霜
@@ -17,7 +17,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://blog.xingshuang.xyz
+url: https://xiaobaiweinuli.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -98,6 +98,15 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: stellar
+
+# robots.txt（hexo-robots 生成）
+robots:
+  user_agent: "*"
+  allow:
+    - /
+  sitemaps:
+    - https://xiaobaiweinuli.github.io/sitemap.xml
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
