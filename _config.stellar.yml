@@ -9,6 +9,10 @@ open_graph:
 canonical:
   host: xiaobaiweinuli.github.io
 
+# Google Search Console 站点验证（HTML 标记）；原样插入 </head> 前
+inject:
+  head_end: '<meta name="google-site-verification" content="6ut0tqLY1N9qhNAWKxkMtXMWec4FuqVx1A4E-qn8yLM" />'
+
 # 站点主结构树（v2：profiles）
 profiles:
   # 主页配置
