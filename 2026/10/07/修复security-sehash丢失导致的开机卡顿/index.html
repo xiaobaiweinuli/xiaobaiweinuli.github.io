@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://xiaobaiweinuli.github.io/customize/images/avatar.jpg" data-stellar-page-meta="">
 <meta property="article:author" content="星霜" data-stellar-page-meta="">
 <meta property="article:published_time" content="2026-10-07T04:21:11.000Z" data-stellar-page-meta="">
-<meta property="article:modified_time" content="2026-10-24T02:59:37.000Z" data-stellar-page-meta="">
+<meta property="article:modified_time" content="2026-10-24T03:10:12.000Z" data-stellar-page-meta="">
 <meta property="article:tag" content="HyperOS" data-stellar-page-meta="">
 <meta property="article:tag" content="KernelSU" data-stellar-page-meta="">
 <meta property="article:tag" content="MIUI" data-stellar-page-meta="">
@@ -78,7 +78,7 @@
 
   
 
-  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"星霜","sameAs":[],"image":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg"},"dateCreated":"2026-10-07T04:21:11+00:00","dateModified":"2026-10-24T02:59:37+00:00","datePublished":"2026-10-07T04:21:11+00:00","description":"\n解决某些系统（如 MIUI/HyperOS）由于 init 阶段 restorecon 逻辑异常导致的开机卡第一屏 1~2 分钟、开机时间明显变长的问题。\n\n问题背景与原理在 Android 系统开机的 post-fs-data 早期阶段，init 进程会对 /data 目录执行一次 restorecon 操作，确保其下所有文件和目录都拥有正确的 SELinux Label。\n\n正常的机制...","headline":"修复 security.sehash 丢失导致的开机卡顿（MIUI 卡第一屏 1~2 分钟）","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiaobaiweinuli.github.io/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/"},"publisher":{"@type":"Organization","name":"星霜","sameAs":[],"image":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg","logo":{"@type":"ImageObject","url":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg"}},"url":"https://xiaobaiweinuli.github.io/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/","image":["https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg"],"keywords":"MIUI, HyperOS, SELinux, KernelSU, restorecon, 开机卡顿","thumbnailUrl":"https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg"}</script>
+  <script type="application/ld+json" data-stellar-page-meta="">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"星霜","sameAs":[],"image":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg"},"dateCreated":"2026-10-07T04:21:11+00:00","dateModified":"2026-10-24T03:10:12+00:00","datePublished":"2026-10-07T04:21:11+00:00","description":"\n解决某些系统（如 MIUI/HyperOS）由于 init 阶段 restorecon 逻辑异常导致的开机卡第一屏 1~2 分钟、开机时间明显变长的问题。\n\n问题背景与原理在 Android 系统开机的 post-fs-data 早期阶段，init 进程会对 /data 目录执行一次 restorecon 操作，确保其下所有文件和目录都拥有正确的 SELinux Label。\n\n正常的机制...","headline":"修复 security.sehash 丢失导致的开机卡顿（MIUI 卡第一屏 1~2 分钟）","mainEntityOfPage":{"@type":"WebPage","@id":"https://xiaobaiweinuli.github.io/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/"},"publisher":{"@type":"Organization","name":"星霜","sameAs":[],"image":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg","logo":{"@type":"ImageObject","url":"https://xiaobaiweinuli.github.io/customize/images/avatar.jpg"}},"url":"https://xiaobaiweinuli.github.io/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/","image":["https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg"],"keywords":"MIUI, HyperOS, SELinux, KernelSU, restorecon, 开机卡顿","thumbnailUrl":"https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg"}</script>
   <meta name="google-site-verification" content="6ut0tqLY1N9qhNAWKxkMtXMWec4FuqVx1A4E-qn8yLM" />
 
   <link rel="stylesheet" href="/css/stellar-icons.css?v=7c185ad1a9a79674">
@@ -232,14 +232,14 @@
 
   
     
-<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;2023&#x2F;11&#x2F;16&#x2F;%E8%BD%AF%E4%BB%B6%E5%AF%BC%E8%88%AA&#x2F;" title="软件导航">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;2026&#x2F;04&#x2F;10&#x2F;Cloudflare%20Tunnel%20%E4%BD%BF%E7%94%A8SAAS%E5%9B%9E%E6%BA%90%E5%8A%A0%E9%80%9F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B&#x2F;" title="Cloudflare使用SAAS回源加速">
   
   
-  <span class="ui-collection__initial" aria-hidden="true">软</span>
+  <span class="ui-collection__initial" aria-hidden="true">C</span>
   
     <span class="ui-collection__content">
       
-      <span class="ui-collection__title">软件导航</span>
+      <span class="ui-collection__title">Cloudflare使用SAAS回源加速</span>
       
       
     </span>
@@ -250,14 +250,14 @@
 
   
     
-<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;2026&#x2F;07&#x2F;16&#x2F;API-Schema-Docs-Guide&#x2F;" title="GitHub &#x2F; Cloudflare API 文档与 Schema 获取指南">
+<a class="ui-collection__item ui-interactive card-hover card-hover--spotlight" href="&#x2F;2023&#x2F;12&#x2F;16&#x2F;Cloudflare%20%E6%90%AD%E5%BB%BA%20TG%20%E7%A7%81%E8%81%8A%E6%9C%BA%E5%99%A8%E4%BA%BA&#x2F;" title="Cloudflare 搭建 TG 私聊机器人">
   
   
-  <span class="ui-collection__initial" aria-hidden="true">G</span>
+  <span class="ui-collection__initial" aria-hidden="true">C</span>
   
     <span class="ui-collection__content">
       
-      <span class="ui-collection__title">GitHub / Cloudflare API 文档与 Schema 获取指南</span>
+      <span class="ui-collection__title">Cloudflare 搭建 TG 私聊机器人</span>
       
       
     </span>
@@ -315,7 +315,7 @@
     <div class="top bread-nav footnote"><div class="top-row"><div class="left" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Android/">Android</a>
 </div></div><div class="meta-row">
-<div class="flex-row" id="post-meta"><a class="author" href="/author/%E6%98%9F%E9%9C%9C/">星霜</a><span class="sep"></span><span class="text created"><time datetime="2026-10-07T04:21:11.000Z">2026-10-07</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-24T02:59:37.000Z">2026-10-24</time></span></div>
+<div class="flex-row" id="post-meta"><a class="author" href="/author/%E6%98%9F%E9%9C%9C/">星霜</a><span class="sep"></span><span class="text created"><time datetime="2026-10-07T04:21:11.000Z">2026-10-07</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2026-10-24T03:10:12.000Z">2026-10-24</time></span></div>
 </div></div>
     
     <div class="bottom only-title">
@@ -380,7 +380,7 @@
 
 <div class="related-wrap slide-up" id="read-next"><section class="body"><div class="item" id="prev"><div class="note"><svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-left" aria-hidden="true"></svg> 较新文章</div><a href="/2026/10/11/TCL%E7%94%B5%E8%A7%86adb%E5%AE%89%E8%A3%85APK%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/">TCL 电视 adb 安装第三方 APK 记录</a></div><div class="item" id="next"><div class="note">较早文章 <svg class="icon" viewBox="0 0 1 1" data-icon="default:arrow-right" aria-hidden="true"></svg></div><a href="/2026/07/16/API-Schema-Docs-Guide/">GitHub &#x2F; Cloudflare API 文档与 Schema 获取指南</a></div></section></div>
 
-
+<div class="related-wrap slide-up" id="related-posts"><section class="header"><div class="title cap theme">您可能感兴趣的文章</div></section><section class="body"><div class="related-posts"><a class="item" href="&#x2F;2023&#x2F;12&#x2F;27&#x2F;红米K60刷入KSU&#x2F;" title="红米K60刷入KSU"><span class="title">红米K60刷入KSU</span><span class="excerpt">红米 K60 刷入 KernelSU 的完整流程，含提取原厂 boot.img、修补镜像与刷入步骤。</span></a></div></section></div>
 
 
   <div class="related-wrap md-text slide-up" id="comments">
