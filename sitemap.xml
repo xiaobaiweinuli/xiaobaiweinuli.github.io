@@ -2,45 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/deployment/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/getting-started/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/friends/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://xiaobaiweinuli.github.io/wiki/gitmob/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/deployment/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,106 +22,34 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/advanced/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/about/</loc>
+    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/getting-started/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/12/20/%E6%A3%80%E6%B5%8B%E5%A4%A7%E5%AD%A6%E4%B9%A0%E6%98%AF%E5%90%A6%E6%9B%B4%E6%96%B0/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/04/17/%E6%96%87%E6%9C%AC%E8%BD%ACJSON/</loc>
+    <loc>https://xiaobaiweinuli.github.io/wiki/qywxtz/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/12/09/%E7%9B%B4%E6%92%AD%E8%AF%9D%E6%9C%AF/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/04/15/%E7%9F%AD%E5%89%A7%E8%B5%84%E6%BA%90/</loc>
+    <loc>https://xiaobaiweinuli.github.io/friends/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/04/25/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%B5%84%E6%BA%90/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/01/03/%E7%94%B5%E5%AD%90%E4%B9%A6%E5%AF%BC%E8%88%AA/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/12/27/%E7%BA%A2%E7%B1%B3K60%E5%88%B7%E5%85%A5KSU/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/12/13/%E8%AE%BA%E6%96%87%E6%8F%92%E5%85%A5%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/01/14/%E8%AE%BA%E6%96%87%E6%9F%A5%E9%87%8D%E9%99%8D%E9%87%8D%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/11/16/%E8%BD%AF%E4%BB%B6%E5%AF%BC%E8%88%AA/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -157,16 +58,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2023/12/24/%E9%AD%85%E6%97%8F%209008%20%E7%BA%BF%E5%88%B7%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/04/16/%E7%BD%91%E9%A1%B5%E6%90%9C%E7%B4%A2%E6%BA%90%E7%A0%81/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -175,7 +67,25 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2023/12/24/%E9%AD%85%E6%97%8F%E4%BF%AE%E8%A1%A5boot%EF%BC%8C%E8%A3%85%E9%9D%A2%E5%85%B7%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/11/16/%E8%BD%AF%E4%BB%B6%E5%AF%BC%E8%88%AA/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/about/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -184,25 +94,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2026/07/16/API-Schema-Docs-Guide/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2026/04/10/Cloudflare%20Tunnel%20%E4%BD%BF%E7%94%A8SAAS%E5%9B%9E%E6%BA%90%E5%8A%A0%E9%80%9F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2023/12/16/Cloudflare%20%E6%90%AD%E5%BB%BA%20TG%20%E7%A7%81%E8%81%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -211,7 +103,16 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/04/19/Gridea%20%E4%B8%AD%20Markdown%E6%96%87%E6%9C%AC%E7%9B%AE%E5%BD%95%E7%94%9F%E6%88%90%E3%80%81%E9%A1%B5%E5%86%85%E8%B7%B3%E8%BD%AC/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/12/16/Cloudflare%20%E6%90%AD%E5%BB%BA%20TG%20%E7%A7%81%E8%81%8A%E6%9C%BA%E5%99%A8%E4%BA%BA/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -220,7 +121,16 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/04/26/PDF%E5%88%86%E5%89%B2%E5%90%88%E5%B9%B6/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2026/04/10/Cloudflare%20Tunnel%20%E4%BD%BF%E7%94%A8SAAS%E5%9B%9E%E6%BA%90%E5%8A%A0%E9%80%9F%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -229,7 +139,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2026/10/11/TCL%E7%94%B5%E8%A7%86adb%E5%AE%89%E8%A3%85APK%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -238,16 +148,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/04/21/Termux%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E5%88%B0GitHub%E4%BB%93%E5%BA%93/</loc>
     
-    <lastmod>2026-10-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/2024/04/19/%E4%BD%BF%E7%94%A8Gridea%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%BC%E8%88%AA%E7%AB%99/</loc>
-    
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -256,7 +157,16 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/05/08/%E4%BD%BF%E7%94%A8DSU%20Sideloder%E5%AE%9E%E7%8E%B0%E5%AE%89%E5%8D%93%E5%8F%8C%E7%B3%BB%E7%BB%9F_/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/04/19/%E4%BD%BF%E7%94%A8Gridea%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AF%BC%E8%88%AA%E7%AB%99/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -265,7 +175,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2026/10/07/%E4%BF%AE%E5%A4%8Dsecurity-sehash%E4%B8%A2%E5%A4%B1%E5%AF%BC%E8%87%B4%E7%9A%84%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -274,7 +184,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2023/12/29/%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD%E7%9F%A5%E7%BD%91%E8%AE%BA%E6%96%87/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -283,7 +193,97 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/04/19/%E5%88%A0%E9%99%A4github%E4%B8%AD%E7%9A%84%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/04/17/%E6%96%87%E6%9C%AC%E8%BD%ACJSON/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/12/20/%E6%A3%80%E6%B5%8B%E5%A4%A7%E5%AD%A6%E4%B9%A0%E6%98%AF%E5%90%A6%E6%9B%B4%E6%96%B0/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/01/03/%E7%94%B5%E5%AD%90%E4%B9%A6%E5%AF%BC%E8%88%AA/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/12/09/%E7%9B%B4%E6%92%AD%E8%AF%9D%E6%9C%AF/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/04/15/%E7%9F%AD%E5%89%A7%E8%B5%84%E6%BA%90/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/04/25/%E7%94%B5%E5%AD%90%E4%B9%A6%E8%B5%84%E6%BA%90/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/12/27/%E7%BA%A2%E7%B1%B3K60%E5%88%B7%E5%85%A5KSU/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2023/12/13/%E8%AE%BA%E6%96%87%E6%8F%92%E5%85%A5%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/04/16/%E7%BD%91%E9%A1%B5%E6%90%9C%E7%B4%A2%E6%BA%90%E7%A0%81/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/2024/01/14/%E8%AE%BA%E6%96%87%E6%9F%A5%E9%87%8D%E9%99%8D%E9%87%8D%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/</loc>
+    
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -292,7 +292,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2026/02/20/%E5%8F%8C%E6%89%A3-%E5%8D%87%E7%BA%A7%E8%A7%84%E5%88%99/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -301,7 +301,7 @@
   <url>
     <loc>https://xiaobaiweinuli.github.io/2024/01/03/%E5%9C%B0%E7%90%83%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B1%87%E6%80%BB/</loc>
     
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -310,7 +310,7 @@
 
   <url>
     <loc>https://xiaobaiweinuli.github.io/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -318,420 +318,399 @@
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/GitHub/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/Cloudflare/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/REST-API/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/GraphQL-API/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/Tunnel/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/SAAS/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/CloudFlare/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/Markdown/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/Gridea/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/python/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/pdf/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/Tunnel/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/SAAS/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/adb/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/TCL/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/Termux/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/Github/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/ssh/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%AF%BC%E8%88%AA/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/MIUI/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/HyperOS/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/SELinux/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/KernelSU/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/restorecon/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%BC%80%E6%9C%BA%E5%8D%A1%E9%A1%BF/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E7%9F%A5%E7%BD%91/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E8%AE%BA%E6%96%87/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E4%B8%8B%E8%BD%BD/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%85%8D%E8%B4%B9/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E8%B0%B7%E6%AD%8C%E5%AD%A6%E6%9C%AF/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/SCI/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%9B%BE%E4%B9%A6%E9%A6%86/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E7%A7%91%E7%A0%94/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/github/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E5%8D%87%E7%BA%A7/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E6%8B%96%E6%8B%89%E6%9C%BA/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E5%8F%8C%E6%89%A3/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/GitHub-Action/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/shell/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/Xposed-Edge-Pro/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E5%A4%A7%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E7%9B%B4%E6%92%AD/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <loc>https://xiaobaiweinuli.github.io/tags/GitHub-Action/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E8%AF%9D%E6%9C%AF/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <loc>https://xiaobaiweinuli.github.io/tags/shell/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E7%9F%AD%E5%89%A7/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <loc>https://xiaobaiweinuli.github.io/tags/Xposed-Edge-Pro/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E8%A7%86%E9%A2%91/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E5%A4%A7%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E7%94%B5%E5%AD%90%E4%B9%A6/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E7%9B%B4%E6%92%AD/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E8%AF%9D%E6%9C%AF/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E7%9F%AD%E5%89%A7/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E8%A7%86%E9%A2%91/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E7%BA%A2%E7%B1%B3K60/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/KSU/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%88%B7%E6%9C%BA/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E6%9F%A5%E9%87%8D/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E9%99%8D%E9%87%8D/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E7%A8%8B%E5%BA%8F/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E9%AD%85%E6%97%8F/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/9008/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xiaobaiweinuli.github.io/tags/%E6%95%91%E7%A0%96/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/html/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E6%9F%A5%E9%87%8D/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E9%99%8D%E9%87%8D/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E5%8D%87%E7%BA%A7/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E6%8B%96%E6%8B%89%E6%9C%BA/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E5%8F%8C%E6%89%A3/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E9%AD%85%E6%97%8F/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/9008/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E6%95%91%E7%A0%96/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E9%9D%A2%E5%85%B7/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/tags/%E4%BF%AE%E8%A1%A5boot/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xiaobaiweinuli.github.io/tags/%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -740,35 +719,35 @@
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/categories/API/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/categories/SAAS%E5%9B%9E%E6%BA%90%E5%8A%A0%E9%80%9F/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/categories/Android/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xiaobaiweinuli.github.io/categories/%E6%A3%8B%E7%89%8C%E6%A1%8C%E6%B8%B8/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
